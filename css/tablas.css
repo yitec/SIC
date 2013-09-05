@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+
+.tablas{
+	 border-top: 1px solid # 0CF;
+     border-right: 1px solid #0CF;
+     border-bottom: 1px solid #0CF;
+     border-left: 1px solid #0CF;
+}
+

@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+body { 
+	margin-left: 10px; 
+	margin-top: 20px; 	
+	
+}
+
+table { 
+		width: 100%; 
+		border-collapse: collapse; 
+}
+.frame {
+	border: 1px ridge #DCD9D9;
+	padding: 10px;
+	background-color: #fff;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-left-radius: 10px;
+	
+}
+.header{
+	
+	border: 0px ridge #fff;
+	padding: 10px;
+    -moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	border-top-left-radius: 10px;
+	background: -webkit-linear-gradient(gray,black);
+	background: -moz-linear-gradient(gray,black);
+	background: -o-linear-gradient(gray,black);
+	background: linear-gradient(gray,black);
+	behavior: url(border-radius.htc); /* Para IE */
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#3d3e3e', EndColorStr='#000');
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:17px;
+	font-weight: bold;
+	color: #FFF;		
+	height: 20px;	
+}
+.linea_azul{
+	border: 0px ridge #fff;
+	padding: 10px;
+	background: -webkit-linear-gradient(#2a94c8,#066ea3);
+	background: -moz-linear-gradient(#2a94c8,#066ea3);
+	background: -o-linear-gradient(#2a94c8,#066ea3);
+	background: linear-gradient(#2a94c8,#066ea3);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#2a94c8', EndColorStr='#066ea3');
+	height: 5px;	
+	
+}
+
+.frame {
+	border: 1px ridge #DCD9D9;
+	padding: 10px;
+	background-color: #fff;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-left-radius: 10px;
+	
+}
+
+/* Zebra striping 
+tr:nth-child(2n+1) { 
+	background: #eef1ed; 
+}*/
+th { 
+		height:  52px;
+		background: #222222; 
+		color: white; 
+		font-weight: bold;
+		font-family: arial;
+		font-size:10px;		
+		text-align: center;
+		border-left:solid 1px;
+		border-left:dashed 1px ;
+		border-left-color: #999999;
+		padding: 3px;
+		
+		
+	}
+td { 
+		padding: 6px;
+		border-left:solid 1px;
+		border-left:dashed 1px ;
+		border-left-color: #999999;
+		border-bottom:solid 1px;
+		border-bottom-color: #999999;
+		text-align: center;
+		
+}
+
+.datos{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px; 
+}
+
+.tableRollOverEffect{
+/*Efecto cuando el mouse pasa por encima*/
+background-color:#000;
+color:#fff;
+}
+.tableRowClickEffect{
+/*Efecto cuando se ha realizado clic*/
+background-color:#F00;
+color:#FFF;
+}
+	
