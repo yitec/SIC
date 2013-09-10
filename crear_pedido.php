@@ -234,7 +234,9 @@
                         </div>
                     </div>
                 </div>           
-			</div>		
+			</div>	
+            <div><input  id="txt_cantidad"  type="hidden" value="0" /></div>
+            <div class="modal"></div>	
     </body>
 
 <script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
