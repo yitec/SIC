@@ -109,6 +109,22 @@ a:hover
 
 
 /************************************************Controles*******************************************/
+.fl{
+  float: left;
+}
+.none{
+  clear: left;
+}
+.ml{
+  position: relative;
+  margin-left: 20px;
+}
+
+.subtitulos{
+  text-align: left;
+  width: 225px; 
+}
+
 .inputbox{
   background:#FFF;
   font-size: 15px;
@@ -118,6 +134,10 @@ a:hover
   padding:2px;
   -webkit-border-radius: 4px; -moz-border-radius: 4px;
   margin-right: 10px;
+
+}
+.input25{
+  width: 226px;
 }
 
 .combos{
