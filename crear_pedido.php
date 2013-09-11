@@ -100,8 +100,7 @@
                             </tr>            
                         </table>
                         <br>
-                        <div id="productos">
-                            
+                        <div id="productos_1">                            
                             <div id="generico">
                             <h2>Generico</h2>
                                 <table>
@@ -224,6 +223,16 @@
                                 </table>                                
                             </div><!--Fin Div de Interlaboratoriales -->    
                         </div><!--Fin Div de Productos -->
+                        <div id="productos_2"></div>
+                        <div id="productos_3"></div>
+                        <div id="productos_4"></div>
+                        <div id="productos_5"></div>
+                        <div id="productos_6"></div>
+                        <div id="productos_7"></div>
+                        <div id="productos_8"></div>
+                        <div id="productos_9"></div>
+                        <div id="productos_10"></div>
+
                         <div id="1">This is a paragraph.</div>
                         <div id="2">This is another paragraph.</div>
                         <br />                    

@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 //$("#productos").hide();	
 //$("#comprade").hide();	
-
+var nproductos=1;
 oculta_divs();
 
 //loading del ajax
@@ -204,16 +204,21 @@ $("#btn_agregar").click(function(event){
 
 /***********************************************Boton agregar un  item**********************************************/
 $("#btn_agregar").click(function(){
-  $("#productos:hidden").clone().appendTo("#2");
+  //$("#productos:hidden").clone().appendTo("#2");  
   //$("productos2").clone().appendTo("productos3");
+  nproductos++;
+  llena_divs(nproductos);
 });
 
-/***********************************************Funciones**********************************************************/
+
+/*****************************************Funciones********************************/
+
+
 function oculta_divs(){
 	//$("#productos").hide();	
 	$("#comprade").hide();	
 	$("#reparacion").hide();	
-	//$("#generico").hide();	
+	$("#generico").hide();	
 	$("#generico").css("visibility", "hidden");
 	$("#reactivos").hide();	
 	$("#gases").hide();	
@@ -221,6 +226,7 @@ function oculta_divs(){
 	$("#interlaboratoriales").hide();	
 	$("#calibracion").hide();
 }
+
 
 function busca_valores(id_pedido,id_categoria){
 	var datos;		
@@ -231,6 +237,12 @@ function busca_valores(id_pedido,id_categoria){
 
 
 
+
+
+function llena_divs(nproductos){
+  $('#productos_'+nproductos).append('<div id="comprade_'+nproductos+'"><h2>Compra de</h2><table><tr><td width="135" class="Arial14Morado">Compra de: </td><td><select class="combos" id="cmb_compra_'+nproductos+'" name="cmb_compra_'+nproductos+'"><option value="0" selected="selected">Seleccione</option><option value="1">Reactivos</option><option value="2">Gases</option><option value="3">Est&aacute;ndares</option><option value="4">Interlaboratoriales</option><option value="5">Cristaler&iacute;a</option><option value="6">Repuestos</option><option value="7">Consumible de equipos</option><option value="8">Muebler&iacute;a</option><option value="9">Equipo Descripci&oacute;n</option><option value="10">Medio de Cultivo</option><option value="11">Materiales y &uacute;tiles de laboratorio varios</option><option value="12">Materiales de Oficina</option><option value="13">Materiales de Limpieza</option><option value="14">Muebler&iacute;a</option><option value="15">Software</option></select></td></tr></table></div>');
+
+}
 
 
 })// JavaScript Document
