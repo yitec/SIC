@@ -72,7 +72,7 @@
 
                                     <tr>
                                         <td width="135" class="Arial14Morado">Compra de: </td>
-                                        <td><select class="combos" id="cmb_compra" name="cmb_compra">
+                                        <td><select class="combos" numero="1" id="cmb_compra_1"  name="cmb_compra_1">
                                         <option value="0" selected="selected">Seleccione</option>
                                         <option value="1">Reactivos</option>
                                         <option value="2">Gases</option>
@@ -223,18 +223,7 @@
                                 </table>                                
                             </div><!--Fin Div de Interlaboratoriales -->    
                         </div><!--Fin Div de Productos -->
-                        <div id="productos_2"></div>
-                        <div id="productos_3"></div>
-                        <div id="productos_4"></div>
-                        <div id="productos_5"></div>
-                        <div id="productos_6"></div>
-                        <div id="productos_7"></div>
-                        <div id="productos_8"></div>
-                        <div id="productos_9"></div>
-                        <div id="productos_10"></div>
-
-                        <div id="1">This is a paragraph.</div>
-                        <div id="2">This is another paragraph.</div>
+                        <div id="productos_dinamicos"></div><!--Dentro de este div se cargan todos los articulos -->                                            
                         <br />                    
                         <div  align="center">Agregar<img id="btn_agregar" name="btn_agregar" src="img/add_icon.png"></div>
                         <br>    
@@ -244,7 +233,7 @@
                     </div>
                 </div>           
 			</div>	
-            <div><input  id="txt_cantidad"  type="hidden" value="0" /></div>
+            <div><input  id="txt_cantidad_lineas"  type="hidden" value="0" /></div>
             <div class="modal"></div>	
     </body>
 
