@@ -18,7 +18,10 @@
   	border-top-left-radius: 4px;
   	border-top-right-radius: 4px;  	
  }
-
+.lineaAzul{
+  margin-top: 20px;
+  border-bottom: 5px solid #2c8cbf;
+}
 /************************************************Estilos del loading**********************************/
 .modal {
     display:    none;
@@ -233,6 +236,12 @@ font-weight:bold;
 .Arial14Morado{
   font-weight:bold;
   font-size:14px;
+  color:#3d5875 ;
+  font-family:arial;
+}
+.Arial18Morado{
+  font-weight:bold;
+  font-size:18px;
   color:#3d5875 ;
   font-family:arial;
 }

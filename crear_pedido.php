@@ -58,18 +58,22 @@
                                 </select></td>
                             </tr>
                         </table>
-                        <div>---------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                        <div align="center"><h2>Detalle del Articulo</h2></div>
                         <table>
                             <tr>
-                                <td width="130" height="29" class="Arial14Morado">Cantidad</td>
-                                <td width="60"><input id="txt_cantidad" name="txt_cantidad" size="10"  value="" class="inputbox"  type="text" /></td>
+                                <td height="25" class="Arial14Morado">Acreditado</td>
+                                <td><span class="Arial14Negro">No</span><input type="radio" value="1" id="rnd_acreditado" name="rnd_acreditado" ><span class="Arial14Negro">S&iacute;</span><input type="radio" value="1" id="rnd_acreditado" name="rnd_acreditado" ></td>
+                            </tr>            
+                        </table>
+                        <div class="lineaAzul"></div>
+                        <div align="center"><h2 align="center" class="Arial18Morado">Articulo 1</h2></div>
+                        <table>
+                            <tr>
+                                <td width="135" height="29" class="Arial14Morado">Cantidad</td>
+                                <td width="60"><input id="txt_cantidad_1" name="txt_cantidad_1" size="10"  value="" class="inputbox"  type="text" /></td>
                             </tr>
                         </table>
-                        <div id="comprade">
-                            <h2>Compra de</h2>
+                        <div id="comprade_1">                            
                                 <table>
-
                                     <tr>
                                         <td width="135" class="Arial14Morado">Compra de: </td>
                                         <td><select class="combos" numero="1" id="cmb_compra_1"  name="cmb_compra_1">
@@ -93,132 +97,120 @@
                                     </tr>
                                 </table>
                         </div><!--Fin Div de Mantenimiento -->
-                        <table>
-                            <tr>
-                                <td height="25" class="Arial14Morado">Acreditado</td>
-                                <td><span class="Arial14Negro">No</span><input type="radio" value="1" id="rnd_acreditado" name="rnd_acreditado" ><span class="Arial14Negro">S&iacute;</span><input type="radio" value="1" id="rnd_acreditado" name="rnd_acreditado" ></td>
-                            </tr>            
-                        </table>
+                        
                         <br>
                         <div id="productos_1">                            
-                            <div id="generico">
-                            <h2>Generico</h2>
+                            <div id="generico_1">                            
                                 <table>
                                     <tr>
                                         <td height="25" class="Arial14Morado">Descripci&oacute;n</td>                                
-                                        <td><textarea rows="4" cols="30" name="txt_descripcion" id="txt_descripcion" ></textarea></td>
+                                        <td><textarea rows="4" cols="30" name="txt_descripcion_1_1" id="txt_descripcion_1_1" ></textarea></td>
                                         <td height="25" class="Arial14Morado">Observaciones</td>                                
-                                        <td><textarea rows="4" cols="30" name="txt_descripcion" id="txt_descripcion" ></textarea></td>
+                                        <td><textarea rows="4" cols="30" name="txt_descripcion_1_1" id="txt_descripcion_1_1" ></textarea></td>
                                     </tr>
                                 </table>
                             </div><!--Fin Div de Mantenimiento -->
-                            <div id="reparacion">
-                            <h2>Reparacion</h2>
-                                <table  >
+                            <div id="reparacion_1">                        
+                                <table>
                                     <tr>
                                         <td height="29" width="80" class="Arial14Morado">Equipo:</td>
-                                        <td width="70"><input id="txt_equipo" name="txt_equipo"   value="" class="inputbox"  type="text" /></td>
+                                        <td width="70"><input id="txt_equipo_1" name="txt_equipo_1"   value="" class="inputbox"  type="text" /></td>
                                         <td height="29" width="80" class="Arial14Morado">C&oacute;digo Equipo:</td>
-                                        <td width="70"><input id="txt_cequipo"  name="txt_cequipo"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="70"><input id="txt_cequipo_1"  name="txt_cequipo_1"  value="" class="inputbox"  type="text" /></td>
                                         <td height="29" width="65" class="Arial14Morado">Placa:</td>
-                                        <td width="70"><input id="txt_placa" name="txt_placa"   value="" class="inputbox"  type="text" /></td>
+                                        <td width="70"><input id="txt_placa_1" name="txt_placa_1"   value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                 </table>
                                 <table>
                                     <tr>
                                         <td height="25" class="Arial14Morado">Descripci&oacute;n:</td>                                
-                                        <td><textarea rows="4" cols="30" name="txt_descripcion" id="txt_descripcion" ></textarea></td>
+                                        <td><textarea rows="4" cols="30" name="txt_descripcion_1" id="txt_descripcion_1" ></textarea></td>
                                         <td height="25" class="Arial14Morado">Observaciones:</td>                                
-                                        <td><textarea rows="4" cols="30" name="txt_observaciones" id="txt_observaciones" ></textarea></td>
+                                        <td><textarea rows="4" cols="30" name="txt_observaciones_1" id="txt_observaciones_1" ></textarea></td>
                                     </tr>
                                 </table>
                             </div><!--Fin Div de Reparacion-->
-                            <div id="calibracion">
-                            <h2>Calibracion</h2>
+                            <div id="calibracion_1">                            
                                 <table>
                                     <tr>
                                         <td height="29" width="80" class="Arial14Morado">Equipo:</td>
-                                        <td width="70"><input id="txt_equipo" name="txt_equipo"   value="" class="inputbox"  type="text" /></td>
+                                        <td width="70"><input id="txt_equipo_1" name="txt_equipo_1"   value="" class="inputbox"  type="text" /></td>
                                         <td height="29" width="80" class="Arial14Morado">C&oacute;digo Equipo:</td>
-                                        <td width="70"><input id="txt_cequipo"  name="txt_cequipo"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="70"><input id="txt_cequipo_1"  name="txt_cequipo_1"  value="" class="inputbox"  type="text" /></td>
                                         
                                         <td height="29"  width="60"class="Arial14Morado">Marca:</td>
-                                        <td width="60"><input id="txt_marca" name="txt_marca"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_marca_1" name="txt_marca_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                     <tr>                                        
                                         <td height="29" width="60" class="Arial14Morado">Modelo</td>
-                                        <td width="60"><input id="txt_modelo" name="txt_modelo"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_modelo_1" name="txt_modelo_1"  value="" class="inputbox"  type="text" /></td>
                                         <td height="29" width="60" class="Arial14Morado">Serie</td>
-                                        <td width="60"><input id="txt_serie" name="txt_serie"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_serie_1" name="txt_serie_1"  value="" class="inputbox"  type="text" /></td>
                                         <td height="29" width="60" class="Arial14Morado">Placa</td>
-                                        <td width="60"><input id="txt_placa" name="txt_placa"  value="" class="inputbox"  type="text" /></td>                                        
+                                        <td width="60"><input id="txt_placa_1" name="txt_placa_1"  value="" class="inputbox"  type="text" /></td>                                        
                                     </tr>
                                 </table>
                                 <br>
                                 <table>    
                                     <tr>                                        
                                         <td width="60" height="25" class="Arial14Morado">Observaciones</td>                                
-                                        <td width="60"><textarea rows="4" cols="40" name="txt_observaciones" id="txt_observaciones" ></textarea></td>
+                                        <td width="60"><textarea rows="4" cols="40" name="txt_observaciones_1" id="txt_observaciones_1" ></textarea></td>
                                     </tr>
                                 </table>
                             </div><!--Fin Div de Reparacion-->                            
-                            <div id="reactivos">
-                            <h2>Reactivos</h2>
+                            <div id="reactivos_1">
                                 <table>
                                     <tr>
                                         <td height="25" class="Arial14Morado">Presentaci&oacute;n</td>                                
-                                        <td width="60"><input id="txt_presentacion" name="txt_presentacion"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_presentacion_1" name="txt_presentacion_1"  value="" class="inputbox"  type="text" /></td>
                                         <td height="25" class="Arial14Morado">Pureza</td>                                
-                                        <td width="60"><input id="txt_pureza" name="txt_pureza"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_pureza_1" name="txt_pureza_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                 </table>
                             </div><!--Fin Div de reactivos -->
-                            <div id="gases">
-                            <h2>Gases</h2>
+                            <div id="gases_1">
                                 <table>
                                     <tr>
                                         <td width="60" height="25" class="Arial14Morado">Pureza</td>                                
-                                        <td width="60"><input id="txt_pureza" name="txt_pureza"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_pureza_1" name="txt_pureza_1"  value="" class="inputbox"  type="text" /></td>
                                         <td height="25" class="Arial14Morado">Capacidad</td>                                
-                                        <td width="60"><input id="txt_capacidad" name="txt_capacidad"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_capacidad_1" name="txt_capacidad_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                 </table>
                                 <table>
                                     <tr>
                                         <td width="60"height="25" class="Arial14Morado">Volumen Cilindro</td>                                
-                                        <td width="60"><input id="txt_volument" name="txt_volumen"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_volument_1" name="txt_volumen"  value="" class="inputbox"  type="text" /></td>
                                         <td width="60"height="25" class="Arial14Morado">Tipo Conecci&oacute;n</td>                                
-                                        <td width="60"><input id="txt_tipoc" name="txt_tipoc"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_tipoc_1" name="txt_tipoc_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                 </table>
                             </div><!--Fin Div de Gases -->
-                            <div id="estandar">
-                            <h2>Estandar</h2>
+                            <div id="estandar_1">
                                 <table>
                                     <tr>
                                         <td width="60" height="25" class="Arial14Morado">Pureza</td>                                
-                                        <td width="60"><input id="txt_pureza" name="txt_pureza"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_pureza_1" name="txt_pureza_1"  value="" class="inputbox"  type="text" /></td>
                                         <td width="60"height="25" class="Arial14Morado">Certificador</td>                                
-                                        <td width="60"><input id="txt_certificador" name="txt_certificador"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_certificador_1" name="txt_certificador_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                 </table>
                                 <table>
                                     <tr>
                                         <td width="60"height="25" class="Arial14Morado">Volumen Cilindro</td>                                
-                                        <td width="60"><input id="txt_volument" name="txt_volumen"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_volument_1" name="txt_volumen"  value="" class="inputbox"  type="text" /></td>
                                         <td width="60"height="25" class="Arial14Morado">Tipo Conecci&oacute;n</td>                                
-                                        <td width="60"><input id="txt_tipoc" name="txt_tipoc"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_tipoc_1" name="txt_tipoc_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                 </table>
                             </div><!--Fin Div de estandar -->
-                            <div id="interlaboratoriales">
-                             <h2>Interlaboratoriales</h2>
+                            <div id="interlaboratoriales_1">
                                 <table>
                                     <tr>
                                         <td height="25" class="Arial14Morado">Matriz</td>                                
-                                        <td width="60"><input id="txt_matriz" name="txt_matriz"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_matriz_1" name="txt_matriz_1"  value="" class="inputbox"  type="text" /></td>
                                         <td height="25" class="Arial14Morado">Certificador</td>                                
-                                        <td width="60"><input id="txt_certificador" name="txt_certificador"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_certificador_1" name="txt_certificador_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
                                 </table>                                
                             </div><!--Fin Div de Interlaboratoriales -->    
