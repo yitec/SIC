@@ -26,6 +26,14 @@
                                 <td ><input id="txt_nombre" name="txt_nombre"  size="40"  class="inputbox" type="text" /></td>
                             </tr>
                             <tr>
+                                <td height="25" class="Arial14Morado">Proveedor</td>
+                                <td ><select class="combos" id="cmb_proveedor" name="cmb_proveedor">
+                                <option selected="selected" value="1">Multiple</option>
+                                <option value="2">Acero Mitral</option>
+                                <option value="3">Tecnologia CR</option>
+                                </select></td>
+                            </tr>
+                            <tr>
                                 <td height="25" class="Arial14Morado">Secci&oacute;n</td>
                                 <td><select class="combos" id="cmb_seccion" name="cmb_seccion">
                                 <option selected="selected">Qu&iacute;mica</option>
@@ -180,7 +188,7 @@
                                 <table>
                                     <tr>
                                         <td width="60"height="25" class="Arial14Morado">Volumen Cilindro</td>                                
-                                        <td width="60"><input id="txt_volument_1" name="txt_volumen"  value="" class="inputbox"  type="text" /></td>
+                                        <td width="60"><input id="txt_volument_1" name="txt_volument_1"  value="" class="inputbox"  type="text" /></td>
                                         <td width="60"height="25" class="Arial14Morado">Tipo Conecci&oacute;n</td>                                
                                         <td width="60"><input id="txt_tipoc_1" name="txt_tipoc_1"  value="" class="inputbox"  type="text" /></td>
                                     </tr>
@@ -217,18 +225,17 @@
                         </div><!--Fin Div de Productos -->
                         <div id="productos_dinamicos"></div><!--Dentro de este div se cargan todos los articulos -->                                            
                         <br />                    
-                        <div  align="center">Agregar<img id="btn_agregar" name="btn_agregar" src="img/add_icon.png"></div>
-                        <br>    
+                        <div  align="center"><input  id="btn_agregar"  type="image"  src="img/agregar.png" />                        
+                        <br> <br>   
                         <div align="center">
-                            <input  id="btn_siguiente"  type="image" onclick="validar()" src="img/btn_continuar.png" /><br />
+                            <input  id="btn_siguiente"  type="image"  src="img/btn_continuar.png" /><br />
                         </div>
                     </div>
                 </div>           
 			</div>	
-            <div><input  id="txt_cantidad_lineas"  type="hidden" value="0" /></div>
+            <div><input  id="txt_cantidad_lineas"  type="hidden" value="1" /></div>
             <div class="modal"></div>	
     </body>
-
 <script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
 <script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
 <script src="includes/Scripts_Pedidos.js" type="text/javascript"></script> 

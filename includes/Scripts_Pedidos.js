@@ -67,9 +67,9 @@ $("#btn_siguiente").click(function(event){
   });//end ajax function   
 	
     //Dependiendo de la cantida de articulos recorro los divs
-	for (i=1;i<=$("#txt_cantidad").val();i++){
-		parametros=busca_valores(id_pedido,$("#cmb_tipo").val())
-
+	for (i=1;i<=$("#txt_cantidad_lineas").val();i++){
+		parametros=busca_valores(id_pedido,$("#cmb_tipo").val(),i)
+    alert($("#txt_pureza_"+i).val());
 		//guardo el detalle del pedido por articulo
     	$.ajax({ 
     	data: "metodo=agrega_articulos&parametros="+parametros,
@@ -102,7 +102,9 @@ $("#btn_agregar").click(function(){
 });
 
 
-/*****************************************Funciones********************************/
+/****************************************************Funciones*******************************************************/
+/********************************************************************************************************************/
+/********************************************************************************************************************/
 
 
 function oculta_divs(){
@@ -204,9 +206,9 @@ function despliega_divs(numero,opcion){
     }
 }
 
-function busca_valores(id_pedido,id_categoria){
+function busca_valores(id_pedido,id_categoria,i){
 	var datos;		
-		datos=id_pedido+","+id_categoria+","+$("#txt_cantidad"+i).val()+","+$("#txt_descripcion_"+i).val()+","+$("#txt_observaciones_"+i).val()+","+$("#txt_equipo_"+i).val()+","+$("#txt_cequipo_"+i).val()+","+$("#txt_placa_"+i).val()+","+$("#txt_serie_"+i).val()+","+$("#txt_marca_"+i).val()+","+$("#txt_modelo_"+i).val()+","+$("#txt_presentacion_"+i).val()+","+$("#txt_pureza_"+i).val()+","+$("#txt_grado_"+i).val()+","+$("#txt_capacidad_"+i).val()+","+$("#txt_tipoc_"+i).val()+","+$("#txt_certificador_"+i).val();					
+		datos=id_pedido+","+id_categoria+","+$("#txt_cantidad"+i).val()+","+$("#txt_descripcion_"+i).val()+","+$("#txt_observaciones_"+i).val()+","+$("#txt_equipo_"+i).val()+","+$("#txt_cequipo_"+i).val()+","+$("#txt_placa_"+i).val()+","+$("#txt_serie_"+i).val()+","+$("#txt_marca_"+i).val()+","+$("#txt_modelo_"+i).val()+","+$("#txt_presentacion_"+i).val()+","+$("#txt_pureza_"+i).val()+","+$("#txt_grado_"+i).val()+","+$("#txt_capacidad_"+i).val()+","+$("#txt_tipoc_"+i).val()+","+$("#txt_certificador_"+i).val()+","+$("#txt_volument_"+i).val();					
 		return datos;	
 }
 
@@ -223,6 +225,15 @@ function llena_divs(nproductos){
   $('#productos_'+nproductos).append('<div id="gases_'+nproductos+'"><div class="Arial14Morado subtitulos fl">Pureza</div><div class="Arial14Morado subtitulos fl">Capacidad</div><br class="none"><div  class="fl input25"><input  id="txt_pureza_'+nproductos+'"  name="txt_pureza_'+nproductos+'"  value="" class="inputbox"  type="text" /></div><div  class=" fl input25"><input  id="txt_capacidad_'+nproductos+'" name="txt_capacidad_'+nproductos+'"   value="" class="inputbox"  type="text" /></div><br class="none"><br><div class="Arial14Morado subtitulos fl">Volumen Cilindro</div><div class="Arial14Morado subtitulos fl">Tipo Conecci&oacute;n</div><br class="none"><div  class="fl input25"><input  id="txt_volument_'+nproductos+'"  name="txt_volument_'+nproductos+'"  value="" class="inputbox"  type="text" /></div><div  class=" fl input25"><input  id="txt_tipoc_'+nproductos+'" name="txt_tipoc_'+nproductos+'"   value="" class="inputbox"  type="text" /></div><br class="none"></div>');
   $('#productos_'+nproductos).append('<div id="estandar_'+nproductos+'"><div class="Arial14Morado subtitulos fl">Pureza</div><div class="Arial14Morado subtitulos fl">Certificador</div><br class="none"><div  class="fl input25"><input  id="txt_pureza_'+nproductos+'"  name="txt_pureza_'+nproductos+'"  value="" class="inputbox"  type="text" /></div><div  class=" fl input25"><input  id="txt_certificador_'+nproductos+'" name="txt_certificador_'+nproductos+'"   value="" class="inputbox"  type="text" /></div><br class="none"><br><div class="Arial14Morado subtitulos fl">Volumen Cilindro</div><div class="Arial14Morado subtitulos fl">Tipo Conecci&oacute;n</div><br class="none"><div  class="fl input25"><input  id="txt_volument_'+nproductos+'"  name="txt_volument_'+nproductos+'"  value="" class="inputbox"  type="text" /></div><div  class=" fl input25"><input  id="txt_tipoc_'+nproductos+'" name="txt_tipoc_'+nproductos+'"   value="" class="inputbox"  type="text" /></div><br class="none"></div>');
   $('#productos_'+nproductos).append('<div id="interlaboratoriales_'+nproductos+'"><div class="Arial14Morado subtitulos fl">Matriz</div><div class="Arial14Morado subtitulos fl">Certificador</div><br class="none"><div  class="fl input25"><input  id="txt_matriz_'+nproductos+'"  name="txt_matriz_'+nproductos+'"  value="" class="inputbox"  type="text" /></div><div  class=" fl input25"><input  id="txt_certificador_'+nproductos+'" name="txt_certificador_'+nproductos+'"   value="" class="inputbox"  type="text" /></div><br class="none"><br></div>');
+}
+
+function notificacion(titulo,cuerpo,tipo){
+  $.pnotify({
+  pnotify_title: titulo,
+    pnotify_text: cuerpo,
+    pnotify_type: tipo,
+    pnotify_hide: true
+  }); 
 }
 
 
