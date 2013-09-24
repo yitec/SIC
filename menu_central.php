@@ -168,7 +168,7 @@ session_start();
 <? if (in_array(31, $_SESSION['perfil'])){
     ?>
     <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
-    <div align="center" class="Arial14Negro"><a href="aprobar_pedido.php"><img src="img/aprobe.png" width="48" height="48"></a><br>Aprobar Pedidos</div>
+    <div align="center" class="Arial14Negro"><a href="control_pedidos.php"><img src="img/aprobe.png" width="48" height="48"></a><br>Control Pedidos</div>
     </div>
     <? } ?>                
     

@@ -170,7 +170,7 @@ a:hover
   margin-left: 20px;
 }
 
-.subtitulos{
+.subtitulosl{
   text-align: left;
   width: 225px; 
 }
@@ -432,6 +432,7 @@ font-weight:bold;
   color:#3d5875 ;
   font-family:arial;
 }
+
 .Arial14Negro{
   font-size:14px;
   color:#000000;

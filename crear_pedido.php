@@ -12,7 +12,8 @@
     </head>
     <body >
     		<div class="header"></div>
-    		<div class="box">                
+    		<div class="box"> 
+            <div style="margin-top:20px;"><?require_once('menu_superior.php');?></div>               
                 <div class="box_azul">
                     <div class="box_blanco">
                         <div class="titulo1" align="center"><h2>Nuevo Pedido</h2></div>

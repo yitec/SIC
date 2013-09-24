@@ -6,12 +6,6 @@ conectar();
 $result1=mysql_query("select * from tbl_pedidos where id='".$_REQUEST['id']."'");
 $row=mysql_fetch_object($result1);
 echo mysql_error();
-
-
-
-
-
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -71,24 +65,7 @@ echo mysql_error();
                         <div  class="ancho_75 rows_centrado2"><?=utf8_decode($row->proyecto_numero);?></div>
                         <div  class="ancho_50 rows_centrado2"><?=utf8_decode($row->tipo);?></div>
                         <div  class="ancho_75 rows_centrado2"><?=utf8_encode($row->fecha_creacion);?></div>
-                        
-
-                        <!--Impresion de items 
-                        
-                        <div class="subtitulos2 ancho_75">Descripci&oacute;n</div>
-                        <div class="subtitulos2 ancho_150">Observaciones</div>
-                        <div class="subtitulos2 ancho_150">Equipo</div>
-                        <div class="subtitulos2 ancho_150">C&oacute;digo</div>
-                        <div class="subtitulos2 ancho_75">Placa</div>
-                        <div class="subtitulos2 ancho_150">Serie</div>
-                        <div class="subtitulos2 ancho_150">Marca</div>
-                        <div class="subtitulos2 ancho_75">Modelo</div>
-                        <div class="subtitulos2 ancho_50">Presentacion</div>
-                        <div class="subtitulos2 ancho_75">Pureza</div>
-                        <div class="subtitulos2 ancho_75">Grado</div>
-                        <div class="subtitulos2 ancho_75">Pureza</div>
-                        <div class="subtitulos2 ancho_75">Pureza</div>
--->                        
+                                            
 
 <?  
 echo '<br><br><br><br>';
@@ -98,7 +75,7 @@ echo mysql_error();
 //$result=mysql_query("select m.codigo,m.fecha_ingreso,a.id,a.nombre,a.observaciones, a.id_laboratorio from tbl_analisis a,tbl_muestras m where a.id_laboratorio=1 and a.estado=1 and a.id_muestra=m.id");
     while ($r2=mysql_fetch_object($result2)){
                         $i++;
-                        echo '<div class="Arial18morado">Articulo '.$i.'</div>';
+                        echo '<div align="left" class="Arial18Morado">Articulo '.$i.'</div>';
                         if($r2->cantidad!=''&&$r2->cantidad!='undefined'){?>
                             <table class="tabla_izquierda"><tr><td class="subtitulos2 ancho_50">Cantidad</td></tr>
                             <tr><td  class="ancho_50 row_reset"><?=utf8_decode($r2->cantidad);?></td></tr></table>

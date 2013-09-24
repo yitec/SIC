@@ -22,14 +22,15 @@ class Pedidos{
 ********************************************************/
 
 	function crea_pedido($parametros,$hoy){
-		$v_datos=explode(",",$parametros);
+		$v_datos=explode(",",utf8_encode($parametros));
 		$result=mysql_query("insert into tbl_pedidos(consecutivo,id_proveedor,fecha_creacion,id_usuario,solicitante,seccion,asunto,proyecto_nombre,proyecto_numero,tipo)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".$hoy."','".$_SESSION['usuario']."','".$v_datos[2]."','".$v_datos[3]."','".$v_datos[4]."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."')");		
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
         	$jsondata['resultado'] = 'Success';        	
 			$jsondata['id_pedido'] = mysql_insert_id();        	
-        }
+        }        
+    envia_correo($v_datos[0]);    
     echo json_encode($jsondata);
 
 	}
@@ -95,7 +96,15 @@ class Pedidos{
     echo json_encode($jsondata);
 
 	}
-
+	function envia_correo(consecutivo){
+		date_default_timezone_set('America/Denver');
+       $head = "From: info@siccina.ucr.ac.cr<info@siccina.ucr.ac.cr>\r\n";	   
+	   $email = "info@siccina.ucr.ac.cr";
+	   $dest = "mizard6@yahoo.es,jennyasc69@gmail.com,kmadrigal@feednet.ucr.ac.cr";
+	   $asunto = "Nuevo Pedido = ".$consecutivo;	
+	   $msg="Se ha creado un nuevo pedido con el consecutivo".$consecutivo." Verifique los detalles en el control de pedidos";	   	
+	   mail($dest, $asunto, $msg, $head);
+    }
 	
 	
 
