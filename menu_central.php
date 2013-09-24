@@ -159,6 +159,18 @@ session_start();
     <div align="center" class="Arial14Negro"><a href="eliminar_analisis.php"><img src="img/minusi.png" width="48" height="48"></a><br>Eliminar An&aacute;lisis</div>
     </div>
     <? } ?>        
+<? if (in_array(30, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="crear_pedido.php"><img src="img/edit.png" width="48" height="48"></a><br>Crear Pedidos</div>
+    </div>
+    <? } ?>            
+<? if (in_array(31, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="aprobar_pedido.php"><img src="img/aprobe.png" width="48" height="48"></a><br>Aprobar Pedidos</div>
+    </div>
+    <? } ?>                
     
 
 

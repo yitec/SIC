@@ -147,6 +147,12 @@ $("#btn_buscar").live("click", function(event){
 			if(v_resultado.indexOf("29")>=0){
 				$("#chk_eliminarAnalisis").attr("checked","checked");
 			}
+			if(v_resultado.indexOf("30")>=0){
+				$("#chk_cpedidos").attr("checked","checked");
+			}
+			if(v_resultado.indexOf("31")>=0){
+				$("#chk_apedidos").attr("checked","checked");
+			}
 		}//end succces function
 		});//end ajax function	
 });						   
@@ -253,6 +259,12 @@ $("#btn_guardar").click(function(event){
 		}
 		if ($("#chk_eliminarAnalisis").is(":checked")){
 			permisos=permisos+","+29;	
+		}
+		if ($("#chk_cpedidos").is(":checked")){
+			permisos=permisos+","+30;	
+		}
+		if ($("#chk_apedidos").is(":checked")){
+			permisos=permisos+","+31;	
 		}
 		
 		
