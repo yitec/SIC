@@ -90,7 +90,7 @@ $result=mysql_query(" select  * from tbl_pedidos where estado=1 ");
 
                         <div  class="ancho_75 rows_centrado"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_centrado"><?=utf8_encode($row->fecha_creacion);?></div>
-                        <div  class="ancho_115 rows_centrado"><a id="consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=2" title="Consultar"><img src="img/search.png" width="25" height="25" /></a></div>        
+                        <div  class="ancho_115 rows_centrado"><a id="consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=2" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="btn_entregar" consecutivo="<?=$row->consecutivo;?>" class="acciones" href="#" title="Consultar"><img src="img/entregar.png" width="25" height="25" /></a></div>        
 						
         <?  
     }echo '<br></br> <br></br> <br></br><br></br> <br></br>'; 
@@ -165,19 +165,28 @@ $result=mysql_query(" select  * from tbl_pedidos where estado=3 ");
                         <div  class="ancho_75 rows_centrado"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_centrado"><?=utf8_encode($row->fecha_creacion);?></div>
                         <div  class="ancho_115 rows_centrado"><a id="btn_aprobar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=4" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;</div>        
-						<div class="row_reset">x</div>
+						
         <?  
     }echo '<br></br> <br></br> <br></br><br></br> <br></br>'; 
 ?>
+  <div id="dialog-form" title="Informaci&oacute;n de la Entrega">
+  <form>
+  <fieldset>
+  <div class="Arial14Morado">Detalle de la entrega</div>
+  <div><textarea rows="4" cols="40" name="txt_detalle" consecutivo="" id="txt_detalle" ></textarea></div>
+  </fieldset>
+  </form>
+  </div>
+					
 
-						
-						</div> <!-- end div blanco-->  
-                    </div><!-- end div azul-->  
-                </div><!-- end div cuadro gris-->             
+					</div> <!-- end div blanco-->  
+        </div><!-- end div azul-->  
+      </div><!-- end div cuadro gris-->             
 				            
             	
     </body>
 <script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
+<script src="includes/ui/jquery-ui.js"></script>
 <script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
 <script src="includes/Scripts_Pedidos.js" type="text/javascript"></script> 
 </html>

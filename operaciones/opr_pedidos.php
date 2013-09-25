@@ -60,6 +60,7 @@ class Pedidos{
     echo json_encode($jsondata);
 
 	}
+	
 	function rechaza_pedidos($parametros,$hoy){
 		$v_datos=explode("|",$parametros);
 		
@@ -72,10 +73,11 @@ class Pedidos{
     echo json_encode($jsondata);
 
 	}
+	
 	function entrega_pedidos($parametros,$hoy){
-		$v_datos=explode(",",$parametros);
+		$v_datos=explode("|",$parametros);
 		
-		$result=mysql_query("update tbl_pedidos set fecha_entregado='".$hoy."',estado=2 where consecutivo='".$v_datos[0]."'");
+		$result=mysql_query("update tbl_pedidos set detalle_entrega='".$v_datos[0]."',fecha_entregado='".$hoy."',estado=3 where consecutivo='".$v_datos[1]."'");
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
@@ -84,6 +86,9 @@ class Pedidos{
     echo json_encode($jsondata);
 
 	}
+
+	
+
 	function elimina_pedidos($parametros,$hoy){
 		$v_datos=explode(",",$parametros);
 		
@@ -96,7 +101,8 @@ class Pedidos{
     echo json_encode($jsondata);
 
 	}
-	function envia_correo(consecutivo){
+
+	function envia_correo($consecutivo){
 		date_default_timezone_set('America/Denver');
        $head = "From: info@siccina.ucr.ac.cr<info@siccina.ucr.ac.cr>\r\n";	   
 	   $email = "info@siccina.ucr.ac.cr";
@@ -105,6 +111,8 @@ class Pedidos{
 	   $msg="Se ha creado un nuevo pedido con el consecutivo".$consecutivo." Verifique los detalles en el control de pedidos";	   	
 	   mail($dest, $asunto, $msg, $head);
     }
+
+	
 	
 	
 

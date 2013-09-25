@@ -161,22 +161,9 @@ $("#btn_rechazar").click(function(){
       setInterval(function(){window.location.assign("control_pedidos.php")},2000);   
 });
 /***********************************************Boton Entregar**********************************************/
-$("#btn_entregar").click(function(){  
-  alert(parametros=$(this).attr('consecutivo')+',');
-  $.ajax({ 
-      data: "metodo=aprueba_pedidos&parametros="+parametros,
-      type: "POST",
-      async:false,
-      dataType: "json",
-      url: "operaciones/opr_pedidos.php",
-      success: function (data){
-        if (data.resultado!="Success"){
-         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");          
-        }else{
-          notificacion("Pedido Aprobado","El pedido se ha entregado correctamente","info");          
-        }
-        }//end succces function
-      });//end ajax function   
+$("#btn_entregar").click(function(){
+ $("#txt_detalle").attr("consecutivo",$(this).attr("consecutivo")) ; 
+ $( "#dialog-form" ).dialog( "open" );
 });
 
 
@@ -193,6 +180,38 @@ alert("entro");
 $( "#rechazar" ).on( "click", function() {
 alert("entro");
 }*/
+
+$( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 350,
+      width: 420,
+      modal: true,
+      buttons: {
+        "Aceptar": function() {
+          var parametros=$("#txt_detalle").val()+"|"+$("#txt_detalle").attr("consecutivo");
+          $.ajax({ data: "metodo=entrega_pedidos&parametros="+parametros,
+      type: "POST",
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function(data){ 
+        if (data.resultado!="Success"){
+          notificacion("Error","Intente de nuevo","error");         
+        }else{
+            notificacion("Pedido Entregado","El Expediente fue entregado exitosamente.","info");
+            setInterval(function(){window.location.assign("control_pedidos.php")},2000);       
+        }       
+      } 
+      });
+          $( this ).dialog( "close" );
+        },
+        Cancelar: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        
+      }
+    });
 /****************************************************Funciones*******************************************************/
 /********************************************************************************************************************/
 /********************************************************************************************************************/
