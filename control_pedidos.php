@@ -55,7 +55,7 @@ $result=mysql_query(" select  * from tbl_pedidos where estado=0 ");
 
                         <div  class="ancho_75 rows_centrado"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_centrado"><?=utf8_encode($row->fecha_creacion);?></div>
-                        <div  class="ancho_115 rows_centrado"><a id="btn_consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=1" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="btn_aprobar" consecutivo="<?=$row->consecutivo;?>" href="#" class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="btn_rechazar"  consecutivo="<?=$row->consecutivo;?>" class="acciones" href="#" title="Rechazar"><img src="img/del.png" width="25" height="25" /></a></div>        
+                        <div  class="ancho_115 rows_centrado"><a id="btn_consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=1" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;<a id="btn_modifica" consecutivo="<?=$row->id;?>" class="acciones" href="modifica_pedido.php?id=<?=$row->id?>&accion=1" title="Modificar"><img src="img/edit_lapiz.png" width="25" height="25" /></a>&nbsp;<a id="btn_aprobar" consecutivo="<?=$row->consecutivo;?>" href="#" class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a>&nbsp;<a id="btn_rechazar"  consecutivo="<?=$row->consecutivo;?>" class="acciones" href="#" title="Rechazar"><img src="img/del.png" width="25" height="25" /></a></div>        
         <?  
     }echo '<br></br> <br></br> <br></br><br></br> <br></br>'; 
 ?>
@@ -127,7 +127,7 @@ $result=mysql_query(" select  * from tbl_pedidos where estado=2 ");
 
                         <div  class="ancho_75 rows_centrado"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_centrado"><?=utf8_encode($row->fecha_creacion);?></div>
-                        <div  class="ancho_115 rows_centrado"><a id="btn_aprobar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=3" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="aprobar" consecutivo="<?=$row->id;?>" href="#" class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a></div>        
+                        <div  class="ancho_115 rows_centrado"><a id="btn_aprobar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=3" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="btn_modifica" consecutivo="<?=$row->id;?>" class="acciones" href="modifica_pedido.php?id=<?=$row->id?>&accion=1" title="Modificar"><img src="img/edit_lapiz.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="aprobar" consecutivo="<?=$row->id;?>" href="#" class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a></div>        
         <?  
     }echo '<br></br> <br></br> <br></br><br></br> <br></br>'; 
 ?>
@@ -169,13 +169,9 @@ $result=mysql_query(" select  * from tbl_pedidos where estado=3 ");
         <?  
     }echo '<br></br> <br></br> <br></br><br></br> <br></br>'; 
 ?>
-  <div id="dialog-form" title="Informaci&oacute;n de la Entrega">
-  <form>
-  <fieldset>
-  <div class="Arial14Morado">Detalle de la entrega</div>
-  <div><textarea rows="4" cols="40" name="txt_detalle" consecutivo="" id="txt_detalle" ></textarea></div>
-  </fieldset>
-  </form>
+  <div id="dialog-form" title="Informaci&oacute;n de la Entrega">  
+    <div class="Arial14Morado">Detalle de la entrega</div>
+    <div><textarea rows="4" cols="40" name="txt_detalle" consecutivo="" id="txt_detalle" ></textarea></div>  
   </div>
 					
 

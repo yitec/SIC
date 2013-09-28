@@ -21,12 +21,12 @@ echo mysql_error();
     </head>
     <body >
     		<div class="header2"></div>
-    		<div class="box2">     
-            <div align="right"style="margin-top:20px; margin-right:25px;"><?require_once('menu_superior.php');?></div>                                          
+    		<div class="box2">  
+            <div align="right"style="margin-top:20px; margin-right:25px;"><?require_once('menu_superior.php');?></div>                                             
                 <div class="box_azul2">
                     <div class="box_blanco2">
                         
-                        <div class="titulo1" align="center"><h2>Detalle Pedidos</h2></div>  
+                        <div class="titulo1" align="center"><h2>Modifica Pedidos</h2></div>  
                         <div  align="right">
                         <? if ($_REQUEST['accion']==1||$_REQUEST['accion']==3){?>
                             <a id="btn_aprobar" consecutivo="<?=$row->consecutivo;?>"  class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a>
@@ -70,16 +70,20 @@ echo mysql_error();
 
 <?  
 echo '<br><br><br><br>';
-
-$result2=mysql_query("SELECT d.id_pedido,d.id_categoria,d.cantidad,d.descripcion,d.observaciones,d.equipo,d.codigo_equipo,d.placa,d.serie,d.marca,d.modelo,d.presentacion,d.pureza,d.grado,d.capacidad,d.tipo_coneccion,d.certificador,d.volumen,d.fecha_recepcion,d.estado,c.nombre FROM tbl_detalle_pedidos d inner join tbl_categorias_pedidos c WHERE d.id_categoria=c.id and d.id_pedido='".$row->id."'");
+echo '<div id="listado_productos">';
+$result2=mysql_query("SELECT  d.id, d.id_pedido,d.id_categoria,d.cantidad,d.descripcion,d.observaciones,d.equipo,d.codigo_equipo,d.placa,d.serie,d.marca,d.modelo,d.presentacion,d.pureza,d.grado,d.capacidad,d.tipo_coneccion,d.certificador,d.volumen,d.fecha_recepcion,d.estado,c.nombre FROM tbl_detalle_pedidos d inner join tbl_categorias_pedidos c WHERE d.id_categoria=c.id and d.id_pedido='".$row->id."' and d.estado=1");
 echo mysql_error();
 //$result=mysql_query("select m.codigo,m.fecha_ingreso,a.id,a.nombre,a.observaciones, a.id_laboratorio from tbl_analisis a,tbl_muestras m where a.id_laboratorio=1 and a.estado=1 and a.id_muestra=m.id");
     while ($r2=mysql_fetch_object($result2)){
                         $i++;
                         echo '<div align="left" class="Arial18Morado">Articulo '.$i.'</div>';
                         if($r2->cantidad!=''&&$r2->cantidad!='undefined'){?>
+                            <table margin="0" padding="0" class="tabla_izquierda"><tr><td class="subtitulos2 ancho_50">Eliminar</td></tr>
+                            <tr><td   class="ancho_50 row_reset"><div align="center"><img class="eliminar" idregistro="<?=$r2->id;?>" idpedido="<?=$_REQUEST['id'];?>"  src="img/eliminar_negro.png"></div></td></tr></table>
+
+                        <?}if($r2->cantidad!=''&&$r2->cantidad!='undefined'){?>
                             <table class="tabla_izquierda"><tr><td class="subtitulos2 ancho_50">Cantidad</td></tr>
-                            <tr><td  class="ancho_50 row_reset"><?=utf8_decode($r2->cantidad);?></td></tr></table>
+                            <tr><td  class="ancho_50 row_reset"><div align="center"><?=utf8_decode($r2->cantidad);?></div></td></tr></table>
 
                         <?}if($r2->id_categoria!=''&&$r2->id_categoria!='undefined'){?>
                             <table class="tabla_izquierda"><tr><td class="subtitulos2 ancho_150">Compra de</td></tr>
@@ -152,10 +156,16 @@ echo mysql_error();
                                                  
     }//end while
 ?>
-                                                                    
-                    </div>
-                </div>           
-			</div>	            
+</div><!-- find id listado productos-->
+<div id="productos_dinamicos" align="left"><!--Dentro de este div se cargan todos los articulos -->                                            
+</div><!--Dentro de este div se cargan todos los articulos -->                                            
+<br />
+
+<div  id="agregar" align="center"><input  id="btn_agregarm"  type="image"  src="img/agregar.png" /></div>                        
+
+<div id="dialog-confirm" idpedido="" idregistro="" title="Eliminar Item">
+  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Desea eliminar este item?</p>
+</div>                        
 <div id="dialog-form" title="Informaci&oacute;n de la Entrega">
   <form>
   <fieldset>
@@ -164,6 +174,18 @@ echo mysql_error();
   </fieldset>
   </form>
 </div> 
+<?$result=mysql_query("select count(*) as total from tbl_detalle_pedidos where id_pedido='".$_REQUEST['id']."' and estado=1 ");
+    $r3=mysql_fetch_object($result);  
+?>
+<div><input  id="txt_cantidad_lineas" type="hidden" inicial="<?=$r3->total;?>" idpedido="<?=$_REQUEST['id'];?>"   value="<?=$r3->total;?>" /></div> 
+<br><br>
+<div id="siguiente" align="center">
+    <input  id="btn_siguientem"  type="image"  src="img/btn_continuar.png" /><br />
+</div> 
+                          
+                </div> <!-- end div blanco-->  
+            </div><!-- end div azul-->  
+        </div><!-- end div cuadro gris-->                      
     </body>
 <script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
 <script src="includes/ui/jquery-ui.js"></script>

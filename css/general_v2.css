@@ -419,10 +419,12 @@ font-weight:bold;
   border-width: 1px;
   border-color:#eaedee;
   padding: 2px;
+  height: 25px;
    
 }
 
 .tabla_izquierda{
+  margin-left: -5px;
   float: left;
 }
 

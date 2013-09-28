@@ -2,7 +2,14 @@ $(document).ready(function(){
 
 
 var nproductos=1;
-llena_divs(1,0);
+if ($("#txt_cantidad_lineas").val()>1){
+  var totl=parseInt($("#txt_cantidad_lineas").val());
+  totl++;
+  llena_divs(totl,0);  
+  $("#txt_cantidad_lineas").attr("value",totl);  
+}else{
+  llena_divs(1,0);
+}
 
 
 
@@ -113,11 +120,52 @@ $("#btn_siguiente").click(function(event){
 
 });
 
+/***********************************************Boton guardar items de modificar pedido*****************************/
+
+$("#btn_siguientem").click(function(event){
+  exito=1;
+  //al ser una modificacion debo empezar por los items que ya tiene + 1
+  var inicial=parseInt($("#txt_cantidad_lineas").attr("inicial"));
+  inicial++;
+  for (i=inicial;i<=$("#txt_cantidad_lineas").val();i++){//Dependiendo de la cantida de articulos recorro los divs
+    parametros=busca_valores($("#txt_cantidad_lineas").attr("idpedido"),'5',i)     
+    //guardo el detalle del pedido por articulo
+      $.ajax({ 
+      data: "metodo=agrega_articulos&parametros="+parametros,
+      type: "POST",
+      async:false,
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function (data){
+        if (data.resultado!="Success"){
+         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error"); 
+         exito=0;
+        }
+        }//end succces function
+      });//end ajax function   
+  
+  }//end for
+if (exito=1){
+    notificacion("Articulos Guardados","Los articulos se guardaron con exito!!","info"); 
+    setInterval(function(){window.location.assign("modifica_pedido.php?id="+$("#txt_cantidad_lineas").attr("idpedido"))},2000);   
+  }
+
+
+});
+
 /***********************************************Boton agregar un  item**********************************************/
 $("#btn_agregar").click(function(){
   nproductos++;
   $("#txt_cantidad_lineas").attr('value',nproductos);  
   llena_divs(nproductos);  
+});
+
+/***********************************************Boton agregar un  item de pedido modificado*************************/
+$("#btn_agregarm").click(function(){  
+  var total=parseInt($("#txt_cantidad_lineas").val());
+  total++;  
+  llena_divs(total);  
+  $("#txt_cantidad_lineas").attr("value",total);
 });
 
 /***********************************************Boton Aprobar**********************************************/
@@ -167,23 +215,21 @@ $("#btn_entregar").click(function(){
 });
 
 
-/***********************************************Boton aprobar un  item**********************************************/
-//$( "#consultar" ).on( "click", function() {
-$('#listado').on('click', '.acciones', function() {  
-    
-    alert($(this).attr("id"));
-    alert($(this).attr("consecutivo"));
+/***********************************************Boton elimnar un  item**********************************************/
+
+$('#listado_productos').on('click', '.eliminar', function() {        
+  $( "#dialog-confirm" ).attr("idpedido",$(this).attr("idpedido"))
+  $( "#dialog-confirm" ).attr("idregistro",$(this).attr("idregistro"))
+    $( "#dialog-confirm" ).dialog( "open" );
+    //eliminar_item($(this).attr("idregistro"),$(this).attr("idpedido"));
 });
-/*$( "#aprobar" ).on( "click", function() {
-alert("entro");
-}
-$( "#rechazar" ).on( "click", function() {
-alert("entro");
-}*/
+
+
+/******************************************Ventana Modal******************************************************/
 
 $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 350,
+      height: 200,
       width: 420,
       modal: true,
       buttons: {
@@ -209,12 +255,51 @@ $( "#dialog-form" ).dialog({
         }
       },
       close: function() {
-        
+        $( this ).dialog( "close" );
       }
     });
+
+/********************************************Confirm modal********************************************/
+$(function() {
+    $( "#dialog-confirm" ).dialog({
+      autoOpen: false,
+      resizable: false,
+      height:200,
+      modal: true,
+      buttons: {
+        "Aceptar": function() {
+          eliminar_item($(this).attr("idregistro"),$(this).attr("idpedido"));
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
+
 /****************************************************Funciones*******************************************************/
 /********************************************************************************************************************/
 /********************************************************************************************************************/
+
+function eliminar_item(id,pedido){
+    parametros=id+',';
+  $.ajax({ 
+      data: "metodo=elimina_item&parametros="+parametros,
+      type: "POST",
+      async:false,
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function (data){
+        if (data.resultado!="Success"){
+         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");          
+        }else{
+          notificacion("Item eliminado","El fue eliminado del pedido","info");          
+        }
+        }//end succces function
+      });//end ajax function
+      setInterval(function(){window.location.assign("modifica_pedido.php?id="+pedido)},1500);   
+}
 
 
 

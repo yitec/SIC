@@ -86,9 +86,18 @@
                 </div>           
 			</div>	
             <div><input  id="txt_cantidad_lineas"  type="hidden" value="1" /></div>
+  <div id="dialog-form" title="Informaci&oacute;n de la Entrega">
+  <form>
+  <fieldset>
+  <div class="Arial14Morado">Detalle de la entrega</div>
+  <div><textarea rows="4" cols="40" name="txt_detalle" consecutivo="" id="txt_detalle" ></textarea></div>
+  </fieldset>
+  </form>
+  </div> 
             <div class="modal"></div>	
     </body>
 <script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
+<script src="includes/ui/jquery-ui.js"></script>
 <script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
 <script src="includes/Scripts_Pedidos.js" type="text/javascript"></script> 
 </html>
