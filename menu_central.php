@@ -3,7 +3,7 @@ session_start();
 ?>
 <body>
 
-<div id="mainGris" style="height:420px;"><!--Cuadro Gris-->
+<div id="mainGris" style="height:510px;"><!--Cuadro Gris-->
 	<? if (in_array(1, $_SESSION['perfil'])){
 	?>
 	<div id="mainBlancoMenu"  style=" margin-left:10px; margin-top:10px;  float:left;">
@@ -171,7 +171,18 @@ session_start();
     <div align="center" class="Arial14Negro"><a href="control_pedidos.php"><img src="img/aprobe.png" width="48" height="48"></a><br>Control Pedidos</div>
     </div>
     <? } ?>                
-    
+<? if (in_array(32, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="control_calidad.php"><img src="img/calidad.png" width="48" height="48"></a><br>Control Calidad</div>
+    </div>
+    <? } ?>                    
+<? if (in_array(33, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="modificar_documento.php"><img src="img/edit.png" width="48" height="48"></a><br>Modificar Documento</div>
+    </div>
+    <? } ?>    
 
 
 

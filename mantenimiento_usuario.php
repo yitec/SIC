@@ -307,6 +307,11 @@ require_once('menu_superior.php');
       <td width="204" class="Arial14Negro"><input class="ck"  id="chk_cpedidos" type="checkbox" value="" />Crear Pedidos</td>      
       <td width="204" class="Arial14Negro"><input class="ck" name="chk_apedidos" id="chk_apedidos" type="checkbox" value="" />Aprobar Pedidos</td>
     </tr>     
+    <tr>
+      <td class="Arial14Azul"></td>
+      <td width="204" class="Arial14Negro"><input class="ck"  id="chk_ccalidad" type="checkbox" value="" />Control Calidad</td>      
+      <td width="204" class="Arial14Negro"><input class="ck" name="chk_mdocumento" id="chk_mdocumento" type="checkbox" value="" />Modificaci&oacute;n Documento</td>
+    </tr>     
     </table>
 <div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar" id="btn_guardar" type="image" src="img/btn_guardar.png" /><input name="btn_eliminar" id="btn_eliminar" type="image" src="img/btn_eliminar.png" /></div>    
 
