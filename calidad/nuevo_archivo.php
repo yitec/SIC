@@ -13,8 +13,7 @@ $dt=mysql_query($consulta);
         <link rel ="stylesheet" href="../css/calidad.css" type="text/css" />        
         <link rel ="stylesheet" href="../css/cuadros.css" type="text/css" /> 
         <link rel ="stylesheet" href="../css/jquery.pnotify.default.css" type="text/css" />
-        <link rel ="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
+        <link rel ="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />        
         <title>SIC CINA</title>  
     </head>
 <body>    

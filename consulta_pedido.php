@@ -12,7 +12,7 @@ echo mysql_error();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel ="stylesheet" href="css/general_v2.css" type="text/css" />
+        <link rel ="stylesheet" href="css/pedidos.css" type="text/css" />
         <link href="css/jquery.pnotify.default.css" rel="stylesheet" type="text/css" />
         <link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -32,23 +32,26 @@ echo mysql_error();
                             <a id="btn_aprobar" consecutivo="<?=$row->consecutivo;?>"  class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a>
                         <?}if ($_REQUEST['accion']==1){?>
                         &nbsp;&nbsp;&nbsp;<a id="btn_rechazar"  consecutivo="<?=$row->consecutivo;?>" class="acciones" href="#" title="Rechazar"><img src="img/del.png" width="25" height="25" /></a></div></td>                              
-                        <?}?>
+                        <?}
+                        $result=mysql_query("select nombre from Tbl_proveedores where id='".$row->id_proveedor."'");
+                        $r1=mysql_fetch_object($result);
+                        $proveedor=$r1->nombre;
+
+                        ?>
+
 
                         <div class="titulo2">Informaci&oacute;n General </div>
                         <div class="subtitulos2 ancho_75">Consecutivo</div>
+                        <div class="subtitulos2 ancho_75">Secci&oacute;n</div>
                         <div class="subtitulos2 ancho_150">Solicitante</div>
                         <div class="subtitulos2 ancho_150">Proveedor</div>
                         <div class="subtitulos2 ancho_175">Categoria</div>
-                        <div class="subtitulos2 ancho_75">Secci&oacute;n</div>
-                        <div class="subtitulos2 ancho_150">Asunto</div>
-                        <div class="subtitulos2 ancho_150">Proyecto</div>
-                        <div class="subtitulos2 ancho_75"># Proyecto</div>
-                        <div class="subtitulos2 ancho_50">Tipo</div>
-                        <div class="subtitulos2 ancho_75">Ingreso</div>
+                        <div class="subtitulos2 ancho_100">Ingreso</div>
+                        <br>
                         <div  class="ancho_75 rows_centrado2"><?=$row->consecutivo;?></div>
-                        
+                        <div  class="ancho_75 rows_centrado2"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_izquierda2"><?=utf8_encode($row->solicitante);?></div>
-                        <div  class="ancho_150 rows_izquierda2"><?=utf8_encode($row->Proveedor);?></div>
+                        <div  class="ancho_150 rows_izquierda2"><?=utf8_encode($proveedor);?></div>
                        <?if ($row->tipo==1){?>
                        <div  class="ancho_175 rows_izquierda2">Instalaciones</div>
                        <?}elseif ($row->tipo==2){ ?>
@@ -60,12 +63,21 @@ echo mysql_error();
                        <?}elseif ($row->tipo==5) {?>
                        <div  class="ancho_175 rows_izquierda2">Compra de:</div>
                        <?}?>
-                        <div  class="ancho_75 rows_centrado2"><?=utf8_decode($row->seccion);?></div>
-                        <div  class="ancho_150 rows_centrado2"><?=utf8_decode($row->asunto);?></div>
+                       <div  class="ancho_100 rows_centrado2"><?=utf8_encode($row->fecha_creacion);?></div>
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="subtitulos2 ancho_450">Asunto</div>
+                        <div class="subtitulos2 ancho_150">Proyecto</div>
+                        <div class="subtitulos2 ancho_75"># Proyecto</div>                        
+                        <br>
+                        <div  class="ancho_450 rows_izquierda2"><?=utf8_decode($row->asunto);?></div>
                         <div  class="ancho_150 rows_centrado2"><?=utf8_decode($row->proyecto_nombre);?></div>
                         <div  class="ancho_75 rows_centrado2"><?=utf8_decode($row->proyecto_numero);?></div>
-                        <div  class="ancho_50 rows_centrado2"><?=utf8_decode($row->tipo);?></div>
-                        <div  class="ancho_75 rows_centrado2"><?=utf8_encode($row->fecha_creacion);?></div>
+                        
+                        
                                             
 
 <?  
@@ -76,7 +88,7 @@ echo mysql_error();
 //$result=mysql_query("select m.codigo,m.fecha_ingreso,a.id,a.nombre,a.observaciones, a.id_laboratorio from tbl_analisis a,tbl_muestras m where a.id_laboratorio=1 and a.estado=1 and a.id_muestra=m.id");
     while ($r2=mysql_fetch_object($result2)){
                         $i++;
-                        echo '<div align="left" class="Arial18Morado">Articulo '.$i.'</div>';
+                        echo '<br><div align="left" class="Arial18Morado">Articulo '.$i.'</div>';
                         if($r2->cantidad!=''&&$r2->cantidad!='undefined'){?>
                             <table class="tabla_izquierda"><tr><td class="subtitulos2 ancho_50">Cantidad</td></tr>
                             <tr><td  class="ancho_50 row_reset"><?=utf8_decode($r2->cantidad);?></td></tr></table>

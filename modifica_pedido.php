@@ -12,7 +12,7 @@ echo mysql_error();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel ="stylesheet" href="css/general_v2.css" type="text/css" />
+        <link rel ="stylesheet" href="css/pedidos.css" type="text/css" />
         <link href="css/jquery.pnotify.default.css" rel="stylesheet" type="text/css" />
         <link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -36,19 +36,16 @@ echo mysql_error();
 
                         <div class="titulo2">Informaci&oacute;n General </div>
                         <div class="subtitulos2 ancho_75">Consecutivo</div>
+                        <div class="subtitulos2 ancho_75">Secci&oacute;n</div>
                         <div class="subtitulos2 ancho_150">Solicitante</div>
                         <div class="subtitulos2 ancho_150">Proveedor</div>
                         <div class="subtitulos2 ancho_175">Categoria</div>
-                        <div class="subtitulos2 ancho_75">Secci&oacute;n</div>
-                        <div class="subtitulos2 ancho_150">Asunto</div>
-                        <div class="subtitulos2 ancho_150">Proyecto</div>
-                        <div class="subtitulos2 ancho_75"># Proyecto</div>
-                        <div class="subtitulos2 ancho_50">Tipo</div>
-                        <div class="subtitulos2 ancho_75">Ingreso</div>
+                        <div class="subtitulos2 ancho_100">Ingreso</div>
+                        <br>
                         <div  class="ancho_75 rows_centrado2"><?=$row->consecutivo;?></div>
-                        
+                        <div  class="ancho_75 rows_centrado2"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_izquierda2"><?=utf8_encode($row->solicitante);?></div>
-                        <div  class="ancho_150 rows_izquierda2"><?=utf8_encode($row->Proveedor);?></div>
+                        <div  class="ancho_150 rows_izquierda2"><?=utf8_encode($row->id_proveedor);?></div>
                        <?if ($row->tipo==1){?>
                        <div  class="ancho_175 rows_izquierda2">Instalaciones</div>
                        <?}elseif ($row->tipo==2){ ?>
@@ -60,12 +57,22 @@ echo mysql_error();
                        <?}elseif ($row->tipo==5) {?>
                        <div  class="ancho_175 rows_izquierda2">Compra de:</div>
                        <?}?>
-                        <div  class="ancho_75 rows_centrado2"><?=utf8_decode($row->seccion);?></div>
-                        <div  class="ancho_150 rows_centrado2"><?=utf8_decode($row->asunto);?></div>
+                       <div  class="ancho_100 rows_centrado2"><?=utf8_encode($row->fecha_creacion);?></div>
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="subtitulos2 ancho_450">Asunto</div>
+                        <div class="subtitulos2 ancho_150">Proyecto</div>
+                        <div class="subtitulos2 ancho_75"># Proyecto</div>
+                        <div class="subtitulos2 ancho_50">Tipo</div>                        
+                        <br>
+                        <div  class="ancho_450 rows_izquierda2"><?=utf8_decode($row->asunto);?></div>
                         <div  class="ancho_150 rows_centrado2"><?=utf8_decode($row->proyecto_nombre);?></div>
                         <div  class="ancho_75 rows_centrado2"><?=utf8_decode($row->proyecto_numero);?></div>
                         <div  class="ancho_50 rows_centrado2"><?=utf8_decode($row->tipo);?></div>
-                        <div  class="ancho_75 rows_centrado2"><?=utf8_encode($row->fecha_creacion);?></div>
+                        
                                             
 
 <?  
@@ -185,7 +192,8 @@ echo mysql_error();
                           
                 </div> <!-- end div blanco-->  
             </div><!-- end div azul-->  
-        </div><!-- end div cuadro gris-->                      
+        </div><!-- end div cuadro gris-->    
+        <div class="modal"></div>                     
     </body>
 <script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
 <script src="includes/ui/jquery-ui.js"></script>

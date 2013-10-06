@@ -6,12 +6,7 @@ $("#btn_guardar").click(function(event){
 		
 		event.preventDefault();	
 		if($("#txt_nombre").val() =="" ) {  
-        	$.pnotify({
-			    pnotify_title: 'Error ',
-    			pnotify_text: 'Debes indicar un nombre',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+        	notificacion("Error!!","Debes indicar un nombre","error"); 				        	
         	return false;  
     	}  
   
@@ -24,24 +19,12 @@ $("#btn_guardar").click(function(event){
         url: "../operaciones/Clase_Calidad.php",
 		data: "metodo=crea_categorias&parametros="+parametros,
 		 		
-		success: function(datos){
-
-		
-		if (data	=="Success"){
-				$.pnotify({
-			    pnotify_title: 'Nuevo Categoria!!',
-    			pnotify_text: 'La categoria fue guardada exitosamente.',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+		success: function(datos){		
+		if (datos["resultado"]=="Success"){
+				notificacion("Nuevo Categoria!!","La categoria fue guardada exitosamente.","info"); 				
+				setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
 		}else{
-				$.pnotify({
-			    pnotify_title: 'Error!!',
-    			pnotify_text: 'La categoria ya existe',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
-			
+				notificacion("Error!!","La categoria ya existe","error"); 														
 		}
 				
 				
@@ -59,20 +42,10 @@ $("#btn_guardar_s").click(function(event){
 		
 		event.preventDefault();
 		if($("#cmb_categoria").val()=="0"){
-				$.pnotify({
-			    pnotify_title: 'Error ',
-    			pnotify_text: 'Debes indicar una categoría',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+			notificacion("Error!!","Debes indicar una categoria","error"); 								
 		}	
 		if($("#txt_subcat").val() =="" ) {  
-        	$.pnotify({
-			    pnotify_title: 'Error ',
-    			pnotify_text: 'Debes indicar un nombre',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+        	notificacion("Error!!","Debes indicar un nombre","error"); 			
         	return false;  
     	}  
   
@@ -88,21 +61,11 @@ $("#btn_guardar_s").click(function(event){
 		success: function(datos){
 
 		
-		if (data	=="Success"){
-				$.pnotify({
-			    pnotify_title: 'Nuevo Subcategoría!!',
-    			pnotify_text: 'La Subcategoría fue guardada exitosamente.',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+		if (datos["resultado"]=="Success"){
+			notificacion("Nueva SubCategoria!!","La Sub Categoria fue guardada exitosamente.","info"); 								
+			setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
 		}else{
-				$.pnotify({
-			    pnotify_title: 'Error!!',
-    			pnotify_text: 'La Subcategoría ya existe',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
-			
+			notificacion("Error!!","La Sub Categoria ya existe","error"); 									
 		}
 				
 				
@@ -114,47 +77,13 @@ $("#btn_guardar_s").click(function(event){
 limpiar();
 });
 
-//**************************************************Subir Archivo ***************************************************
-function subirArchivo(url){
-	
-	var archivos = document.getElementById("archivos");//Damos el valor del input tipo file
-	var archivo = archivos.files; //Obtenemos el valor del input (los arcchivos) en modo de arreglo
-	var texto = '';
-	var nombreArchivo = '';
-	var data = new FormData();
-	for(i=0; i<archivo.length; i++){
-	data.append('archivo'+i,archivo[i]);	
-	}
-	data.append('texto',texto);
-
-	$.ajax({
-		url:url, //Url a donde la enviaremos
-		type:'POST', //Metodo que usaremos
-		contentType:false, //Debe estar en false para que pase el objeto sin procesar
-		async: false,
-		data:data, //Le pasamos el objeto que creamos con los archivos
-		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
-		cache:false, //Para que el formulario no guarde cache
-		/*success: function(data){
-			nombreArchivo = data;
-
-		}*/
-	}).done(function(data){nombreArchivo = data})
-
-	return nombreArchivo;
-}
 
 //***************************************************Guardar Archivo******************************************
 $("#guardar_archivo").click(function(event){
 		
 		event.preventDefault();	
 		if($("#txt_nombre").length < 0) {  
-        	$.pnotify({
-			    pnotify_title: 'Error ',
-    			pnotify_text: 'Debes indicar un nombre',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+			notificacion("Error!!","Debes Inidicar un nombre","error"); 						        	
         	return false;  
     	}  
   
@@ -170,25 +99,12 @@ $("#guardar_archivo").click(function(event){
 					
 			success: function(datos){
 
-				if (datos["resultado"]	=="Success"){
-						
-						$.pnotify({
-						pnotify_title: 'Nuevo Archivo!!',
-						pnotify_text: 'El archivo fue guardado exitosamente.',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
-				}else{
-						$.pnotify({
-						pnotify_title: 'Error!!',
-						pnotify_text: 'El archivo ya existe',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
-					
-				}
-						
-				
+				if (datos["resultado"]=="Success"){						
+						notificacion("Nuevo Archivo!!","El archivo fue guardado exitosamente.","info"); 
+						setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
+				}else{						
+						notificacion("Error!!","El archivo ya existe","error"); 					
+				}				
 				}//end succces function
 		});//end ajax function			
 		
@@ -201,12 +117,7 @@ $("#guardar_editar_categoria").click(function(event){
 		
 		event.preventDefault();	
 		if($("#txt_nombre").length < 0) {  
-        	$.pnotify({
-			    pnotify_title: 'Error ',
-    			pnotify_text: 'Debes indicar un nombre',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+			notificacion("Error!!","Debes indicar un nombre","error"); 						        	
         	return false;  
     	}  
   
@@ -222,21 +133,10 @@ $("#guardar_editar_categoria").click(function(event){
 			success: function(datos){
 
 				if (datos["resultado"]	=="Success"){
-						
-						$.pnotify({
-						pnotify_title: 'Nuevo Archivo!!',
-						pnotify_text: 'El nombre fue editado exitosamente.',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
+						notificacion("Nuevo Archivo!!","El nombre fue editado correctamente","info"); 												
+						setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
 				}else{
-						$.pnotify({
-						pnotify_title: 'Error!!',
-						pnotify_text: 'El nombre ya existe',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
-					
+					notificacion("Error!!","El nombre ya existe","error"); 												
 				}
 						
 				
@@ -266,6 +166,7 @@ $("#eliminar_categoria").click(function(event){
 				if (datos["resultado"]	=="Success"){
 						location.href=location.href;
 						alert('Categoria Eliminada!');
+						setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
 				}else{
 						$.pnotify({
 						pnotify_hide: true
@@ -277,9 +178,7 @@ $("#eliminar_categoria").click(function(event){
 				}//end succces function
 		});//end ajax function	
 
-} else { 
-
-				
+} else { 				
 		
 }
 } 		
@@ -292,12 +191,7 @@ $("#guardar_editar_subcat").click(function(event){
 		
 		event.preventDefault();	
 		if($("#txt_nombre").length < 0) {  
-        	$.pnotify({
-			    pnotify_title: 'Error ',
-    			pnotify_text: 'Debes indicar un nombre',
-    			pnotify_type: 'info',
-    			pnotify_hide: true
-				});
+			notificacion("Error!!","Debes indicar un nombre","error"); 						        	
         	return false;  
     	}  
   
@@ -313,20 +207,9 @@ $("#guardar_editar_subcat").click(function(event){
 			success: function(datos){
 
 				if (datos["resultado"]	=="Success"){
-						
-						$.pnotify({
-						pnotify_title: 'Nuevo Archivo!!',
-						pnotify_text: 'El nombre fue editado exitosamente.',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
+					notificacion("Edición Correcta!!","La sub categoria se edito correctamente","info"); 																								
 				}else{
-						$.pnotify({
-						pnotify_title: 'Error!!',
-						pnotify_text: 'El nombre ya existe',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
+						notificacion("Error!!","El nombre ya existe","error"); 						
 					
 				}
 						
@@ -357,6 +240,7 @@ $("#eliminar_subcategoria").click(function(event){
 				if (datos["resultado"]	=="Success"){
 						location.href=location.href;
 						alert('Categoria Eliminada!');
+						setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
 				}else{
 						$.pnotify({
 						pnotify_hide: true
@@ -395,12 +279,7 @@ $("#btn_rechazar").click(function(event){
 
 				if (datos["resultado"]	=="Success"){
 						  location.href=location.href;
-						alert('Solicitud Eliminada!');
-						
-						 
-						
-						
-						
+						alert('Solicitud Eliminada!');													
 				}else{
 						$.pnotify({
 						pnotify_hide: true
@@ -439,12 +318,7 @@ $("#btn_aprobar").click(function(event){
 
 				if (datos["resultado"]	=="Success"){
 						  location.href=location.href;
-						alert('Solicitud Aceptada!');
-						
-						 
-						
-						
-						
+						alert('Solicitud Aceptada!');						
 				}else{
 						$.pnotify({
 						pnotify_hide: true
@@ -472,7 +346,7 @@ $("#btn_guardar_p").click(function(event){
 		event.preventDefault();	
 
   
-		var archivo = subirArchivo('operaciones/subirModificado.php');
+		var archivo = subirArchivo('../operaciones/subirModificado.php');
 
 		var parametros=$("#cmb_archivos").val()+','+$("#txt_comentario").val()+','+archivo;
 		$.ajax({
@@ -484,20 +358,9 @@ $("#btn_guardar_p").click(function(event){
 			success: function(datos){
 
 				if (datos["resultado"]	=="Success"){
-						$.pnotify({
-						pnotify_title: 'Nuevo Archivo!!',
-						pnotify_text: 'El archivo fue guardado exitosamente.',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
+						notificacion("Nuevo Archivo!!","El nombre fue guardado correctamente","info");					
 				}else{
-						$.pnotify({
-						pnotify_title: 'Error!!',
-						pnotify_text: 'El archivo ya existe',
-						pnotify_type: 'info',
-						pnotify_hide: true
-						});
-					
+						notificacion("Error!!","El archivo ya existe","error"); 											
 				}
 				}//end succces function
 		});//end ajax function			
@@ -514,7 +377,7 @@ $("#btn_guardar_p").click(function(event){
   
   
   
-  /************************************Tool Tip************************************************************/
+  /************************************Tool Tip***********************************************************
   $( document ).tooltip({
 		position: {
 		  my: "center bottom-20",
@@ -529,7 +392,7 @@ $("#btn_guardar_p").click(function(event){
 		  }
 		}
   });
-  
+  */
   /************************************Notificaciones Jquery************************************************************/
   function notificacion(titulo,cuerpo,tipo){
 	$.pnotify({
@@ -576,6 +439,36 @@ $("#cmb_subcategoria").change(function(event){
 		}//end succces function
 	});//end ajax function	
 });
+
+//**************************************************Subir Archivo ***************************************************
+function subirArchivo(url){
+	
+	var archivos = document.getElementById("archivos");//Damos el valor del input tipo file
+	var archivo = archivos.files; //Obtenemos el valor del input (los arcchivos) en modo de arreglo
+	var texto = '';
+	var nombreArchivo = '';
+	var data = new FormData();
+	for(i=0; i<archivo.length; i++){
+	data.append('archivo'+i,archivo[i]);	
+	}
+	data.append('texto',texto);
+
+	$.ajax({
+		url:url, //Url a donde la enviaremos
+		type:'POST', //Metodo que usaremos
+		contentType:false, //Debe estar en false para que pase el objeto sin procesar
+		async: false,
+		data:data, //Le pasamos el objeto que creamos con los archivos
+		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
+		cache:false, //Para que el formulario no guarde cache
+		/*success: function(data){
+			nombreArchivo = data;
+
+		}*/
+	}).done(function(data){nombreArchivo = data})
+
+	return nombreArchivo;
+}
 
   /****************************************Ediar Categorias******************************************************
   

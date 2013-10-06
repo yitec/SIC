@@ -16,11 +16,16 @@
            <div align="center" class="Arial18Morado"> Opciones Calidad</div>
            <br>
            <div class="lineaAzul"></div>
-           <div id="sombra_azul" class="menu_calidad"><a href="nuevo_archivo.php">Subir Archivo</a></div>
-           <div id="sombra_azul" class="menu_calidad"><a href="maestro.php">Control Maestro</a></div>
-           <div id="sombra_azul" class="menu_calidad"><a href="peticiones.php">Peticiones</a></div>
-           <div id="sombra_azul"class="menu_calidad"><a href="nueva_categoria.php">Crear Categoria</a></div>
-           <div id="sombra_azul"class="menu_calidad"><a href="nueva_subcategoria.php">Crear Sub Categoria</a></div>           
+           <a href="nuevo_archivo.php"><div id="sombra_azul" class="menu_calidad">Subir Archivo</div></a>
+           <a href="maestro.php"><div id="sombra_azul" class="menu_calidad">Control Maestro</div></a>
+           <a href="ver_peticiones.php"><div id="sombra_azul" class="menu_calidad">Peticiones</div></a>
+           <a href="nueva_categoria.php"><div id="sombra_azul"class="menu_calidad">Crear Categoria</div></a>
+           <a href="nueva_subcategoria.php"><div id="sombra_azul"class="menu_calidad">Crear Sub Categoria</div></a>
+           <a href="nueva_peticion.php"><div id="sombra_azul"class="menu_calidad">Nueva Petici&oacute;n</div></a>
+           <a href="editar_categoria.php"><div id="sombra_azul"class="menu_calidad">Editar Categoria</div></a>
+           <a href="editar_subcategoria.php"><div id="sombra_azul"class="menu_calidad">Editar Sub Categoria</div></a>
+           <a href="descargar_maestro.php"><div id="sombra_azul"class="menu_calidad">Descargar Maestro</div></a>
+           <a href="historial_cambios.php"><div id="sombra_azul"class="menu_calidad">Historial Cambios</div></a>
            </div>
 
            </div>		

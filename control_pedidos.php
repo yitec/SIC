@@ -9,7 +9,7 @@ conectar();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel ="stylesheet" href="css/general_v2.css" type="text/css" />
+        <link rel ="stylesheet" href="css/pedidos.css" type="text/css" />
         <link href="css/jquery.pnotify.default.css" rel="stylesheet" type="text/css" />
         <link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -55,7 +55,7 @@ $result=mysql_query(" select  * from tbl_pedidos where estado=0 ");
 
                         <div  class="ancho_75 rows_centrado"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_centrado"><?=utf8_encode($row->fecha_creacion);?></div>
-                        <div  class="ancho_115 rows_centrado"><a id="btn_consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=1" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;<a id="btn_modifica" consecutivo="<?=$row->id;?>" class="acciones" href="modifica_pedido.php?id=<?=$row->id?>&accion=1" title="Modificar"><img src="img/edit_lapiz.png" width="25" height="25" /></a>&nbsp;<a id="btn_aprobar" consecutivo="<?=$row->consecutivo;?>" href="#" class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a>&nbsp;<a id="btn_rechazar"  consecutivo="<?=$row->consecutivo;?>" class="acciones" href="#" title="Rechazar"><img src="img/del.png" width="25" height="25" /></a></div>        
+                        <div  class="ancho_115 rows_centrado"><a id="btn_consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=1" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;<a id="btn_modifica" consecutivo="<?=$row->id;?>" class="acciones" href="modifica_pedido.php?id=<?=$row->id?>&accion=1" title="Modificar"><img src="img/edit_lapiz.png" width="25" height="25" /></a>&nbsp;<a id="btn_aprobar" consecutivo="<?=$row->consecutivo;?>" class="acciones" title="Aprobar"><img src="img/check.png" width="25" height="25" /></a>&nbsp;<a id="btn_rechazar"  consecutivo="<?=$row->consecutivo;?>" class="acciones"  title="Rechazar"><img src="img/del.png" width="25" height="25" /></a></div>        
         <?  
     }echo '<br></br> <br></br> <br></br><br></br> <br></br>'; 
 ?>
@@ -90,7 +90,7 @@ $result=mysql_query(" select  * from tbl_pedidos where estado=1 ");
 
                         <div  class="ancho_75 rows_centrado"><?=utf8_decode($row->seccion);?></div>
                         <div  class="ancho_150 rows_centrado"><?=utf8_encode($row->fecha_creacion);?></div>
-                        <div  class="ancho_115 rows_centrado"><a id="consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=2" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="btn_entregar" consecutivo="<?=$row->consecutivo;?>" class="acciones" href="#" title="Consultar"><img src="img/entregar.png" width="25" height="25" /></a></div>        
+                        <div  class="ancho_115 rows_centrado"><a id="consultar" consecutivo="<?=$row->id;?>" class="acciones" href="consulta_pedido.php?id=<?=$row->id?>&accion=2" title="Consultar"><img src="img/search.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;<a id="btn_entregar" consecutivo="<?=$row->consecutivo;?>" class="acciones" href="#" title="Entregar"><img src="img/entregar.png" width="25" height="25" /></a></div>        
 						
         <?  
     }echo '<br></br> <br></br> <br></br><br></br> <br></br>'; 

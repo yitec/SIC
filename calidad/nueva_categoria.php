@@ -3,23 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel ="stylesheet" href="css/general_v2.css" type="text/css" />
-        <link rel ="stylesheet" href="css/cuadros.css" type="text/css" />
-        <link rel ="stylesheet" href="css/jquery.pnotify.default.css" type="text/css" />
-        <link rel ="stylesheet" href="css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />
+        <link rel ="stylesheet" href="../css/calidad.css" type="text/css" />
+        <link rel ="stylesheet" href="../css/cuadros.css" type="text/css" />
+        <link rel ="stylesheet" href="../css/jquery.pnotify.default.css" type="text/css" />
+        <link rel ="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
-        <title>XPD</title>
+        <title>SIC CINA</title>
     </head>
     <body >
     		<div class="header"></div>
     		<div class="box">
          <div align="center">
 <table><tr><td> 
-<div class="izq_sup_g"></div>
-<div class="cen_sup_g"><div  class="Arial14blanco" align="left" style="float:left; margin-top:18px;">Categorias</div><div align="right"></div> </div>
-<div class="der_sup_g"></div>
-<div class="lineaAzul"></div>
-<div class="izq_lat_g"></div>
+
 <div    class="contenido_gm">
 
 <div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
@@ -41,7 +37,7 @@
 	    </tr>
 	          
 	  </table>
-	<div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar" id="btn_guardar" type="image" src="img/btn_guardar.png" /></div>    
+	<div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar" id="btn_guardar" type="image" src="../img/btn_guardar.png" /></div>    
 
 </div><!--fin cuadro blanco--> 
 </div><!--fin cuadro azul--> 
@@ -50,10 +46,7 @@
 
 
 </div><!--fin div de contenido cudro gm-->
-<div class="der_lat_g"></div>
-<div class="izq_inf_g"></div>
-<div class="cen_inf_g"></div>
-<div class="der_inf_g"></div>
+
 
 <div align="center" style=" margin-left:350px;float:left" class="Arial8negro">
 Sistema de Control e Informaci&oacute;n.  
@@ -70,8 +63,8 @@ Versi&oacute;n 1.0
 			</div>		
     </body>
 
-<script src="includes/jquery-1.8.3.js" type="text/javascript"></script> 
-<script src="includes/jquery.pnotify.js" type="text/javascript"></script>
-<script src="includes/Scripts_Calidad.js" type="text/javascript"></script> 
+<script src="../includes/jquery-1.8.3.js" type="text/javascript"></script> 
+<script src="../includes/jquery.pnotify.js" type="text/javascript"></script>
+<script src="../includes/Scripts_Calidad.js" type="text/javascript"></script> 
 </html>
 

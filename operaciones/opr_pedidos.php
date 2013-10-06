@@ -30,9 +30,8 @@ class Pedidos{
         	$jsondata['resultado'] = 'Success';        	
 			$jsondata['id_pedido'] = mysql_insert_id();        	
         }        
-    envia_correo($v_datos[0]);    
     echo json_encode($jsondata);
-
+    //envia_correo($v_datos[8]);       
 	}
 	
 	function agrega_articulos($parametros,$hoy){

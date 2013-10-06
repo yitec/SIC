@@ -1,6 +1,6 @@
 <?php
 //Como no sabemos cuantos archivos van a llegar, iteramos la variable $_FILES
-$ruta="../archivos/pendientes/";
+$ruta="../calidad/archivos/Pendientes/";
 $texto=$_POST['texto'];
 foreach ($_FILES as $key) {
 if($key['error'] == UPLOAD_ERR_OK ){//Verificamos si se subio correctamente

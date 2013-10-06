@@ -1,5 +1,4 @@
 <?php
-
 include ('../cnx/Conexion_Calidad.php');
 $hoy=date("Y-m-d H:i:s");
 
@@ -104,7 +103,7 @@ class Categorias{
 		echo json_encode($jsondata);
 	}
 	
-		function eliminar_categoria($parametros){
+	function eliminar_categoria($parametros){
 	
 		$v_datos=explode(",",$parametros);	
 		$result=mysql_query("UPDATE `tbl_categorias` SET `estado` = '0' WHERE `tbl_categorias`.`id_categoria` ='".$v_datos[1]."';");
@@ -140,7 +139,7 @@ class Categorias{
 		echo json_encode($jsondata);
 	}
 	
-	  function rechazar_peticion($parametros){
+	function rechazar_peticion($parametros){
   
 	  $v_datos=explode(",",$parametros);	
 	  $result=mysql_query("UPDATE `bd_calidad`.`tbl_pendientes` SET `estado` = '0' WHERE `tbl_pendientes`.`id_pendiente` ='".$v_datos[0]."';");
@@ -182,7 +181,7 @@ class Categorias{
 
         }    
   
-		function crear_archivo($parametros){
+	function crear_archivo($parametros){
 	
 		$v_datos=explode(",",$parametros);	
 		$result=mysql_query("INSERT INTO `tbl_archivos` (`id_archivo` ,`id_categoria` ,`id_subcat`,`nombre_archivo`,`version`,`fecha_creacion`,`id_usuario`,`url_archivo`,`estado`) VALUES (NULL , '".$v_datos[2]."', '".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."',NOW(),'','".$v_datos[4]."','1')");

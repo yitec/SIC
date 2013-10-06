@@ -174,7 +174,7 @@ session_start();
 <? if (in_array(32, $_SESSION['perfil'])){
     ?>
     <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
-    <div align="center" class="Arial14Negro"><a href="control_calidad.php"><img src="img/calidad.png" width="48" height="48"></a><br>Control Calidad</div>
+    <div align="center" class="Arial14Negro"><a href="calidad/control_calidad.php"><img src="img/calidad.png" width="48" height="48"></a><br>Control Calidad</div>
     </div>
     <? } ?>                    
 <? if (in_array(33, $_SESSION['perfil'])){

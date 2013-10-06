@@ -316,7 +316,7 @@ font-weight:bold;
   border-width: 1px;
   border-color:#eaedee;
   padding: 2px;
-  height: 25px;
+  height: 35px;
 }
 .rows_izquierda2{
   font-size:10px;
@@ -328,7 +328,7 @@ font-weight:bold;
   border-width: 1px;
   border-color:#eaedee;
   padding: 2px;
-   height: 25px;
+   height: 35px;
 }
 .ancho_50{
   width: 50px;    
@@ -356,6 +356,9 @@ font-weight:bold;
 }
 .ancho_200{
   width: 200px;  
+}
+.ancho_450{
+  width: 450px;  
 }
 
 

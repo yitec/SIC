@@ -1,9 +1,14 @@
+<?
+session_start();
+require_once('cnx/conexion.php');
+conectar();
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel ="stylesheet" href="css/general_v2.css" type="text/css" />
+        <link rel ="stylesheet" href="css/pedidos.css" type="text/css" />
         <link href="css/jquery.pnotify.default.css" rel="stylesheet" type="text/css" />
         <link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -28,10 +33,15 @@
                             </tr>
                             <tr>
                                 <td height="25" class="Arial14Morado">Proveedor</td>
-                                <td ><select class="combos" id="cmb_proveedor" name="cmb_proveedor">
-                                <option selected="selected" value="1">Multiple</option>
-                                <option value="2">Acero Mitral</option>
-                                <option value="3">Tecnologia CR</option>
+                                <td >
+                                <select class="combos" id="cmb_proveedor" name="cmb_proveedor">
+                                <option selected="selected" value="0">Multiple</option>
+                                <?
+                                $result=mysql_query("select * from Tbl_proveedores where estado=1");
+                                while($r1=mysql_fetch_object($result)){
+                                  echo  '<option value="'.$r1->id.'">'.$r1->nombre.'</option>' ;
+                                }
+                                ?>                                                                                                        
                                 </select></td>
                             </tr>
                             <tr>
@@ -52,14 +62,14 @@
                             </tr>        
                             <tr>
                                 <td height="25" class="Arial14Morado">Asunto</td>
-                                <td><textarea rows="4" cols="40" name="txt_asunto" id="txt_asunto" ></textarea></td>
+                                <td><textarea maxlength="200" rows="4" cols="40" name="txt_asunto" id="txt_asunto" ></textarea></td>
                             </tr>
                             <tr>
                                 <td class="Arial14Morado">Solicitud de: </td>
                                 <td><select class="combos" id="cmb_tipo" name="cmb_tipo">
                                 <option value="0" selected="selected">Seleccione</option>
                                 <option value="1">Mantenimiento Instalaciones Fisicas</option>
-                                <option value="2">Reparaci&oacute;-Servicio T&eacute;cnico</option>
+                                <option value="2">Reparaci&oacute;n-Servicio T&eacute;cnico</option>
                                 <option value="3">Calibraci&oacute;n</option>
                                 <option value="4">Contrataci&oacute;n de Servicios</option>                                
                                 <option value="5">Compra de:</option>
