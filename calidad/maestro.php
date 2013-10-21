@@ -34,11 +34,13 @@ $dt=mysql_query($consulta);
     <div class="maestro_titulo">Archivo</div></br></br></br>
      <?php				
     while($info=mysql_fetch_array($dt)){
-	echo '<div class="maestro_lista">'.utf8_encode($info[9]).'</div><div class="maestro_lista">'.utf8_encode($info[10]).'</div><div class="maestro_lista">'.utf8_encode($info[3]).'</div><div class="maestro_lista">'.utf8_encode($info[4]).'</div><div class="maestro_lista"><a href="archivos/ControlCalidad/'.utf8_encode($info[7]).'">Ver Archivo</a></div>
+	echo '<div class="maestro_lista">'.utf8_encode($info[9]).'</div><div class="maestro_lista">'.utf8_encode($info[10]).'</div><div class="maestro_lista">'.utf8_encode($info[3]).'</div><div class="maestro_lista">'.utf8_encode($info[4]).'</div><div class="maestro_lista"><a target="_blank" href="'.($info[8]).'">Ver Archivo</a></div>
    </br>';} echo '<br><br><br><br>';?>
     </div>
-	<div align="center" style="margin-top:20px; margin-bottom:20px;"></div>    
-<?echo '<br><br>';?><?echo '<br><br>';?>
+	<div align="center" style="margin-top:20px; margin-bottom:20px;">
+	  <a href="../includes/genera_maestroExcell.php" target="_blank"> <input type="button" name="boton" value="Generar Archivo Excell" /> </a>
+	</div>    
+
 </div><!--fin cuadro blanco--> 
 
 </div><!--fin cuadro azul-->
@@ -56,7 +58,7 @@ Versi&oacute;n 1.0
 </div>
 </td></tr></table>
 </div>
-<?echo '<br><br>';?>
+<br><br>
 </div>		
 </body>
 <script src="../includes/jquery-1.8.3.js" type="text/javascript"></script>

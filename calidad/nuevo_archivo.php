@@ -80,10 +80,18 @@ $dt=mysql_query($consulta);
 	    <td width="178" class="Arial14Negro"><div align="center">Archivo</div></td>
 	    </tr>
 	  <tr>
-	    <td class="Arial14Negro"><input name="archivos[]" type="file" class="inputbox" id="archivos"></td>
+	    <td class="Arial14Negro"><input name="archivos" type="file" class="inputbox" id="archivos"></td>
 	    </tr>
 	  </table>
-	<p>&nbsp;</p>
+	<table>
+	  <tr>
+	    <td width="178" class="Arial14Negro"><div align="center">URL Google Docs</div></td>
+	    </tr>
+	  <tr>
+	    <td class="Arial14Negro"><input name="url_google" type="text" class="inputbox" id="url_google" /></td>
+	    </tr>
+	  </table>
+<p>&nbsp;</p>
 	<p>&nbsp;</p>
 	<p>&nbsp;</p>
     

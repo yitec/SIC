@@ -37,7 +37,7 @@ while($info=mysql_fetch_array($dt))
 										$idpeticion=$info[0];
 										$nuevoarchivo=$info[3];
 										echo '
-    <div class="lista">'.utf8_encode($nuevoarchivo).'</div><div class="lista">'.utf8_encode($info[2]).'</div><div class="lista">'.utf8_encode($info[4]).'</div><div class="lista_botones">
+    <div class="lista"><a href="archivos/ControlCalidad/'.($nuevoarchivo).'">Ver Archivo</a></div><div class="lista">'.utf8_encode($info[2]).'</div><div class="lista">'.utf8_encode($info[4]).'</div><div class="lista_botones">
       <input name="button" id="btn_aprobar" value="'.$idpeticion.'" type="image" src="../img/btn_aprobar.png">
 	  <input type="hidden" id="id_archivo" name="id_archivo" value="'.utf8_encode($info[1]).'">
 	  <input type="hidden" id="nuevo_archivo" name="nuevo_archivo" value="'.$nuevoarchivo.'">

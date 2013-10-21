@@ -24,7 +24,7 @@
 <div id="mainAzulFondo" style="padding:10px;" align="center">
 <div id="mainBlancoFondo" style=" width:750px;" align="center">
 	
-	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">Crear Nueva Categoria</div>
+	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">Crear Nueva Categoría</div>
 	<table>
 	  <tr>
 	    <td width="178" class="Arial14Negro"><div align="center">Nombre</div></td>

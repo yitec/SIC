@@ -82,14 +82,36 @@ limpiar();
 $("#guardar_archivo").click(function(event){
 		
 		event.preventDefault();	
-		if($("#txt_nombre").length < 0) {  
+		if($("#txt_nombre").val()=="") {  
 			notificacion("Error!!","Debes Inidicar un nombre","error"); 						        	
         	return false;  
-    	}  
+    	} 
+		
+		if($("#txt_version").val()=="") {  
+			notificacion("Error!!","Debes Inidicar la version","error"); 						        	
+        	return false;  
+    	} 
+		
+		if($("#cmb_categoria").val()=="0") {  
+			notificacion("Error!!","Debes Inidicar una categoría","error"); 						        	
+        	return false;  
+    	}
+		if($("#cmb_subcategoria").val()=="0") {  
+			notificacion("Error!!","Debes Inidicar una subcategoría","error"); 						        	
+        	return false;  
+    	}
+		if($("#archivos").val()=="") {  
+			notificacion("Error!!","Debes elegir un archivo","error"); 						        	
+        	return false;  
+    	}
+		if($("#url_google").val()=="") {  
+			notificacion("Error!!","Debes indicar la url del archivo","error"); 						        	
+        	return false;  
+    	}
   
 		var archivo = subirArchivo('../operaciones/subir.php');
 
-		var parametros=$("#txt_nombre").val()+','+$("#txt_version").val()+','+$("#cmb_categoria").val()+','+$("#cmb_subcategoria").val()+','+archivo;
+		var parametros=$("#txt_nombre").val()+','+$("#txt_version").val()+','+$("#cmb_categoria").val()+','+$("#cmb_subcategoria").val()+','+$("#url_google").val()+','+archivo;
 		$.ajax({
 			type: "POST",
 			async: false,
@@ -345,10 +367,33 @@ $("#btn_guardar_p").click(function(event){
 		
 		event.preventDefault();	
 
-  
+		if($("#cmb_categoria").val()=="0") {  
+			notificacion("Error!!","Debes Inidicar una categoría","error"); 						        	
+        	return false;  
+    	}
+		if($("#cmb_subcategoria").val()=="0") {  
+			notificacion("Error!!","Debes Inidicar una subcategoría","error"); 						        	
+        	return false;  
+    	} 
+		if($("#cmb_archivos").val()=="0") {  
+			notificacion("Error!!","Debes Inidicar un Archivo","error"); 						        	
+        	return false;  
+    	}
+		if($("#archivos").val()=="") {  
+			notificacion("Error!!","Debes elegir un archivo","error"); 						        	
+        	return false;  
+    	}
+		if($("#url_google").val()=="") {  
+			notificacion("Error!!","Debes indicar la url del archivo","error"); 						        	
+        	return false;  
+    	}
+		if($("#txt_comentario").val()=="") {  
+			notificacion("Error!!","Debes Agregar un comentario","error"); 						        	
+        	return false;  
+    	}  
 		var archivo = subirArchivo('../operaciones/subirModificado.php');
 
-		var parametros=$("#cmb_archivos").val()+','+$("#txt_comentario").val()+','+archivo;
+		var parametros=$("#cmb_archivos").val()+','+$("#txt_comentario").val()+','+$("#url_google").val()+','+archivo;
 		$.ajax({
 			type: "POST",
 			async: false,
