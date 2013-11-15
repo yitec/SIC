@@ -51,7 +51,7 @@ $dt=mysql_query($consulta);
 	        </tr>
 	      <tr>
 	        <td class="Arial14Negro"><label>
-	          <select name="cmb_categoria" class="combos" id="cmb_categoria" >
+	          <select name="cmb_categoria2" class="combos" id="cmb_categoria2" >
 	            <option value="0">Seleccione</option>
 	            <?php				
 									while($info=mysql_fetch_array($dt)){
@@ -72,18 +72,35 @@ $dt=mysql_query($consulta);
 	    </tr>
 	  <tr>
 	    <td class="Arial14Negro">
-		<select name="cmb_subcat" class="combos" id="cmb_subcategoria"></select> 
+		<select name="cmb_subcat2" class="combos" id="cmb_subcat2"></select> 
 	    </tr>
+	  </table>
+      	<table>    
+	  <tr>
+	    <td width="178" class="Arial14Negro"><div align="center">Prefijo</div></td>	    
+	    </tr>
+	  <tr>
+	    <td class="Arial14Negro"><select name="cmb_prefijo" class="combos" id="cmb_prefijo">
+	      </select></td>	  	   
+	    </tr>	          
 	  </table>
 	<table>
 	  <tr>
 	    <td width="178" class="Arial14Negro"><div align="center">Archivo</div></td>
 	    </tr>
 	  <tr>
-	    <td class="Arial14Negro"><input name="archivos[]" type="file" class="inputbox" id="archivos"></td>
+	    <td class="Arial14Negro"><input name="archivos" type="file" class="inputbox" id="archivos"></td>
 	    </tr>
 	  </table>
-	<p>&nbsp;</p>
+	<table>
+	  <tr>
+	    <td width="178" class="Arial14Negro"><div align="center">URL Google Docs</div></td>
+	    </tr>
+	  <tr>
+	    <td class="Arial14Negro"><input name="url_google" type="text" class="inputbox" id="url_google" /></td>
+	    </tr>
+	  </table>
+<p>&nbsp;</p>
 	<p>&nbsp;</p>
 	<p>&nbsp;</p>
     

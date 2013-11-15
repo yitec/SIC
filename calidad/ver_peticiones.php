@@ -25,9 +25,9 @@ echo mysql_error();
 <div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
 <div id="mainAzulFondo" style="padding:10px;" align="center">
 <div id="mainBlancoFondo" style=" width:750px;" align="center">	
-	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">Peticiones Pendientes:</div>
+	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">R-GE-04  v9 Solicitud de modificación o elaboración de documentos</div>
     <div align="center" class=" Arial14Negro" style="margin-bottom:10px; margin-top:10px;">
-    <div class="lista_titulo">Archivo</div><div class="lista_titulo">Comentario</div><div class="lista_titulo">Fecha</div></br></br></br></br>
+    <div class="lista_titulo"><strong>Archivo</strong></div><div class="lista_titulo"><strong>Comentario</strong></div><div class="lista_titulo"><strong>Fecha</strong></div></br></br></br></br>
      <?php				
 if (mysql_num_rows($dt)>0)
 {     
@@ -37,7 +37,7 @@ while($info=mysql_fetch_array($dt))
 										$idpeticion=$info[0];
 										$nuevoarchivo=$info[3];
 										echo '
-    <div class="lista">'.utf8_encode($nuevoarchivo).'</div><div class="lista">'.utf8_encode($info[2]).'</div><div class="lista">'.utf8_encode($info[4]).'</div><div class="lista_botones">
+    <div class="lista"><a href="archivos/ControlCalidad/'.($nuevoarchivo).'">Ver Archivo</a></div><div class="lista">'.utf8_encode($info[2]).'</div><div class="lista">'.utf8_encode($info[4]).'</div><div class="lista_botones">
       <input name="button" id="btn_aprobar" value="'.$idpeticion.'" type="image" src="../img/btn_aprobar.png">
 	  <input type="hidden" id="id_archivo" name="id_archivo" value="'.utf8_encode($info[1]).'">
 	  <input type="hidden" id="nuevo_archivo" name="nuevo_archivo" value="'.$nuevoarchivo.'">

@@ -24,20 +24,20 @@
 <div id="mainAzulFondo" style="padding:10px;" align="center">
 <div id="mainBlancoFondo" style=" width:750px;" align="center">
 	
-	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">Crear Nueva Categoría</div>
-	<table>
+	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">Rechazar Peticion</div>
+	<table width="191">
 	  <tr>
-	    <td width="178" class="Arial14Negro"><div align="center">Nombre</div></td>
+	    <td width="202" class="Arial14Negro"><div align="center">Comentario:</div></td>
 	    
 	    </tr>
 	  <tr>
-	    <td class="Arial14Negro"><input name="txt_nombre" type="text" class="inputbox" id="txt_nombre" /></td>
+	    <td class="Arial14Negro"><textarea name="txt_comentario" rows="5" class="textArea" id="txt_comentario"></textarea></td>
 	   
 	    
 	    </tr>
 	          
 	  </table>
-	<div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar" id="btn_guardar" type="image" src="../img/btn_guardar.png" /></div>    
+	<div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_enviar" id="btn_enviar" type="image" src="../img/btn_enviar.png" /></div>    
 
 </div><!--fin cuadro blanco--> 
 </div><!--fin cuadro azul--> 

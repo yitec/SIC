@@ -62,8 +62,19 @@ $dt=mysql_query($consulta);
 	    </tr>
 	  <tr>
 	    <td class="Arial14Negro">
-	      <input name="archivos[]" type="file" class="inputbox" id="archivos">  </td>
+	      <p>
+	        <input name="archivos" type="file" class="inputbox" id="archivos">
+	      </p>
+	      <p>&nbsp; </p></td>
 	    </tr>                           
+	  </table>
+	<table>
+	  <tr>
+	    <td width="178" class="Arial14Negro"><div align="center">URL Google:</div></td>
+	    </tr>
+	  <tr>
+	    <td class="Arial14Negro"><input name="url_google" type="text" class="inputbox" id="url_google" /></td>
+	    </tr>
 	  </table>
 	<table>
 	  <tr>
@@ -77,6 +88,7 @@ $dt=mysql_query($consulta);
 	    </tr>
 	          
 	  </table>
+	<p>&nbsp;</p>
 	<div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar_p" id="btn_guardar_p" type="image" src="../img/btn_guardar.png" /></div>    		
 </div><!--fin cuadro blanco--> 
 </div><!--fin cuadro azul--> 
