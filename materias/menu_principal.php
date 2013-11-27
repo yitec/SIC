@@ -83,7 +83,7 @@ a:hover{
     
 <table width="365"  cellpadding="0" cellspacing="0">
 <?
-$result=mysql_query("select * from bd_materiasprimas.tbl_menu ")or throw_ex(mysql_error());
+$result=mysql_query("select * from bd_materiasprimas.tbl_menu order by orden ASC ")or throw_ex(mysql_error());
 $cont=1;
 while($row=mysql_fetch_assoc($result)){
 	

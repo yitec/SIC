@@ -13,7 +13,12 @@ header("Content-Disposition: attachment; filename=ControlMaestro_".date('d-m-Y')
 #Sql, acá pone tu consulta a la tabla que necesites exportar filtrando los datos que creas necesarios.
 $consulta = "SELECT `nombre_categoria`, `nombre_subcat`, `nombre_archivo`, `version`, `url_archivo`, `url_online` FROM `vista_maestro` WHERE `estado` = 1";
 $dt=mysql_query($consulta);
- ?>   
+if(!$dt){
+	echo mysql_error();	
+}
+
+
+?>   
 <TABLE BORDER=1 align="center" CELLPADDING=1 CELLSPACING=1>
 <TR>
 <TD  bgcolor="#CCCCCC">CATEGORIA</TD>

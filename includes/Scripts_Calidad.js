@@ -104,10 +104,7 @@ $("#guardar_archivo").click(function(event){
 			notificacion("Error!!","Debes elegir un archivo","error"); 						        	
         	return false;  
     	}
-		if($("#url_google").val()=="") {  
-			notificacion("Error!!","Debes indicar la url del archivo","error"); 						        	
-        	return false;  
-    	}
+		
   
 		var archivo = subirArchivo('../operaciones/subir.php');
 
@@ -261,7 +258,7 @@ $("#eliminar_subcategoria").click(function(event){
 
 				if (datos["resultado"]	=="Success"){
 						location.href=location.href;
-						alert('Categoria Eliminada!');
+						alert('Sub Categoria Eliminada!');
 						setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
 				}else{
 						$.pnotify({
@@ -383,10 +380,6 @@ $("#btn_guardar_p").click(function(event){
 			notificacion("Error!!","Debes elegir un archivo","error"); 						        	
         	return false;  
     	}
-		if($("#url_google").val()=="") {  
-			notificacion("Error!!","Debes indicar la url del archivo","error"); 						        	
-        	return false;  
-    	}
 		if($("#txt_comentario").val()=="") {  
 			notificacion("Error!!","Debes Agregar un comentario","error"); 						        	
         	return false;  
@@ -403,7 +396,8 @@ $("#btn_guardar_p").click(function(event){
 			success: function(datos){
 
 				if (datos["resultado"]	=="Success"){
-						notificacion("Nuevo Archivo!!","El nombre fue guardado correctamente","info");					
+						notificacion("Nueva Peticion!!","Nueva petición guardada correctamente","info");					
+						setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
 				}else{
 						notificacion("Error!!","El archivo ya existe","error"); 											
 				}

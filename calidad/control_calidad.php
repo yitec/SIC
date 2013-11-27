@@ -10,6 +10,7 @@
     <body >
     		<div class="header"></div>
     		<div class="box" >
+        <div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="../menu.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
             
             <br>
            <div style="height:400px;"  >
@@ -24,7 +25,7 @@
            <a href="nueva_peticion.php"><div id="sombra_azul"class="menu_calidad">Nueva Petici&oacute;n</div></a>
            <a href="editar_categoria.php"><div id="sombra_azul"class="menu_calidad">Editar Categoria</div></a>
            <a href="editar_subcategoria.php"><div id="sombra_azul"class="menu_calidad">Editar Sub Categoria</div></a>
-           <a href="descargar_maestro.php"><div id="sombra_azul"class="menu_calidad">Descargar Maestro</div></a>
+           <a href="../includes/genera_maestroExcell.php"><div id="sombra_azul"class="menu_calidad">Descargar Maestro</div></a>
            <a href="historial_cambios.php"><div id="sombra_azul"class="menu_calidad">Historial Cambios</div></a>
            </div>
 

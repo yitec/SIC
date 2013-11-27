@@ -20,12 +20,12 @@ $dt=mysql_query($consulta);
 <div class="header"></div>
 <div class="box">
 <div align="center">
-<table><tr><td height="710"> 
+<table><tr><td > 
 <div    class="contenido_gm">
-<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
+<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="control_calidad.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
 <div id="mainAzulFondo" style="padding:10px;" align="center">
 <div id="mainBlancoFondo" style=" width:750px;" align="center">	
-	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;"> Editar Categoría</div>    
+	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;"> Editar Categor&iacute;a</div>    
 	<table>    
 	  <tr>
 	    <td width="178" class="Arial14Negro"><div align="center"></div></td>	    
@@ -39,7 +39,7 @@ $dt=mysql_query($consulta);
 	  <td width="178" class="Arial14Negro"><div align="center">
 	    <table>
 	      <tr>
-	        <td width="178" class="Arial14Negro"><div align="center">Categoria</div></td>
+	        <td width="178" class="Arial14Negro"><div align="center">Categor&iacute;a</div></td>
 	        </tr>
 	      <tr>
 	        <td class="Arial14Negro"><label>

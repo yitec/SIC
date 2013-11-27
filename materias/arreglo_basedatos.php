@@ -22,10 +22,10 @@ try{
 //*********************************************************************************************************************************	
 //*********************************************************************************************************************************	
 
-/*	
+	
 $f1="1912-01-01";
 $f2="1912-31-12";	
-$result=mysql_query("select * from bd_materiasprimas.tbl_muestras where fecha_creacion>='".$f1."' and fecha_creacion<='".$f2."'");
+$result=mysql_query("select * from bd_materiasprimas.tbl_minerales where fecha_creacion>='".$f1."' and fecha_creacion<='".$f2."'");
 if (!$result) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
         $message .= 'Query ejecutado: ' . $query;
@@ -41,12 +41,9 @@ $mes=substr($r1->fecha_creacion, 5, 2);
 $fecha="2012-".$mes."-".$dia." 00:00:00";
 
 echo "<br>".$fecha."->".$r1->fecha_creacion;	
+$res=mysql_query("update bd_materiasprimas.tbl_minerales set fecha_creacion='".$fecha."' where id='".$r1->id."'")or throw_ex(mysql_error());
 
-	
-	
-	$res=mysql_query("update bd_materiasprimas.tbl_muestras set fecha_creacion='".$fecha."' where id='".$r1->id."'")or throw_ex(mysql_error());
 }
-*/
 
 
 //********************************Actualiza los codigos a cada materia prima*******************************************************
@@ -79,6 +76,7 @@ echo $cont;
 //********************************Arregla cifra año*******************************************************
 //*********************************************************************************************************************************	
 //*********************************************************************************************************************************	
+/*
 $result=mysql_query("select id,fecha_creacion from tbl_muestras ");
 if (!$result) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
@@ -236,7 +234,7 @@ mysql_query("insert into bd_materiasprimas.tbl_muestras (tipo_muestreo,clase_ali
 	)");
 
 }//end while
-
+*/
 	}//end try
 	catch (Exception $e)
 	{
@@ -244,9 +242,10 @@ mysql_query("insert into bd_materiasprimas.tbl_muestras (tipo_muestreo,clase_ali
 		mysql_query("insert into bd.materiasprimas.tbl_errores (error,fecha)values('".$e."','".$hoy."')");
 		
 	}
-*/
+
 
 function throw_ex($er){  
   throw new Exception($er);  
-}  			
+} 
+
 ?>

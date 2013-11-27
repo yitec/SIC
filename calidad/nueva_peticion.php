@@ -22,7 +22,11 @@ $dt=mysql_query($consulta);
     <div align="center">
 <table><tr><td> 
 <div class="contenido_gm">
-<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
+<? if ($_REQUEST['acceso']==1){?>
+<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="../menu.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
+<?}else{?>
+<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="control_calidad.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
+<?}?>
 <div id="mainAzulFondo" style="padding:10px;" align="center">
 <div id="mainBlancoFondo" style=" width:750px;" align="center">
 	

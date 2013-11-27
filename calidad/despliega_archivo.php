@@ -11,8 +11,9 @@
     		<div class="header" ></div>
     		<div class="box">
             <div align="center">
+            <div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
             <br>
-                <iframe width="900" height="800" src="https://docs.google.com/spreadsheet/ccc?key=0AtqAbbt-nkVPdHd0cEZrTU5fRFZiV0VtbEdkWkF1dWc&usp=sharing"></iframe>
+                <iframe width="900" height="800" src="<?=$_REQUEST['url']?>"></iframe>
             </br>
             </div>
            

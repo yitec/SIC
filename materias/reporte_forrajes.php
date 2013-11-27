@@ -9,8 +9,8 @@
   $fecha_ini=$ano."-".$mes."-".$dia." 00:00:00";
   $ano=$_REQUEST['year_fin'];
   $mes=$_REQUEST['mes_fin'];
-  $dia="01";
-  $fecha_fin=$ano."-".$mes."-".$dia." 00:00:00";
+  $dia="31";
+  $fecha_fin=$ano."-".$mes."-".$dia." 23:59:59";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -417,7 +417,7 @@ $(document).ready(function() {
   </tr>           
 </thead>
 <?
-$sql="select * from bd_materiasprimas.tbl_forrajes where vulgar>0 and fecha_creacion>='".$fecha_ini."' and fecha_creacion<='".$fecha_fin."'   order by fecha_creacion";
+
 $result=mysql_query("select * from bd_materiasprimas.tbl_forrajes where vulgar>0 and  fecha_creacion>='".$fecha_ini."' and fecha_creacion<='".$fecha_fin."'   order by id")or throw_ex(mysql_error());
 $cont=0;
 while($row=mysql_fetch_assoc($result)){

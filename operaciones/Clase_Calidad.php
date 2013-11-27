@@ -216,7 +216,7 @@ class Categorias{
 					fwrite($fch, $contenido); // Grabas
 					fclose($fch); // Cierras el archivo.
 				$subject = "Solicitud para modificar el archivo: ".$v_datos[0]." Motivo: ".$v_datos[1]." Nombre del nuevo archivo: ".$v_datos[2];
-				mail("jpgarcia01@gmail.com","Nuevo Pendiente.",$subject);
+//				mail("jpgarcia01@gmail.com","Nuevo Pendiente.",$subject);
 			}
 		echo json_encode($jsondata);
 	}	

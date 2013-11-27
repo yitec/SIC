@@ -22,7 +22,7 @@ $dt=mysql_query($consulta);
 <div align="center">
 <table><tr><td> 
 <div class="contenido_gm">
-<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
+<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="control_calidad.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
 <div id="mainAzulFondo" style="padding:10px;" align="center">
 <div id="mainBlancoFondo" style=" width:750px;" align="center">	
 	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">Control Maestro:</div>
@@ -34,7 +34,7 @@ $dt=mysql_query($consulta);
     <div class="maestro_titulo">Archivo</div></br></br></br>
      <?php				
     while($info=mysql_fetch_array($dt)){
-	echo '<div class="maestro_lista">'.utf8_encode($info[9]).'</div><div class="maestro_lista">'.utf8_encode($info[10]).'</div><div class="maestro_lista">'.utf8_encode($info[3]).'</div><div class="maestro_lista">'.utf8_encode($info[4]).'</div><div class="maestro_lista"><a target="_blank" href="'.($info[8]).'">Ver Archivo</a></div>
+	echo '<div class="maestro_lista">'.utf8_encode($info[9]).'</div><div class="maestro_lista">'.utf8_encode($info[10]).'</div><div class="maestro_lista">'.utf8_encode($info[3]).'</div><div class="maestro_lista">'.utf8_encode($info[4]).'</div><div class="maestro_lista"><a target="_blank" href="http://localhost/SIC/calidad/archivos/ControlCalidad/'.($info[7]).'">Ver Archivo</a></div>
    </br>';} echo '<br><br><br><br>';?>
     </div>
 	<div align="center" style="margin-top:20px; margin-bottom:20px;">

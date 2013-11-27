@@ -180,9 +180,15 @@ session_start();
 <? if (in_array(33, $_SESSION['perfil'])){
     ?>
     <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
-    <div align="center" class="Arial14Negro"><a href="modificar_documento.php"><img src="img/edit.png" width="48" height="48"></a><br>Modificar Documento</div>
+    <div align="center" class="Arial14Negro"><a href="calidad/nueva_peticion.php?acceso=1"><img src="img/edit.png" width="48" height="48"></a><br>Modificar Documento</div>
     </div>
     <? } ?>    
+<? if (in_array(34, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="calidad/ver_archivos.php"><img src="img/edit.png" width="48" height="48"></a><br>Documentos Oficiales</div>
+    </div>
+    <? } ?>        
 
 
 

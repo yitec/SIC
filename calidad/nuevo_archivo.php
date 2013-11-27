@@ -22,7 +22,7 @@ $dt=mysql_query($consulta);
 <div style="height:600px;" align="center">
 
 <div class="contenido_gm">
-<div style="margin-left:650px;  margin-top:0px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
+<div style="margin-left:650px;  margin-top:0px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="control_calidad.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
 <div id="mainAzulFondo" style="padding:10px;" align="center">
 <div id="mainBlancoFondo" style=" width:750px;" align="center">	
 <div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;"> Nuevo Archivo</div>    
@@ -36,7 +36,7 @@ $dt=mysql_query($consulta);
 	  </table>
 	<table>
 	  <tr>
-	    <td width="178" class="Arial14Negro"><div align="center">version</div></td>
+	    <td width="178" class="Arial14Negro"><div align="center">Versi&oacute;n</div></td>
 	    </tr>
 	  <tr>
 	    <td class="Arial14Negro"><input name="txt_version" type="text" class="inputbox" id="txt_version" /></td>
@@ -47,7 +47,7 @@ $dt=mysql_query($consulta);
 	  <td width="178" class="Arial14Negro"><div align="center">
 	    <table>
 	      <tr>
-	        <td width="178" class="Arial14Negro"><div align="center">Categoria</div></td>
+	        <td width="178" class="Arial14Negro"><div align="center">Categor&iacute;a</div></td>
 	        </tr>
 	      <tr>
 	        <td class="Arial14Negro"><label>
@@ -68,7 +68,7 @@ $dt=mysql_query($consulta);
 	</table>
 	<table>
 	  <tr>
-	    <td width="178" class="Arial14Negro"><div align="center">SubCategoria</div></td>
+	    <td width="178" class="Arial14Negro"><div align="center">Sub Categor&iacute;a</div></td>
 	    </tr>
 	  <tr>
 	    <td class="Arial14Negro">

@@ -159,6 +159,9 @@ $("#btn_buscar").live("click", function(event){
 			if(v_resultado.indexOf("33")>=0){
 				$("#chk_mdocumento").attr("checked","checked");
 			}
+			if(v_resultado.indexOf("34")>=0){
+				$("#chk_docoficiales").attr("checked","checked");
+			}
 		}//end succces function
 		});//end ajax function	
 });						   
@@ -277,6 +280,9 @@ $("#btn_guardar").click(function(event){
 		}
 		if ($("#chk_mdocumento").is(":checked")){
 			permisos=permisos+","+33;	
+		}
+		if ($("#chk_docoficiales").is(":checked")){
+			permisos=permisos+","+34;	
 		}		
 		
 		
