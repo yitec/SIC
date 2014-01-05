@@ -136,6 +136,18 @@ mysql_free_result($result);
     
   </tr>
   
+  <tr>  
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas">Solubilidad in vitro del carbonato </td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"> - Se refiere al análisis que determina la velocidad en que una fuente cabonatada reacciona en medio ácido. La muestra no se tritura o muele ya que la velocidad de reacción depende del tamaño de partícula.</td>
+    
+  </tr>
+  
+  <tr>  
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas">Neutralización del carbonato</td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"> - Se refiere al análisis para determinar la pureza de una fuente carbonatada. </td>
+    
+  </tr>
+  
 </table>
     
     <br />

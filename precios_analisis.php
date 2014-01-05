@@ -56,7 +56,9 @@ $("#cmb_analisis").change(function(event){
         	url: "operaciones/opr_analisis.php",		
         	data: "opcion=13&id="+$("#cmb_categoria").val()+"&laboratorio="+$("#cmb_laboratorio").val()+"&analisis="+$("#cmb_analisis").val(),
         	success: function(datos){
-				$('#txt_precio').attr('value',datos);
+				var array = datos.split("|");			
+				$('#txt_precio').attr('value',array[0]);
+				$('#txt_metodo').attr('value',array[1]);
 				
 			}//end succces function
 			});//end ajax function									  
@@ -84,7 +86,7 @@ $("#btn_guardar").live("click", function(event){
         type: "POST",
 		async: false,
         url: "operaciones/opr_analisis.php",
-		data: "opcion=14&id="+$("#cmb_categoria").val()+"&laboratorio="+$("#cmb_laboratorio").val()+"&analisis="+$("#cmb_analisis").val()+"&precio="+$("#txt_precio").val(),
+		data: "opcion=14&id="+$("#cmb_categoria").val()+"&laboratorio="+$("#cmb_laboratorio").val()+"&analisis="+$("#cmb_analisis").val()+"&precio="+$("#txt_precio").val()+"&metodo="+$("#txt_metodo").val(),
 success: function(datos){			
 	
 			
@@ -132,8 +134,8 @@ require_once('menu_superior.php');
 	<td width="157" align="left" class="Arial12Azul">Laboratorio</td>
     <td width="156" align="left" class="Arial12Azul">Categor&iacute;a</td>
     <td width="205" align="left" class="Arial12Azul">An&aacute;lisis</td>    
-   
-    <td align="left" width="35" class="Arial12Azul">Precio</td>
+   <td width="105" align="left" width="35" class="Arial12Azul">Metodo</td>
+    <td width="105" align="left" width="35" class="Arial12Azul">Precio</td>
     
     </tr></table>
     <table width="754">
@@ -161,6 +163,9 @@ require_once('menu_superior.php');
           <select id="cmb_analisis" class="combos"  name="cmb_analisis">
             <option>Seleccione</option>
             </select>
+        </td>
+		<td width="104">
+          <input id="txt_metodo" class="inputboxPequeno" style="font-size:14px; height:17px;" size="10" type="text" />
         </td>
         <td width="104">
           <input id="txt_precio" class="inputboxPequeno" style="font-size:14px; height:17px;" size="10" type="text" />

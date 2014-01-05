@@ -54,6 +54,18 @@ $dt=mysql_query($consulta);
 	    </tr>
 	          
 	  </table>
+      	<table>
+	  <tr>
+	    <td width="178" class="Arial14Negro"><div align="center">Prefijo Código</div></td>
+	    
+	    </tr>
+	  <tr>
+	    <td class="Arial14Negro"><input name="txt_pref" type="text" class="inputbox" id="txt_pref" /></td>
+	   
+	    
+	    </tr>
+	          
+	  </table>
 	<div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar_s" id="btn_guardar_s" type="image" src="../img/btn_guardar.png" /></div>    
 
 </div><!--fin cuadro blanco--> 

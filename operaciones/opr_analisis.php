@@ -233,10 +233,10 @@ if($_REQUEST['opcion']==12)
 //cargo el precio de cada analisis
 if($_REQUEST['opcion']==13)
 {
-	$result=mysql_query("select precio from tbl_categoriasanalisis where ids_categoriamuestra='".$_REQUEST['id']."' and id_laboratorio='".$_REQUEST['laboratorio']."'  and  id='".$_REQUEST['analisis']."' order by nombre ");
+	$result=mysql_query("select precio,metodo from tbl_categoriasanalisis where ids_categoriamuestra='".$_REQUEST['id']."' and id_laboratorio='".$_REQUEST['laboratorio']."'  and  id='".$_REQUEST['analisis']."' order by nombre ");
 	while ($row=mysql_fetch_assoc($result))
 	{
-		$resultado=$resultado.$row['precio']	;
+		$resultado=$row['precio']."|".$row['metodo']	;
 	}
 	echo $resultado;
 }
@@ -244,7 +244,7 @@ if($_REQUEST['opcion']==13)
 //modifico el precio de un analisis
 if($_REQUEST['opcion']==14)
 {
-	$result=mysql_query("update tbl_categoriasanalisis set precio = '".$_REQUEST['precio']."' where ids_categoriamuestra='".$_REQUEST['id']."' and id_laboratorio='".$_REQUEST['laboratorio']."'  and  id='".$_REQUEST['analisis']."' ");
+	$result=mysql_query("update tbl_categoriasanalisis set precio = '".$_REQUEST['precio']."', metodo = '".$_REQUEST['metodo']."' where ids_categoriamuestra='".$_REQUEST['id']."' and id_laboratorio='".$_REQUEST['laboratorio']."'  and  id='".$_REQUEST['analisis']."' ");
 	
 }
 

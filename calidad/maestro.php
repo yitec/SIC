@@ -1,7 +1,7 @@
 <?php
 include ('../cnx/Conexion_Calidad.php');
 conectar();
-$consulta = "SELECT * FROM `vista_maestro` WHERE `estado` =1 ORDER BY `nombre_archivo` ASC";	
+$consulta = "SELECT * FROM `vista_maestro` WHERE `estado` =1 ORDER BY `codigo` ASC";	
 
 $dt=mysql_query($consulta);
 
@@ -22,28 +22,39 @@ $dt=mysql_query($consulta);
 <div align="center">
 <table><tr><td> 
 <div class="contenido_gm">
+<<<<<<< HEAD
 <div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="control_calidad.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
 <div id="mainAzulFondo" style="padding:10px;" align="center">
+=======
+<div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="menu_inventario.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
+
+>>>>>>> 03588de5c218c28d9aaaf29ff413eb979e0d5e85
 <div id="mainBlancoFondo" style=" width:750px;" align="center">	
 	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">Control Maestro:</div>
     <div align="center" class=" Arial14Negro" style="margin-bottom:10px; margin-top:10px;">
-    <div class="maestro_titulo">Categoría</div>
-    <div class="maestro_titulo">Subcategoría</div>
-    <div class="maestro_titulo">Nombre</div>
-    <div class="maestro_titulo">Versión</div>
-    <div class="maestro_titulo">Archivo</div></br></br></br>
+    <div class="maestro_titulo1">Código</div>
+    <div class="maestro_titulo2">Nombre</div>
+    <div class="maestro_titulo3">Versión</div>
+    <div class="maestro_titulo2">Fecha de emisión o derogación</div>
+    <div class="maestro_titulo1">Fecha última revisión</div>
+    <div class="maestro_titulo2">Archivo</div></br></br></br>
      <?php				
     while($info=mysql_fetch_array($dt)){
+<<<<<<< HEAD
 	echo '<div class="maestro_lista">'.utf8_encode($info[9]).'</div><div class="maestro_lista">'.utf8_encode($info[10]).'</div><div class="maestro_lista">'.utf8_encode($info[3]).'</div><div class="maestro_lista">'.utf8_encode($info[4]).'</div><div class="maestro_lista"><a target="_blank" href="http://localhost/SIC/calidad/archivos/ControlCalidad/'.($info[7]).'">Ver Archivo</a></div>
+=======
+	echo '<div class="maestro_lista1">'.utf8_encode($info[1]).'</div><div class="maestro_lista">'.utf8_encode($info[4]).'</div><div class="maestro_lista3">'.utf8_encode($info[3]).'</div><div class="maestro_lista">'.utf8_encode($info[6]).'</div><div class="maestro_lista1">'.utf8_encode($info[10]).'</div><div class="maestro_lista"><a target="_blank" href="'.($info[8]).'">Ver Archivo</a></div>
+>>>>>>> 03588de5c218c28d9aaaf29ff413eb979e0d5e85
    </br>';} echo '<br><br><br><br>';?>
     </div>
+     
 	<div align="center" style="margin-top:20px; margin-bottom:20px;">
 	  <a href="../includes/genera_maestroExcell.php" target="_blank"> <input type="button" name="boton" value="Generar Archivo Excell" /> </a>
 	</div>    
 
 </div><!--fin cuadro blanco--> 
 
-</div><!--fin cuadro azul-->
+
 
 </div><!--fin div de contenido cudro gm-->
 
