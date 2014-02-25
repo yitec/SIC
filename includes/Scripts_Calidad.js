@@ -48,9 +48,12 @@ $("#btn_guardar_s").click(function(event){
         	notificacion("Error!!","Debes indicar un nombre","error"); 			
         	return false;  
     	}  
-  
+  		if($("#txt_pref").val() =="" ) {  
+        	notificacion("Error!!","Debes indicar un prefijo","error"); 				        	
+        	return false;  
+    	}  
 		
-	var parametros=$("#cmb_categoria").val()+","+$("#txt_subcat").val();
+	var parametros=$("#cmb_categoria").val()+","+$("#txt_subcat").val()+","+$("#txt_pref").val();
 		$.ajax({
         type: "POST",
 		async: false,
@@ -100,15 +103,36 @@ $("#guardar_archivo").click(function(event){
 			notificacion("Error!!","Debes Inidicar una subcategoría","error"); 						        	
         	return false;  
     	}
-		if($("#archivos").val()=="") {  
+		if($("#archivos").val()=="" && $("#url_google").val()=="") {  
 			notificacion("Error!!","Debes elegir un archivo","error"); 						        	
         	return false;  
     	}
+
 		
   
 		var archivo = subirArchivo('../operaciones/subir.php');
 
-		var parametros=$("#txt_nombre").val()+','+$("#txt_version").val()+','+$("#cmb_categoria").val()+','+$("#cmb_subcategoria").val()+','+$("#url_google").val()+','+archivo;
+		var parametros=
+		$("#txt_nombre").val()+'|'
+		+$("#txt_version").val()+'|'
+		+$("#cmb_categoria2").val()+'|'
+		+$("#cmb_usuario").val()+'|'
+		+$("#txt_revision").val() +'|'
+		+$("#cmb_subcat2").val()+'|'
+		+$("#url_google").val()+'|'
+		+$("#cmb_prefijo").val()+'|'
+		+archivo;
+
+		/*if($("#url_google").val()=="") {  
+			notificacion("Error!!","Debes indicar la url del archivo","error"); 						        	
+        	return false;  
+    	}
+  
+		var archivo = subirArchivo('../operaciones/subir.php');
+
+		var parametros=$("#txt_nombre").val()+','+$("#txt_version").val()+','+$("#cmb_categoria2").val()+','+$("#cmb_subcat2").val()+','+$("#cmb_prefijo").val()+','+archivo;
+		*/
+
 		$.ajax({
 			type: "POST",
 			async: false,
@@ -297,8 +321,46 @@ $("#btn_rechazar").click(function(event){
 			success: function(datos){
 
 				if (datos["resultado"]	=="Success"){
-						  location.href=location.href;
+						   location.href='rechazar_peticion.php';
 						alert('Solicitud Eliminada!');													
+				}else{
+						$.pnotify({
+						pnotify_hide: true
+						});
+					
+				}
+						
+				
+				}//end succces function
+		});//end ajax function	
+
+} else { 
+
+				
+		
+}
+} 		
+//limpiar();
+}); 
+//***************************************************Derogar******************************************
+$("#btn_derogar").click(function(event){
+		
+		event.preventDefault();	
+		 {  
+        	if (confirm('¿Desea derogar el archivo?')) {
+				var parametros=$("#btn_derogar").val();
+		$.ajax({
+			type: "POST",
+			async: false,
+			dataType: "json",
+			url: "../operaciones/Clase_Calidad.php",
+			data: "metodo=derogar_archivo&parametros="+parametros,
+					
+			success: function(datos){
+
+				if (datos["resultado"]	=="Success"){
+						    location.href=location.href;
+						alert('Archivo Derogado!');													
 				}else{
 						$.pnotify({
 						pnotify_hide: true
@@ -380,6 +442,7 @@ $("#btn_guardar_p").click(function(event){
 			notificacion("Error!!","Debes elegir un archivo","error"); 						        	
         	return false;  
     	}
+
 		if($("#txt_comentario").val()=="") {  
 			notificacion("Error!!","Debes Agregar un comentario","error"); 						        	
         	return false;  
@@ -406,6 +469,42 @@ $("#btn_guardar_p").click(function(event){
 
 //limpiar();
 });    
+ 
+  //***************************************************enviar comentarios rechazado******************************************
+$("#btn_enviar").click(function(event){
+		
+		event.preventDefault();	
+		if($("#txt_comentario").val() =="" ) {  
+        	notificacion("Error!!","Debes ingresar un comentario","error"); 				        	
+        	return false;  
+    	}  
+  
+		
+	var parametros=$("#txt_comentario").val();
+		$.ajax({
+        type: "POST",
+		async: false,
+		dataType: "json",
+        url: "../operaciones/Clase_Calidad.php",
+		data: "metodo=envia_comentarios&parametros="+parametros,
+		 		
+		success: function(datos){		
+		if (datos["resultado"]=="Success"){
+				notificacion("Mensaje Enviado!!","La Petición ha sido rechazada.","info"); 				
+				setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
+		}else{
+				notificacion("Error!!","No se pudo enviar el comentario","error"); 														
+		}
+				
+				
+		}//end succces function
+		});//end ajax function			
+		$('#txt_comentario').focus();	
+		
+		
+limpiar();
+});
+ 
   
   /***************************************Limpiar todos los campos***************************************/
   function limpiar(){
@@ -445,8 +544,7 @@ $("#btn_guardar_p").click(function(event){
   
   })// Document ready Final
   
-  
-  /****************************************Seleccionar SubCategorias*******************************************************/
+ /****************************************Seleccionar SubCategorias*******************************************************/
   
 $("#cmb_categoria").change(function(event){
 	$.ajax({
@@ -458,6 +556,21 @@ $("#cmb_categoria").change(function(event){
 				
 		success: function(datos){
 			$("#cmb_subcategoria").html(datos["resultado"]);
+		}//end succces function
+	});//end ajax function	
+});
+ /****************************************Seleccionar SubCategorias*******************************************************/
+  
+$("#cmb_categoria2").change(function(event){
+	$.ajax({
+		type: "POST",
+		async: false,
+		dataType: "json",
+		url: "../operaciones/Clase_Calidad.php",
+		data: "metodo=seleccionar_subCategoria&parametros="+$(this).val(),
+				
+		success: function(datos){
+			$("#cmb_subcat2").html(datos["resultado"]);
 		}//end succces function
 	});//end ajax function	
 });
@@ -478,6 +591,40 @@ $("#cmb_subcategoria").change(function(event){
 		}//end succces function
 	});//end ajax function	
 });
+
+  /****************************************Seleccionar SubCategorias PREF*******************************************************/
+  
+$("#cmb_subcat2").change(function(event){
+	
+	$.ajax({
+		type: "POST",
+		async: false,
+		dataType: "json",
+		url: "../operaciones/Clase_Calidad.php",
+		data: "metodo=seleccionar_prefijo&parametros="+$(this).val(),
+				
+		success: function(datos){
+			$("#cmb_prefijo").html(datos["resultado"]);
+		}//end succces function
+	});//end ajax function	
+});
+
+  /****************************************Seleccionar prefijos*******************************************************/
+  
+/*$("#cmb_subcat2").change(function(event){
+	$.ajax({
+		type: "POST",
+		async: false,
+		dataType: "json",
+		url: "../operaciones/Clase_Calidad.php",
+		data: "metodo=seleccionar_prefijo&parametros="+$(this).val(),
+				
+		success: function(datos){
+			$("#txt_prefijo").html(datos["resultado"]);
+		}//end succces function
+	});//end ajax function	
+});
+  */
 
 //**************************************************Subir Archivo ***************************************************
 function subirArchivo(url){

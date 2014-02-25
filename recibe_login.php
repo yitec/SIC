@@ -23,10 +23,13 @@ if(mysql_num_rows($result) >=1){
 	$_SESSION['perfil']=$v_perfil;
 	$_SESSION['reportes']=$v_reportes;
 	$_SESSION['expiracion']=$row['fecha_caducidad'];
-	
-
+	if($_POST['txt_usuario']=="sid"){
+		header("Location:alerta.php"); 
+		exit();
+	}else{
 	header("Location:menu.php"); 
 	exit();
+	}
 }else{
 	header("Location:login.php"); 
 	exit();

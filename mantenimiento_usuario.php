@@ -90,7 +90,11 @@ require_once('menu_superior.php');
         <td width="207" height="27" class="Arial14Negro"><input class="ck" name="chk_c_contrato"  id="chk_c_contrato" type="checkbox" value="" />
           Crear Contratos</td>
         <td width="232" class="Arial14Negro"><input class="ck" name="chk_m_contrato" id="chk_m_contrato" type="checkbox" value="" />Modificar Contratos</td>
-        <td width="172" class="Arial14Negro"><input class="ck" name="chk_v_contrato" id="chk_v_contrato" type="checkbox" value="" />Ver Contratos</td>
+        <td width="172" class="Arial14Negro"><input class="ck" name="chk_v_contrato" id="chk_v_contrato" type="checkbox" value="" />Ver Contratos</td>        
+    </tr>
+    <tr>
+        <td width="109" class="Arial14Azul"></td>
+        <td width="207" class="Arial14Negro"><input class="ck" name="chk_e_contrato" id="chk_e_contrato" type="checkbox" value="" />Eliminar Contratos</td>
     </tr>
     </table>
     <table width="740">

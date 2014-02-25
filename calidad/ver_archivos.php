@@ -1,6 +1,6 @@
 <?php
 include ('../cnx/Conexion_Calidad.php');
-conectar();
+conectarc();
 
 
 $dt=mysql_query("SELECT * FROM tbl_archivos WHERE estado = 1  order by nombre_archivo");
@@ -18,7 +18,7 @@ echo mysql_error();
     </head>
     <body >
     		<div class="header"></div>
-    		<div class="box">
+    		<div class="box"><br><br><br>
          <div align="center">
 <table><tr><td> 
 <div    class="contenido_gm">
@@ -42,7 +42,7 @@ while($r1=mysql_fetch_object($dt))
 
 			
 }//end while
-echo "<br><br><br>";
+echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 }else{
   echo 'No hay pendientes';
   

@@ -40,13 +40,48 @@ a:hover{
 
 </style>
 
+<script>
+$("#btn_generar").live("click", function(event){
+var validado=true;
+if($('#fecha_ini').val()==""){
+	alert("Todos los campos son obligatorios por favor verifique");
+	validado=false;
+	
+}
+
+if($('#fecha_fin').val()==""){
+	alert("Todos los campos son obligatorios por favor verifique");
+	validado=false;
+	
+}
+if($('#cmb_cliente').val()==0){
+	alert("Todos los campos son obligatorios por favor verifique");
+	validado=false;
+	
+}
+
+
+
+
+if (validado==true){
+	top.location.href = 'contratos_tipoCliente.php?cmb_tipo='+$('#cmb_tipo').val()+'&fecha_ini='+$('#fecha_ini').val()+'&fecha_fin='+$('#fecha_fin').val()+'&cmb_ini='+$('#cmb_ini').val()+'&cmb_fin='+$('#cmb_fin').val()+'&cmb_cliente='+$('#cmb_cliente').val();
+}
+
+
+
+
+
+});
+
+</script>
+
 </head>
 
 <body>
 <div align="center">
 <table><tr><td> 
 <div class="izq_sup_g"></div>
-<div class="cen_sup_g" style=" width:1100px"><div  class="Arial14blanco"  align="left" style="float:left; margin-top:18px;">Reportes Contratos tipo cliente</div><div align="right"></div> </div>
+<div class="cen_sup_g" style=" width:1100px"><div  class="Arial14blanco"  align="left" style="float:left; margin-top:18px;">Reportes de Contratos por Clientes</div><div align="right"></div> </div>
 <div class="der_sup_g" style=" position:relative; margin-left:1101px;" ></div>
 <div class="lineaAzul" style="width:1109px;"></div>
 <div class="izq_lat_g" style="height:1000px"></div>
@@ -59,28 +94,98 @@ a:hover{
 <div align="center">
 <br />
  
-<form action="contratos_tipoCliente.php" method="get"  enctype="multipart/form-data">
-  <br />
-  <table height="112">
-  <tr>
-  	<td height="36" align="center" class="Arial18Morado">Contratos por tipo de cliente</td>
-  </tr>
-  <tr>  
-    <td align="center"><select name="cmb_tipo" id="cmb_tipo" class="combos">
-	       <option>Seleccione</option>
-          <option>Particular</option>
-	      <option>Investigacion</option>
-          <option>Exonerado</option>
-	      </select></td>
-  </tr>
-  </table>
 
+<table>
+    
+    <tr>
+    <td class="Arial14Negro">Fecha Inicio:</td>
+    <td><input type="Text" name="fecha_ini" class="inputbox" id="fecha_ini" maxlength="20" size="20"/>     <img src="../img_calendar/cal.gif" onClick="javascript:NewCssCal('fecha_ini')" style="cursor:pointer"/></td>
+    </tr>
+    <tr>
+    <td class="Arial14Negro">Fecha Fin:</td>
+    <td><input type="Text" class="inputbox" id="fecha_fin" name="fecha_fin" maxlength="20" size="20"/>     <img src="../img_calendar/cal.gif" onClick="javascript:NewCssCal('fecha_fin')" style="cursor:pointer"/></td>
+    </tr>
+    <tr>
+    <td class="Arial14Negro">Hora Inicio:</td>
+    <td><label>
+      <select class="combos" name="cmb_ini" id="cmb_ini">
+      <option>00:00</option>
+      <option>01:00</option>
+      <option>02:00</option>
+      <option>03:00</option>
+      <option>04:00</option>
+      <option>05:00</option>                        
+      <option>06:00</option>
+      <option>07:00</option>      
+      <option>08:00</option>
+      <option>09:00</option>
+      <option>10:00</option>
+      <option>11:00</option>
+      <option>12:00</option>
+      <option>13:00</option>
+      <option>14:00</option>
+      <option>15:00</option>
+      <option>16:00</option>
+      <option>17:00</option>
+      <option>18:00</option>
+      <option>19:00</option>
+      <option>20:00</option>
+      <option>21:00</option>
+      <option>22:00</option>
+      <option>23:00</option>
+      </select>
+    </label></td>
+    </tr>
+    <tr>
+    <td class="Arial14Negro">Hora F&iacute;n:</td>
+    <td><label>
+      <select class="combos" name="cmb_fin" id="cmb_fin">
+      <option>00:00</option>
+      <option>01:00</option>
+      <option>02:00</option>
+      <option>03:00</option>
+      <option>04:00</option>
+      <option>05:00</option>                        
+      <option>06:00</option>
+      <option>07:00</option>      
+      <option>08:00</option>
+      <option>09:00</option>
+      <option>10:00</option>
+      <option>11:00</option>
+      <option>12:00</option>
+      <option>13:00</option>
+      <option>14:00</option>
+      <option>15:00</option>
+      <option>16:00</option>
+      <option>17:00</option>
+      <option>18:00</option>
+      <option>19:00</option>
+      <option>20:00</option>
+      <option>21:00</option>
+      <option>22:00</option>
+      <option>23:00</option>
+
+      </select>
+    </label> <input name="opcion" type="hidden" value="1" /></td>
+    </tr>
+    
+    <tr>  
+    <td class="Arial14Negro">Tipo Cliente:</td>
+    <td align="center"><select name="cmb_tipo" id="cmb_tipo" class="combos">
+         <option>Seleccione</option>
+          <option>Particular</option>
+        <option>Investigacion</option>
+          <option>Exonerado</option>
+        </select></td>
+  </tr>
+    </table>
+    <br />
     <table>
     <tr>
-    <td><input name="btn_generar" type="image" src="../img/btn_generar.png" /></td>
+    <td><input id="btn_generar"  type="image" src="../img/btn_generar.png" /></td>
     </tr>
     </table>
-</form>
+
     
 </div><!--div de centrado-->    
     

@@ -171,6 +171,10 @@ if (validado==true){
     <tr>
     <td class="Arial14Negro">Tipo pago</td>    
     <td><select class="combos" id="cmb_tipoPago" name="cmb_tipoPago">
+          <option selected="selected">Todos</option>
+          <option selected="selected">Efectivo</option>
+          <option selected="selected">Cheque</option>
+          <option selected="selected">Deposito-Transferencia</option>
           <option selected="selected">Contado</option>
           <option selected="selected">Tarjeta</option>
           <option selected="selected">Rebajar</option>

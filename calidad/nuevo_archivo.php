@@ -1,9 +1,11 @@
 <?php
-include ('../cnx/Conexion_Calidad.php');
-conectar();
+session_start();
+include ('../cnx/conexion_calidad.php');
+include ('../cnx/conexion.php');
+conectarc();
 $consulta = "SELECT * FROM `tbl_categorias` WHERE `estado` =1 ORDER  BY `nombre_categoria` ASC";	
+$result=mysql_query($consulta,$_SESSION['connectidc']);
 
-$dt=mysql_query($consulta);
 
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,7 +21,7 @@ $dt=mysql_query($consulta);
 <body>    
 <div class="header"></div>
 <div class="box">
-<div style="height:600px;" align="center">
+<div style="height:800px;" align="center">
 
 <div class="contenido_gm">
 <div style="margin-left:650px;  margin-top:0px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="control_calidad.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
@@ -51,12 +53,13 @@ $dt=mysql_query($consulta);
 	        </tr>
 	      <tr>
 	        <td class="Arial14Negro"><label>
-	          <select name="cmb_categoria" class="combos" id="cmb_categoria" >
+	          <select name="cmb_categoria2" class="combos" id="cmb_categoria2" >
 	            <option value="0">Seleccione</option>
 	            <?php				
-									while($info=mysql_fetch_array($dt)){
+									while($row=mysql_fetch_object($result)){
+										echo mysql_error($result);
 										echo '
-                      <option value="'.$info[0].'">'.utf8_encode($info[1]).'</option>';}?>
+                      <option value="'.$row->id_categoria.'">'.utf8_encode($row->nombre_categoria).'</option>';}?>
 	            </select>
 	    
 	          </label></td>
@@ -72,12 +75,46 @@ $dt=mysql_query($consulta);
 	    </tr>
 	  <tr>
 	    <td class="Arial14Negro">
-		<select name="cmb_subcat" class="combos" id="cmb_subcategoria"></select> 
+		<select name="cmb_subcat2" class="combos" id="cmb_subcat2"></select> 
 	    </tr>
+	  </table>
+      	<table>    
+	  <tr>
+	    <td width="178" class="Arial14Negro"><div align="center">Prefijo</div></td>	    
+	  </tr>
+	  <tr>
+	    <td class="Arial14Negro"><select name="cmb_prefijo" class="combos" id="cmb_prefijo">
+	      </select></td>	  	   
+	  </tr>	          
+	  <tr>
+	    <td width="178" class="Arial14Negro"><br><div align="center">Fecha ultima Revisi&oacute;n</div></td>	    
+	  </tr>
+	  <tr>
+	    <td class="Arial14Negro">
+	    	<input type="text" class="inputbox" id="txt_revision" value="">
+	    </td>	  	   
+	  </tr>	          
+	  <tr>
+	    <td width="178" class="Arial14Negro"><br><div align="center">Responsable Revisi&oacute;n</div></td>	    
+	  </tr>
+	  <tr>
+	    <td class="Arial14Negro">
+	    	<?
+	    	conectar();
+	    	$result2=mysql_query("select id,usuario from tbl_usuarios  order by usuario ASC ",$_SESSION['connectid']);
+	    		    	echo '<select id="cmb_usuario"><option selected="selected">Seleccione</option>';
+	    	while($row2=mysql_fetch_object($result2)){
+	    	echo '<option value="'.$row2->id.'">'.$row2->usuario.'</option>';
+	    	}//end while	
+	    	echo '</select>';
+	    	conectarc();
+	    	?>
+	    </td>	  	   
+	  </tr>	          
 	  </table>
 	<table>
 	  <tr>
-	    <td width="178" class="Arial14Negro"><div align="center">Archivo</div></td>
+	    <td width="178" class="Arial14Negro"><br><div align="center">Archivo</div></td>
 	    </tr>
 	  <tr>
 	    <td class="Arial14Negro"><input name="archivos" type="file" class="inputbox" id="archivos"></td>
@@ -85,7 +122,7 @@ $dt=mysql_query($consulta);
 	  </table>
 	<table>
 	  <tr>
-	    <td width="178" class="Arial14Negro"><div align="center">URL Google Docs</div></td>
+	    <td width="178" class="Arial14Negro"><br><div align="center">URL Google Docs</div></td>
 	    </tr>
 	  <tr>
 	    <td class="Arial14Negro"><input name="url_google" type="text" class="inputbox" id="url_google" /></td>

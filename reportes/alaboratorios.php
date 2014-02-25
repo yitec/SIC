@@ -1,5 +1,6 @@
 <?
 session_start();
+set_time_limit(0);
 include('../cnx/conexion.php');
 conectar();
 $hoy=date("Y-m-d H:i:s");
@@ -99,21 +100,26 @@ $(document).ready(function() {
 <br />
 <table width="900" border="1"  cellpadding="0" cellspacing="0">
   <tr>
-    <td width="108">
+    <td width="88">
     	<div style=" background:url(../img/centro_grid.png);" class=" Arial14Morado"><strong>Contrato</strong></div>
   	</td> 
-    
-     
-    <td width="97" >
+    <td width="108">
+    	<div style=" background:url(../img/centro_grid.png);" class=" Arial14Morado"><strong>Ingreso</strong></div>
+  	</td> 
+    <td width="87" >
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Muestra</strong></div>
   	</td> 
+  	<td width="97" >
+    	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Matriz</strong></div>
+  	</td> 
+
     <td width="438">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Nombre</strong></div>
   	</td> 
-<td width="121">
+<td width="91">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Precio</strong></div>
   	</td>     
-    <td width="121">
+    <td width="131">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Resultados</strong></div>
   	</td>     
     
@@ -122,7 +128,7 @@ $(document).ready(function() {
 
 <?
 
-$result=mysql_query("select * from tbl_analisis where fecha_contrato>='".$fecha_ini."' and fecha_contrato<='".$fecha_fin."' and id_laboratorio='".$_REQUEST['cmb_laboratorio']."' ");
+$result=mysql_query("select an.id,an.id_contrato,an.id_muestra,an.id_analisis,an.fecha_molienda,an.precio,inf.tipo_alimento from tbl_analisis an INNER JOIN tbl_infmuestras inf on an.fecha_contrato>='".$fecha_ini."' and an.fecha_contrato<='".$fecha_fin."' and an.id_laboratorio='".$_REQUEST['cmb_laboratorio']."' and  inf.cons_contrato=an.id_contrato");
 
 
 $cont=0;
@@ -151,13 +157,13 @@ $monto=$monto+$row['precio'];
 ?>
   
   <tr>
-  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['id_contrato']);?></td>
-  
-  
-  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['id_muestra']);?></td>
-  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['nombre']);?></td>
-  <td width="121" class="tablas" style=" font-size:14px; font-family:Arial, Helvetica, sans-serif"><?=utf8_encode($row['precio']);?></td>
-  <td width="121" class="tablas" style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" >
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['id_contrato']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['fecha_molienda']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['id_muestra']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['tipo_alimento']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['nombre']);?></td>
+  <td width="121" class="tablas" style=" font-size:12px; font-family:Arial, Helvetica, sans-serif"><?=utf8_encode($row['precio']);?></td>
+  <td width="121" class="tablas" style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" >
     <?
     //pregunto si hay resultado en base fresca, si la hay primero va el resultado en base fresca y luego seca
 	//valor corregido&incertidumbre

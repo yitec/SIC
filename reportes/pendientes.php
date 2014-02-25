@@ -58,14 +58,15 @@ $(document).ready(function() {
     </tr>	
 <?
 
-$result=mysql_query("select * from tbl_contratos where estado='"."1"."' or estado='"."2"."'  order by fecha_ingreso");
+$result=mysql_query("select * from tbl_contratos where estado='"."1"."' or estado='"."2"."' and fecha_ingreso>='".$_REQUEST['fecha_ini']."' and fecha_ingreso<='".$_REQUEST['fecha_fin']."'  order by fecha_ingreso");
 	while ($row=mysql_fetch_assoc($result)){
 	$result2=mysql_query("select nombre from tbl_clientes where id='".$row['id_cliente']."' ");
 	$row2=mysql_fetch_assoc($result2);
+    $tot++;
 ?>	
 	<tr>
     <td><div align="center" class="Arial14Negro"><?=utf8_encode($row2['nombre']);?></div></td>
-    <td><div align="center" class="Arial14Negro"><?=$row['consecutivo'];?></div></td>
+    <td><div align="center" class="Arial14Negro"><a href="status_analisis?id=<?=$row['consecutivo'];?>" target="_blank"><?=$row['consecutivo'];?></a></div></td>
     <td><div align="center" class="Arial14Negro"><?=$row['numero_muestras'];?></div></td>    
     <td><div align="center" class="Arial14Negro"><?=$row['fecha_ingreso'];?></div></td>
     
@@ -78,6 +79,7 @@ $result=mysql_query("select * from tbl_contratos where estado='"."1"."' or estad
 	</table>
     
     </div>
+    <div align="center" class="Arial14Negro">Total = <?=$tot?></div>    
     
 </div><!--div de centrado-->    
     

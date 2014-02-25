@@ -1,12 +1,12 @@
 <?php
 
-function conectar()
+function conectarc()
 {	
-	$_SESSION['connectid'] = mysql_connect('localhost', 'root', '1q2w3e');
+	$_SESSION['connectidc'] = mysql_connect('localhost', 'root', '1q2w3e');
 	mysql_select_db("bd_calidad"); 
 }
 
-function desconectar()
+function desconectarc()
 {
 	mysql_close();
 }

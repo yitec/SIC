@@ -1,6 +1,6 @@
 <?php
-include ('../cnx/Conexion_Calidad.php');
-conectar();
+include ('../cnx/conexion_calidad.php');
+conectarc();
 $consulta = "SELECT * FROM `tbl_categorias` WHERE `estado` =1 ORDER  BY `nombre_categoria` ASC";	
 
 $dt=mysql_query($consulta);
@@ -8,18 +8,18 @@ $dt=mysql_query($consulta);
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel ="stylesheet" href="../css/calidad.css" type="text/css" />
         <link rel ="stylesheet" href="../css/cuadros.css" type="text/css" />
         <link rel ="stylesheet" href="../css/jquery.pnotify.default.css" type="text/css" />
         <link rel ="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />        
         <title>SIC CINA</title>
-    </head>
-    <body >
-    <div class="header"></div>
-    <div class="box">
-    <div align="center">
+</head>
+<body >
+<div class="header"></div>
+<div class="box">
+<div align="center">
 <table><tr><td> 
 <div class="contenido_gm">
 <? if ($_REQUEST['acceso']==1){?>
@@ -40,15 +40,14 @@ $dt=mysql_query($consulta);
 	      <select name="cmb_categoria" class="combos" id="cmb_categoria" >
 	      <option value="0">Seleccione</option>
 	      <?php				
-									while($info=mysql_fetch_array($dt)){
-										echo '
-                      <option value="'.$info[0].'">'.utf8_encode($info[1]).'</option>';}?>
+				while($info=mysql_fetch_array($dt)){
+					echo '<option value="'.$info[0].'">'.utf8_encode($info[1]).'</option>';}?>
 	      </select> </td>
 	    </tr>
- <tr>
+ 	<tr>
 	    <td width="178" class="Arial14Negro"><div align="center">SubCategoria:</div></td>
 	    </tr>
-	  <tr>
+	<tr>
 	    <td class="Arial14Negro">
 	      <select name="cmb_subcat" class="combos" id="cmb_subcategoria"></select>  </td>
 	    </tr>

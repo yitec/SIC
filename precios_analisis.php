@@ -33,6 +33,8 @@ $("#cmb_categoria").change(function(event){
         	data: "opcion=12&id="+$("#cmb_categoria").val()+"&laboratorio="+$("#cmb_laboratorio").val(),
         	success: function(datos){
 				
+				datos=datos.replace("\n","");
+				datos=datos.replace("\r","");
 				var v_resultado=datos.split("|");
 				posiciones=parseInt(v_resultado.length)-1;
 				$('#cmb_analisis').append('<option>Seleccione</option>');

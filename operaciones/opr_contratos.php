@@ -434,13 +434,41 @@ if($_REQUEST['opcion']==14)
 	desconectar();
 
 
-}//end if opcion 13
+}//end if opcion 14
 
 
 //*************************************************Modificar firmas***********************
 if($_REQUEST['opcion']==15)
-{	
-$result=mysql_query("update tbl_contratos set fecha_equimica='".$_REQUEST['txt_equimica']."',fecha_fquimica='".$_REQUEST['txt_fquimica']."',fecha_emicro='".$_REQUEST['txt_emicro']."',fecha_fmicro='".$_REQUEST['txt_fmicro']."',fecha_ebroma='".$_REQUEST['txt_ebroma']."',fecha_fbroma='".$_REQUEST['txt_fbroma']."',fecha_ezootecnia='".$_REQUEST['txt_ezootecnia']."',fecha_fzootecnia='".$_REQUEST['txt_fzootecnia']."' where consecutivo='".$_REQUEST['contrato']."'");
+{
+
+	if	($_REQUEST['txt_equimica']!="0000-00-00 00:00:00"){
+		$equimica=$_REQUEST['txt_equimica']." ".date('h:i');		
+	}
+	if	($_REQUEST['txt_fquimica']!="0000-00-00 00:00:00"){
+		$fquimica=$_REQUEST['txt_fquimica']." ".date('h:i') ;		
+	}
+	if	($_REQUEST['txt_emicro']!="0000-00-00 00:00:00"){
+		$equimica=$_REQUEST['txt_emicro']." ".date('h:i');		
+	}
+	if	($_REQUEST['txt_fmicro']!="0000-00-00 00:00:00"){
+		$fquimica=$_REQUEST['txt_fmicro']." ".date('h:i') ;		
+	}
+	if	($_REQUEST['txt_ebroma']!="0000-00-00 00:00:00"){
+		$equimica=$_REQUEST['txt_ebroma']." ".date('h:i');		
+	}
+	if	($_REQUEST['txt_fbroma']!="0000-00-00 00:00:00"){
+		$fquimica=$_REQUEST['txt_fbroma']." ".date('h:i') ;		
+	}
+	if	($_REQUEST['txt_ezootecnia']!="0000-00-00 00:00:00"){
+		$equimica=$_REQUEST['txt_ezootecnia']." ".date('h:i');		
+	}
+	if	($_REQUEST['txt_fzootecnia']!="0000-00-00 00:00:00"){
+		$fquimica=$_REQUEST['txt_fzootecnia']." ".date('h:i') ;		
+	}
+
+		
+
+$result=mysql_query("update tbl_contratos set fecha_equimica='".$equimica."',fecha_fquimica='".$fquimica."',fecha_emicro='".$emicro."',fecha_fmicro='".$fmicro."',fecha_ebroma='".$ebroma."',fecha_fbroma='".$fbroma."',fecha_ezootecnia='".$ezootecnia."',fecha_fzootecnia='".$fzootecnia."' where consecutivo='".$_REQUEST['contrato']."'");
 
 if (!$result) {//si da error que me despliegue el error del query
       echo $message  = 'Error: ' . mysql_error() . "\n";
@@ -451,7 +479,50 @@ if (!$result) {//si da error que me despliegue el error del query
 }
 	
 desconectar();
-}//end if opcion 3
+}//end if opcion 15
+
+//*************************************************Modificar firmas***********************
+if($_REQUEST['opcion']==16)
+{
+$resultado="Success";	
+$result=mysql_query("delete from tbl_infmuestras where cons_contrato='".$_REQUEST['contrato']."'");
+if (!$result) {//si da error que me despliegue el error del query
+       $resultado  = 'Error: ' . mysql_error() . "\n";     	
+}
+$result=mysql_query("delete from tbl_infforrajes where cons_contrato='".$_REQUEST['contrato']."'");
+if (!$result) {//si da error que me despliegue el error del query
+       $resultado  = 'Error: ' . mysql_error() . "\n";     	
+}
+$result=mysql_query("delete from tbl_infoficiales where cons_contrato='".$_REQUEST['contrato']."'");
+if (!$result) {//si da error que me despliegue el error del query
+       $resultado  = 'Error: ' . mysql_error() . "\n";     	
+}
+$result=mysql_query("delete from tbl_resultados where consecutivo_contrato='".$_REQUEST['contrato']."'");
+if (!$result) {//si da error que me despliegue el error del query
+       $resultado  = 'Error: ' . mysql_error() . "\n";     	
+}
+$result=mysql_query("delete from tbl_analisis where id_contrato='".$_REQUEST['contrato']."'");
+if (!$result) {//si da error que me despliegue el error del query
+       $resultado  = 'Error: ' . mysql_error() . "\n";     	
+}
+$result=mysql_query("delete from tbl_muestras where id_contrato='".$_REQUEST['contrato']."'");
+if (!$result) {//si da error que me despliegue el error del query
+       $resultado  = 'Error: ' . mysql_error() . "\n";     	
+}
+$result=mysql_query("delete from tbl_contratos where consecutivo='".$_REQUEST['contrato']."'");
+if (!$result) {//si da error que me despliegue el error del query
+       $resultado  = 'Error: ' . mysql_error() . "\n";     	
+}
+
+
+
+
+echo $resultado;
+	
+desconectar();
+}//end if opcion 16
+
+
 
 
 

@@ -32,11 +32,20 @@ $aprobados=0;
 <div id="mainAzulFondo" align="center" style=" width: 1080px; height:auto; " >
 <div id="mainBlancoFondo" align="center" style="padding: 20 20 20 20;">
 <br />
+<?
+	$result=mysql_query("select c.nombre,ct.fecha_ingreso from tbl_clientes c inner JOIN tbl_contratos ct on ct.consecutivo='".$_REQUEST['id']."' and ct.id_cliente=c.id ");
+	$row=mysql_fetch_object($result)
+?>
+	<div align="left" class="Arial14Negro">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cliente: <?=$row->nombre?></div>
+	<br>
+	<div align="left" class="Arial14Negro">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fecha Ingreso: <?=$row->fecha_ingreso?></div>
+	<br>
 	<table width="1008"  height="22" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
     <tr>
     <td width="94"><div align="center" class="Arial14Azul" style="margin-top:5px;">Contrato</div></td>
     <td width="119"><div align="center" class="Arial14Azul">Muestra</div></td>    
     <td width="118"><div align="center" class="Arial14Azul">An&aacute;lisis</div></td>
+    <td width="118"><div align="center" class="Arial14Azul">Laboratorio</div></td>
     <td width="114"><div align="center" class="Arial14Azul">Status actual</div></td>                
     <td width="136"><div align="center" class="Arial14Azul">Fecha Molienda</div></td>    
     <td width="143"><div align="center" class="Arial14Azul">Fecha Resultados</div></td>
@@ -81,6 +90,18 @@ $result=mysql_query("select * from tbl_analisis where id_contrato='".$_REQUEST['
     <td><div align="center" class="Arial11Negro" style="margin-top:5px;"><?=$row['id_contrato'];?></div></td>
     <td><div align="center" class="Arial11Negro"><?=$row2['codigo'];?></div></td>    
     <td><div align="center" class="Arial11Negro"><?=utf8_encode($row3['nombre']);?></div></td>    
+    <td><div align="center" class="Arial11Negro">
+    <?
+    if($row['id_laboratorio']==1)
+    	echo "Qu&iacute;mica";
+    if($row['id_laboratorio']==2)
+    	echo "Microbiolog&iacute;a";
+    if($row['id_laboratorio']==3)
+    	echo "Bromatolog&iacute;a";
+    
+    
+
+    ?></div></td>
     <td><div align="center" class="Arial11Negro"><?=$actual;?></div></td>
     <td><div align="center" class="Arial11Negro"><?=$row['fecha_molienda'];?></div></td>
     <td><div align="center" class="Arial11Negro"><?=$row['fecha_analisis'];?></div></td>
@@ -96,7 +117,7 @@ $result=mysql_query("select * from tbl_analisis where id_contrato='".$_REQUEST['
 </table>
 
 <br />
-<div align="center" class="Arial14Morado" > Total An&aacute;lisis = <?=$total;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;En molienda = <?=$molienda;?> &nbsp;&nbsp;&nbsp;&nbsp; En an&aacute;lisis = <?=$analisis;?> &nbsp;&nbsp;&nbsp;&nbsp; Por aprobar = <?=$aprobacion;?>&nbsp;&nbsp;&nbsp;&nbsp; Aprobados = <?=$aprobados;?>  </div>
+<div align="center" class="Arial14Morado" > Total An&aacute;lisis = <?=$total;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Pendientes = <?=$molienda+$analisis;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;En molienda = <?=$molienda;?> &nbsp;&nbsp;&nbsp;&nbsp; En an&aacute;lisis = <?=$analisis;?> &nbsp;&nbsp;&nbsp;&nbsp; Por aprobar = <?=$aprobacion;?>&nbsp;&nbsp;&nbsp;&nbsp; Aprobados = <?=$aprobados;?>  </div>
 </div><!--fin cuadro gris--> 
 </div><!--fin cuadro azul--> 
 

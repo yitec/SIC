@@ -50,7 +50,7 @@ $("#btn_guardar").click(function(event){
 		if($("#txt_contrato").val()=="") {  
         	$.pnotify({
 			    pnotify_title: 'Error en contrato!!',
-    			pnotify_text: 'Revisa el numero de contato no debe estar vacio',
+    			pnotify_text: 'Revisa el numero de contrato, no debe estar vacio',
     			pnotify_type: 'info',
     			pnotify_hide: true
 				});

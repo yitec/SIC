@@ -183,8 +183,7 @@ if (validado==true){
 	}
 	?>
 	      </select></td>
-    </tr>
-    
+    </tr>    
     </table>
     <br />
     <table>

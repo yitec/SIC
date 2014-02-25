@@ -80,8 +80,7 @@ if($_REQUEST['opcion']==4)
 	$row3=mysql_fetch_assoc($result3);
 
 	$total_ap=$row3['total'];
-	//meto los datos de materias primas
-	$materias=actualiza_materias($_REQUEST['id']);
+	
 	
 	$result3=mysql_query("select COUNT(id_contrato) as total from tbl_analisis where id_contrato='".$_REQUEST['contrato']."'");
 	
@@ -92,7 +91,9 @@ if($_REQUEST['opcion']==4)
 		echo "Entro";
 		$result3=mysql_query("update tbl_contratos set fecha_terminado='".$hoy."', estado='"."4"."' where consecutivo='".$_REQUEST['contrato']."'");
 		 		date_default_timezone_set('America/Denver');
-       $dest = "kmadrigal@feednet.ucr.ac.cr";
+       //$dest = "kmadrigal@feednet.ucr.ac.cr";
+       $dest  = 'kmadrigal@feednet.ucr.ac.cr' . ', ';
+	   $dest .= 'sergio.barrantes@hotmail.com';
        $head = "From: info@siccina.ucr.ac.cr<info@siccina.ucr.ac.cr>\r\n";
 	   $asunto = "Contrato Termindado = ".$_REQUEST['contrato'];
 	   $email = "info@siccina.ucr.ac.cr";
@@ -106,6 +107,9 @@ if($_REQUEST['opcion']==4)
 	
 
 	}
+
+	//meto los datos de materias primas
+	$materias=actualiza_materias($_REQUEST['id']);
 	
 	
 
@@ -221,10 +225,16 @@ if($_REQUEST['opcion']==11)
 //cargo las categorias de muestras en mantenimiento de analisis
 if($_REQUEST['opcion']==12)
 {
+	$cant=0;
 	$result=mysql_query("select * from tbl_categoriasanalisis where ids_categoriamuestra='".$_REQUEST['id']."' and id_laboratorio='".$_REQUEST['laboratorio']."' order by nombre ");
 	while ($row=mysql_fetch_assoc($result))
 	{
-		$resultado=$resultado.$row['id'].",".utf8_encode($row['nombre'])."|"	;
+		if ($cant==0){
+			$resultado=$row['id'].",".utf8_encode($row['nombre'])."|"	;
+		}else{
+			$resultado=$resultado.$row['id'].",".utf8_encode($row['nombre'])."|"	;
+		}
+		$cant++;
 	}
 	echo $resultado;
 }

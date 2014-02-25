@@ -53,20 +53,23 @@ $(document).ready(function() {
     <td><div align="center" class="Arial14Azul">Contrato</div></td>
     <td><div align="center" class="Arial14Azul">Muestras</div></td>    
     <td><div align="center" class="Arial14Azul">Fecha Ingreso</div></td>
+    <td><div align="center" class="Arial14Azul">Fecha Completo</div></td>
          
     </tr>	
 <?
 
-$result=mysql_query("select * from tbl_contratos where estado='"."4"."'  order by fecha_ingreso");
+$result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_terminado>='".$_REQUEST['fecha_ini']."' and fecha_terminado<='".$_REQUEST['fecha_fin']."'  order by fecha_ingreso");
 	while ($row=mysql_fetch_assoc($result)){
 	$result2=mysql_query("select nombre from tbl_clientes where id='".$row['id_cliente']."' ");
 	$row2=mysql_fetch_assoc($result2);
+    $tot++;
 ?>	
 	<tr>
     <td><div align="center" class="Arial14Negro"><?=utf8_encode($row2['nombre']);?></div></td>
     <td><div align="center" class="Arial14Negro"><?=$row['consecutivo'];?></div></td>
     <td><div align="center" class="Arial14Negro"><?=$row['numero_muestras'];?></div></td>    
     <td><div align="center" class="Arial14Negro"><?=$row['fecha_ingreso'];?></div></td>
+    <td><div align="center" class="Arial14Negro"><?=$row['fecha_terminado'];?></div></td>
     
     </tr>	
     
@@ -75,7 +78,8 @@ $result=mysql_query("select * from tbl_contratos where estado='"."4"."'  order b
 
 ?>
 	</table>
-    
+    <br>
+    <div align="center" class="Arial14Negro">Total = <?=$tot?></div>    
     </div>
 
 </div><!--div de centrado-->    

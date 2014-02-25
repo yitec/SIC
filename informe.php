@@ -685,7 +685,7 @@ $pdf->Cell(95,5,'________________________________________',0,1,'C');
 
 $pdf->SetFont('Arial','',6);
 $pdf->Cell(95,5,'Nombre',0,0,'C');
-$pdf->Cell(95,5,'Firma',0,1,'C');
+$pdf->Cell(95,5,'Fecha',0,1,'C');
 
 
 $pdf->SetFont('Arial','',8);	

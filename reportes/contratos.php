@@ -86,22 +86,29 @@ $(document).ready(function() {
 $result=mysql_query("select nombre from tbl_clientes where id='".$_REQUEST['cmb_cliente']."'");
 $row=mysql_fetch_assoc($result);
 ?>
-<div align="center" class="Arial18Morado"> Analisis para <?=$row['nombre']?> entre <?=$_REQUEST['fecha_ini']?> y <?=$_REQUEST['fecha_fin']?></div>
+<div align="center" class="Arial18Morado"> Contratos para <?=utf8_encode($row['nombre'])?> entre <?=$_REQUEST['fecha_ini']?> y <?=$_REQUEST['fecha_fin']?></div>
 <br />
 <table width="900" border="1"  cellpadding="0" cellspacing="0">
   <tr>
     <td width="66">
     	<div style=" background:url(../img/centro_grid.png);" class=" Arial14Morado"><strong>Contrato</strong></div>
   	</td> 
+    
     <td width="58">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Muestras</strong></div>
   	</td> 
+    <td width="58">
+      <div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Tipo tipo_alimento</strong></div>
+    </td> 
     <td width="97" >
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Monto</strong></div>
   	</td> 
     <td width="36">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Tipo Pago</strong></div>
   	</td> 
+    <td width="36">
+      <div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Factura</strong></div>
+    </td> 
 <td width="98">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Fecha Ingreso</strong></div>
   	</td>
@@ -111,8 +118,18 @@ $row=mysql_fetch_assoc($result);
 
 <?
 $monto=0;
-$result=mysql_query("select * from tbl_contratos where id_cliente='".$_REQUEST['cmb_cliente']."' and fecha_ingreso>='".$fecha_ini."' and fecha_ingreso<='".$fecha_fin."' ");
+$result=mysql_query("select 
+  ct.consecutivo,
+  ct.tipo_pago,
+  ct.numero_muestras,
+  ct.monto_total,
+  ct.tipo_pago,
+  ct.factura,
+  ct.fecha_ingreso,
+  inf.tipo_alimento
+  from tbl_contratos ct inner join tbl_infmuestras inf on ct.id_cliente='".$_REQUEST['cmb_cliente']."' and ct.fecha_ingreso>='".$fecha_ini."' and ct.fecha_ingreso<='".$fecha_fin."' and  ct.consecutivo=inf.cons_contrato ");
 $cont=0;
+echo mysql_error();
 while($row=mysql_fetch_assoc($result)){
 	$cont++;
 	$monto=$monto+$row['monto_total'];
@@ -121,8 +138,10 @@ while($row=mysql_fetch_assoc($result)){
   <tr>
   <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['consecutivo']);?></td>
   <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['numero_muestras']);?></td>
+  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['tipo_alimento']);?></td>
   <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['monto_total']);?></td>
   <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['tipo_pago']);?></td>
+  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['factura']);?></td>
   <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['fecha_ingreso']);?></td>
     
   </tr>

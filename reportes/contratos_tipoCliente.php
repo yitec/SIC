@@ -90,9 +90,15 @@ a:hover{
     <td width="58">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Cliente</strong></div>
   	</td> 
+    <td width="58">
+      <div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Fecha Ingreso</strong></div>
+    </td> 
     <td width="97" >
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Muestras</strong></div>
   	</td> 
+    <td width="97" >
+      <div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Total Análisis</strong></div>
+    </td> 
     <td width="36">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Monto</strong></div>
   	</td> 
@@ -101,7 +107,12 @@ a:hover{
 <?
 $cont=0;
 $monto=0;
-$result=mysql_query("select * from tbl_clientes where tipo_cliente='".$_REQUEST['cmb_tipo']."'");
+$result=mysql_query("select cli.nombre,con.consecutivo,con.fecha_ingreso,con.numero_muestras,con.monto_total
+from tbl_clientes cli join tbl_contratos con 
+on 
+con.fecha_ingreso>='".$_REQUEST['fecha_ini']."'
+and con.fecha_ingreso<='".$_REQUEST['fecha_fin']."'
+and cli.tipo_cliente='".$_REQUEST['cmb_tipo']."' and con.id_cliente=cli.id order by fecha_ingreso ASC ");
 if (!$result) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
         $message .= 'Query ejecutado: ' . $query;
@@ -109,7 +120,7 @@ if (!$result) {//si da error que me despliegue el error del query
 		} 
 while ($row=mysql_fetch_assoc($result)){
 
-$result2=mysql_query("select * from tbl_contratos where id_cliente='".$row['id']."'");
+$result2=mysql_query("SELECT COUNT(1) as total from tbl_analisis where id_contrato='".$row['consecutivo']."'");
 if (!$result2) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
         $message .= 'Query ejecutado: ' . $query;
@@ -118,14 +129,16 @@ if (!$result2) {//si da error que me despliegue el error del query
 
 while($row2=mysql_fetch_assoc($result2)){
 	$cont++;
-	$monto=$monto+$row2['monto_total'];
+	$monto=$monto+$row['monto_total'];
 ?>
   
   <tr>
-  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['consecutivo']);?></td>
-  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['nombre']);?></td>
-  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['numero_muestras']);?></td>
-  <td style=" font-size:14px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['monto_total']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['consecutivo']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['nombre']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['fecha_ingreso']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['numero_muestras']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['total']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['monto_total']);?></td>
     
   </tr>
 <?

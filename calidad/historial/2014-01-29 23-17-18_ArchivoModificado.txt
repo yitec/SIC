@@ -1,0 +1,5 @@
+12;<br />
+<b>Warning</b>:  move_uploaded_file(../calidad/archivos/Pendientes/Revisio?n General SIC Julio 2013-3.docx) [<a href=\'function.move-uploaded-file\'>function.move-uploaded-file</a>]: failed to open stream: No error in <b>C:\\AppServ\\www\\SIC\\operaciones\\subirModificado.php</b> on line <b>10</b><br />
+<br />
+<b>Warning</b>:  move_uploaded_file() [<a href=\'function.move-uploaded-file\'>function.move-uploaded-file</a>]: Unable to move \'C:\\Windows\\Temp\\php5A3A.tmp\' to \'../calidad/archivos/Pendientes/Revisio?n General SIC Julio 2013-3.docx\' in <b>C:\\AppServ\\www\\SIC\\operaciones\\subirModificado.php</b> on line <b>10</b><br />
+Revisio?n General SIC Julio 2013-3.docx;;asdsa
