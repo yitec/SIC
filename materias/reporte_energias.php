@@ -164,42 +164,7 @@ body{
     <th>
       <div style="width: 60px;">Calidad</div>
     </th>
-    <th>
-      <div style="width: 60px;">Lisina</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Metionina</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Tronina</div>
-    </th>    
-    <th>
-      <div style="width: 60px;">Valina</div>
-    </th>    
-    <th>
-      <div style="width: 60px;">Tnd</div>
-    </th>    
-    <th>
-      <div style="width: 60px;">Taurina</div>
-    </th>    
-    <th>
-      <div style="width: 60px;">Triftofano</div>
-    </th>    
-    <th>
-      <div style="width: 60px;">Sulf_Lisin</div>
-    </th>                        
-    <th>
-      <div style="width: 60px;">S_En_Koh</div>
-    </th>                        
-    <th>
-      <div style="width: 60px;">Met_Hidrox</div>
-    </th>                        
-    <th>
-      <div style="width: 60px;">T2</div>
-    </th>                                    
-    <th>
-      <div style="width: 60px;">M1</div>
-    </th>                                        
+    
  </tr>
 </thead>
 <thead >  
@@ -300,51 +265,18 @@ body{
     <th>
       <div  style="width: 60px;"><strong></strong></div>
     </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-
   
         
   </tr>           
 </thead>
 <tbody>
 <?
-
-	$result=mysql_query("select * from bd_materiasprimas.tbl_energias where  fecha_creacion>='".$fecha_ini."' and fecha_creacion<='".$fecha_fin."'   order by id")or throw_ex(mysql_error());
+if ($_REQUEST['energia']==0){
+  $sql="select * from bd_materiasprimas.tbl_energias where  cifra10='".$_REQUEST['year']."' order by fecha_creacion ASC";  
+}else{
+  $sql="select * from bd_materiasprimas.tbl_energias where  cifra10='".$_REQUEST['year']."' and cifra5='".$_REQUEST['energia']."' order by fecha_creacion ASC";  
+}
+	$result=mysql_query($sql)or throw_ex(mysql_error());
  
 $cont=0;
 while($row=mysql_fetch_assoc($result)){
@@ -388,23 +320,6 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="Indice ACD"class="datos"><?=utf8_encode($row['indice_acd']);?></td>
   <td style="width: 60px;"title="Impurezas"class="datos"><?=utf8_encode($row['impurezas']);?></td>
   <td style="width: 60px;"title="Calidad"class="datos"><?=utf8_encode($row['calidad']);?></td>
-  <td style="width: 60px;"title="Lisina"class="datos"><?=utf8_encode($row['lisina']);?></td>
-  <td style="width: 60px;"title="Metionina"class="datos"><?=utf8_encode($row['metionina']);?></td>
-  <td style="width: 60px;"title="Tronina"class="datos"><?=utf8_encode($row['tronina']);?></td>
-  <td style="width: 60px;"title="Valina"class="datos"><?=utf8_encode($row['valina']);?></td>
-  <td style="width: 60px;"title="Tnd"class="datos"><?=utf8_encode($row['tnd']);?></td>
-  <td style="width: 60px;"title="Taurina"class="datos"><?=utf8_encode($row['taurina']);?></td>
-  <td style="width: 60px;"title="Triftofano"class="datos"><?=utf8_encode($row['triftofano']);?></td>
-  <td style="width: 60px;"title="Sulf_Lisin"class="datos"><?=utf8_encode($row['sulf_lisn']);?></td>
-  <td style="width: 60px;"title="S_En_koh"class="datos"><?=utf8_encode($row['s_en_koh']);?></td>
-  <td style="width: 60px;"title="Met_Hidrox"class="datos"><?=utf8_encode($row['met_hidrox']);?></td>
-  <td style="width: 60px;"title="T2"class="datos"><?=utf8_encode($row['t2']);?></td>
-  <td style="width: 60px;"title="M1"class="datos"><?=utf8_encode($row['m1']);?></td>
-  
-
-  
-
-
   </tr>
 <?
 }

@@ -43,13 +43,19 @@ $result=mysql_query($consulta,$_SESSION['connectidc']);
 	  <tr>
 	    <td class="Arial14Negro"><input name="txt_version" type="text" class="inputbox" id="txt_version" /></td>
 	    </tr>
+	    <tr>
+	    <td width="178" class="Arial14Negro"><br><div align="center">Copias Controladas</div></td>	    
+	  </tr>
+	  <tr>
+	    <td class="Arial14Negro"><input name="txt_copias" id="txt_copias"  class="inputbox"></td>	  	   
+	  </tr>	
 	  </table>
 	<table>
 	<tr>
 	  <td width="178" class="Arial14Negro"><div align="center">
 	    <table>
 	      <tr>
-	        <td width="178" class="Arial14Negro"><div align="center">Categor&iacute;a</div></td>
+	        <td width="178" class="Arial14Negro"><br><div align="center">Categor&iacute;a</div></td>
 	        </tr>
 	      <tr>
 	        <td class="Arial14Negro"><label>
@@ -90,8 +96,10 @@ $result=mysql_query($consulta,$_SESSION['connectidc']);
 	    <td width="178" class="Arial14Negro"><br><div align="center">Fecha ultima Revisi&oacute;n</div></td>	    
 	  </tr>
 	  <tr>
-	    <td class="Arial14Negro">
-	    	<input type="text" class="inputbox" id="txt_revision" value="">
+	    <td width="178" class="Arial14Negro">
+	    	<div><input type="text" class="inputbox" id="txt_revision" value=""></div>
+	    </td>
+	    <td><img src="../img_calendar/cal.gif" onClick="javascript:NewCssCal('txt_revision')" style="cursor:pointer"/>
 	    </td>	  	   
 	  </tr>	          
 	  <tr>
@@ -110,7 +118,7 @@ $result=mysql_query($consulta,$_SESSION['connectidc']);
 	    	conectarc();
 	    	?>
 	    </td>	  	   
-	  </tr>	          
+	  </tr>	  	 
 	  </table>
 	<table>
 	  <tr>
@@ -151,5 +159,6 @@ Versi&oacute;n 1.0
 <script src="../includes/jquery-1.8.3.js" type="text/javascript"></script>
 <script src="../includes/jquery.pnotify.js" type="text/javascript"></script>
 <script src="../includes/Scripts_Calidad.js" type="text/javascript"></script>  
+<script src="../includes/datetimepicker_css.js"></script>
 </html>
 

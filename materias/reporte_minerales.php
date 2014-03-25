@@ -161,24 +161,6 @@ body{
     <th>
       <div style="width: 60px;">Materia_Seca</div>
     </th>
-    <th>
-      <div style="width: 60px;">Azufre</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fluor</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Mercurio</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Arsenico</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Cadmio</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Plomo</div>
-    </th>    
  </tr>
 </thead>
 <thead >  
@@ -275,33 +257,18 @@ body{
     </th>
     <th>
       <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-  
-        
+    </th>       
   </tr>           
 </thead>
 <tbody>
 <?
 
-	$result=mysql_query("select * from bd_materiasprimas.tbl_minerales where  fecha_creacion>='".$fecha_ini."' and fecha_creacion<='".$fecha_fin."'   order by id")or throw_ex(mysql_error());
+if ($_REQUEST['mineral']==0){
+  $sql="select * from bd_materiasprimas.tbl_minerales where  cifra10='".$_REQUEST['year']."' order by fecha_creacion ASC";  
+}else{
+  $sql="select * from bd_materiasprimas.tbl_minerales where  cifra10='".$_REQUEST['year']."' and cifra5='".$_REQUEST['mineral']."' order by fecha_creacion ASC";  
+}	
+  $result=mysql_query($sql)or throw_ex(mysql_error());
  
 $cont=0;
 while($row=mysql_fetch_assoc($result)){
@@ -344,15 +311,6 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="Carbonatos"class="datos"><?=utf8_encode($row['carbonatos']);?></td>
   <td style="width: 60px;"title="Sodio"class="datos"><?=utf8_encode($row['sodio']);?></td>
   <td style="width: 60px;"title="Materia Seca"class="datos"><?=utf8_encode($row['mat_seca']);?></td>
-  <td style="width: 60px;"title="Azufre"class="datos"><?=utf8_encode($row['azufre']);?></td>
-  <td style="width: 60px;"title="Fluor"class="datos"><?=utf8_encode($row['fluor']);?></td>
-  <td style="width: 60px;"title="Mercurio"class="datos"><?=utf8_encode($row['mercurio']);?></td>
-  <td style="width: 60px;"title="Arsenico"class="datos"><?=utf8_encode($row['arsenico']);?></td>
-  <td style="width: 60px;"title="Cadmio"class="datos"><?=utf8_encode($row['cadmio']);?></td>
-  <td style="width: 60px;"title="Plomo"class="datos"><?=utf8_encode($row['plomo']);?></td>
-  
-
-
   </tr>
 <?
 }

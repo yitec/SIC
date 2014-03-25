@@ -8,50 +8,132 @@ round(1.95583, 2);
 /********************************************Repara decimales***********************************************/
 /********************************************Repara decimales***********************************************/
 /********************************************Repara decimales***********************************************/
-$result=mysql_query("select id,humedad_135,materia_seca,cenizas,fibra_cruda,extracto_etereo,eln,cenizas,protenia_cruda
-,silica,
-,celulosa,
-,lignina,
-,fnd,
-,fad,
-,dims,
-,calcio,
-,fosforo_t,
-,fosforo_d,
-,magnesio,
-,potasio,
-,hierro,
-,cobre,
-,manganeso,
-,zinc,
-,cobalto,
-,molibdeno,
-,sodio,
-,e_bruta,
-,azufre,
-,cloro,
-,ph,
-,hemicelulosa,
-,ceinsolu,
-,nfnd,
-,nfad,
-,cne,
-,enl,
-,fa1,
-,fb1,
-,fb2,
-,fb3,
-,fc from tbl_muestras");
+
+/***********************************************Proximal******************
+*/
+$result=mysql_query("select id,
+proteina_cruda,
+fibra_cruda,
+materia_seca,
+eln,
+nnp,
+silica,
+celulosa,
+lignina,
+fnd,
+fad,
+peroxidos,
+pc_lignif,
+calidad,
+particula,
+nifnd,
+nifad,
+hemicelulosa,
+ce_insolu,
+extracto_etereo,
+energia_bruta,
+cenizas,
+humedad_135
+from tbl_muestras where year='"."-1"."'");
+if (!$result) {//si da error que me despliegue el error del query
+       echo $message  = 'Query invalido: ' . mysql_error() . "\n";
+        $message .= 'Query ejecutado: ' . $query;
+		
+		} 
 while ($r1=mysql_fetch_object($result)){
-$result2=mysql_query("update tbl_muestras set proteina_cruda='".round($r1->proteina_cruda, 2)."', fibra_cruda='".round($r1->fibra_cruda, 2)."', humedad_135='".round($r1->humedad_135, 2)."', extracto_etereo='".round($r1->extracto_etereo, 2)."', eln='".round($r1->eln, 2)."', cenizas='".round($r1->cenizas, 2)."',
+$result2=mysql_query("update tbl_muestras set 
+proteina_cruda='".round($r1->proteina_cruda, 2)."', 
+fibra_cruda='".round($r1->fibra_cruda, 2)."', 
 materia_seca='".round($r1->materia_seca, 2)."', 
-humedad_135='".round($r1->humedad_135, 2)."',
-materia_seca='".round($r1->materia_seca, 2)."',
-cenizas='".round($r1->cenizas, 2)."',
-fibra_cruda='".round($r1->fibra_cruda, 2)."',
+eln='".round($r1->eln, 2)."', 
+nnp='".round($r1->nnp, 2)."', 
+silica='".round($r1->silica, 2)."',
+celulosa='".round($r1->celulosa, 2)."',
+lignina='".round($r1->lignina, 2)."',
+fnd='".round($r1->fnd, 2)."',
+fad='".round($r1->fad, 2)."',
+peroxidos='".round($r1->peroxidos, 2)."',
+pc_lignif='".round($r1->pc_lignif, 2)."',
+calidad='".round($r1->calidad, 2)."',
+particula='".round($r1->particula, 2)."',
+nifnd='".round($r1->nifnd, 2)."',
+nifad='".round($r1->nifad, 2)."',
+hemicelulosa='".round($r1->hemicelulosa, 2)."',
+ce_insolu='".round($r1->ce_insolu, 2)."',
 extracto_etereo='".round($r1->extracto_etereo, 2)."',
-eln='".round($r1->eln, 2)."',
-proteina_cruda='".round($r1->proteina_cruda, 2)."',
+energia_bruta='".round($r1->energia_bruta, 2)."',
+cenizas='".round($r1->cenizas, 2)."',
+humedad_135='".round($r1->humedad_135, 2)."' 
+where id='".$r1->id."'");
+	if (!$result2) {//si da error que me despliegue el error del query
+       echo $message  = 'Query invalido: ' . mysql_error() . "\n";
+        $message .= 'Query ejecutado: ' . $query;
+		
+		} 
+		$tot++;
+	//echo round($r1->materia_seca, 2)."<br>";
+}
+
+/*
+
+
+
+$result=mysql_query("select id,
+humedad_135,
+materia_seca,
+cenizas,
+fibra_cruda,
+extracto_etereo,
+eln,
+proteina_cruda,
+silica,
+celulosa,
+lignina,
+fnd,
+fad,
+dims,
+calcio,
+fosforo_t,
+fosforo_d,
+magnesio,
+potasio,
+hierro,
+cobre,
+manganeso,
+zinc,
+cobalto,
+molibdeno,
+sodio,
+e_bruta,
+azufre,
+cloro,
+ph,
+hemicelulosa,
+ceinsolu,
+nfnd,
+nfad,
+cne,
+enl,
+fa1,
+fb1,
+fb2,
+fb3,
+fc from tbl_forrajes_new");
+
+if (!$result) {//si da error que me despliegue el error del query
+       echo $message  = 'Query invalido: ' . mysql_error() . "\n";
+        $message .= 'Query ejecutado: ' . $query;
+		
+		} 
+while ($r1=mysql_fetch_object($result)){
+$result2=mysql_query("update tbl_forrajes_new set 
+humedad_135='".round($r1->humedad_135, 2)."', 
+materia_seca='".round($r1->materia_seca, 2)."', 
+cenizas='".round($r1->cenizas, 2)."',
+fibra_cruda='".round($r1->fibra_cruda, 2)."', 
+extracto_etereo='".round($r1->extracto_etereo, 2)."', 
+eln='".round($r1->eln, 2)."', 
+proteina_cruda='".round($r1->proteina_cruda, 2)."', 
 silica='".round($r1->silica, 2)."',
 celulosa='".round($r1->celulosa, 2)."',
 lignina='".round($r1->lignina, 2)."',
@@ -91,8 +173,14 @@ where id='".$r1->id."'");
         $message .= 'Query ejecutado: ' . $query;
 		
 		} 
+		$tot++;
 	//echo round($r1->materia_seca, 2)."<br>";
 }
+
+
+
+
+
 /*
 $fecha1='1987-01-01 00:00:00';
 $fecha2='1987-12-31 00:00:00';

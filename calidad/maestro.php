@@ -26,7 +26,7 @@ $dt=mysql_query($consulta);
     <table cellpadding="0" cellspacing="0"class="diseno_tablas">
     <tbody>
     <tr>
-    <th class="titulo_tablas">Tipo</th>
+    <th class="titulo_tablas">Categoria</th>
     <th class="titulo_tablas">Código</th>
     <th class="titulo_tablas">Nombre</th>
     <th class="titulo_tablas">Versión</th>
@@ -51,10 +51,10 @@ $dt=mysql_query($consulta);
 
 	echo '
     
-    <td class="datos_tablas">'.utf8_encode($info[12]).'-'.utf8_encode($info[13]).'</td>
-    <td class="datos_tablas">'.$info[14].'-'.$info[1].'</td>
+    <td class="datos_tablas">'.utf8_encode($info[15]).'</td>
+    <td class="datos_tablas">'.$info[16].'-'.$info[1].'</td>
     <td class="datos_tablas">'.utf8_decode($info[4]).'</td>
-    <td class="datos_tablas">'.utf8_encode($info[3]).'</td>
+    <td class="datos_tablas">'.utf8_encode($info[5]).'</td>
     <td class="datos_tablas">'.utf8_encode($info[6]).'</td>
     <td class="datos_tablas">'.utf8_encode($info[10]).'</td>
     <td class="datos_tablas"><a target="_blank" href="'.$archivo.'">Ver Archivo</a></td>';
@@ -70,7 +70,7 @@ $dt=mysql_query($consulta);
 
      
 	<div align="center" style="margin-top:20px; margin-bottom:20px;">
-	  <a href="../includes/genera_maestroExcell.php" target="_blank"> <input type="button" name="boton" value="Generar Archivo Excell" /> </a>
+	  <a href="../includes/genera_maestroExcell2.php" target="_blank"> <input type="button" name="boton" value="Generar Archivo Excell" /> </a>
 	</div>    
 
 

@@ -133,90 +133,9 @@ body{
     </th>
     <th>
       <div style="width: 60px;">FAD</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Dims</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Calcio</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fosforo T</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fosforo D</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Magneso</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Potasio</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Hierro</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Cobre</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Manganeso</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Zinc</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Cobalto</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Molibdeno</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Sodio</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Ebruta</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Azufre</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Cloro</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Ph</div>
-    </th>
+    </th>   
     <th>
       <div style="width: 60px;">Hemicelulosa</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Ceinsolu</div>
-    </th>
-    <th>
-      <div style="width: 60px;">NFND</div>
-    </th>
-    <th>
-      <div style="width: 60px;">NFAD</div>
-    </th>
-    <th>
-      <div style="width: 60px;">CNE</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Enl</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fa1/div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fb1</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fb2</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fb3</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Fc</div>
     </th>
  </tr>
 </thead>
@@ -247,7 +166,7 @@ body{
       <div  style="width: 60px;"><strong>(10)</strong></div>
     </th> 
     <th>
-      <div  style="width: 60px;"></div>
+      <div  style="width: 60px;"><strong>(11)</strong></div>
     </th> 
     <th>
       <div  style="width: 60px;"></div>
@@ -294,91 +213,18 @@ body{
     <th>
       <div  style="width: 60px;"><strong></strong></div>
     </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
         
   </tr>           
 </thead>
 <tbody>
 <?
-  
-$result=mysql_query("select * from bd_materiasprimas.tbl_muestras where  fecha_creacion>='".$fecha_ini."' and fecha_creacion<='".$fecha_fin."' and codigo >=1   order by fecha_creacion ASC")or throw_ex(mysql_error());
+if ($_REQUEST['materia']==0){
+  $sql="select * from bd_materiasprimas.tbl_muestras where  year='".$_REQUEST['year']."' order by fecha_creacion ASC";  
+}else{
+  $sql="select * from bd_materiasprimas.tbl_muestras where  year='".$_REQUEST['year']."' and codigo='".$_REQUEST['materia']."' order by fecha_creacion ASC";  
+}
+
+$result=mysql_query($sql)or throw_ex(mysql_error());
 $cont=0;
 while($row=mysql_fetch_assoc($result)){
 	$cont++;
@@ -390,8 +236,7 @@ while($row=mysql_fetch_assoc($result)){
 ?>
   <tr>
   <td style="width: 60px;" class="datos"><?=utf8_encode($row['registro']);?></td>
-  <td style="width: 60px;" class="datos"><?=utf8_encode($row['tipo_muestreo']);?></td>
-  <!--<td style="width: 60px;" class="datos"><?=utf8_encode($row['clase_alimento']);?></td>-->
+  <td style="width: 60px;" class="datos"><?=utf8_encode($row['tipo_muestreo']);?></td>  
   <td style="width: 60px;" class="datos"><?=utf8_encode($row['tipo_alimento']);?></td>  
   <td style="width: 60px;" class="datos"><?=utf8_encode($row['codigo']);?></td>
   <td style="width: 60px;" class="datos"><?=utf8_encode($row['clasificacion_internacional']);?></td>  
@@ -412,36 +257,7 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="Lignina"class="datos"><?=utf8_encode($row['lignina']);?></td>
   <td style="width: 60px;"title="Fnd"class="datos"><?=utf8_encode($row['fnd']);?></td>
   <td style="width: 60px;"title="Fad"class="datos"><?=utf8_encode($row['fad']);?></td>
-  <td style="width: 60px;"title="Dims"class="datos"><?=utf8_encode($row['dims']);?></td>
-  <td style="width: 60px;"title="Calcio"class="datos"><?=utf8_encode($row['calcio']);?></td>
-  <td style="width: 60px;"title="Fosforo T"class="datos"><?=utf8_encode($row['fosforo_t']);?></td>
-  <td style="width: 60px;"title="Fosforo D"class="datos"><?=utf8_encode($row['fosforo_d']);?></td>
-  <td style="width: 60px;"title="Magnesio"class="datos"><?=utf8_encode($row['magnesio']);?></td>
-  <td style="width: 60px;"title="Potasio"class="datos"><?=utf8_encode($row['potasio']);?></td>
-  <td style="width: 60px;"title="Hierro"class="datos"><?=utf8_encode($row['hierro']);?></td>
-  <td style="width: 60px;"title="Cobre"class="datos"><?=utf8_encode($row['cobre']);?></td>
-  <td style="width: 60px;"title="Manganeso"class="datos"><?=utf8_encode($row['manganeso']);?></td>
-  <td style="width: 60px;"title="Zinc"class="datos"><?=utf8_encode($row['zinc']);?></td>
-  <td style="width: 60px;"title="Cobalto"class="datos"><?=utf8_encode($row['cobalto']);?></td>
-  <td style="width: 60px;"title="Molibdeno"class="datos"><?=utf8_encode($row['molibdeno']);?></td>
-  <td style="width: 60px;"title="Sodio"class="datos"><?=utf8_encode($row['sodio']);?></td>
-  <td style="width: 60px;"title="E Bruta"class="datos"><?=utf8_encode($row['e_bruta']);?></td>
-  <td style="width: 60px;"title="Azufre"class="datos"><?=utf8_encode($row['azufre']);?></td>
-  <td style="width: 60px;"title="Cloro"class="datos"><?=utf8_encode($row['cloro']);?></td>
-  <td style="width: 60px;"title="Ph"class="datos"><?=utf8_encode($row['ph']);?></td>
   <td style="width: 60px;"title="Hemicelulosa"class="datos"><?=utf8_encode($row['hemicelulosa']);?></td>
-  <td style="width: 60px;"title="Ceinsolu"class="datos"><?=utf8_encode($row['ceinsolu']);?></td>
-  <td style="width: 60px;"title="Nfnd"class="datos"><?=utf8_encode($row['nfnd']);?></td>
-  <td style="width: 60px;"title="Nfad"class="datos"><?=utf8_encode($row['nfad']);?></td>
-  <td style="width: 60px;"title="Cne"class="datos"><?=utf8_encode($row['cne']);?></td>
-  <td style="width: 60px;"title="Enl"class="datos"><?=utf8_encode($row['enl']);?></td>
-  <td style="width: 60px;"title="Fa1"class="datos"><?=utf8_encode($row['fa1']);?></td>
-  <td style="width: 60px;"title="Fb1"class="datos"><?=utf8_encode($row['fb1']);?></td>
-  <td style="width: 60px;"title="Fb2"class="datos"><?=utf8_encode($row['fb2']);?></td>
-  <td style="width: 60px;"title="Fb3"class="datos"><?=utf8_encode($row['fb3']);?></td>
-  <td style="width: 60px;"title="Fc"class="datos"><?=utf8_encode($row['fc']);?></td>
-
-
   </tr>
 <?
 }

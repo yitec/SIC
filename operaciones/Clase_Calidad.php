@@ -243,14 +243,15 @@ class Categorias{
 		id_categoria,
 		id_subcat,
 		nombre_archivo,
-		version,
+		version,		
 		fecha_creacion,
 		responsable,
 		ultima_revision,
 		url_archivo,
 		url_online,
 		estado,
-		codigo) 
+		codigo,
+		copias_controladas) 
 		VALUES 
 		(
 		 '".$v_datos[2]."',
@@ -260,10 +261,11 @@ class Categorias{
 		 NOW(),
 		 '".utf8_encode($v_datos[3])."',
 		 '".$v_datos[4]."',
-		 '".$v_datos[8]."',
+		 '".$v_datos[9]."',
 		 '".$v_datos[6]."',
 		 1,
-		 '".$v_datos[7]."'
+		 '".$v_datos[7]."',
+		 '".$v_datos[8]."'
 		 )");
 
 		if (!$result) {//si da error que me despliegue el error del query       		

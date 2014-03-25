@@ -1,60 +1,8 @@
 <?
 session_start();
-include('../cnx/conexion.php');
-conectar();
-$meses = array(
-'01' => 'Enero',
-'02' => 'Febrero',
-'03' => 'Marzo',
-'04' => 'Abril',
-'05' => 'Mayo',
-'06' => 'Junio',
-'07' => 'Julio',
-'08' => 'Agosto',
-'09' => 'Setiembre',
-'10' => 'Octubre',
-'11' => 'Noviembre',
-'12' => 'Diciembre'
-);
+include('../cnx/conexion_materias.php');
+conectarm();
 
-$years = array(
-'1985' => '1985',
-'1986' => '1986',
-'1987' => '1987',
-'1988' => '1988',
-'1989' => '1989',
-'1990' => '1990',
-'1991' => '1991',
-'1992' => '1992',
-'1993' => '1993',
-'1994' => '1994',
-'1995' => '1995',
-'1996' => '1996',
-'1997' => '1997',
-'1998' => '1998',
-'1999' => '1999',
-'2000' => '2000',
-'2001' => '2001',
-'2002' => '2002',
-'2003' => '2003',
-'2004' => '2004',
-'2005' => '2005',
-'2006' => '2006',
-'2007' => '2007',
-'2008' => '2008',
-'2009' => '2009',
-'2010' => '2010',
-'2011' => '2011',
-'2012' => '2012',
-'2013' => '2013',
-'2014' => '2014',
-'2015' => '2015',
-'2016' => '2016',
-'2017' => '2017',
-'2018' => '2018',
-'2019' => '2019',
-'2020' => '2020',
-);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -132,7 +80,7 @@ if (validado==true){
 	if ($("#chk_energias").is(":checked")){
 			energias=1;	
 	}
-	top.location.href = 'reporte_forrajes.php?mes_ini='+$('#mes_ini').val()+'&year_ini='+$('#year_ini').val()+'&mes_fin='+$('#mes_fin').val()+'&year_fin='+$('#year_fin').val()+'&cmb_materia='+$('#cmb_materia').val()+'&proximal='+proximal+'&minerales='+minerales+'&micotoxinas='+micotoxinas+'&energias='+energias;
+	top.location.href = 'reporte_forrajes.php?year='+$('#cmb_year').val()+'&forraje='+$('#cmb_forraje').val();
 }
 });
 </script>
@@ -150,74 +98,76 @@ if (validado==true){
 <div id="mainBlancoFondo" style="width:985px;" >
 <div align="center">
 <br />
+<div align="center" class="Arial14Morado">Seleccione el a&ntilde;o</div> 
+<div align="center">-------------------------</div> 
 <table>
-    <tr>
-    <td class="Arial14Negro">Fecha Inicio:</td>
-    <td>
-    	<select name="mes_ini" id="mes_ini" class="combos">
-		<option value="">&nbsp;&nbsp;&nbsp;Mes&nbsp;&nbsp;&nbsp;&nbsp;</option>
-		<?
-		$to = count($meses);
-		$i = 0; 
-		foreach($meses as $key => $mes)
-		{
-			$i = $i+1;
-		?>
-		<option value="<?php echo $key;?>" <?php echo ($_POST["mes_ini"] == $key) ? " selected" : ""; ?>><?php echo $mes; ?></option>
-		<?
-		}
-		?>
-		</select>
-
-		<select name="year_ini" id="year_ini" class="combos">
-		<option value="">&nbsp;&nbsp;&nbsp;Año&nbsp;&nbsp;&nbsp;&nbsp;</option>
-		<?
-		$to = count($meses);
-		$i = 0; 
-		foreach($years as $key => $year)
-		{
-			$i = $i+1;
-		?>
-		<option value="<?php echo $key;?>" <?php echo ($_POST["year_ini"] == $key) ? " selected" : ""; ?>><?php echo $year; ?></option>
-		<?
-		}
-		?>
-		</select>
-    </td>
-    </tr>
-    <tr>
-    <td class="Arial14Negro">Fecha Fin:</td>
-    <td><select name="mes_fin" id="mes_fin" class="combos">
-		<option value="">&nbsp;&nbsp;&nbsp;Mes&nbsp;&nbsp;&nbsp;&nbsp;</option>
-		<?
-		$to = count($meses);
-		$i = 0; 
-		foreach($meses as $key => $mes)
-		{
-			$i = $i+1;
-		?>
-		<option value="<?php echo $key;?>" <?php echo ($_POST["mes_fin"] == $key) ? " selected" : ""; ?>><?php echo $mes; ?></option>
-		<?
-		}
-		?>
-		</select>
-		<select name="year_fin" id="year_fin" class="combos">
-		<option value="">&nbsp;&nbsp;&nbsp;Año&nbsp;&nbsp;&nbsp;&nbsp;</option>
-		<?
-		$to = count($years);
-		$i = 0; 
-		foreach($years as $key => $year)
-		{
-			$i = $i+1;
-		?>
-		<option value="<?php echo $key;?>" <?php echo ($_POST["year_fin"] == $key) ? " selected" : ""; ?>><?php echo $year; ?></option>
-		<?
-		}
-		?>
-		</select>
+<tr>	
+	<td class="Arial14Negro">A&ntilde;o:</td>
+	<td>
+	<select name="cmb_year" id="cmb_year" class="combos">
+		<option selected="selected" value="">&nbsp;&nbsp;&nbsp;Mes&nbsp;&nbsp;&nbsp;&nbsp;</option>
+		<option value="-1">Antes de 1985 (-1)</option>
+		<option value="1">1985 (1)</option>
+		<option value="2">1986 (2)</option>
+		<option value="3">1987 (3)</option>
+		<option value="4">1988 (4)</option>
+		<option value="5">1989 (5)</option>
+		<option value="6">1990 (6)</option>
+		<option value="7">1991 (7)</option>
+		<option value="8">1992 (8)</option>
+		<option value="9">1993 (9)</option>
+		<option value="10">1994 (10)</option>
+		<option value="11">1995 (11)</option>
+		<option value="12">1996 (12)</option>
+		<option value="13">1997 (13)</option>
+		<option value="14">1998 (14)</option>
+		<option value="15">1999 (15)</option>
+		<option value="16">2000 (16)</option>
+		<option value="17">2001 (17)</option>
+		<option value="18">2002 (18)</option>
+		<option value="19">2003 (19)</option>
+		<option value="20">2004 (20)</option>
+		<option value="21">2005 (21)</option>
+		<option value="22">2006 (22)</option>
+		<option value="23">2007 (23)</option>
+		<option value="24">2008 (24)</option>
+		<option value="25">2009 (25)</option>
+		<option value="26">2010 (26)</option>
+		<option value="27">2011 (27)</option>
+		<option value="28">2012 (28)</option>
+		<option value="29">2013 (29)</option>
+		<option value="30">2014 (30)</option>
+		<option value="31">2015 (31)</option>
+		<option value="32">2016 (32)</option>
+		<option value="33">2017 (33)</option>
+		<option value="34">2018 (34)</option>
+		<option value="35">2019 (35)</option>
+		<option value="36">2020 (36)</option>
+		<option value="37">2021 (37)</option>
+		<option value="38">2022 (38)</option>
+		<option value="39">2023 (39)</option>
+		<option value="40">2024 (40)</option>
+		<option value="41">2025 (41)</option>
+	</select>
 	</td>
-    </tr>
-    </table>
+</tr>
+</table>
+<div align="center" class="Arial14Morado">Seleccione el tipo de forraje</div> 
+<div align="center">-------------------------</div> 
+<div align="center">
+<select name="cmb_forraje" id="cmb_forraje" class="combos">
+<option selected="selected" value="0">Todas</option>
+<? $result=mysql_query("select vulgar,nombre from tbl_forrajes group by nombre order by nombre")or throw_ex(mysql_error());
+while ($row=mysql_fetch_object($result)){
+	echo '<option value="'.$row->vulgar.'">'.utf8_encode(strtoupper($row->nombre)).'</option>';
+}
+?>
+</select>
+
+
+
+</div>
+    
     <input name="opcion" type="hidden" value="1" />
     
     <br />

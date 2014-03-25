@@ -51,26 +51,15 @@ if($('#fecha_ini').val()==""){
 
 if($('#fecha_fin').val()==""){
 	alert("Todos los campos son obligatorios por favor verifique");
-	validado=false;
-	
+	validado=false;	
 }
 if($('#cmb_cliente').val()==0){
 	alert("Todos los campos son obligatorios por favor verifique");
-	validado=false;
-	
+	validado=false;	
 }
-
-
-
-
 if (validado==true){
 	top.location.href = 'contratos.php?fecha_ini='+$('#fecha_ini').val()+'&fecha_fin='+$('#fecha_fin').val()+'&cmb_ini='+$('#cmb_ini').val()+'&cmb_fin='+$('#cmb_fin').val()+'&cmb_cliente='+$('#cmb_cliente').val();
 }
-
-
-
-
-
 });
 
 </script>
@@ -86,15 +75,10 @@ if (validado==true){
 <div class="lineaAzul" style="width:1109px;"></div>
 <div class="izq_lat_g" style="height:1000px"></div>
 <div    class="contenido_gm">
-
-
-
 <div id="mainAzulFondo" style=" width:1000px;padding:5px;" >
 <div id="mainBlancoFondo" style="width:985px;" >
 <div align="center">
 <br />
- 
-
 <table>
     
     <tr>

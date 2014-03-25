@@ -114,13 +114,14 @@ $("#guardar_archivo").click(function(event){
 
 		var parametros=
 		$("#txt_nombre").val()+'|'
-		+$("#txt_version").val()+'|'
+		+$("#txt_version").val()+'|'		
 		+$("#cmb_categoria2").val()+'|'
 		+$("#cmb_usuario").val()+'|'
 		+$("#txt_revision").val() +'|'
 		+$("#cmb_subcat2").val()+'|'
 		+$("#url_google").val()+'|'
 		+$("#cmb_prefijo").val()+'|'
+		+$("#txt_copias").val()+'|'
 		+archivo;
 
 		/*if($("#url_google").val()=="") {  
