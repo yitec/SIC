@@ -186,7 +186,7 @@ session_start();
 <? if (in_array(34, $_SESSION['perfil'])){
     ?>
     <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
-    <div align="center" class="Arial14Negro"><a href="calidad/ver_archivos.php"><img src="img/edit.png" width="48" height="48"></a><br>Documentos Oficiales</div>
+    <div align="center" class="Arial14Negro"><a href="calidad/maestro.php"><img src="img/edit.png" width="48" height="48"></a><br>Documentos Oficiales</div>
     </div>
     <? } ?>        
 <? if (in_array(35, $_SESSION['perfil'])){

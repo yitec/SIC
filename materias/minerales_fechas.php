@@ -178,7 +178,7 @@ if (validado==true){
 <div align="center">
 <select name="cmb_mineral" id="cmb_mineral" class="combos">
 <option selected="selected" value="0">Todas</option>
-<? $result=mysql_query("select * from tbl_minerales group by nombre order by nombre")or throw_ex(mysql_error());
+<? $result=mysql_query("select cifra5,LTRIM(nombre) as nombre from tbl_minerales group by nombre order by nombre")or throw_ex(mysql_error());
 while ($row=mysql_fetch_object($result)){
 	echo '<option value="'.$row->cifra5.'">'.utf8_encode(strtoupper($row->nombre)).'</option>';
 }

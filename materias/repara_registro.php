@@ -34,14 +34,14 @@ extracto_etereo,
 energia_bruta,
 cenizas,
 humedad_135
-from tbl_muestras where year='"."-1"."'");
+from tbl_minerales where year='"."3"."' or year='"."4"."' or year='"."5"."' ");
 if (!$result) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
         $message .= 'Query ejecutado: ' . $query;
 		
 		} 
 while ($r1=mysql_fetch_object($result)){
-$result2=mysql_query("update tbl_muestras set 
+$result2=mysql_query("update tbl_minerales set 
 proteina_cruda='".round($r1->proteina_cruda, 2)."', 
 fibra_cruda='".round($r1->fibra_cruda, 2)."', 
 materia_seca='".round($r1->materia_seca, 2)."', 

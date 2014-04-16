@@ -26,7 +26,7 @@
            <a href="editar_categoria.php"><div id="sombra_azul"class="menu_calidad">Editar Categoria</div></a>
            <a href="editar_subcategoria.php"><div id="sombra_azul"class="menu_calidad">Editar Sub Categoria</div></a>
            <a href="../includes/genera_maestroExcell2.php"><div id="sombra_azul"class="menu_calidad">Descargar Maestro</div></a>
-           <a href="historial_cambios.php"><div id="sombra_azul"class="menu_calidad">Historial Cambios</div></a>
+           <a href="bitacora.php"><div id="sombra_azul"class="menu_calidad">Historial Cambios</div></a>
            </div>
 
            </div>		

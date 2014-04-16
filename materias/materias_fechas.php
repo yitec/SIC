@@ -178,7 +178,7 @@ if (validado==true){
 <div align="center">
 <select name="cmb_materia" id="cmb_materia" class="combos">
 <option selected="selected" value="0">Todas</option>
-<? $result=mysql_query("select * from tbl_codigos order by nombre")or throw_ex(mysql_error());
+<? $result=mysql_query("select codigo,LTRIM(nombre) as nombre from tbl_codigos order by nombre")or throw_ex(mysql_error());
 while ($row=mysql_fetch_object($result)){
 	echo '<option value="'.$row->codigo.'">'.utf8_encode($row->nombre).'</option>';
 }

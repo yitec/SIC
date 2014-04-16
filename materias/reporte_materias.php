@@ -137,6 +137,32 @@ body{
     <th>
       <div style="width: 60px;">Hemicelulosa</div>
     </th>
+    <th>
+      <div style="width: 60px;">NNP</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Peroxidos</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Pc_Lignif</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Calidad</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Particula</div>
+    </th>
+    <th>
+      <div style="width: 60px;">NIFND</div>
+    </th>
+    <th>
+      <div style="width: 60px;">NIFAD</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Ce_Insolu</div>
+    </th>
+    
+
  </tr>
 </thead>
 <thead >  
@@ -167,6 +193,30 @@ body{
     </th> 
     <th>
       <div  style="width: 60px;"><strong>(11)</strong></div>
+    </th> 
+        <th>
+      <div  style="width: 60px;"></div>
+    </th> 
+    <th>
+      <div  style="width: 60px;"></div>
+    </th> 
+    <th>
+      <div  style="width: 60px;"></div>
+    </th> 
+    <th>
+      <div  style="width: 60px;"></div>
+    </th> 
+    <th>
+      <div  style="width: 60px;"></div>
+    </th> 
+    <th>
+      <div  style="width: 60px;"></div>
+    </th> 
+    <th>
+      <div  style="width: 60px;"></div>
+    </th> 
+    <th>
+      <div  style="width: 60px;"></div>
     </th> 
     <th>
       <div  style="width: 60px;"></div>
@@ -258,6 +308,14 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="Fnd"class="datos"><?=utf8_encode($row['fnd']);?></td>
   <td style="width: 60px;"title="Fad"class="datos"><?=utf8_encode($row['fad']);?></td>
   <td style="width: 60px;"title="Hemicelulosa"class="datos"><?=utf8_encode($row['hemicelulosa']);?></td>
+  <td style="width: 60px;"title="NNP"class="datos"><?=utf8_encode($row['nnp']);?></td>
+  <td style="width: 60px;"title="Peroxidos"class="datos"><?=utf8_encode($row['peroxidos']);?></td>
+  <td style="width: 60px;"title="Pc_lignif"class="datos"><?=utf8_encode($row['pc_lignif']);?></td>
+  <td style="width: 60px;"title="Calidad"class="datos"><?=utf8_encode($row['calidad']);?></td>
+  <td style="width: 60px;"title="Particula"class="datos"><?=utf8_encode($row['particula']);?></td>
+  <td style="width: 60px;"title="NIFND"class="datos"><?=utf8_encode($row['nifnd']);?></td>
+  <td style="width: 60px;"title="NIFAD"class="datos"><?=utf8_encode($row['nifad']);?></td>
+  <td style="width: 60px;"title="CE_INSOLU"class="datos"><?=utf8_encode($row['ce_insolu']);?></td>
   </tr>
 <?
 }

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('../cnx/Conexion_Calidad.php');
 
 $hoy=date("Y-m-d H:i:s");
@@ -33,6 +34,7 @@ class Categorias{
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("Categoria creada ".utf8_decode($v_datos[0]) );				
 				$jsondata['resultado'] = 'Success';
 			}
 		echo json_encode($jsondata);
@@ -49,6 +51,7 @@ class Categorias{
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("SubCategoria creada ".utf8_decode($v_datos[1]) );				
 				$jsondata['resultado'] = 'Success';
 			}
 		echo json_encode($jsondata);
@@ -125,6 +128,7 @@ class Categorias{
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("Edicion de categoria ".utf8_decode($v_datos[0]) );				
 				$jsondata['resultado'] = 'Success';
 			}
 		echo json_encode($jsondata);
@@ -137,6 +141,7 @@ class Categorias{
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("Catogoria  ".utf8_decode($v_datos[1])." eliminada" );				
 				$jsondata['resultado'] = 'Success';
 			}
 		echo json_encode($jsondata);
@@ -149,6 +154,7 @@ class Categorias{
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("SubCategoria ".utf8_decode($v_datos[0]). " modificada" );				
 				$jsondata['resultado'] = 'Success';
 			}
 		echo json_encode($jsondata);
@@ -161,24 +167,51 @@ class Categorias{
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("SubCategoria ".utf8_decode($v_datos[1])." eliminada" );				
 				$jsondata['resultado'] = 'Success';
 			}
 		echo json_encode($jsondata);
 	}
-	
-	function rechazar_peticion($parametros){
+
+  function aceptar_peticion($parametros,$hoy){
+  
+	  $v_datos=explode(",",$parametros);
+	  $origen = "../calidad/archivos/Pendientes/";
+	  $destino = '../calidad/archivos/ControlCalidad/';
+	  $archivo = $v_datos[1];
+    if (copy($origen.$archivo, $destino.$archivo)) {
+    	$consulta=mysql_query("UPDATE bd_calidad.tbl_pendientes SET estado = 2, ,fecha_actualizacion='".$hoy."' WHERE tbl_pendientes.id_pendiente ='".$v_datos[0]."'");
+		$result=mysql_query("UPDATE bd_calidad.tbl_archivos SET url_archivo = '".$v_datos[1]."' WHERE tbl_archivos.id_archivo ='".$v_datos[2]."'");
+	  	if (!$result) {//si da error que me despliegue el error del query       		
+			  $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+		}else{
+			bitacora("Peticion acepatada ".utf8_decode($v_datos[1]) );				
+			$jsondata['resultado'] = 'Success';
+			$subject = "Solicitud para modificar el archivo Aceptada";
+			echo json_encode($jsondata);
+			//	mail("jpgarcia01@gmail.com","Nuevo Pendiente.",$subject);
+          }
+	}else{
+           echo "error al copiar el archivo";            
+		   echo json_encode($jsondata);
+	}	
+   }
+
+	function rechazar_peticion($parametros,$hoy){
   
 	  $v_datos=explode(",",$parametros);	
-	  $result=mysql_query("UPDATE bd_calidad.tbl_pendientes SET estado = 0 WHERE tbl_pendientes.id_pendiente ='".$v_datos[0]."'");
+	  $result=mysql_query("UPDATE bd_calidad.tbl_pendientes SET estado = 3,razon_rechazo='".$v_datos[1]."',fecha_actualizacion='".$hoy."' WHERE tbl_pendientes.id_pendiente ='".$v_datos[0]."'");
 	  if (!$result) {//si da error que me despliegue el error del query       		
 			  $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 		  }else{
-			  $jsondata['resultado'] = 'Success';
-
+		  	bitacora("Peticion rechazada ".utf8_decode($v_datos[1]) );				
+			$jsondata['resultado'] = 'Success';
+			  //	mail("jpgarcia01@gmail.com","Nuevo Pendiente.",$subject);
 		  }
 	  echo json_encode($jsondata);
   }
   
+
   	function derogar_archivo($parametros){
   
 	  $v_datos=explode(",",$parametros);	
@@ -186,39 +219,14 @@ class Categorias{
 	  if (!$result) {//si da error que me despliegue el error del query       		
 			  $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 		  }else{
-			  $jsondata['resultado'] = 'Success';
+		  	bitacora("Archivo ".utf8_decode($v_datos[1])." derogado" );				
+			$jsondata['resultado'] = 'Success';
 
 		  }
 	  echo json_encode($jsondata);
   }
   
-  function aceptar_peticion($parametros){
-  
-	  $v_datos=explode(",",$parametros);
-	  $origen = "../archivos/pendientes/";
-	  $destino = '../archivos/ControlCalidad/';
-	  $archivo = $v_datos[2];
-    if (copy($origen.$archivo, $destino.$archivo)) {
 
-      $consulta=mysql_query("UPDATE bd_calidad.tbl_pendientes SET estado = 0 WHERE tbl_pendientes.id_pendiente ='".$v_datos[0]."'");
-	  $result=mysql_query("UPDATE bd_calidad.tbl_archivos SET url_archivo = '".$v_datos[2]."' WHERE tbl_archivos.id_archivo ='".$v_datos[1]."'");
-	  }
-	  else {
-
-           echo "error al copiar el archivo";            
-		   echo json_encode($jsondata);
-		     }
-	  if (!$result) {//si da error que me despliegue el error del query       		
-			  $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
-		  }else{
-			  	
-			  $jsondata['resultado'] = 'Success';
-			  $subject = "Solicitud para modificar el archivo Aceptada";
-				mail("jpgarcia01@gmail.com","Nuevo Pendiente.",$subject);
-
-          }
-
-        }
 		
 		
 	function envia_comentarios($parametros){
@@ -271,6 +279,7 @@ class Categorias{
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("Archivo creado ".utf8_decode($v_datos[0]), " " );				
 				$jsondata['resultado'] = 'Success';
 					$archivo= "../calidad/historial/".date("Y-m-d H-i-s")."_NuevoArchivo.txt"; // el nombre de tu archivo
 					$contenido= $v_datos[0] .";". $v_datos[1] .";". $v_datos[5].";". $v_datos[4];// Recibe el formulario
@@ -287,10 +296,11 @@ class Categorias{
 	function modificar_archivo($parametros){
 		//$parametros=utf8_decode($parametros);
 		$v_datos=explode(",",$parametros);	
-		$result=mysql_query("INSERT INTO tbl_pendientes (id_archivo,nuevo_archivo,url_online,comentario,fecha_solicitud,id_usuario,estado) VALUES ( '".$v_datos[0]."',  '".$v_datos[3]."', '".$v_datos[2]."','".utf8_decode($v_datos[1])."',NOW(),'','1')");
+		$result=mysql_query("INSERT INTO tbl_pendientes (id_archivo,nuevo_archivo,url_online,comentario,fecha_solicitud,id_usuario,correo,estado) VALUES ( '".$v_datos[0]."',  '".$v_datos[3]."', '".$v_datos[2]."','".utf8_decode($v_datos[1])."',NOW(),'".$_SESSION['usuario']."','".$_SESSION['correo']."','1')");
 		if (!$result) {//si da error que me despliegue el error del query       		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 			}else{
+				bitacora("Archivo modificado ".utf8_decode($v_datos[3]) );				
 				$jsondata['resultado'] = 'Success';
 					$archivo= "../calidad/historial/".date("Y-m-d H-i-s")."_ArchivoModificado.txt"; // el nombre de tu archivo
 					$contenido= $v_datos[0] .";". $v_datos[3] .";". $v_datos[2].";". $v_datos[1];// Recibe el formulario
@@ -302,9 +312,14 @@ class Categorias{
 //				mail("jpgarcia01@gmail.com","Nuevo Pendiente.",$subject);
 			}
 		echo json_encode($jsondata);
-	}	
+	}
+
+	
 }//end class
 
 
+function bitacora($accion){
+		$result=mysql_query("INSERT INTO tbl_historial (accion,usuario,fecha)values('".$accion."','".$_SESSION['nombre_usuario']."',NOW())");
+}	
 
 ?>

@@ -1,9 +1,9 @@
 <?php
 include ('../cnx/Conexion_Calidad.php');
-conectar();
+conectarc();
 
 
-$dt=mysql_query("SELECT * FROM tbl_pendientes WHERE estado = 1  ORDER  BY fecha_solicitud ASC");
+$result=mysql_query("SELECT pen.id_pendiente,pen.comentario,pen.nuevo_archivo,pen.url_online,pen.fecha_solicitud,arc.nombre_archivo,arc.id_archivo FROM tbl_pendientes pen, tbl_archivos arc WHERE pen.estado = 1 and pen.id_archivo=arc.id_archivo  ORDER  BY fecha_solicitud ASC");
 echo mysql_error();
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,56 +21,50 @@ echo mysql_error();
     		<div class="box">
          <div align="center">
 <table><tr><td> 
-<div    class="contenido_gm">
 <div style="margin-left:650px;  margin-top:5px; " ><a href="javascript:history.back(-1)">Volver</a>&nbsp;-&nbsp;<a href="control_calidad.php">Men&uacute;</a>&nbsp;-&nbsp;<a href="../login.php">Salir</a></div>
-<div id="mainAzulFondo" style="padding:10px;" align="center">
-<div id="mainBlancoFondo" style=" width:750px;" align="center">	
-	<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">R-GE-04  v9 Solicitud de modificación o elaboración de documentos</div>
-    <div align="center" class=" Arial14Negro" style="margin-bottom:10px; margin-top:10px;">
-    <div class="lista_titulo"><strong>Archivo</strong></div><div class="lista_titulo"><strong>Comentario</strong></div><div class="lista_titulo"><strong>Fecha</strong></div></br></br></br></br>
-     <?php				
-if (mysql_num_rows($dt)>0)
+<div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;">R-GE-04  v9 Solicitud de modificaci&oacute;n o elaboraci&oacute;n de documentos</div>
+
+<div id="tabla">
+<div class="filatitulo">
+    <span class="celda">Archivo</span>
+    <span class="celda">Comentario</span>
+    <span class="celda">Fecha</span>
+    <span class="celda">Acciones</span>
+</div>
+<?php				
+if (mysql_num_rows($result)>0)
 {     
-while($info=mysql_fetch_array($dt))
+while($row=mysql_fetch_object($result))
 {
 
-										$idpeticion=$info[0];
-										$nuevoarchivo=$info[3];
-										echo '
-      <input name="button" id="btn_aprobar" value="'.$idpeticion.'" type="image" src="../img/btn_aprobar.png">
-	  <input type="hidden" id="id_archivo" name="id_archivo" value="'.utf8_encode($info[1]).'">
-	  <input type="hidden" id="nuevo_archivo" name="nuevo_archivo" value="'.$nuevoarchivo.'">
-      <input  name="button2" id="btn_rechazar" value="'.$idpeticion.'" type="image" src="../img/btn_rechazar.png">
-    </div></br></br></br></br></br></br>';
+										$tot++;
+										$nuevoarchivo=$row->nuevo_archivo;
+                     echo '<div class="fila">
+                      <span class="celda">'.utf8_decode($row->nombre_archivo).'</span>
+                      <span class="celda">'.utf8_decode($row->comentario).'</span>
+                      <span class="celda">'.$row->fecha_solicitud.'</span>
+                      <span class="celda"><a href="archivos/Pendientes/'.$nuevoarchivo.'"><input name="button" id="btn_descargar" class="btn_descargar"  title="Descargar" value="'.$row->id_pendiente.'" type="image" src="../img/descargar.png"></a>&nbsp;&nbsp;&nbsp;<input name="button"  class="btn_aprobar" title="Aprobar" value="'.$row->id_pendiente.'" id_archivo="'.$row->id_archivo.'" nombre_archivo="'.$nuevoarchivo.'"  type="image" src="../img/aprove_icon.png">&nbsp&nbsp&nbsp;<input  name="button2" title="Rechazar" class="btn_rechazar" value="'.$row->id_pendiente.'" id_archivo="'.$row->id_archivo.'" nombre_archivo="'.$nuevoarchivo.'" type="image" src="../img/deny_icon.png"></span>
+                      </div>';
+                    
 }//end while
 }else{
   echo 'No hay pendientes';
   
 }//end if
-    ?>
-    </div>
-	<div align="center" style="margin-top:20px; margin-bottom:20px;"></div>    
-
-</div><!--fin cuadro blanco--> 
-</div><!--fin cuadro azul--> 
+?>
+  
+	
+</div><!--fin div de tabla-->
 
 
 
 
-</div><!--fin div de contenido cudro gm-->
-<div align="center" style=" margin-left:350px;float:left" class="Arial8negro">
-Sistema de Control e Informaci&oacute;n.  
-</div>
-<div align="center" style="float:left" class="Arial8azul">&nbsp;CINA.&nbsp;
-</div>
-<div align="center" style="float:left" class="Arial8negro">
-Versi&oacute;n 1.0
-</div>
+
+
 </td></tr></table>
+</div><!--fin div de centrado-->
+</div><!--fin div de box-->	
 
-</div>
-           
-			</div>		
     </body>
 <script src="../includes/jquery-1.8.3.js" type="text/javascript"></script>
 <script src="../includes/jquery.pnotify.js" type="text/javascript"></script> 

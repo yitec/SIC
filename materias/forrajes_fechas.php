@@ -157,7 +157,7 @@ if (validado==true){
 <div align="center">
 <select name="cmb_forraje" id="cmb_forraje" class="combos">
 <option selected="selected" value="0">Todas</option>
-<? $result=mysql_query("select vulgar,nombre from tbl_forrajes group by nombre order by nombre")or throw_ex(mysql_error());
+<? $result=mysql_query("select vulgar,LTRIM(nombre) as nombre from tbl_forrajes group by nombre order by nombre")or throw_ex(mysql_error());
 while ($row=mysql_fetch_object($result)){
 	echo '<option value="'.$row->vulgar.'">'.utf8_encode(strtoupper($row->nombre)).'</option>';
 }

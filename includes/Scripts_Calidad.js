@@ -305,44 +305,63 @@ $("#eliminar_subcategoria").click(function(event){
 //limpiar();
 }); 
 
-//***************************************************Rechazar Peticion******************************************
-$("#btn_rechazar").click(function(event){
+//***************************************************Aceptar Peticion******************************************
+$(".btn_aprobar").click(function() {
 		
+		
+		   
+        	if (confirm('¿Desea aceptar la Solicitud?')) {
+        	var index = $( ".btn_aprobar" ).index( this );        	
+			var parametros=$(this).val()+','+$(this).attr("nombre_archivo")+','+$(this).attr("id_archivo");
+			$.ajax({
+			type: "POST",
+			async: false,
+			dataType: "json",
+			url: "../operaciones/Clase_Calidad.php",
+			data: "metodo=aceptar_peticion&parametros="+parametros,					
+			success: function(datos){
+				if (datos["resultado"]	=="Success"){
+						notificacion("Aceptada!!","La Solicitud fue aceptada correctamente","info"); 				        	
+						setInterval(function(){window.location.assign("control_calidad.php")},2000);   						
+				}else{
+						notificacion("Error!!","A ocurrido un error intente de nuevo","error"); 				        						
+				}										
+				}//end succces function
+		});//end ajax function	
+} else { 
+	return;				
+}	
+}); 
+
+
+//***************************************************Rechazar Peticion******************************************
+$(".btn_rechazar").click(function(event){		
 		event.preventDefault();	
-		 {  
-        	if (confirm('¿Desea rechazar la Solicitud?')) {
-				var parametros=$("#btn_rechazar").val();
+		var razon=prompt("Ingrese la razón del rechazo"); 
+        if (razon!=null) {
+				var parametros=$(this).val()+','+razon;
 		$.ajax({
 			type: "POST",
 			async: false,
 			dataType: "json",
 			url: "../operaciones/Clase_Calidad.php",
-			data: "metodo=rechazar_peticion&parametros="+parametros,
-					
+			data: "metodo=rechazar_peticion&parametros="+parametros,					
 			success: function(datos){
-
 				if (datos["resultado"]	=="Success"){
-						   location.href='rechazar_peticion.php';
-						alert('Solicitud Eliminada!');													
+					notificacion("Solicitud Rechazada!!","La Solicitud fue rechazada correctamente","info"); 				        	
+					//setInterval(function(){window.location.assign("control_calidad.php")},2000);   												   						
 				}else{
-						$.pnotify({
-						pnotify_hide: true
-						});
-					
-				}
-						
-				
+					notificacion("Error!!","A ocurrido un error intente de nuevo","error"); 				        																	
+				}										
 				}//end succces function
 		});//end ajax function	
-
-} else { 
-
-				
-		
-}
-} 		
+}else{ 
+return;						
+}		
 //limpiar();
 }); 
+
+
 //***************************************************Derogar******************************************
 $("#btn_derogar").click(function(event){
 		
@@ -355,71 +374,23 @@ $("#btn_derogar").click(function(event){
 			async: false,
 			dataType: "json",
 			url: "../operaciones/Clase_Calidad.php",
-			data: "metodo=derogar_archivo&parametros="+parametros,
-					
+			data: "metodo=derogar_archivo&parametros="+parametros,				
 			success: function(datos){
-
 				if (datos["resultado"]	=="Success"){
-						    location.href=location.href;
-						alert('Archivo Derogado!');													
+						notificacion("Notici!!","La Solicitud fue aceptada correctamente","info"); 				        	
+						setInterval(function(){window.location.assign("control_calidad.php")},2000);   																		
 				}else{
-						$.pnotify({
-						pnotify_hide: true
-						});
-					
-				}
-						
-				
-				}//end succces function
+				notificacion("Error!!","A ocurrido un error intente de nuevo","error"); 				        											
+				}										
+			}//end succces function
 		});//end ajax function	
-
 } else { 
-
-				
-		
+	return;
 }
 } 		
 //limpiar();
 }); 
 
-//***************************************************Aceptar Peticion******************************************
-$("#btn_aprobar").click(function(event){
-		
-		event.preventDefault();	
-		 {  
-        	if (confirm('¿Desea aceptar la Solicitud?')) {
-				var parametros=$("#btn_aprobar").val()+','+$("#id_archivo").val()+','+$("#nuevo_archivo").val();
-		$.ajax({
-			type: "POST",
-			async: false,
-			dataType: "json",
-			url: "../operaciones/Clase_Calidad.php",
-			data: "metodo=aceptar_peticion&parametros="+parametros,
-					
-			success: function(datos){
-
-				if (datos["resultado"]	=="Success"){
-						  location.href=location.href;
-						alert('Solicitud Aceptada!');						
-				}else{
-						$.pnotify({
-						pnotify_hide: true
-						});
-					
-				}
-						
-				
-				}//end succces function
-		});//end ajax function	
-
-} else { 
-
-				
-		
-}
-} 		
-//limpiar();
-}); 
    
    
  //***************************************************Modificar Archivo******************************************

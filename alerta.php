@@ -24,11 +24,22 @@ session_start();
 <div align="center"   class="contenido_gm">
 <div align="center"><img src="img/logo_grande.png"  /></div>
 
-	<div id="mainAzulFondo"  style="padding: 20px; margin-top:10px; width:400px;">
+	<div id="mainAzulFondo"  style="padding: 20px; margin-top:10px; width:600px;">
 	<div id="mainBlancoFondo" >
     		<table><tr>
-  <td><div class="Arial18Azul">
-  <div align="center">Alerta<div> <br>El Documento Testing Vencimiento necesita revisión.</div>
+  <td width="600"><div class="Arial18Azul">
+  <div align="center">Alerta</div><br>
+  <?
+  $v_datos=explode(",",$_GET['datos']);
+  foreach ($v_datos as &$valor) {
+    $v_archivos=explode("|",$valor);
+    if ($v_archivos[1]){
+      echo '<div class="Arial14Negro" >- El documento '.$v_archivos[1]. ' vence su revisi&oacute;n en '.$v_archivos[0].' d&iacute;as</div>';
+    }
+  }
+
+  ?>
+  <br>
   </td> 
   </tr>
     </table>

@@ -524,3 +524,13 @@ a.button{
 	border-radius:10px;
 }
 
+
+/******************************************estilos de tablas como divs**************************************/
+ #tabla {display: table;}
+  #tabla .caption {display: table-caption}
+  #tabla .fila {display: table-row;}
+  #tabla .celda {display: table-cell;border: 1px solid #DBDBDB;font-size: 12px;float:left;color: #000; font-family: Arial; height: 60px;padding:2px;width:240px;}
+  #tabla .filatitulo {display: table-row;}
+  #tabla .filatitulo .celda {display: table-cell; text-align: center; font-weight: bold; border: 1px solid #DBDBDB;font-size: 14px;float:left;color: #000; font-family: Arial; height: 40px;padding:2px;
+  padding:2px;  width:240px; }
+
