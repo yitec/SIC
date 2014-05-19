@@ -271,10 +271,14 @@ body{
 </thead>
 <tbody>
 <?
-if ($_REQUEST['energia']==0){
-  $sql="select * from bd_materiasprimas.tbl_energias where  cifra10='".$_REQUEST['year']."' order by fecha_creacion ASC";  
+if ($_REQUEST['energia']==0 && $_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_energias  order by cifra10,registro ASC";  
+}elseif ($_REQUEST['energia']==0){
+  $sql="select * from bd_materiasprimas.tbl_energias where  cifra10='".$_REQUEST['year']."' order by cifra10,registro ASC";  
+}elseif ($_REQUEST['energia']!=0&&$_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_energias where  cifra5='".$_REQUEST['energia']."' order by cifra10,registro ASC";    
 }else{
-  $sql="select * from bd_materiasprimas.tbl_energias where  cifra10='".$_REQUEST['year']."' and cifra5='".$_REQUEST['energia']."' order by fecha_creacion ASC";  
+  $sql="select * from bd_materiasprimas.tbl_energias where  cifra10='".$_REQUEST['year']."' and cifra5='".$_REQUEST['energia']."' order by cifra10,registro ASC";  
 }
 	$result=mysql_query($sql)or throw_ex(mysql_error());
  

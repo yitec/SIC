@@ -41,42 +41,91 @@ require_once('menu_superior.php');
 	</div>
     <div align="center" id="mainBlancoMolienda">
     
-	<table width="747" height="18" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
-    <tr>
-    <td><div align="center" class="Arial14Azul">Contrato</div></td>
-    <td><div align="center" class="Arial14Azul">Muestras</div></td>    
-    <td><div align="center" class="Arial14Azul">Fecha Ingreso</div></td>
-    <td><div align="center" class="Arial14Azul">Procesar</div></td>        
-    </tr>	
+
 <?
 
 	  if($_REQUEST['estado']==1){
       	$result=mysql_query("select * from tbl_contratos where estado='"."1"."' or estado='"."2"."' order by id");
 	  }else{
-		$result=mysql_query("select * from tbl_contratos where estado='".$_REQUEST['estado']."' order by id");
-	  }
-
-
-
-
-
-	while ($row=mysql_fetch_assoc($result)){
-?>	
-	<tr>
-    <td><div align="center" class="Arial14Negro"><?=$row['consecutivo'];?></div></td>
-    <td><div align="center" class="Arial14Negro"><?=$row['numero_muestras'];?></div></td>    
-    <td><div align="center" class="Arial14Negro"><?=$row['fecha_ingreso'];?></div></td>
-    <td><div align="center" class="Arial14Negro"><a href="informe.php?id=<?=$row['id']; ?>" target="_blank"><img src="img/search.png" /></a> 
+		//$result=mysql_query("select * from tbl_contratos where estado='".$_REQUEST['estado']."' order by id");
+		$result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20120101' and  fecha_ingreso<='20121231' order by id ASC");
+		echo '<div align="center" id="year_2012">    
+    <table width="747" height="18" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
+    <tr>
+    <td><div align="center" class="Arial14Azul">Contrato</div></td>
+    <td><div align="center" class="Arial14Azul">Muestras</div></td>    
+    <td><div align="center" class="Arial14Azul">Fecha Ingreso</div></td>
+    <td><div align="center" class="Arial14Azul">Ver Contrato</div></td>        
+    </tr>';
+    while ($row=mysql_fetch_assoc($result)){
+        echo '<tr>
+    <td><div align="center" class="Arial14Negro">'.$row['consecutivo'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['numero_muestras'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['fecha_ingreso'].'</div></td>
+    <td><div align="center" class="Arial14Negro"><a href="informe.php?id='.$row['id'].'" target="_blank"><img src="img/search.png" /></a>
     </div></td>        
-    </tr>	
-    
-<?	
+    </tr>';
+    }
+    echo '</table>
+    </div>';  
+    echo '<div align="center" class="Arial14Morado">Año 2012</div>';
+    echo '<div align="center" class="Arial14Azul"><img id="btn_2012" src="img/search.png" />
+    </div><br>';  
 	}
 
-?>
-	</table>
+	$result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20130101' and  fecha_ingreso<='20131231' order by id ASC");    
+    echo '<div align="center" id="year_2013">    
+    <table width="747" height="18" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
+    <tr>
+    <td><div align="center" class="Arial14Azul">Contrato</div></td>
+    <td><div align="center" class="Arial14Azul">Muestras</div></td>    
+    <td><div align="center" class="Arial14Azul">Fecha Ingreso</div></td>
+    <td><div align="center" class="Arial14Azul">Ver Contrato</div></td>        
+    </tr>';
+    while ($row=mysql_fetch_assoc($result)){
+        echo '<tr>
+    <td><div align="center" class="Arial14Negro">'.$row['consecutivo'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['numero_muestras'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['fecha_ingreso'].'</div></td>
+    <td><div align="center" class="Arial14Negro"><a href="informe.php?id='.$row['id'].'" target="_blank"><img src="img/search.png" /></a>
+    </div></td>        
+    </tr>';
+    }
+    echo '</table>
+    </div>';  
+    echo '<div align="center" class="Arial14Morado">Año 2013</div>';   
+    echo '<div align="center" class="Arial14Negro"><img id="btn_2013" src="img/search.png" />
+    </div><br>';   
+
+
+$result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20140101' order by id ASC");    
+    echo '<div align="center" id="year_2013">    
+    <table width="747" height="18" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
+    <tr>
+    <td><div align="center" class="Arial14Azul">Contrato</div></td>
+    <td><div align="center" class="Arial14Azul">Muestras</div></td>    
+    <td><div align="center" class="Arial14Azul">Fecha Ingreso</div></td>
+    <td><div align="center" class="Arial14Azul">Ver Contrato</div></td>        
+    </tr>';
+    while ($row=mysql_fetch_assoc($result)){
+        echo '<tr>
+    <td><div align="center" class="Arial14Negro">'.$row['consecutivo'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['numero_muestras'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['fecha_ingreso'].'</div></td>
+    <td><div align="center" class="Arial14Negro"><a href="informe.php?id='.$row['id'].'" target="_blank"><img src="img/search.png" /></a>
+    </div></td>        
+    </tr>';
+    }
+    echo '</table>
+    </div>';              
     
-    </div>
+
+
+
+
+?>
+    
+</div>
 
 
 
@@ -98,12 +147,8 @@ Sistema de Control e Informaci&oacute;n.
 Versi&oacute;n 1.0
 </div>
 </td></tr></table>
-
 </div>
-
-
-
-
 </body>
-
+<script src="includes/jquery-1.7.1.js"></script>
+<script src="includes/Scripts_Years.js"></script>
 </html>

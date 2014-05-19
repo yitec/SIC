@@ -1,6 +1,6 @@
 <?php
 
-include ('../cnx/Conexion_Calidad.php');
+include ('../cnx/conexion_calidad.php');
 $hoy=date("Y-m-d H:i:s");
 conectarc();
 $consulta = "SELECT * FROM `vista_maestro` WHERE `estado` =1 ORDER BY `prefijo` ASC";	
@@ -13,7 +13,7 @@ $dt=mysql_query($consulta);
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel ="stylesheet" href="../css/calidad.css" type="text/css" />
         <link rel ="stylesheet" href="../css/cuadros.css" type="text/css" />
-        <link rel ="stylesheet" href="../css/tablas.css" type="text/css" />
+        <link rel ="stylesheet" href="../css/tablas_calidad.css" type="text/css" />
         <link rel ="stylesheet" href="../css/jquery.pnotify.default.css" type="text/css" />
         <link rel ="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />        
         <title>SIC CINA</title>
@@ -70,7 +70,7 @@ $dt=mysql_query($consulta);
 
      
 	<div align="center" style="margin-top:20px; margin-bottom:20px;">
-	  <a href="../includes/genera_maestroExcell2.php" target="_blank"> <input type="button" name="boton" value="Generar Archivo Excell" /> </a>
+	  <a href="../includes/genera_maestroExcell.php" target="_blank"> <input type="button" name="boton" value="Generar Archivo Excell" /> </a>
 	</div>    
 
 

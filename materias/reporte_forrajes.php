@@ -86,15 +86,16 @@ $(document).ready(function() {
     <th>
     	<div  style="width: 60px;"><strong>Madurez</strong></div>
   	</th> 
+    <th>
+      <div  style="width: 60px;"><strong>Año</strong></div>
+    </th>
     <!--    <th>
     	<div  style="width: 60px;"><strong>Tipo</strong></div>
   	</th> 
     <th>
     	<div  style="width: 60px;"><strong>Mes</strong></div>
   	</th> 
-    <th>
-    	<div  style="width: 60px;"><strong>Año</strong></div>
-  	</th> 
+     
 	 <th>
     	<div  style="width: 60px;"><strong>Origen</strong></div>
   	</th>
@@ -266,9 +267,10 @@ $(document).ready(function() {
     <th>
       <div  style="width: 60px;"><strong>(9)</strong></div>
     </th> 
-     <!--   <th>
+    <th>
       <div  style="width: 60px;"><strong>(10)</strong></div>
-    </th> 
+    </th>
+    <!-- 
     <th>
       <div  style="width: 60px;"><strong>(11)</strong></div>
     </th> 
@@ -414,10 +416,14 @@ $(document).ready(function() {
   </tr>           
 </thead>
 <?
-if ($_REQUEST['forraje']==0){
-  $sql="select * from bd_materiasprimas.tbl_forrajes where  year='".$_REQUEST['year']."' order by fecha_creacion ASC";  
+if ($_REQUEST['forraje']==0 && $_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_forrajes order by year,registro ASC";  
+}elseif ($_REQUEST['forraje']==0){
+  $sql="select * from bd_materiasprimas.tbl_forrajes where  year='".$_REQUEST['year']."'  order by year,registro ASC";    
+}elseif ($_REQUEST['forraje']!=0&&$_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_forrajes where  vulgar='".$_REQUEST['forraje']."' order by year,registro ASC";    
 }else{
-  $sql="select * from bd_materiasprimas.tbl_forrajes where  year='".$_REQUEST['year']."' and vulgar='".$_REQUEST['forraje']."' order by fecha_creacion ASC";  
+  $sql="select * from bd_materiasprimas.tbl_forrajes where  year='".$_REQUEST['year']."' and vulgar='".$_REQUEST['forraje']."' order by year,registro ASC";  
 }
 
 $result=mysql_query($sql)or throw_ex(mysql_error());
@@ -432,7 +438,7 @@ $fecha=$dia."-".$mes."-".$ano;
 ?>
   
   <tr>
-  <td style="width: 60px;" class="datos"><?=utf8_encode($row['id']);?></td>
+  <td style="width: 60px;" class="datos"><?=utf8_encode($row['registro']);?></td>
   <td style="width: 60px;" class="datos"><?=utf8_encode($row['tipo_muestreo']);?></td>
   <td style="width: 60px;"class="datos"><?=utf8_encode($row['zona_geografica']);?></td>
   <td style="width: 60px;"class="datos"><?=utf8_encode($row['provincia']);?></td>
@@ -442,7 +448,7 @@ $fecha=$dia."-".$mes."-".$ano;
   <td style="width: 60px;"class="datos"><?=utf8_encode($row['cientifico']);?></td>
   <td style="width: 60px;"class="datos"><?=utf8_encode($row['parte_planta']);?></td>
   <td style="width: 60px;"class="datos"><?=utf8_encode($row['madurez']);?></td>
-  
+  <td style="width: 60px;"class="datos"><?=utf8_encode($row['year']);?></td>  
    <td style="width: 60px;"class="datos"><div align="left"><?=utf8_encode($row['nombre']);?></div></td>
    <td style="width: 60px;"class="datos"><?=$fecha;?></td>      
    <td style="width: 60px;"title="Humedad 135"class="datos"><?=utf8_encode($row['humedad_135']);?></td>   

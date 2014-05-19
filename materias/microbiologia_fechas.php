@@ -89,7 +89,7 @@ if (validado==true){
 	if ($("#chk_energias").is(":checked")){
 			energias=1;	
 	}
-	top.location.href = 'reporte_energias.php?year='+$('#cmb_year').val()+'&energia='+$('#cmb_energia').val();
+	top.location.href = 'reporte_microbiologia.php?year='+$('#cmb_year').val()+'&micro='+$('#cmb_micro').val();
 }
 
 
@@ -106,7 +106,7 @@ if (validado==true){
 <div align="center">
 <table><tr><td> 
 <div class="izq_sup_g"></div>
-<div class="cen_sup_g" style=" width:1100px"><div  class="Arial14blanco"  align="left" style="float:left; margin-top:18px;">Reporte Energ&iacute;as entre fechas</div><div align="right"></div> </div>
+<div class="cen_sup_g" style=" width:1100px"><div  class="Arial14blanco"  align="left" style="float:left; margin-top:18px;">Reporte Microbiolog&iacute;a entre fechas</div><div align="right"></div> </div>
 <div class="der_sup_g" style=" position:relative; margin-left:1101px;" ></div>
 <div class="lineaAzul" style="width:1109px;"></div>
 <div class="izq_lat_g" style="height:1000px"></div>
@@ -119,7 +119,6 @@ if (validado==true){
 <div align="center">
 <br />
  
-
 <div align="center" class="Arial14Morado">Seleccione el a&ntilde;o</div> 
 <div align="center">-------------------------</div> 
 <table>
@@ -174,18 +173,16 @@ if (validado==true){
 	</td>
 </tr>
 </table>
-<br>
-<div align="center" class="Arial14Morado">Seleccione la Energía</div> 
+<div align="center" class="Arial14Morado">Seleccione el mineral</div> 
 <div align="center">-------------------------</div> 
 <div align="center">
-<select name="cmb_energia" id="cmb_energia" class="combos">
+<select name="cmb_micro" id="cmb_micro" class="combos">
 <option selected="selected" value="0">Todas</option>
 <? 
-//$result=mysql_query("select cifra5,LTRIM(nombre) as nombre from tbl_energias group by nombre order by nombre")or throw_ex(mysql_error());
+//$result=mysql_query("select cifra5,LTRIM(nombre) as nombre from tbl_microbiologia group by nombre order by nombre")or throw_ex(mysql_error());
 $result=mysql_query("select codigo,nombre from tbl_codigos order by codigo")or throw_ex(mysql_error());
-
 while ($row=mysql_fetch_object($result)){
-	echo '<option value="'.$row->codigo.'">'.$row->codigo." - ".utf8_encode(strtoupper($row->nombre)).'</option>';
+	echo '<option value="'.$row->codigo.'">'.($row->codigo)." - ".utf8_encode(strtoupper($row->nombre)).'</option>';
 }
 ?>
 </select>
@@ -193,7 +190,18 @@ while ($row=mysql_fetch_object($result)){
 
 
 </div>
- 
+    
+    
+<table> 
+<tr>
+<td><div align="center" class=" Arial14Negro">--------------------------------------</div></td>
+</tr>
+<tr>
+
+</tr>
+   
+
+</table>        
     
     <br />
     <table>

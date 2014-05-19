@@ -67,13 +67,19 @@ class PHPExcel_Autoloader
 			//	Either already loaded, or not a PHPExcel class request
 			return FALSE;
 		}
-
-		$pObjectFilePath = PHPEXCEL_ROOT .
+		if (!defined('PHPEXCEL_ROOT')) {
+		define('PHPEXCEL_ROOT', '/var/www/SIC/includes/');		
+		PHPEXCEL_ROOT;
+		}
+		
+		$pObjectFilePath = '/var/www/SIC/includes/' .
 						   str_replace('_',DIRECTORY_SEPARATOR,$pClassName) .
 						   '.php';
 
+
 		if ((file_exists($pObjectFilePath) === false) || (is_readable($pObjectFilePath) === false)) {
 			//	Can't load
+			
 			return FALSE;
 		}
 

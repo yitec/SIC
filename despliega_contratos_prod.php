@@ -101,7 +101,7 @@ if ($_REQUEST['estado']==1){
     echo '<div align="center" class="Arial14Azul"><img id="btn_2012" src="img/search.png" />
     </div><br>';        
 
-        $result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20130101' and  fecha_ingreso<='20131231' order by id ASC");    
+    $result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20130101' and  fecha_ingreso<='20131231' order by id ASC");    
     echo '<div align="center" id="year_2013">    
     <table width="747" height="18" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
     <tr>

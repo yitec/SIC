@@ -59,7 +59,7 @@ body{
 </style>
 </head>
 <body style="margin-left:50px;">
-<div class="header" style=" width:3180px;">Base Datos Minerales</div>
+<div class="header" style=" width:3180px;">Base Datos Microbiolog&iacute;a</div>
 <div class="linea_azul" style=" width:3180px;"></div>
 <div  id="Exportar_a_Excel">
 <table   style=" width:3200px;" border="1"  cellpadding="0" cellspacing="0" id="Exportar_a_Excel">
@@ -111,53 +111,21 @@ body{
     	<div style="width: 60px;">Fecha</div>
   	</th>       
 	<th>
-    	<div style="width: 60px;">Calcio</div>
+    	<div style="width: 60px;">Zeralenona</div>
   	</th>   
     <th>
-      <div style="width: 60px;">Fosoforo</div>
+      <div style="width: 60px;">Ocratoxina</div>
     </th>    
 	<th>
-    	<div style="width: 60px;">Fosforo_d</div>
+    	<div style="width: 60px;">Fumomisina</div>
   	</th>                  
     <th>
-      <div style="width: 60px;">Magnesio</div>
+      <div style="width: 60px;">A_g_t</div>
     </th>
     <th>
-      <div style="width: 60px;">Potasio</div>
+      <div style="width: 60px;">DON</div>
     </th>
-    <th>
-      <div style="width: 60px;">Sal</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Hierro</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Cobre</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Manganeso</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Zinc</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Cobalto</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Molibdeno</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Ph</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Carbonatos</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Sodio</div>
-    </th>
-    <th>
-      <div style="width: 60px;">Materia_Seca</div>
-    </th>
+    
  </tr>
 </thead>
 <thead >  
@@ -216,39 +184,7 @@ body{
   <th>
       <div  style="width: 60px;"><strong></strong></div>
     </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>    
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
-    <th>
-      <div  style="width: 60px;"><strong></strong></div>
-    </th>
+    
     <th>
       <div  style="width: 60px;"><strong></strong></div>
     </th>       
@@ -257,14 +193,14 @@ body{
 <tbody>
 <?
 
-if ($_REQUEST['mineral']==0 && $_REQUEST['year']==0){
-  $sql="select * from bd_materiasprimas.tbl_minerales  order by cifra10,registro ASC";  
-}elseif ($_REQUEST['mineral']==0){
-  $sql="select * from bd_materiasprimas.tbl_minerales where  cifra10='".$_REQUEST['year']."'  order by cifra10,registro ASC";  
-}elseif ($_REQUEST['mineral']!=0&&$_REQUEST['year']==0){
-  $sql="select * from bd_materiasprimas.tbl_minerales where   cifra5='".$_REQUEST['mineral']."' order by cifra10,registro ASC";  
-}else{ 
-  $sql="select * from bd_materiasprimas.tbl_minerales where  cifra10='".$_REQUEST['year']."' and cifra5='".$_REQUEST['mineral']."' order by cifra10,registro ASC";  
+if ($_REQUEST['micro']==0 && $_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_microbiologia  order by cifra10,registro ASC";  
+}elseif ($_REQUEST['micro']==0){
+  $sql="select * from bd_materiasprimas.tbl_microbiologia where  cifra10='".$_REQUEST['year']."' order by cifra10,registro ASC";  
+}elseif ($_REQUEST['micro']!=0&&$_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_microbiologia where   cifra5='".$_REQUEST['micro']."' order by cifra10,registro ASC";    
+}else{
+  $sql="select * from bd_materiasprimas.tbl_microbiologia where  cifra10='".$_REQUEST['year']."' and cifra5='".$_REQUEST['micro']."' order by cifra10,registro ASC";  
 }	
   $result=mysql_query($sql)or throw_ex(mysql_error());
  
@@ -292,22 +228,11 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;" class="datos"><?=utf8_encode($row['cifra11']);?></td>
   <td style="width: 60px;" class="datos"><div align="left"><?=utf8_encode($row['nombre']);?></div></td>
   <td style="width: 60px;" class="datos"><?=utf8_encode($fecha);?></td>
-  <td style="width: 60px;"title="Calcio" class="datos"><?=utf8_encode($row['calcio']);?></td>
-  <td style="width: 60px;"title="Fosforo" class="datos"><?=utf8_encode($row['fosforo']);?></td>  
-  <td style="width: 60px;"title="Fosoforo D" class="datos"><?=utf8_encode($row['fosforo_d']);?></td>  
-  <td style="width: 60px;"title="Magnesio" class="datos"><?=utf8_encode($row['magnesio']);?></td>
-  <td style="width: 60px;"title="Potasio" class="datos"><?=utf8_encode($row['potasio']);?></td>    
-  <td style="width: 60px;"title="Sal" class="datos"><?=utf8_encode($row['sal']);?></td>      
-  <td style="width: 60px;"title="Hierro"class="datos"><?=utf8_encode($row['hierro']);?></td>  
-  <td style="width: 60px;"title="Cobre"class="datos"><?=utf8_encode($row['cobre']);?></td>
-  <td style="width: 60px;"title="Manganeso"class="datos"><?=utf8_encode($row['manganeso']);?></td>
-  <td style="width: 60px;"title="Zinc"class="datos"><?=utf8_encode($row['zinc']);?></td>
-  <td style="width: 60px;"title="Cobalto"class="datos"><?=utf8_encode($row['cobalto']);?></td>
-  <td style="width: 60px;"title="Molibdeno"class="datos"><?=utf8_encode($row['molibdeno']);?></td>
-  <td style="width: 60px;"title="Ph"class="datos"><?=utf8_encode($row['ph']);?></td>
-  <td style="width: 60px;"title="Carbonatos"class="datos"><?=utf8_encode($row['carbonatos']);?></td>
-  <td style="width: 60px;"title="Sodio"class="datos"><?=utf8_encode($row['sodio']);?></td>
-  <td style="width: 60px;"title="Materia Seca"class="datos"><?=utf8_encode($row['mat_seca']);?></td>
+  <td style="width: 60px;"title="Calcio" class="datos"><?=utf8_encode($row['zeralenona']);?></td>
+  <td style="width: 60px;"title="Fosforo" class="datos"><?=utf8_encode($row['ocratoxina']);?></td>  
+  <td style="width: 60px;"title="Fosoforo D" class="datos"><?=utf8_encode($row['fumomisina']);?></td>  
+  <td style="width: 60px;"title="Magnesio" class="datos"><?=utf8_encode($row['a_g_t']);?></td>
+  <td style="width: 60px;"title="Potasio" class="datos"><?=utf8_encode($row['don']);?></td>      
   </tr>
 <?
 }

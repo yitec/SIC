@@ -120,6 +120,9 @@ body{
     	<div style="width: 60px;">Proteina Cruda</div>
   	</th>              
     <th>
+      <div style="width: 60px;">NNP</div>
+    </th>
+    <th>
       <div style="width: 60px;">Silica</div>
     </th>
     <th>
@@ -134,12 +137,6 @@ body{
     <th>
       <div style="width: 60px;">FAD</div>
     </th>   
-    <th>
-      <div style="width: 60px;">Hemicelulosa</div>
-    </th>
-    <th>
-      <div style="width: 60px;">NNP</div>
-    </th>
     <th>
       <div style="width: 60px;">Peroxidos</div>
     </th>
@@ -157,6 +154,9 @@ body{
     </th>
     <th>
       <div style="width: 60px;">NIFAD</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Hemicelulosa</div>
     </th>
     <th>
       <div style="width: 60px;">Ce_Insolu</div>
@@ -268,10 +268,14 @@ body{
 </thead>
 <tbody>
 <?
-if ($_REQUEST['materia']==0){
-  $sql="select * from bd_materiasprimas.tbl_muestras where  year='".$_REQUEST['year']."' order by fecha_creacion ASC";  
+if ($_REQUEST['materia']==0 && $_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_muestras order by year,registro ASC";  
+}elseif ($_REQUEST['materia']==0){
+  $sql="select * from bd_materiasprimas.tbl_muestras where  year='".$_REQUEST['year']."'  order by year,registro ASC";  
+}elseif ($_REQUEST['materia']!=0&&$_REQUEST['year']==0){
+  $sql="select * from bd_materiasprimas.tbl_muestras where codigo='".$_REQUEST['materia']."' order by year,registro ASC";   
 }else{
-  $sql="select * from bd_materiasprimas.tbl_muestras where  year='".$_REQUEST['year']."' and codigo='".$_REQUEST['materia']."' order by fecha_creacion ASC";  
+  $sql="select * from bd_materiasprimas.tbl_muestras where  year='".$_REQUEST['year']."' and codigo='".$_REQUEST['materia']."' order by year,registro ASC";  
 }
 
 $result=mysql_query($sql)or throw_ex(mysql_error());
@@ -302,19 +306,19 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="Extracto Etereo" class="datos"><?=utf8_encode($row['extracto_etereo']);?></td>
   <td style="width: 60px;"title="Eln" class="datos"><?=utf8_encode($row['eln']);?></td>    
   <td style="width: 60px;"title="Proteina Cruda" class="datos"><?=utf8_encode($row['proteina_cruda']);?></td>      
+  <td style="width: 60px;"title="NNP"class="datos"><?=utf8_encode($row['nnp']);?></td>
   <td style="width: 60px;"title="Silica"class="datos"><?=utf8_encode($row['silica']);?></td>  
   <td style="width: 60px;"title="Celulosa"class="datos"><?=utf8_encode($row['celulosa']);?></td>
   <td style="width: 60px;"title="Lignina"class="datos"><?=utf8_encode($row['lignina']);?></td>
   <td style="width: 60px;"title="Fnd"class="datos"><?=utf8_encode($row['fnd']);?></td>
   <td style="width: 60px;"title="Fad"class="datos"><?=utf8_encode($row['fad']);?></td>
-  <td style="width: 60px;"title="Hemicelulosa"class="datos"><?=utf8_encode($row['hemicelulosa']);?></td>
-  <td style="width: 60px;"title="NNP"class="datos"><?=utf8_encode($row['nnp']);?></td>
   <td style="width: 60px;"title="Peroxidos"class="datos"><?=utf8_encode($row['peroxidos']);?></td>
-  <td style="width: 60px;"title="Pc_lignif"class="datos"><?=utf8_encode($row['pc_lignif']);?></td>
+  <td style="width: 60px;"title="Pc_lignif"class="datos"><?=utf8_encode($row['pc_lignif']);?></td>  
   <td style="width: 60px;"title="Calidad"class="datos"><?=utf8_encode($row['calidad']);?></td>
   <td style="width: 60px;"title="Particula"class="datos"><?=utf8_encode($row['particula']);?></td>
   <td style="width: 60px;"title="NIFND"class="datos"><?=utf8_encode($row['nifnd']);?></td>
   <td style="width: 60px;"title="NIFAD"class="datos"><?=utf8_encode($row['nifad']);?></td>
+  <td style="width: 60px;"title="Hemicelulosa"class="datos"><?=utf8_encode($row['hemicelulosa']);?></td>    
   <td style="width: 60px;"title="CE_INSOLU"class="datos"><?=utf8_encode($row['ce_insolu']);?></td>
   </tr>
 <?

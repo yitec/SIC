@@ -1,5 +1,5 @@
 <?php
-include ('../cnx/Conexion_Calidad.php');
+include ('../cnx/conexion_calidad.php');
 conectarc();
 
 

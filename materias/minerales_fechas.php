@@ -125,8 +125,8 @@ if (validado==true){
 <tr>	
 	<td class="Arial14Negro">A&ntilde;o:</td>
 	<td>
-	<select name="cmb_year" id="cmb_year" class="combos">
-		<option selected="selected" value="">&nbsp;&nbsp;&nbsp;Mes&nbsp;&nbsp;&nbsp;&nbsp;</option>
+	<select name="cmb_year" id="cmb_year" class="combos">	
+		<option selected="selected" value="0">Todos</option>
 		<option value="-1">Antes de 1985 (-1)</option>
 		<option value="1">1985 (1)</option>
 		<option value="2">1986 (2)</option>
@@ -178,9 +178,11 @@ if (validado==true){
 <div align="center">
 <select name="cmb_mineral" id="cmb_mineral" class="combos">
 <option selected="selected" value="0">Todas</option>
-<? $result=mysql_query("select cifra5,LTRIM(nombre) as nombre from tbl_minerales group by nombre order by nombre")or throw_ex(mysql_error());
+<? 
+//$result=mysql_query("select cifra5,LTRIM(nombre) as nombre from tbl_minerales group by nombre order by nombre")or throw_ex(mysql_error());
+$result=mysql_query("select codigo,nombre from tbl_codigos order by codigo")or throw_ex(mysql_error());
 while ($row=mysql_fetch_object($result)){
-	echo '<option value="'.$row->cifra5.'">'.utf8_encode(strtoupper($row->nombre)).'</option>';
+	echo '<option value="'.$row->codigo.'">'.$row->codigo." - ".utf8_encode(strtoupper($row->nombre)).'</option>';
 }
 ?>
 </select>
