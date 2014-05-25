@@ -116,7 +116,7 @@ echo $var;?>
 </span></div><div style=" margin-top:5px;" align="center" >
 				<a target="_blank"  href="info_muestra.php?id=<?=$_REQUEST['id'];?>"><img title="Informaci&oacute;n de la muestra" src="img/search_rojo.png"/></a>
                 <a target="_blank"  href="info_forrajes.php?id=<?=$_REQUEST['id'];?>"><img title="Informaci&oacute;n Forrajes" src="img/search_verde.png"/></a>
-                <a target="_blank"  href="info_resultados.php?id=<?=$_REQUEST['id'];?>"><img title="Informaci&oacute;n Otros Resultados" src="img/search_azul.png"/></a>             
+                <a target="_blank"  href="info_resultados.php?contrato=<?=$_REQUEST['contrato'];?>"><img title="Informaci&oacute;n Otros Resultados" src="img/search_azul.png"/></a>             
                 </div>
                 
 <?

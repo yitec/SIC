@@ -67,14 +67,29 @@ mysql_free_result($result);
     <div align="center" >
     
     <?
-	$result=mysql_query("select  tcli.tipo_cliente, tio.lisencia, tim.tipo_alimento, tim.procedencia,tc.fecha_ingreso from tbl_analisis ta, tbl_contratos tc, tbl_clientes tcli, tbl_infoficiales tio, tbl_infmuestras tim  where ta.codigo='".$_REQUEST['codigo'].	"' and tc.consecutivo=ta.id_contrato and tcli.id=tc.id_cliente and tio.cons_contrato=tc.consecutivo and tim.cons_contrato= tc.consecutivo");
+	$result=mysql_query("
+        SELECT
+    cli.tipo_cliente,
+    tio.lisencia,
+    tim.tipo_alimento,
+    tim.procedencia,
+    con.fecha_ingreso 
+    from 
+    tbl_clientes cli join
+    tbl_contratos con on
+    cli.id=con.id_cliente and con.consecutivo='".$_REQUEST['contrato']."' join
+    tbl_infoficiales tio on 
+    tio.cons_contrato=con.consecutivo join
+    tbl_infmuestras tim  on
+    tim.cons_contrato= con.consecutivo
+    ");
 	
 	
 	$row=mysql_fetch_assoc($result);
 	$v_procedencia=explode(',',$row['procedencia']);
 	$result3=mysql_query("select p.nombre, c.nombre, d.nombre from tbl_provincias p, tbl_cantones c, tbl_distritos d where p.id='".$v_procedencia[0]."' and c.id='".$v_procedencia[1]."' and d.id='".$v_procedencia[2]."' ");
-$row3=mysql_fetch_array($result3);
-$pro=$row3[0]."-".$row3[1]."-".$row3[2]
+    $row3=mysql_fetch_array($result3);
+    $pro=$row3[0]."-".$row3[1]."-".$row3[2]
 	
 	?>
     <table>

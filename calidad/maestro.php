@@ -44,7 +44,7 @@ $dt=mysql_query($consulta);
     <tr>
     <?
     if ($info[8]!=""){
-        $archivo= "http://localhost/SIC/calidad/archivos/ControlCalidad/".$info[8];
+        $archivo= "http://www.siccina.ucr.ac.cr/SIC/calidad/archivos/ControlCalidad/".$info[8];
     }else{
         $archivo= "http://".$info[9];
     }

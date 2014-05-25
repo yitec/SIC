@@ -100,23 +100,35 @@ mysql_free_result($result);
 
 <?
 
-$result=mysql_query("select * from tbl_resultados where consecutivo_contrato='".$contrato."'");
+$result=mysql_query("
+select 
+ana.codigo, 
+res.id,
+res.consecutivo_contrato,
+res.metodo,
+res.base_fresca,
+res.base_seca,
+res.incertidumbre,
+res.incertidumbre_fresca,
+res.incertidumbre_seca,
+res.valor_correjido,
+res.unidades,
+res.resultado,
+cat.nombre
+from tbl_resultados res  join tbl_analisis ana  on res.consecutivo_contrato='".$_REQUEST['contrato']."'
+and ana.id=res.id_analisis
+ join tbl_categoriasanalisis cat on ana.id_analisis =cat.id ");
 
 while($row=mysql_fetch_assoc($result)){
 	
-	$result2=mysql_query("select c.nombre from tbl_categoriasanalisis c,tbl_resultados r, tbl_analisis a where a.id='".$row['id_analisis']."' and c.id=a.id_analisis limit 1");	
-	$row2=mysql_fetch_assoc($result2);
-	
-		$result3=mysql_query("select a.codigo from tbl_analisis a where a.id='".$row['id_analisis']."'  limit 1");	
-	$row3=mysql_fetch_assoc($result3);
 
 ?>
   
   <tr>
-  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($contrato);?></td>
-  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row3['codigo']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['consecutivo_contrato']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['codigo']);?></td>
   <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['metodo']);?></td>
-  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['nombre']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['nombre']);?></td>
   
   
     <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas">

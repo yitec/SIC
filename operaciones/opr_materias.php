@@ -56,54 +56,54 @@ if ($encontrado==false){
 	
 	$result=mysql_query("select * from tbl_clientes where id='".$r4->id_cliente."' ");
 	$r8=mysql_fetch_object($result);
-	//echo $hoy;
-	//echo "<br> Tipo muestreo=";
+	////echo $hoy;
+	////echo "<br> Tipo muestreo=";
 	$tipo_muestreo=busca_muestreo($r8->nombre,$r8->tipo_cliente);
-	//echo "<br> Sub Categoria=";
-	//echo $r3->id_subCategoria;
+	////echo "<br> Sub Categoria=";
+	////echo $r3->id_subCategoria;
 	
 	
 	
 	if($r3->id_categoria==2||$r3->id_categoria==3||$r3->id_categoria==4||$r3->id_categoria==6||$r3->id_categoria==7||$r3->id_categoria==12||$r3->id_categoria==13||$r3->id_categoria==14)
 	{
-	echo "<br> Clase Alimento=";	
-	echo $clase_alimento=busca_clase_alimento($r3->id_subCategoria);
-	echo "<br> Tipo Alimento=";
-	echo $tipo_alimento="2";
+	////echo "<br> Clase Alimento=";	
+	////echo $clase_alimento=busca_clase_alimento($r3->id_subCategoria);
+	////echo "<br> Tipo Alimento=";
+	////echo $tipo_alimento="2";
 	$clasificacion="";
-	echo "<br> Codigo=";
-	echo $codigo_alimento=busca_codigo($r3->id_subCategoria);
+	////echo "<br> Codigo=";
+	////echo $codigo_alimento=busca_codigo($r3->id_subCategoria);
 	$v_codigo=explode("|",$codigo_alimento);
 	$codigo_alimento=$v_codigo[0];
 	$nombre=$v_codigo[1];	
-	echo "<br> Proecesamiento=";
-	echo $procesamiento=busca_procesamiento($r5->proceso_elaboracion);	
-	echo "<br> Fuente=";
-	echo $codigo_fuente=busca_fuente($codigo_alimento);	
+	////echo "<br> Proecesamiento=";
+	////echo $procesamiento=busca_procesamiento($r5->proceso_elaboracion);	
+	////echo "<br> Fuente=";
+	////echo $codigo_fuente=busca_fuente($codigo_alimento);	
 	}
 	
 	 
 	if ($r3->id_categoria==5){//forrajes
-	echo "<br> Region=";
-	echo $region=busca_region($r5->procedencia);		
-	echo "<br> Pasto=";	
-	echo $pasto=busca_pasto($r3->id_subCategoria);
+	//echo "<br> Region=";
+	//echo $region=busca_region($r5->procedencia);		
+	//echo "<br> Pasto=";	
+	//echo $pasto=busca_pasto($r3->id_subCategoria);
 	$v_forrajes=explode(",",$pasto);		
-	echo "<br> Vulgar=";
-	echo $v_forrajes[0];
-	echo "<br> Cientifico=";
-	echo $v_forrajes[1];
-	echo "<br> Nombre=";
-	echo $v_forrajes[2];
-	echo "<br> Parte Planta=";
-	echo $parte=busca_parte($r5->parte_planta);
-	echo "<br> Madurez=";
-	echo $madurez=busca_madurez($r6->madurez);
-	echo "<br> Tipo=";
-	echo $tipo=busca_tipo($r6->tipo);
-	echo "<br> Mes=".$mes;
-	echo "<br> Origen=";
-	echo $origen=busca_origen($r6->origen);		
+	//echo "<br> Vulgar=";
+	//echo $v_forrajes[0];
+	//echo "<br> Cientifico=";
+	//echo $v_forrajes[1];
+	//echo "<br> Nombre=";
+	//echo $v_forrajes[2];
+	//echo "<br> Parte Planta=";
+	//echo $parte=busca_parte($r5->parte_planta);
+	//echo "<br> Madurez=";
+	//echo $madurez=busca_madurez($r6->madurez);
+	//echo "<br> Tipo=";
+	//echo $tipo=busca_tipo($r6->tipo);
+	//echo "<br> Mes=".$mes;
+	//echo "<br> Origen=";
+	//echo $origen=busca_origen($r6->origen);		
 		switch ($r6->fertilizacion){
 			case "Si":
 			 	$fer=1;
@@ -115,20 +115,20 @@ if ($encontrado==false){
 			 	$fer=2;
 			 break;			
 		}
-	echo "<br> Fertilizacion=";
-	echo $fer;
+	//echo "<br> Fertilizacion=";
+	//echo $fer;
 
-	echo "<br> Nitrogeno=";
-	echo $nitro=busca_nitrogeno($r6->nitrogeno);			
+	//echo "<br> Nitrogeno=";
+	//echo $nitro=busca_nitrogeno($r6->nitrogeno);			
 
 
 		
 	}//end if forrajes
-	echo "<br> Año=";
-	echo $year=busca_year($r5->fecha_muestra);	
+	//echo "<br> Año=";
+	//echo $year=busca_year($r5->fecha_muestra);	
 	
 	
-	print_r($v_localizacion=explode(",",$r5->procedencia));
+	$v_localizacion=explode(",",$r5->procedencia);
 	
 	//si es forraje
 	if ($r3->id_categoria==5){
@@ -197,7 +197,7 @@ if ($encontrado==false){
 	}//end try
 	catch (Exception $e)
 	{
-		echo $e;
+		//echo $e;
 		mysql_query("insert into bd.materiasprimas.tbl_errores (error,fecha)values('".$e."','".$hoy."')");
 		
 	}
@@ -276,7 +276,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -293,7 +293,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -313,7 +313,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -331,7 +331,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -391,7 +391,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -421,7 +421,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -441,7 +441,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -475,7 +475,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -498,7 +498,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -516,7 +516,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -534,7 +534,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -553,7 +553,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -572,7 +572,7 @@ try{
 }
 	catch(Exception $e)
 {
-	echo "Error:". $e;
+	//echo "Error:". $e;
 }
 	
 }//end function
@@ -671,11 +671,11 @@ if ($_REQUEST['opcion']==1){
 		$id_codigo=mysql_insert_id();
 		mysql_query("insert into bd_materiasprimas.tbl_fuente (id_codigo,nombre)values('".$id_codigo."','".$_REQUEST['fuente']."')")or throw_ex(mysql_error());		
 		$jsondata['resultado'] = "Success";
-		echo json_encode($jsondata);
+		//echo json_encode($jsondata);
 	}
 	catch(Exception $e)
 	{
-		echo "Error:". $e;
+		//echo "Error:". $e;
 	}
 }
 

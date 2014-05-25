@@ -71,6 +71,13 @@ if($_REQUEST['opcion']==3)
 //aprueba el resultado de un analisis
 if($_REQUEST['opcion']==4)
 {
+	$result=mysql_query("select estado from tbl_resultados where id='".$_REQUEST['id']."'");
+	$row=mysql_fetch_assoc($result);
+	if($row['estado']==1){
+		echo 'Error, ya estaba aprobado este análisis, no puede aprobarlo de nuevo';
+
+	}else{
+
 	$result=mysql_query("update tbl_resultados set estado='"."1"."',fecha_aprobacion='".$hoy."',base_fresca='".utf8_decode($_REQUEST['base_fresca'])."',incertidumbre_fresca='".utf8_decode($_REQUEST['incertidumbre_fresca'])."',observaciones_gerente='".utf8_decode($_REQUEST['observaciones_gerente'])."' where id='".$_REQUEST['id']."'");
 	$result=mysql_query("Select id_analisis from tbl_resultados where id='".$_REQUEST['id']."'");
 	$row=mysql_fetch_assoc($result);
@@ -88,7 +95,7 @@ if($_REQUEST['opcion']==4)
 	$total_an=$row3['total'];
 
 	if($total_ap==$total_an){
-		echo "Entro";
+		//echo "Entro";
 		$result3=mysql_query("update tbl_contratos set fecha_terminado='".$hoy."', estado='"."4"."' where consecutivo='".$_REQUEST['contrato']."'");
 		 		date_default_timezone_set('America/Denver');
        //$dest = "kmadrigal@feednet.ucr.ac.cr";
@@ -100,22 +107,19 @@ if($_REQUEST['opcion']==4)
 		$msg="El contrato ".$_REQUEST['contrato']." ha finalizado su proceso, por favor genere el informe";
 			   if (mail($dest, $asunto, $msg, $head)) {
       
-	   echo 'Enviado correo';	   
+	   //echo 'Enviado correo';	   
        } else {
-       echo 'error correo';
+       //echo 'error correo';
 	   }
 	
 
 	}
-
 	//meto los datos de materias primas
-	$materias=actualiza_materias($_REQUEST['id']);
+	//$materias=actualiza_materias($_REQUEST['id']);
 	
-	
-
-
-	echo $total_ap."sid ".$total_an;
-	
+	//echo $total_ap."sid ".$total_an;
+	echo "Success";
+	}
 	
 	
 }//end opcion 4
@@ -124,6 +128,13 @@ if($_REQUEST['opcion']==4)
 //rechazar el resultado de un analisis
 if($_REQUEST['opcion']==5)
 {
+	$result=mysql_query("select estado from tbl_resultados where id='".$_REQUEST['id']."'");
+	$row=mysql_fetch_assoc($result);
+	if($row['estado']==1){
+		echo 'Error, ya estaba aprobado este análisis, no puede rechazar un resultado que ya habia aprobado';
+
+	}else{
+	
 	$result=mysql_query("Select id_analisis from tbl_resultados where id='".$_REQUEST['id']."'");
 	$row=mysql_fetch_assoc($result);
 	if($_REQUEST['rechazar']==2){
@@ -139,7 +150,8 @@ if($_REQUEST['opcion']==5)
         $message .= 'Query ejecutado: ' . $query;
 		
 		}
-	
+	echo "Success";	
+	}
 
 }
 

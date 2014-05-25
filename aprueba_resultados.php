@@ -28,18 +28,25 @@ $("#btn_aprobar").live("click", function(event){
         url: "operaciones/opr_analisis.php",		
         data: "opcion=4&id="+$('#id').val()+"&laboratorio="+$('#laboratorio').val()+"&contrato="+$('#contrato').val()+"&base_fresca="+$('#txt_fresca').val()+"&incertidumbre_fresca="+$('#txt_incertidumbre_fresca').val()+"&observaciones_gerente="+$('#txt_observaciones_gerente').val(),
         success: function(datos){
+        	/*if (datos=="Success"){
+        		
+        	}
+        	else{
+        		alert (datos);
+        	}*/
         	
 		}//end succces function
 		});//end ajax function		
-		  		if($('#laboratorio').val()==1){
-				top.location.href = 'resultados_quimica.php';
-				}
-				if($('#laboratorio').val()==2){
-				top.location.href = 'resultados_micro.php';
-				}
-				if($('#laboratorio').val()==3){
-				top.location.href = 'resultados_bromatologia.php';
-				}
+		        if($('#laboratorio').val()==1){
+                top.location.href = 'resultados_quimica.php';
+                }
+                if($('#laboratorio').val()==2){
+                top.location.href = 'resultados_micro.php';
+                }
+                if($('#laboratorio').val()==3){
+                top.location.href = 'resultados_bromatologia.php';
+                }
+
 		 }else{
 			return;
 		 }
@@ -75,10 +82,8 @@ $("#btn_rechazar").live("click", function(event){
         url: "operaciones/opr_analisis.php",		
         data: "opcion=5&id="+$('#id').val()+"&laboratorio="+$('#laboratorio').val()+"&observaciones_gerente="+$('#txt_observaciones_gerente').val()+"&rechazar="+rechazar,
         success: function(datos){
-		
-		}//end succces function
-		});//end ajax function		
-		  		if($('#laboratorio').val()==1){
+        	if (datos=="Succcess"){
+        	if($('#laboratorio').val()==1){
 				top.location.href = 'resultados_quimica.php';
 				}
 				if($('#laboratorio').val()==2){
@@ -87,6 +92,13 @@ $("#btn_rechazar").live("click", function(event){
 				if($('#laboratorio').val()==3){
 				top.location.href = 'resultados_bromatologia.php';
 				}
+			}else{
+        		alert (datos);
+        	}
+		
+		}//end succces function
+		});//end ajax function		
+		  		
 		 }else{
 			return;
 		 }
@@ -165,7 +177,7 @@ $row=mysql_fetch_assoc($result);
                 </a>
                 <a target="_blank"  href="info_forrajes.php?id=<?=$_REQUEST['id_analisis'];?>"><img title="Informaci&oacute;n Forrajes" src="img/search_verde.png"/>
                 </a>
-                <a target="_blank"  href="info_resultados.php?id=<?=$_REQUEST['id_analisis'];?>"><img title="Informaci&oacute;n Otros Resultados" src="img/search_azul.png"/>
+                <a target="_blank"  href="info_resultados.php?contrato=<?=$_REQUEST['contrato'];?>"><img title="Informaci&oacute;n Otros Resultados" src="img/search_azul.png"/>
                 </a>
                 
                 </div>

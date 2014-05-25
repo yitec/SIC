@@ -62,7 +62,7 @@ require_once('menu_superior.php');
         </tr>
         <?	
 
-$result=mysql_query(" select a.id as id_analisis, a.codigo,a.id_contrato,r.id, r.fecha_ingreso,r.observaciones_analista, c.nombre from tbl_resultados r,tbl_categoriasanalisis c, tbl_analisis a where r.estado='"."0"."' and r.id_laboratorio='"."2"."' and r.id_analisis=a.id  and a.id_analisis=c.id");
+$result=mysql_query(" select a.id_contrato,a.id as id_analisis, a.codigo,a.id_contrato,r.id, r.fecha_ingreso,r.observaciones_analista, c.nombre from tbl_resultados r,tbl_categoriasanalisis c, tbl_analisis a where r.estado='"."0"."' and r.id_laboratorio='"."2"."' and r.id_analisis=a.id  and a.id_analisis=c.id");
 //$result=mysql_query("select m.codigo,m.fecha_ingreso,a.id,a.nombre,a.observaciones, a.id_laboratorio from tbl_analisis a,tbl_muestras m where a.id_laboratorio=1 and a.estado=1 and a.id_muestra=m.id");
 	while ($row=mysql_fetch_assoc($result)){
 ?>
@@ -73,7 +73,7 @@ $result=mysql_query(" select a.id as id_analisis, a.codigo,a.id_contrato,r.id, r
           <td><div align="center" class="Arial14Negro"><?=utf8_encode($row['nombre']);?>	
           </div></td>
           <td><div align="left" class="Arial10Negro"><?=utf8_encode($row['observaciones_analista']);?></div></td>
-          <td><div align="center" class="Arial14Negro"><a id="ver" href="aprueba_resultados.php?id=<?=$row['id'];?>&codigo=<?=$row['codigo'];?>&nombre=<?=$row['nombre'];?>&laboratorio=<? echo"2";?>&contrato=<?=$row['id_contrato'];?>&id_analisis=<?=$row['id_analisis'];?>"><img src="img/search.png" width="25" height="25" /></a></div></td>
+          <td><div align="center" class="Arial14Negro"><a id="ver" href="aprueba_resultados.php?id=<?=$row['id'];?>&codigo=<?=$row['codigo'];?>&nombre=<?=$row['nombre'];?>&laboratorio=<? echo"2";?>&contrato=<?=$row['id_contrato'];?>&id_analisis=<?=$row['id_analisis'];?>&contrato=<?=$row['id_contrato'];?>"><img src="img/search.png" width="25" height="25" /></a></div></td>
         </tr>
         <?	
 	}
