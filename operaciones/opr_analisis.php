@@ -308,6 +308,20 @@ if($_REQUEST['opcion']==17)
 
 }
 
+//Eliminar un analisis
+if($_REQUEST['opcion']==18)
+{
+	$result=mysql_query("update tbl_muestras set nombre_muestra='".$_REQUEST['nombre']."'  where id='".$_REQUEST['id']."'");
+	if (!$result) {//si da error que me despliegue el error del query
+       echo $message  = 'Query invalido: ' . mysql_error() . "\n";
+        $message .= 'Query ejecutado: ' . $query;
+		
+	}else{
+		echo "Exito";
+	}
+
+}
+
 
 
 

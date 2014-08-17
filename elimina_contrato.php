@@ -54,7 +54,7 @@ if($('#txt_contrato').val()==""){
 		  $.ajax({
         type: "POST",
 		async: false,
-        url: "/operaciones/opr_contratos.php",		
+        url: "operaciones/opr_contratos.php",		
         data: "opcion=16&contrato="+$('#txt_contrato').val(),
         success: function(datos){
         	if (datos=="Success"){

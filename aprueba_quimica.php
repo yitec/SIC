@@ -130,8 +130,29 @@ while ($row2=mysql_fetch_assoc($result2)){
 	}
 }
 mysql_free_result($result2);
+$fecha1=date('Y').'0101';
+$fecha2=date('Y').'1231';
 
+$result2=mysql_query("
+    select mues.id_contrato as consecutivo,mues.id as id_muestra, mues.fecha_ingreso, mues.numero_muestra  from tbl_muestras mues join tbl_analisis ana 
+    ON ana.id_muestra=mues.numero_muestra 
+    join tbl_categoriasanalisis cat
+    ON cat.id=ana.id_analisis
+    where mues.id_contrato='".$_REQUEST['contrato']."' 
+    and cat.nombre in ('Proteína Cruda','fibra cruda','materia seca','eln','extracto etereo','energia bruta','Humedad 135° C') and metodo not like 'no se realiza%'
+    and mues.id not in (select id_muestra from bd_materiasprimas.tbl_muestras where fecha_creacion>='".$fecha1."' and fecha_creacion<'".$fecha2."')
+    group by mues.id order by mues.id_contrato");   
 
+if (mysql_num_rows($result2)>0){    
+    $result3=mysql_query("select tipo_alimento from tbl_infmuestras inf join bd_materiasprimas.tbl_codigos_alimentos cod
+        on inf.tipo_alimento=cod.nombre
+        where inf.cons_contrato='".$_REQUEST['contrato']."'");    
+    if (mysql_num_rows($result3)==0){
+        $result4=mysql_query("select tipo_alimento from tbl_infmuestras where cons_contrato='".$_REQUEST['contrato']."'");
+        $row4=mysql_fetch_object($result4);
+        echo '<div align="center" class="Arial20rojo">----------<br>'.$row4->tipo_alimento.' no se encuentra dentro del listado de códigos de materias primas</div>';
+    }
+}
 ?>
 
 

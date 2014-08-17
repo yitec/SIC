@@ -12,7 +12,7 @@ conectar();
 <link href="css/cuadros.css" rel="stylesheet" type="text/css" />
 <script>
 function redirigir(id){
-window.location = "despliega_muestras.php?id="+id;	
+window.location = "despliega_muestras_mantenimiento.php?id="+id;	
 }
 
 </script>

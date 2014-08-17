@@ -20,21 +20,22 @@ $("#btn_guardarm").click(function(event){
         type: "POST",
         dataType: "json",
         url: "../operaciones/opr_materias.php",
-        data: "opcion=1&nombre="+$('#txt_nombre').val()+"&clasificacion="+$("#cmb_clasificacion").val()+"&sub_categoria="+$('#cmb_subcategoria_1_1').val()+"&fuente="+$('#txt_fuente').val(),        		
+        data: "opcion=1&nombre="+$('#txt_nombre').val()+"&clasificacion="+$("#cmb_clasificacion").val()+"&sub_categoria="+$('#cmb_subcategoria_1_1').val()+"&fuente="+$('#txt_fuente').val()+"&codigo="+$('#txt_codigo').val(),        		
 		success: function(datos){
 			//alert (datos.resultado);
 		if (datos.resultado=="Success"){
 				$.pnotify({
-			    pnotify_title: 'Nueva Materia Prima!!',
-    			pnotify_text: 'Nueva Materia Prima  creada exitosamente.',
+			    pnotify_title: 'Nuevo codigo!!',
+    			pnotify_text: 'Nuevo codigo creado exitosamente.',
     			pnotify_type: 'info',
     			pnotify_hide: true
 				});
+				setInterval(function(){window.location.assign("menu_principal.php")},2000); 
 		}else{
 				$.pnotify({
 			    pnotify_title: 'Error!!',
-    			pnotify_text: 'Ha sucedido un error intentelo mas tarde',
-    			pnotify_type: 'info',
+    			pnotify_text: 'Ha sucedido un error revise que el codigo no fuera creado anteriormente',
+    			pnotify_type: 'error',
     			pnotify_hide: true
 				});
 			
@@ -50,8 +51,9 @@ $("#btn_guardarm").click(function(event){
 
 //****************************************************Limpiar formulario crear articulo
 function limpiar(){
-			$('#txt_fuente').attr('value','');
-			$('#txt_nombre').attr('value','');
+	$('input[type=text]').each(function() {
+		$(this).val('');
+	}); 
 			$("#cmb_clasificacion option[value='0']").attr("selected","selected");
 			$("#cmb_cmb_categoria_1_1 option[value='0']").attr("selected","Seleccione");
 			$("#cmb_cmb_subcategoria_1_1 option[value='0']").attr("selected","Selecccione");

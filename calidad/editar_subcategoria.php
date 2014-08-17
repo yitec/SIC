@@ -1,5 +1,5 @@
 <?php
-include ('../cnx/Conexion_Calidad.php');
+include ('../cnx/conexion_calidad.php');
 conectarc();
 $consulta = "SELECT * FROM `tbl_subcat` WHERE `estado` =1 ORDER  BY `nombre_subcat` ASC";	
 

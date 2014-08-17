@@ -194,7 +194,25 @@ session_start();
     <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
     <div align="center" class="Arial14Negro"><a href="elimina_contrato.php"><img src="img/minusi.png" width="48" height="48"></a><br>Elimina Contrato</div>
     </div>
-    <? } ?>        
+<? } ?>        
+<? if (in_array(36, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="activos/activos.php"><img src="img/activos.png" width="48" height="48"></a><br>Mantenimiento Activos</div>
+    </div>
+<? } ?>   
+<? if (in_array(37, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="activos/lista_pedido_simple.php"><img src="img/activos.png" width="48" height="48"></a><br>Petici&oacute;n de Activos</div>
+    </div>
+<? } ?>     
+<? if (in_array(38, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="mantenimiento_muestras.php"><img src="img/edit.png" width="48" height="48"></a><br>Nombre Muestras</div>
+    </div>
+<? } ?>     
 
 
 

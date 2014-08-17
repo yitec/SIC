@@ -391,19 +391,19 @@ if($acreditado==1){
 }
 $pdf->Cell(190,0,'',1,0,'C');
 $pdf->Ln(0);
-$pdf->Cell(28,5,'',1,0,'C');
+$pdf->Cell(48,5,'',1,0,'C');
 $pdf->Cell(20,5,'',1,0,'C');
 $pdf->SetFillColor(200,220,255);
 $pdf->Cell(86,5,'',1,0,'C');
-$pdf->Cell(56,5,'',1,0,'C');
+$pdf->Cell(36,5,'',1,0,'C');
 $pdf->SetFont('Arial','B',7);
 $pdf->Ln(0);
-$pdf->Cell(28,5,'Identificación Muestra',0,0,'C');
+$pdf->Cell(48,5,'Identificación Muestra',0,0,'C');
 $pdf->Cell(20,5,'Laboratorio',0,0,'L');
 $pdf->SetFillColor(200,220,255);
 
 $pdf->Cell(86,5,'Análisis Solicitados',0,0,'C');
-$pdf->Cell(56,5,'Resultados',0,2,'C');
+$pdf->Cell(36,5,'Resultados',0,2,'C');
 $pdf->Ln(0);
 $pdf->SetFont('Arial','',5);
 $cont=0;
@@ -435,19 +435,19 @@ while($row2=mysql_fetch_array($result2)){
 	}
 	$pdf->Cell(190,0,'',1,0,'C');
 	$pdf->Ln(0);
-	$pdf->Cell(28,5,'',1,0,'C');
+	$pdf->Cell(48,5,'',1,0,'C');
 	$pdf->Cell(20,5,'',1,0,'C');
 	$pdf->SetFillColor(200,220,255);
 	$pdf->Cell(86,5,'',1,0,'C');
-	$pdf->Cell(56,5,'',1,0,'C');
+	$pdf->Cell(36,5,'',1,0,'C');
 	$pdf->SetFont('Arial','B',7);
 	$pdf->Ln(0);
-	$pdf->Cell(28,5,'Identificación Muestra',0,0,'C');
+	$pdf->Cell(48,5,'Identificación Muestra',0,0,'C');
 	$pdf->Cell(20,5,'Laboratorio',0,0,'L');
 	$pdf->SetFillColor(200,220,255);
 
 	$pdf->Cell(86,5,'Análisis Solicitados',0,0,'C');
-	$pdf->Cell(56,5,'Resultados',0,2,'C');
+	$pdf->Cell(36,5,'Resultados',0,2,'C');
 	$pdf->Ln(0);
 	$pdf->SetFont('Arial','',8);
 	$cont=0;
@@ -457,10 +457,10 @@ while($row2=mysql_fetch_array($result2)){
 	$result3=mysql_query("select nombre_muestra,codigo from tbl_muestras where id_contrato='".$row['consecutivo']."' and  numero_muestra='".$row2[22]."'  ");
 	$row3=mysql_fetch_assoc($result3);
 	$pdf->Ln($linea);
-	$pdf->Cell(28,10,'',1,0,'C');
-	$pdf->Cell(20,10,'',1,0,'C');
-	$pdf->Cell(86,10,'',1,0,'L');
-	$pdf->Cell(56,10,'',1,0,'C');
+	$pdf->Cell(48,15,'',1,0,'C');
+	$pdf->Cell(20,15,'',1,0,'C');
+	$pdf->Cell(86,15,'',1,0,'L');
+	$pdf->Cell(36,15,'',1,0,'C');
 	if ($posicion==0){
 		$pdf->Ln(0);
 	}else{
@@ -469,38 +469,39 @@ while($row2=mysql_fetch_array($result2)){
 	}
 			if (strlen($row3['nombre_muestra'])>18){
 				$pdf->SetTextColor(0,0,0);
-				$pdf->SetFont('Arial','',5);
+				$pdf->SetFont('Arial','',8);
 				if (strlen($row3['nombre_muestra'])<=71){
-					$pdf->Cell(28,10,utf8_decode($row3['nombre_muestra']),1,1,'C');	
+					$pdf->Cell(48,15,utf8_decode($row3['nombre_muestra']),1,1,'C');	
 				}else{
-					$pdf->MultiCell(28,5,utf8_decode($row3['nombre_muestra']),1,'L');
+					$pdf->MultiCell(48,5,utf8_decode($row3['nombre_muestra']),1,'L');
 				}
 				$var = $pdf->GetY();		
 				$pdf->SetY($var-10);
-				$pdf->SetX(38);
+				$pdf->SetX(58);
 				$pdf->SetFont('Arial','',8);
 			}else{
-				$pdf->Cell(28,10,$row3['nombre_muestra'],1,0,'C');		
+				$pdf->Cell(48,15,$row3['nombre_muestra'],1,0,'C');		
 			}
 
 
-
+$pdf->Ln(0);	
+$pdf->SetX(58);
 		
 	if($row2[2]==1){
-		$pdf->MultiCell(20,5,"Química\n".$row3['codigo'],1,1,'L');
+		$pdf->MultiCell(20,5,"Química\n".$row3['codigo']."\n ",1,1,'L');
 		//$pdf->Cell(18,10,'Química'\n,1,0,'C');
 	}
 	if($row2[2]==2){
-		$pdf->MultiCell(20,5,"Microbiología\n".$row3['codigo'],1,1,'L');		
+		$pdf->MultiCell(20,5,"Microbiología\n".$row3['codigo']."\n ",1,1,'L');		
 		//$pdf->Cell(18,10,'Microbiología',1,0,'C');
 	}
 	if($row2[2]==3){
-		$pdf->MultiCell(20,5,"Bromatología\n".$row3['codigo'],1,1,'L');		
+		$pdf->MultiCell(20,5,"Bromatología\n".$row3['codigo']."\n ",1,1,'L');		
 		//$pdf->Cell(18,10,'Bromatología',1,0,'C');	
 	}
-	$pdf->Ln(-10);	
+	$pdf->Ln(-15);	
 	
-	$pdf->SetX(58);
+	$pdf->SetX(78);
 	
 	if($row2[39]==1){//si es acreditado lo imprimo en verde
 	
@@ -512,15 +513,15 @@ while($row2=mysql_fetch_array($result2)){
 			if($row2['37']=="Salmonella sp"){
 			$pdf->SetFont('Arial','IUB',8);
 			}
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4],1,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n ",1,'L');
 			$pdf->Ln(-10);
-			$pdf->SetX(144);
+			$pdf->SetX(154);
 			$pdf->SetFont('Arial','',8);
 		}else{
 			$pdf->SetTextColor(39,210,75);
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4],1,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n ",1,'L');
 			$pdf->Ln(-10);
-			$pdf->SetX(144);
+			$pdf->SetX(154);
 			$pdf->SetFont('Arial','',8);
 		}
 		
@@ -530,15 +531,15 @@ while($row2=mysql_fetch_array($result2)){
 		if (strlen($row2[4])>=50){
 			$pdf->SetTextColor(0,0,0);
 			$pdf->SetFont('Arial','',8);
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4],1,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n",1,'L');
 			$pdf->Ln(-10);
-			$pdf->SetX(144);
+			$pdf->SetX(154);
 			$pdf->SetFont('Arial','',8);
 		}else{
 			$pdf->SetTextColor(0,0,0);
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4],1,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n",1,'L');
 			$pdf->Ln(-10);
-			$pdf->SetX(144);
+			$pdf->SetX(154);
 		}
 	}
 	
@@ -617,7 +618,7 @@ while($row2=mysql_fetch_array($result2)){
 	$pdf->SetTextColor(0,0,0);
 	//Si el análisis es de microscopia imprimo una multicelda por ser muy largo el resultado
 	if ($row2['37']=="Microscopía"){
-		$pdf->Cell(56,10,"Ver siguiente línea",1,0,'C');
+		$pdf->Cell(36,10,"Ver siguiente línea",1,0,'C');
 		$pdf->Ln(10);
 		$pdf->MultiCell(0,5,'Resultado Microscopía: '.$resultado,1,2,'L');
 		$posicion=1;	
@@ -629,23 +630,23 @@ while($row2=mysql_fetch_array($result2)){
 			$pdf->SetTextColor(0,0,0);
 			$pdf->SetFont('Arial','',8);
 		$var = $pdf->GetY();		
-		$pdf->SetY($var-10);
+		$pdf->SetY($var-25);
 		$var2 = $pdf->GetX();		
-		$pdf->SetX($var2+134);
-		$pdf->MultiCell(56,5,$r1."\n ",1,'L');
+		$pdf->SetX($var2+154);
+		$pdf->MultiCell(36,5,$r1."\n ",1,'L');
 			//$pdf->Cell(56,10,$resultado,1,0,'C');
 			$pdf->SetFont('Arial','',8);
 		}else{
 		$var = $pdf->GetY();
 			if($cont==1){		
-				$pdf->SetY($var);
+				$pdf->SetY($var-5);
 			}else{
 				$pdf->SetY($var);
 			}
 		$pdf->SetFont('Arial','',8);	
 		$var2 = $pdf->GetX();		
-		$pdf->SetX($var2+134);
-		$pdf->MultiCell(56,5,$r1."\n ".$r2,1,'L');
+		$pdf->SetX($var2+154);
+		$pdf->MultiCell(36,5,$r1."\n ".$r2."\n ",1,'L');
 			//$pdf->Cell(56,10,$resultado,1,0,'C');
 		}
 	}

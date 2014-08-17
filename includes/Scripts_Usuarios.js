@@ -165,6 +165,15 @@ $("#btn_buscar").live("click", function(event){
 			if(v_resultado.indexOf("35")>=0){
 				$("#chk_e_contrato").attr("checked","checked");
 			}
+			if(v_resultado.indexOf("36")>=0){
+				$("#chk_activos").attr("checked","checked");
+			}
+			if(v_resultado.indexOf("37")>=0){
+				$("#chk_pactivos").attr("checked","checked");
+			}
+			if(v_resultado.indexOf("38")>=0){
+				$("#chk_nmuestras").attr("checked","checked");
+			}
 		}//end succces function
 		});//end ajax function	
 });						   
@@ -289,6 +298,15 @@ $("#btn_guardar").click(function(event){
 		}	
 		if ($("#chk_e_contrato").is(":checked")){
 			permisos=permisos+","+35;	
+		}		
+		if ($("#chk_activos").is(":checked")){
+			permisos=permisos+","+36;	
+		}
+		if ($("#chk_pactivos").is(":checked")){
+			permisos=permisos+","+37;	
+		}
+		if ($("#chk_nmuestras").is(":checked")){
+			permisos=permisos+","+38;	
 		}		
 		
 		

@@ -659,7 +659,7 @@ function actualiza_resultados($id_resultado,$id_muestra,$id_categoria){
 
 //**************************************************Operaciones***************************
 /*************************************************************
-	Accion: Inserta una nueva empresa
+	Accion: Inserta un nuevo codigo de materia
 	Parametros: Clasificacion, Sub_Categoria, Fuente, Nombre.	
 *******************************************************/
 if ($_REQUEST['opcion']==1){
@@ -667,15 +667,37 @@ if ($_REQUEST['opcion']==1){
 		$result=mysql_query("select id from bd_sic.tbl_subcatmuestras where nombre='".$_REQUEST['sub_categoria']."'")or throw_ex(mysql_error());
 		$row=mysql_fetch_object($result);
 		$sub=$row->id;
-		mysql_query("insert into bd_materiasprimas.tbl_codigos_alimentos(id_clasificacion,id_subcatmuestra,nombre)values('".$_REQUEST['clasificacion']."','".$sub."','".$_REQUEST['nombre']."')")or throw_ex(mysql_error());
+		mysql_query("insert into bd_materiasprimas.tbl_codigos_alimentos(codigo,id_clasificacion,id_subcatmuestra,nombre)values('".$_REQUEST['codigo']."','".$_REQUEST['clasificacion']."','".$sub."','".strtoupper($_REQUEST['nombre'])."')")or throw_ex(mysql_error());
 		$id_codigo=mysql_insert_id();
 		mysql_query("insert into bd_materiasprimas.tbl_fuente (id_codigo,nombre)values('".$id_codigo."','".$_REQUEST['fuente']."')")or throw_ex(mysql_error());		
 		$jsondata['resultado'] = "Success";
-		//echo json_encode($jsondata);
+		echo json_encode($jsondata);
 	}
 	catch(Exception $e)
 	{
-		//echo "Error:". $e;
+		echo "Error:". $e;
+	}
+}
+
+//**************************************************Operaciones***************************
+/*************************************************************
+	Accion: Inserta un nuevo codigo de forraje
+	Parametros: Clasificacion, Sub_Categoria, Fuente, Nombre.	
+*******************************************************/
+if ($_REQUEST['opcion']==2){
+	try{
+		$result=mysql_query("select id from bd_sic.tbl_subcatmuestras where nombre='".$_REQUEST['sub_categoria']."'")or throw_ex(mysql_error());
+		$row=mysql_fetch_object($result);
+		$sub=$row->id;
+		mysql_query("insert into bd_materiasprimas.tbl_codigos_alimentos(codigo,id_clasificacion,id_subcatmuestra,nombre)values('".$_REQUEST['codigo']."','".$_REQUEST['clasificacion']."','".$sub."','".$_REQUEST['nombre']."')")or throw_ex(mysql_error());
+		$id_codigo=mysql_insert_id();
+		mysql_query("insert into bd_materiasprimas.tbl_fuente (id_codigo,nombre)values('".$id_codigo."','".$_REQUEST['fuente']."')")or throw_ex(mysql_error());		
+		$jsondata['resultado'] = "Success";
+		echo json_encode($jsondata);
+	}
+	catch(Exception $e)
+	{
+		echo "Error:". $e;
 	}
 }
 

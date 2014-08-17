@@ -61,15 +61,10 @@ require_once('menu_superior.php');
       <td><select class="combos" title="q" id="cmb_subcategoria_1_1"></select></td>
       </tr>
       <tr>
-      <td class="Arial14Negro"><div align="left">Fuente</div></td>      
-      <td class="Arial14Negro"><input id="txt_fuente" class="inputbox"  type="text" /></td>
-      </tr>
-      <tr>
       <td class="Arial14Negro"><div align="left">Nombre</div></td>      
 	    <td class="Arial14Negro"><input id="txt_nombre" class="inputbox" type="text" /></td>	    
 	    </tr>	        
 	  </table>
-        <div align="center" class="Arial18Azul" style="margin-bottom:10px; margin-top:10px;"><a href="codificacion_materias.php" target="_blank">Descargar listado de codificaci&oacute;n</a></div>
 	<div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardarm" id="btn_guardarm" type="image" src="../img/btn_guardar.png" /></div>    
 </div><!--fin cuadro blanco--> 
 </div><!--fin cuadro azul--> 
