@@ -2,7 +2,7 @@
 session_start();
 require_once('cnx/conexion.php');
 require_once('cnx/session_activa.php');
-$hoy=date("Y-m-d H:i:s");
+$hoy=date("Y-m-d");
 conectar();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -60,6 +60,20 @@ if ($_REQUEST['estado']==1){
     $start_date=gregoriantojd($date_parts1[1], $date_parts1[2], $date_parts1[0]);
     $end_date=gregoriantojd($date_parts2[1], $date_parts2[2], $date_parts2[0]);
     $intervalo= $end_date - $start_date;
+
+
+//calculo si tienen mas de 10 dias habiles
+$time1 = strtotime($row['fecha_ingreso']); 
+$time2 = strtotime($hoy); 
+$intervalo = 0; 
+while($time1 < $time2) { 
+   $chk = date('D', $time1); # Actual date conversion 
+   if($chk != 'Sat' && $chk != 'Sun') 
+      $intervalo++; 
+
+   $time1 += 86400; # Add a day 
+} 
+
 
     if ($intervalo>=10){
         echo '<td><div align="center" class="Arial14rojo">'.$row['fecha_ingreso'].'</div></td>';
