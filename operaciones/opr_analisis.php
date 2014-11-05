@@ -78,7 +78,7 @@ if($_REQUEST['opcion']==4)
 
 	}else{
 
-	$result=mysql_query("update tbl_resultados set estado='"."1"."',fecha_aprobacion='".$hoy."',base_fresca='".utf8_decode($_REQUEST['base_fresca'])."',incertidumbre_fresca='".utf8_decode($_REQUEST['incertidumbre_fresca'])."',observaciones_gerente='".utf8_decode($_REQUEST['observaciones_gerente'])."' where id='".$_REQUEST['id']."'");
+	$result=mysql_query("update tbl_resultados set estado='"."1"."',fecha_aprobacion='".$hoy."',base_fresca='".utf8_decode($_REQUEST['base_fresca'])."',incertidumbre_fresca='".utf8_decode($_REQUEST['incertidumbre_fresca'])."',base_seca='".utf8_decode($_REQUEST['base_seca'])."',incertidumbre_seca='".utf8_decode($_REQUEST['incertidumbre_seca'])."',observaciones_gerente='".utf8_decode($_REQUEST['observaciones_gerente'])."' where id='".$_REQUEST['id']."'");
 	$result=mysql_query("Select id_analisis from tbl_resultados where id='".$_REQUEST['id']."'");
 	$row=mysql_fetch_assoc($result);
 	$result2=mysql_query("update tbl_analisis set estado='"."3"."',fecha_gerentes='".$hoy."' where id='".$row['id_analisis']."'");

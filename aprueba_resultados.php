@@ -26,7 +26,7 @@ $("#btn_aprobar").live("click", function(event){
         type: "POST",
 		async: false,
         url: "operaciones/opr_analisis.php",		
-        data: "opcion=4&id="+$('#id').val()+"&laboratorio="+$('#laboratorio').val()+"&contrato="+$('#contrato').val()+"&base_fresca="+$('#txt_fresca').val()+"&incertidumbre_fresca="+$('#txt_incertidumbre_fresca').val()+"&observaciones_gerente="+$('#txt_observaciones_gerente').val(),
+        data: "opcion=4&id="+$('#id').val()+"&laboratorio="+$('#laboratorio').val()+"&contrato="+$('#contrato').val()+"&base_fresca="+$('#txt_fresca').val()+"&incertidumbre_fresca="+$('#txt_incertidumbre_fresca').val()+"&base_seca="+$('#txt_seca').val()+"&incertidumbre_seca="+$('#txt_incertidumbre_seca').val()+"&observaciones_gerente="+$('#txt_observaciones_gerente').val(),
         success: function(datos){
         	/*if (datos=="Success"){
         		

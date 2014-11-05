@@ -192,10 +192,10 @@ if($tipo_query!=""){
 							</div>
 						</td>
                         <td align="center">' .
-                           $row[1] .
+                           utf8_encode($row[1]) .
                         '</td>
                         <td align="center">' .
-                           $row[2] .
+                           utf8_encode($row[2])	 .
                         '</td>
                         
 						<td style="width:10%" style align="center">

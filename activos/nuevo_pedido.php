@@ -126,8 +126,9 @@ if($tipo_query!="0"){
 	<input type="hidden" name="FECHA_LARGA" id="FECHA_LARGA" value="<?php  echo $fecha_larga;  ?>">
 	<input type="hidden" name="USUARIO" id="USUARIO" value="<?php  echo $_SESSION['nombre_usuario'];  ?>">
 	
-	
+
 	<table style="width:700px;" border="0">
+
 		<tr>
 			<td class="Arial14Negro" colspan="2">
 				Responsable
@@ -144,9 +145,9 @@ if($tipo_query!="0"){
 							
 								while ($row=mysql_fetch_object($result)){
 									if($id_personal==$row->ID_PERSONA){
-										echo '<option selected  value="' . $row->ID_PERSONA .'">' . $row->NOMBRE . '</option>';
+										echo '<option selected  value="' . $row->ID_PERSONA .'">' . utf8_encode($row->NOMBRE) . '</option>';
 									}else{
-										echo '<option value="' . $row->ID_PERSONA .'">' . $row->NOMBRE . '</option>';
+										echo '<option value="' . $row->ID_PERSONA .'">' . utf8_encode($row->NOMBRE) . '</option>';
 									}
 								}
 							
@@ -175,9 +176,9 @@ if($tipo_query!="0"){
 							
 								while ($row=mysql_fetch_object($result)){
 									if($id_activo==$row->ID_ACTIVOS){
-										echo '<option selected  value="' . $row->ID_ACTIVOS .'">' . $row->ACTIVO . '  -****-    PLACA [' . $row->PLACA . ']</option>';
+										echo '<option selected  value="' . $row->ID_ACTIVOS .'">' . utf8_encode($row->ACTIVO) . '  -****-    PLACA [' . $row->PLACA . ']</option>';
 									}else{
-										echo '<option value="' . $row->ID_ACTIVOS .'">' . $row->ACTIVO . '     PLACA [' . $row->PLACA . ']</option>';
+										echo '<option value="' . $row->ID_ACTIVOS .'">' . utf8_encode($row->ACTIVO) . '     PLACA [' . $row->PLACA . ']</option>';
 									}
 								}
 							

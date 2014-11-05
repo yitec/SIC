@@ -174,9 +174,9 @@ if($tipo_query!="0"){
 							while($row = mysql_fetch_array($query_result))
 							{	
 								if($id_ubicacion==$row[0]){
-									echo '<option selected value="' . $row[0] . '">' . $row[1] . '</option>';
+									echo '<option selected value="' . $row[0] . '">' . utf8_encode($row[1]) . '</option>';
 								}else{
-									echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+									echo '<option value="' . $row[0] . '">' . utf8_encode($row[1]) . '</option>';
 								}
 							}
 						}
@@ -271,28 +271,34 @@ if($tipo_query!="0"){
 		
 		
 		<tr>
-			<td align="center" class="Arial14Negro col_mitad" >
+			<td align="center" class="Arial14Negro" >
 				Placa
 			</td>
-			<td align="center" class="Arial14Negro col_mitad" >
-				Precio
+			<td align="left"  class="Arial14Negro " >
+				Moneda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio
 			</td>
+			
 		</tr>
 		<tr>
-			<td align="center"  class="Arial14Negro col_mitad" >
+			<td align="center"  class="Arial14Negro " >
 				<input name="txt_placa" type="text" class="inputbox_largo" id="txt_placa" value="<?php
 					if($placa!=""){
 						echo $placa;				
 					}				
 				?>"/>
 			</td>
-			<td align="center" class="Arial14Negro" >
-				<input name="txt_precio" type="text" class="inputbox_largo" id="txt_precio" maxlength="15" value="<?php
+			<td align="left" class="Arial14Negro" >
+				<select  type="select" class="combos_medianos" name="cmb_moneda"   id="cmb_moneda"/>
+				<option value="Colónes" selected="selected">Colónes</option>
+				<option value="Dolares">Dolares</option>
+				</select>
+				<input name="txt_precio" type="text" class="inputbox" id="txt_precio" maxlength="12" value="<?php
 					if($precio!=""){
 						echo $precio;				
 					}				
 				?>"/>
 			</td>
+			
 		</tr>
 		
 		
@@ -325,9 +331,9 @@ if($tipo_query!="0"){
 							while($row = mysql_fetch_array($query_result))
 							{	
 								if($id_responsable==$row[0]){
-									echo '<option selected value="' . $row[0] . '">' . $row[1] . '</option>';
+									echo '<option selected value="' . $row[0] . '">' . utf8_encode($row[1]) . '</option>';
 								}else{
-									echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+									echo '<option value="' . $row[0] . '">' . utf8_encode($row[1]) . '</option>';
 								}
 							}
 						}
@@ -386,7 +392,7 @@ if($tipo_query!="0"){
 				Factura
 			</td>
 			<td align="center" class="Arial14Negro col_mitad" >
-				
+				Fecha				
 			</td>
 		</tr>
 		<tr>
@@ -398,10 +404,15 @@ if($tipo_query!="0"){
 				?>"/>
 			</td>
 			<td align="center"  class="Arial14Negro col_mitad" >
-				
+					<input name="txt_fecha_x" type="text" class="inputbox_largo" id="txt_fecha_x" maxlength="45" value="<?php
+					if($fecha!=""){
+						echo $fecha;				
+					}				
+				?>"/>
 			</td>
 		</tr>
 		
+
 		<tr>
 			<td class="Arial14Negro" >
 					<div align="center" style="margin-top:20px; margin-bottom:20px;">

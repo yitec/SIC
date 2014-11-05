@@ -152,6 +152,16 @@
   -webkit-border-radius: 4px; -moz-border-radius: 4px;
   width:100%
 }
+.combos_medianos{
+  background:#FFF;
+  font-size: 11px;
+  color: #000;
+  border: 1px solid #DBDBDB;
+  height: 31px;
+  padding:0px;
+  -webkit-border-radius: 4px; -moz-border-radius: 4px;
+  width:30%;
+}
 
 
 .combos_persona{

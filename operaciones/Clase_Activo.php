@@ -35,10 +35,10 @@ class Activos{
 				$jsondata['resultado'] = 'EXISTE';
 			}else{				
 				
-				$result=mysql_query("insert into tbl_activos(activo,descripcion,modelo,serie,fecha_creacion,placa,precio,documento,fecha_modificacion,prestamo,oaf,factura)values('" . utf8_decode($v_datos[1]) . "','" . utf8_decode($v_datos[8]) . "','" . $v_datos[6] . "','" . $v_datos[7] . "',NOW(), '" . $v_datos[9] . "'," .  $v_datos[10]  . ",'" . $v_datos[11] . "', NOW()," . $v_datos[14]  . "," .  $v_datos[15]  .  ",'" .  $v_datos[16] . "');" , $_SESSION['conectact']);
+				$result=mysql_query("insert into tbl_activos(activo,descripcion,modelo,serie,fecha_creacion,placa,precio,documento,fecha_modificacion,prestamo,oaf,factura,moneda)values('" . utf8_decode($v_datos[1]) . "','" . utf8_decode($v_datos[8]) . "','" . $v_datos[6] . "','" . $v_datos[7] . "',NOW(), '" . $v_datos[9] . "'," .  $v_datos[10]  . ",'" . $v_datos[11] . "', NOW()," . $v_datos[14]  . "," .  $v_datos[15]  .  ",'" .  $v_datos[16] . "' ,'" .  $v_datos[17] . "');" , $_SESSION['conectact']);
 								 
 				if(!$result){
-					$jsondata['resultado'] = "insert into tbl_activos(activo,descripcion,modelo,serie,fecha_creacion,placa,precio,documento,fecha_modificacion)values('" . utf8_decode($v_datos[1]) . "','" . utf8_decode($v_datos[8]) . "','" . $v_datos[6] . "','" . $v_datos[7] . "',NOW(), '" . $v_datos[9] . "'," .  $v_datos[10]  . ",'" . $v_datos[11] . "', NOW());" ;//'Query invalido: ' . mysql_error() ;
+					$jsondata['resultado'] = "insert into tbl_activos(activo,descripcion,modelo,serie,fecha_creacion,placa,precio,documento,fecha_modificacion,moneda)values('" . utf8_decode($v_datos[1]) . "','" . utf8_decode($v_datos[8]) . "','" . $v_datos[6] . "','" . $v_datos[7] . "',NOW(), '" . $v_datos[9] . "'," .  $v_datos[10]  . ",'" . $v_datos[11] . "', NOW(),'" .  $v_datos[17] . "');" ;//'Query invalido: ' . mysql_error() ;
 				}else{
 					
 					$result=mysql_query("select id_activos from tbl_activos where activo = '" . $v_datos[1] . "';",$_SESSION['conectact']);
@@ -113,230 +113,201 @@ class Activos{
 		$v_datos=explode("|",$parametros);	
 		
 		//primero se actualiza en la tabla activos
-		
-		
 		$result=mysql_query("SELECT 1 FROM tbl_activos WHERE placa = '" . $v_datos[9] . "' and  ID_ACTIVOS <> " . $v_datos[0] ,$_SESSION['conectact']);
-		
 		//si da error que me despliegue el error del query   
 		if (!$result) {    		
 				$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
 		}else{
 			if(mysql_num_rows($result)>= 1){
 				$jsondata['resultado'] = 'EXISTE';
-		}else{
-		
-		
-		
-		
-		
-		
-		$result=mysql_query("update tbl_activos set 
-			activo = '" . utf8_decode($v_datos[1]) . "' , 
-			descripcion = '" . utf8_decode($v_datos[8]) . "' , 
-			modelo ='" . $v_datos[6] . "' ,  
-			serie ='" . $v_datos[7] . "', 
-			placa='" . $v_datos[9] . "', 
-			precio= " . $v_datos[10] . " , 
-			fecha_modificacion = NOW() , 
-			documento = '" . $v_datos[11] . "', 
-			prestamo = " .	$v_datos[14]  . " ,	
-			oaf = " . $v_datos[15]  . " ,
-			factura = '" . $v_datos[16]  . "'  where id_activos = " .  $v_datos[0]  ,$_SESSION['conectact']);
+			}else{
+				$result=mysql_query("update tbl_activos set 
+				activo = '" . utf8_decode($v_datos[1]) . "' , 
+				descripcion = '" . utf8_decode($v_datos[8]) . "' , 
+				modelo ='" . $v_datos[6] . "' ,  
+				serie ='" . $v_datos[7] . "', 
+				placa='" . $v_datos[9] . "', 
+				precio= " . $v_datos[10] . " , 
+				fecha_modificacion = NOW() , 
+				documento = '" . $v_datos[11] . "', 
+				prestamo = " .	$v_datos[14]  . " ,	
+				oaf = " . $v_datos[15]  . " ,
+				factura = '" . $v_datos[16]  . "',moneda = '" . $v_datos[17]  . "'  where id_activos = " .  $v_datos[0]  ,$_SESSION['conectact']);
 									 
-		if(!$result){
-			$jsondata['resultado'] = 'Query invalido 1: ' . mysql_error() ;
-		}else{
-			
-			//Se procede a verificar el estado
-			if($v_datos[2]!=0){
-				$result=mysql_query("SELECT 1 FROM tbl_activo_estado WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-									 
-				if($result){
-					if(mysql_num_rows($result)>0){
-						//se procede a hacer update
-						$result=mysql_query("update tbl_activo_estado set id_estado = " . $v_datos[2] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
+				if(!$result){
+					$jsondata['resultado'] = 'Query invalido 1: ' . mysql_error() ;
+				}else{
+					//Se procede a verificar el estado del activo
+					if($v_datos[2]!=0){
+						$result=mysql_query("SELECT 1 FROM tbl_activo_estado WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);									 
+						if($result){
+							if(mysql_num_rows($result)>0){
+								//se procede a hacer update
+								$result=mysql_query("update tbl_activo_estado set id_estado = " . $v_datos[2] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
+								}
+							}else{
+								//se procede a hacer insert
+								$result=mysql_query("insert into tbl_activo_estado (id_activo,id_estado)values(" . $v_datos[0] . "," . $v_datos[2] . ")",$_SESSION['conectact']);;
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
+								}
+							}				
+						}else{
+							$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
 						}
 					}else{
-						//se procede a hacer insert
-						$result=mysql_query("insert into tbl_activo_estado (id_activo,id_estado)values(" . $v_datos[0] . "," . $v_datos[2] . ")",$_SESSION['conectact']);;
+						//hace delete a la relacion
+						echo "entro en 1";
+						$result=mysql_query("DELETE FROM tbl_activo_estado WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
 						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
+						$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
 						}
 					}
+					//FIN de verificar el estado
+			
+			
+			
+					//Se procede a verificar el ubicacion
+					if($v_datos[3]!=0){
+						$result=mysql_query("SELECT 1 FROM tbl_ubicacion_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+						if($result){
+							if(mysql_num_rows($result)>0){
+								//se procede a hacer update
+								$result=mysql_query("update tbl_ubicacion_activo set id_ubicacion = " . $v_datos[3] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
+								}
+							}else{
+								//se procede a hacer insert
+								$result=mysql_query("insert into tbl_ubicacion_activo (id_activo,id_ubicacion)values(" . $v_datos[0] . "," . $v_datos[3] . ")",$_SESSION['conectact']);;
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
+								}
+							}
 				
-				}else{
-					$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
-				}
-			}else{
-				//hace delete a la relacion
-				$result=mysql_query("DELETE FROM tbl_activo_estado WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-				if(!$result){
-					$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
-				}
-			}
-			//FIN de verificar el estado
+						}else{
+							$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
+						}
+					}else{
+						//hace delete a la relacion
+						echo "entro en 2";
+						$result=mysql_query("DELETE FROM tbl_ubicacion_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+						if(!$result){
+						$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
+						}
+					}
+					//FIN de verificar ubicacion
 			
 			
+					//Se procede a verificar categoria
+					if($v_datos[4]!=0){				
+						$result=mysql_query("SELECT 1 FROM tbl_activo_categoria WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);									 
+						if($result){
+							if(mysql_num_rows($result)>0){
+								//se procede a hacer update
+								$result=mysql_query("update tbl_activo_categoria set id_categoria = " . $v_datos[4] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
+								}
+							}else{
+								//se procede a hacer insert
+								$result=mysql_query("insert into tbl_activo_categoria (id_activo,id_categoria)values(" . $v_datos[0] . "," . $v_datos[4] . ")",$_SESSION['conectact']);;
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
+								}
+							}
+						}else{
+							$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
+						}
+					}else{
+						//hace delete a la relacion
+						echo "entro en 3";
+						$result=mysql_query("DELETE FROM tbl_activo_categoria WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+						if(!$result){
+							$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
+						}
+					}
+					//FIN de verificar categoria
 			
-			//Se procede a verificar el ubicacion
-			if($v_datos[3]!=0){
+			
+					//Se procede a verificar marca
+					if($v_datos[5]!=0){
+						$result=mysql_query("SELECT 1 FROM tbl_marca_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);									 
+						if($result){
+							if(mysql_num_rows($result)>0){
+								//se procede a hacer update
+								$result=mysql_query("update tbl_marca_activo set id_marca = " . $v_datos[5] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
+								}
+							}else{
+								//se procede a hacer insert
+								$result=mysql_query("insert into tbl_marca_activo (id_activo,id_marca)values(" . $v_datos[0] . "," . $v_datos[5] . ")",$_SESSION['conectact']);;
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
+								}
+							}
+						}else{
+							$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
+						}
+					}else{
+						//hace delete a la relacion
+						echo "entro en 4";
+						$result=mysql_query("DELETE FROM tbl_marca_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+						if(!$result){
+							$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
+						}
+					}
+					//FIN de verificar marca
+			
+			
+					//Se procede a verificar responsable
+					if($v_datos[13]!=0){
+						$result=mysql_query("SELECT 1 FROM tbl_responsable WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);									
+						if($result){
+							if(mysql_num_rows($result)>0){
+								//se procede a hacer update
+								$result=mysql_query("update tbl_responsable set id_persona = " . $v_datos[13] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+								if(!$result){
+									$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
+								}
+								}else{
+									//se procede a hacer insert
+									$result=mysql_query("insert into tbl_responsable (id_activo,id_persona)values(" . $v_datos[0] . "," . $v_datos[13] . ")",$_SESSION['conectact']);;
+									if(!$result){
+										$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
+									}
+								}
 				
-				$result=mysql_query("SELECT 1 FROM tbl_ubicacion_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-									 
-				if($result){
+						}else{
+							$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
+						}
+					}else{
+						//hace delete a la relacion
+						echo "entro en 5";
+						$result=mysql_query("DELETE FROM tbl_responsable WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
+						if(!$result){
+							$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
+						}
+					}
+					//FIN de verificar responsable											
+		
+					if($jsondata['resultado']==""){
+						mysql_query("insert into tbl_historico_activos(detalle,fecha,opcion,usuario)values('Se actualizo el activo:" . $v_datos[1] .  "-Placa:" . $v_datos[9] . "',NOW(),'ACTIVOS','" . $v_datos[12] . "')",$_SESSION['conectact']);
+						$jsondata['resultado']="Success";
+					}	
+					
 
-					if(mysql_num_rows($result)>0){
-						//se procede a hacer update
-						$result=mysql_query("update tbl_ubicacion_activo set id_ubicacion = " . $v_datos[3] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
-						}
-					}else{
-						//se procede a hacer insert
-						$result=mysql_query("insert into tbl_ubicacion_activo (id_activo,id_ubicacion)values(" . $v_datos[0] . "," . $v_datos[3] . ")",$_SESSION['conectact']);;
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
-						}
-					}
-				
-				}else{
-					$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
-				}
-			}else{
-				//hace delete a la relacion
-				$result=mysql_query("DELETE FROM tbl_ubicacion_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-				if(!$result){
-					$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
-				}
-			}
-			//FIN de verificar ubicacion
-			
-			
-			//Se procede a verificar categoria
-			if($v_datos[4]!=0){
-			
-	
-				
-				$result=mysql_query("SELECT 1 FROM tbl_activo_categoria WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-									 
-				if($result){
-					if(mysql_num_rows($result)>0){
-						//se procede a hacer update
-						$result=mysql_query("update tbl_activo_categoria set id_categoria = " . $v_datos[4] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
-						}
-					}else{
-						//se procede a hacer insert
-						$result=mysql_query("insert into tbl_activo_categoria (id_activo,id_categoria)values(" . $v_datos[0] . "," . $v_datos[4] . ")",$_SESSION['conectact']);;
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
-						}
-					}
-				
-				}else{
-					$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
-				}
-			}else{
-				//hace delete a la relacion
-				$result=mysql_query("DELETE FROM tbl_activo_categoria WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-				if(!$result){
-					$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
-				}
-			}
-			//FIN de verificar categoria
-			
-			
-			//Se procede a verificar marca
-			if($v_datos[5]!=0){
-				$result=mysql_query("SELECT 1 FROM tbl_marca_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-									 
-				if($result){
-					if(mysql_num_rows($result)>0){
-						//se procede a hacer update
-						$result=mysql_query("update tbl_marca_activo set id_marca = " . $v_datos[5] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
-						}
-					}else{
-						//se procede a hacer insert
-						$result=mysql_query("insert into tbl_marca_activo (id_activo,id_marca)values(" . $v_datos[0] . "," . $v_datos[5] . ")",$_SESSION['conectact']);;
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
-						}
-					}
-				
-				}else{
-					$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
-				}
-			}else{
-				//hace delete a la relacion
-				$result=mysql_query("DELETE FROM tbl_marca_activo WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-				if(!$result){
-					$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
-				}
-			}
-			//FIN de verificar marca
-			
-			
-			//Se procede a verificar responsable
-			if($v_datos[13]!=0){
-				$result=mysql_query("SELECT 1 FROM tbl_responsable WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-									 
-				if($result){
-					if(mysql_num_rows($result)>0){
-						//se procede a hacer update
-						$result=mysql_query("update tbl_responsable set id_persona = " . $v_datos[13] . " WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 3: ' . mysql_error() ;
-						}
-					}else{
-						//se procede a hacer insert
-						$result=mysql_query("insert into tbl_responsable (id_activo,id_persona)values(" . $v_datos[0] . "," . $v_datos[13] . ")",$_SESSION['conectact']);;
-						if(!$result){
-							$jsondata['resultado'] = 'Query invalido 4: ' . mysql_error() ;
-						}
-					}
-				
-				}else{
-					$jsondata['resultado'] = 'Query invalido 2: ' . mysql_error() ;
-				}
-			}else{
-				//hace delete a la relacion
-				$result=mysql_query("DELETE FROM tbl_responsable WHERE id_activo =" . $v_datos[0] ,$_SESSION['conectact']);
-				if(!$result){
-					$jsondata['resultado'] = 'Query invalido 5: ' . mysql_error() ;
-				}
-			}
-			//FIN de verificar responsable			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		}
-		
-		if($jsondata['resultado']==""){
-			mysql_query("insert into tbl_historico_activos(detalle,fecha,opcion,usuario)values('Se actualizo el activo:" . $v_datos[1] .  "-Placa:" . $v_datos[9] . "',NOW(),'ACTIVOS','" . $v_datos[12] . "')",$_SESSION['conectact']);
-			$jsondata['resultado']="Success";
-		}
-		
-		
-	}
-	}
+				}//end  del update
+			}//end del existe
+		}//end	linea 120
 	echo json_encode($jsondata);
-	}
+	}//end la funcion
 	
 	function elimina_activo($parametros){
-		
+		echo "entro en elimina activo";
 		$resultado ="";
 		$v_datos=explode("|",$parametros);
 		

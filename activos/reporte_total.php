@@ -62,6 +62,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 
 	
 <form action="ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
+
 	<div align="left" style="text-align:left">
 		<a class="link_volver Arial14Azul" href="#" id="ExcelExp"  >  <img src="../img/microsoft_excel.png" alt="delete" height="19" width="19"> Exportar a Excel </a>
 	</div>
@@ -69,16 +70,33 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 	<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" value="" />
 	<input type="hidden" id="Nombre" name="Nombre" value="ReporteTotalActivos" />
 	<div id="tabla_datos">
+	
 	<?php
 		
 		if($query_result){
 				
 				echo '
-				<div class="Tabla_Lista" >
+				<div id="exportar" class="Tabla_Lista" >				
+				<table id="encabezado">
+				<tr>
+				<td>Usuario</td><td>Firma</td>
+				</tr>
+				<tr>
+				<td>Seccion</td>
+				</tr>
+				<tr>
+				<td>Encargado</td>
+				</tr>
+				<tr>
+				<td>Firma</td>
+				</tr>
+
+				</table>
                 <table id="tabla_datost" border="2">
+                <tr>
                     <tr>
                         <td align="center" style="background:#7f7f7f">
-                           Activo
+                           Activos
                         </td>
                         <td align="center"  style="background:#7f7f7f" >
                            Modelo

@@ -1,5 +1,7 @@
   $(document).ready(function(){
 
+ $("#encabezado").hide();
+
  function notificacion(titulo,cuerpo,tipo){
 	$.pnotify({
 	pnotify_title: titulo,
@@ -19,7 +21,7 @@ function validateEmail($email) {
 }
 
 $("#ExcelExp").click(function(event) {
-		$("#datos_a_enviar").val( $("<div>").append( $("#tabla_datost").eq(0).clone()).html());
+		$("#datos_a_enviar").val( $("<div>").append( $("#exportar").eq(0).clone()).html());
 		$("#FormularioExportacion").submit();
 });
 
@@ -55,6 +57,7 @@ $("#btn_guardar_activo").click(function(event){
 		var usuario     =$("#USUARIO").val();
 		var prestamo    =$("#cmb_pres option:selected").val();
 		var oaf			=$("#cmb_oaf option:selected").val();
+		var moneda			=$("#cmb_moneda option:selected").val();
 		
 		if($("#txt_precio").val() != 0){
 			precio = $("#txt_precio").val();
@@ -66,7 +69,7 @@ $("#btn_guardar_activo").click(function(event){
 			parametros = $('#tipo_query').val() + "|" + $("#txt_activo").val()  + "|" +  estado 
 			+ "|" + ubicacion + "|" + categoria + "|" + marca 
 			+ "|" +  $("#txt_modelo").val() + "|" +  $("#txt_serie").val() + "|" + $("#txt_desc").val() 
-			+ "|" +  $("#txt_placa").val() + "|" +  precio + "|" + $("#txt_documento").val() + "|" +  usuario + "|" + responsable + "|" + prestamo  + "|" +  oaf  + "|" + $("#txt_factura").val() ;
+			+ "|" +  $("#txt_placa").val() + "|" +  precio + "|" + $("#txt_documento").val() + "|" +  usuario + "|" + responsable + "|" + prestamo  + "|" +  oaf  + "|" + $("#txt_factura").val() + "|" + $("#cmb_moneda").val() ;
 		
 			metodo = "guarda_activo";
 		}else{
@@ -74,7 +77,7 @@ $("#btn_guardar_activo").click(function(event){
 			parametros = $('#tipo_query').val() + "|" + $("#txt_activo").val()  + "|" +  estado 
 			+ "|" + ubicacion + "|" + categoria + "|" + marca 
 			+ "|" +  $("#txt_modelo").val() + "|" +  $("#txt_serie").val() + "|" + $("#txt_desc").val() 
-			+ "|" +  $("#txt_placa").val() + "|" +  precio + "|" + $("#txt_documento").val() + "|" +  usuario + "|" + responsable + "|" + prestamo  + "|" +  oaf  + "|" + $("#txt_factura").val() ;
+			+ "|" +  $("#txt_placa").val() + "|" +  precio + "|" + $("#txt_documento").val() + "|" +  usuario + "|" + responsable + "|" + prestamo  + "|" +  oaf  + "|" + $("#txt_factura").val()+ "|" + $("#cmb_moneda").val() ;
 		
 			metodo = "actualiza_activo";
 		}
