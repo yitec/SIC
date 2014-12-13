@@ -34,6 +34,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 	</br>
 
 <form action="ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
+
 	<div align="left" style="text-align:left">
 		<a class="Arial14Azul" href="#" id="ExcelExp" >  <img src="../img/microsoft_excel.png" alt="delete" height="19" width="19"> Exportar a Excel </a>
 	</div>
@@ -49,7 +50,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 				
 				echo '
 				<div class="Tabla_Lista" >
-                 <table id="tabla_datost" border="2">
+                 <table id="exportar" id="tabla_datost" border="2">
                     <tr>
                         <td align="center" style="background:#7f7f7f">
                            Activo

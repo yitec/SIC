@@ -50,7 +50,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 		if($query_result){
 				
 				echo '
-				<div class="Tabla_Lista" >
+				<div id="exportar" class="Tabla_Lista" >
                 <table id="tabla_datost" border="1">
                     <tr>
                         <td align="center" style="background:#7f7f7f">

@@ -51,7 +51,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 				
 				
 				echo '
-				<div class="Tabla_Lista" >
+				<div id="exportar" class="Tabla_Lista" >
                 <table id="tabla_datost" border="2">
                     <tr>
                         <td align="center" style="background:#7f7f7f">
@@ -118,7 +118,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 					echo'
 					 <tr>
 						<td colspan="9" align="center" style="background:#F4FA58; font-size:18px">' 
-							. $row[1]  .
+							.utf8_encode($row[1])  .
 						'</td>
 					 </tr>';
 					 
@@ -175,20 +175,13 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 						'</td>
 					 </tr>';
 				
-				}
-				
-				
-				
-				
-				
+				}				
 				echo '
 				</table>
-				</div';
-				
+				</div';				
 		}
 	?>
-	</div>
-	 
+	</div>	 
 </div><!--fin cuadro blanco--> 
 </form>
 </div><!--fin cuadro azul--> 
