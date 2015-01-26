@@ -9,7 +9,7 @@ $sql="select id,tipo_muestra,nombre_producto from tbl_proxi2013";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	
-	$sql2="select codigo,nombre from tbl_codigos where nombre like '%".$row->nombre_producto."%' or nombre like '%".$row->tipo_muestra."%'";
+	$sql2="select codigo,nombre from tbl_codigos_alimentos where nombre like '%".$row->nombre_producto."%' or nombre like '%".$row->tipo_muestra."%'";
 	$result2=mysql_query($sql2);
 	if (!$result2) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
