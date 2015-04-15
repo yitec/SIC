@@ -470,17 +470,8 @@ while($row2=mysql_fetch_array($result2)){
 			if (strlen($row3['nombre_muestra'])>18){
 				$pdf->SetTextColor(0,0,0);
 				$pdf->SetFont('Arial','',8);
-				$saltoi=strpos($row3['nombre_muestra'],"|");
 				if (strlen($row3['nombre_muestra'])<=71){
-					if ($salto>=0){
-						$inicio=substr($row3['nombre_muestra'], 0,$saltoi);
-						$fin=substr($row3['nombre_muestra'], $saltoi+1,strlen($row3['nombre_muestra']));	
-						$pdf->MultiCell(48,5,utf8_decode($inicio."\n".$fin."\n" ),0,'L');
-					}else{
-					$pdf->Cell(48,15,utf8_decode($row3['nombre_muestra']),1,1,'C');
-					}
-					$salto=0;	
-
+					$pdf->Cell(48,15,utf8_decode($row3['nombre_muestra']),1,1,'C');	
 				}else{
 					$pdf->MultiCell(48,5,utf8_decode($row3['nombre_muestra']),1,'L');
 				}
@@ -497,15 +488,15 @@ $pdf->Ln(0);
 $pdf->SetX(58);
 		
 	if($row2[2]==1){
-		$pdf->MultiCell(20,5,"Química\n".$row3['codigo']."\n ",0,1,'L');
+		$pdf->MultiCell(20,5,"Química\n".$row3['codigo']."\n ",1,1,'L');
 		//$pdf->Cell(18,10,'Química'\n,1,0,'C');
 	}
 	if($row2[2]==2){
-		$pdf->MultiCell(20,5,"Microbiología\n".$row3['codigo']."\n ",0,1,'L');		
+		$pdf->MultiCell(20,5,"Microbiología\n".$row3['codigo']."\n ",1,1,'L');		
 		//$pdf->Cell(18,10,'Microbiología',1,0,'C');
 	}
 	if($row2[2]==3){
-		$pdf->MultiCell(20,5,"Bromatología\n".$row3['codigo']."\n ",0,1,'L');		
+		$pdf->MultiCell(20,5,"Bromatología\n".$row3['codigo']."\n ",1,1,'L');		
 		//$pdf->Cell(18,10,'Bromatología',1,0,'C');	
 	}
 	$pdf->Ln(-15);	
@@ -522,13 +513,13 @@ $pdf->SetX(58);
 			if($row2['37']=="Salmonella sp"){
 			$pdf->SetFont('Arial','IUB',8);
 			}
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n\n",0,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n ",1,'L');
 			$pdf->Ln(-10);
 			$pdf->SetX(154);
 			$pdf->SetFont('Arial','',8);
 		}else{
 			$pdf->SetTextColor(39,210,75);
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n\n",0,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n ",1,'L');
 			$pdf->Ln(-10);
 			$pdf->SetX(154);
 			$pdf->SetFont('Arial','',8);
@@ -540,20 +531,16 @@ $pdf->SetX(58);
 		if (strlen($row2[4])>=50){
 			$pdf->SetTextColor(0,0,0);
 			$pdf->SetFont('Arial','',8);
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n",0,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n",1,'L');
 			$pdf->Ln(-10);
 			$pdf->SetX(154);
 			$pdf->SetFont('Arial','',8);
 		}else{
 			$pdf->SetTextColor(0,0,0);
-			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n",0,'L');
+			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n",1,'L');
 			$pdf->Ln(-10);
 			$pdf->SetX(154);
 		}
-	}
-	$var = $pdf->GetY();
-	if($cont==1){		
-		$pdf->SetY($var+5);
 	}
 	
 	//pregunto si hay resultado en base fresca, si la hay primero va el resultado en base fresca y luego seca
@@ -646,7 +633,7 @@ $pdf->SetX(58);
 		$pdf->SetY($var-25);
 		$var2 = $pdf->GetX();		
 		$pdf->SetX($var2+154);
-		$pdf->MultiCell(36,5,$r1."\n ",0,'L');
+		$pdf->MultiCell(36,5,$r1."\n ",1,'L');
 			//$pdf->Cell(56,10,$resultado,1,0,'C');
 			$pdf->SetFont('Arial','',8);
 		}else{
@@ -659,10 +646,9 @@ $pdf->SetX(58);
 		$pdf->SetFont('Arial','',8);	
 		$var2 = $pdf->GetX();		
 		$pdf->SetX($var2+154);
-		$pdf->MultiCell(36,5,$r1."\n ".$r2."\n\n ",0,'L');		
+		$pdf->MultiCell(36,5,$r1."\n ".$r2."\n ",1,'L');
 			//$pdf->Cell(56,10,$resultado,1,0,'C');
 		}
-
 	}
 
 

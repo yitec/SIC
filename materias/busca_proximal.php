@@ -4,12 +4,12 @@ ini_set('memory_limit', '512M');
 include('../cnx/conexion.php');
 conectar();
 $cont=0;
-echo $proxi="'Proteína Cruda','Fibra Cruda','Humedad a 60 ºC (Materia Seca a 60 ºC)','ELN','Extracto etéreo',
+$proxi="'Proteína Cruda','Fibra Cruda','Humedad a 60 ºC (Materia Seca a 60 ºC)','ELN','Extracto etéreo',
 'Humedad 135 °C','Humedad 135° C','Cenizas','Proteína Equivalente (NNP)' ,
 'Lignina Detergente Ácido','Fibra Detergente Neutro','Fibra Detergente Ácida',
 'Lignina Detergente Ácido','Tamaño de Partículas','Energía Bruta'";
 echo "<br><br>";
-echo $sql="select cat.nombre,mues.numero_muestra,mues.id_contrato as consecutivo,mues.id as id_muestra,
+ $sql="select cat.nombre,mues.numero_muestra,mues.id_contrato as consecutivo,mues.id as id_muestra,
 mues.fecha_ingreso, mues.numero_muestra, inf.tipo_alimento,inf.nombre_producto,inf.procedencia  
 from tbl_muestras mues join tbl_analisis ana 
 ON ana.id_muestra=mues.numero_muestra 
@@ -17,7 +17,7 @@ join tbl_categoriasanalisis cat
 ON cat.id=ana.id_analisis
 join tbl_infmuestras inf
 on mues.id_contrato=inf.cons_contrato
-where mues.fecha_ingreso>='20130101' and mues.fecha_ingreso<='20131231' 
+where mues.fecha_ingreso>='20140101' and mues.fecha_ingreso<='20141231' 
 and cat.nombre in (".utf8_decode($proxi).") and metodo not like 'no se realiza%'
 group by mues.id order by mues.id_contrato";
 $result=mysql_query($sql);
@@ -56,86 +56,86 @@ and ana.id_contrato='".$id."'";
 	
 	switch (utf8_encode($row2->nombre)) {
     case "Proteína Cruda":
-		echo "||entro Prote||".$id;
+		//echo "||entro Prote||".$id;
         $analisis="proteína_cruda";
 		$total++;
 		$encontrado=true;
         break;
     case "Fibra Cruda":
-		echo "||entro fibra||".$id;
+		//echo "||entro fibra||".$id;
         $analisis="fibra_cruda";
 		$total++;
 		$encontrado=true;
         break;
     case "Humedad a 60 ºC (Materia Seca a 60 ºC)":
-        echo "||entro materia||".$id;
+        //echo "||entro materia||".$id;
 		$analisis="materia_seca";
 		$total++;
 		$encontrado=true;
         break;
 	case "ELN":
-		echo "||entro eln||".$id;
+		//echo "||entro eln||".$id;
         $analisis="eln";
 		$total++;
 		$encontrado=true;
     break;
 	case "Extracto etéreo":
-		echo "||entro extrato||".$id;
+		//echo "||entro extrato||".$id;
         $analisis="extracto_etereo";
 		$total++;
 		$encontrado=true;
         break;	
 	case "Humedad 135 °C":
-		echo "||entro 135||".$id;
+		//echo "||entro 135||".$id;
         $analisis="humedad_135";
 		$total++;
 		$encontrado=true;
         break;
 	
 	case "Cenizas":
-		echo "||entro cenizas||".$id;
+		//echo "||entro cenizas||".$id;
         $analisis="cenizas";
 		$total++;
 		$encontrado=true;
         break;
 	
 	case "Proteína Equivalente (NNP)":
-		echo "||entro NNP||".$id;
+		//echo "||entro NNP||".$id;
         $analisis="nnp";
 		$total++;
 		$encontrado=true;
         break;
 	
 	case "Lignina Detergente Ácido":
-		echo "||entro Ligni||".$id;
+		//echo "||entro Ligni||".$id;
         $analisis="cenizas";
 		$total++;
 		$encontrado=true;
         break;
 	
 		case "Fibra Detergente Neutro":
-		echo "||entro fdn||".$id;
+		//echo "||entro fdn||".$id;
         $analisis="cenizas";
 		$total++;
 		$encontrado=true;
         break;
 	
 		case "Fibra Detergente Ácida":
-		echo "||entro fda||".$id;
+		//echo "||entro fda||".$id;
         $analisis="cenizas";
 		$total++;
 		$encontrado=true;
         break;
 		
 		case "Tamaño de Partículas":
-		echo "||entro particulas||".$id;
+		//echo "||entro particulas||".$id;
         $analisis="cenizas";
 		$total++;
 		$encontrado=true;
         break;
 	
 		case "Energía Bruta":
-		echo "||entro enegia||".$id;
+		//echo "||entro enegia||".$id;
         $analisis="cenizas";
 		$total++;
 		$encontrado=true;
@@ -147,7 +147,7 @@ and ana.id_contrato='".$id."'";
 	}//end while
 	
 	if ($encontrado==false){
-	echo"************analisis******->".$analisis_procesar;
+	//echo"************analisis******->".$analisis_procesar;
 	}
 	//echo "<br>Total-> ".$total;
 	if ($total>=1){
@@ -159,11 +159,16 @@ and ana.id_contrato='".$id."'";
 		$clase_alimento=busca_clase_alimento($id,$numero_muestra);
 		$procedencia=busca_region($procedencia);
 
-		$sql3="insert into bd_materiasprimas.tbl_proxi2013 (consecutivo_contrato,numero_muestra,tipo_muestreo,clase_alimento,tipo_alimento,zona_geografica,year,fecha_ingreso,id_muestra,tipo_muestra,nombre_producto)
+		echo $sql3="insert into bd_materiasprimas.tbl_proxi2014 (consecutivo_contrato,numero_muestra,tipo_muestreo,clase_alimento,tipo_alimento,zona_geografica,year,fecha_ingreso,id_muestra,tipo_muestra,nombre_producto)
 		values
 		('$id','$numero_muestra','$tipo_muestreo','$clase_alimento',2,'$procedencia',29,'$fecha_ingreso','$id_muestra','$tipo_muestra','$nombre_producto')
 		";
-		mysql_query($sql3);
+		$resultado=mysql_query($sql3);
+		if (!$resulto) {//si da error que me despliegue el error del query
+       echo $message  = 'Query invalido: ' . mysql_error() . "\n";
+        $message .= 'Query ejecutado: ' . $sql3;
+		
+		} 
 
 
 	}else{

@@ -81,6 +81,9 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 						<td align="center" style="background:#7f7f7f">
                            OAF
                         </td>
+                         <td align="center"  style="background:#7f7f7f">
+                           Funcionario
+                        </td>
                     </tr>';
 				
 				$contador = 0;
@@ -101,12 +104,15 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 					IFNULL(ubi.ubicacion,'') as ubicacion,
 					IFNULL(est.estado,'') as estado,
 					DATE_FORMAT(ACT.fecha_creacion, '%d / %m / %Y') as fecha_creacion,
-					IFNULL(ACT.oaf,0) as oaf
+					IFNULL(ACT.oaf,0) as oaf,
+					LTRIM(IFNULL(per.Nombre,'')) as responsable 
 					FROM  tbl_activos as ACT
 					LEFT OUTER JOIN tbl_marca_activo as MarcAct 			ON MarcAct.id_activo = ACT.id_activos
 					LEFT OUTER JOIN tbl_ubicacion_activo as UbiAct		 	ON UbiAct.id_activo = ACT.id_activos
 					LEFT OUTER JOIN tbl_activo_estado as ActEst		 		ON ActEst.id_activo = ACT.id_activos
 					LEFT OUTER JOIN tbl_activo_categoria as ActCat		 	ON ActCat.id_activo = ACT.id_activos
+					LEFT OUTER JOIN tbl_responsable as resp 				ON resp.id_activo = ACT.id_activos
+					LEFT OUTER JOIN tbl_persona as per						ON per.id_persona = resp.id_persona
 					LEFT OUTER JOIN tbl_marca as marc		 				ON MarcAct.id_marca = marc.id_marca 
 					LEFT OUTER JOIN tbl_ubicacion as ubi	 				ON UbiAct.id_ubicacion = ubi.id_ubicacion 
 					LEFT OUTER JOIN tbl_categoria as cat 					ON ActCat.id_categoria = cat.id_categoria
@@ -117,7 +123,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 					
 					echo'
 					 <tr>
-						<td colspan="9" align="center" style="background:#F4FA58; font-size:18px">' 
+						<td colspan="10" align="center" style="background:#F4FA58; font-size:18px">' 
 							.utf8_encode($row[1])  .
 						'</td>
 					 </tr>';
@@ -162,6 +168,9 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 								<td align="left">' .
 									$oaf .
 								'</td>
+								 <td align="center">' .
+									utf8_encode($rowE[12])  .
+                        		'</td>
 							</tr>';
 					
 							$contador  = $contador + 1;
@@ -170,7 +179,7 @@ $query_result=mysql_query($query,$_SESSION['conectact']);
 					}
 					echo'
 					 <tr>
-						<td colspan="9" align="center" style="background:white; font-size:15px">' .
+						<td colspan="10" align="center" style="background:white; font-size:15px">' .
 							'Total de Activos: ' . $contador .
 						'</td>
 					 </tr>';

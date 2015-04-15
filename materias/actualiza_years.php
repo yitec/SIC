@@ -4,15 +4,15 @@ ini_set('memory_limit', '512M');
 include('../cnx/conexion_materias.php');
 conectarm();
 
-$sql="select id,consecutivo_contrato,id_muestra from tbl_muestras where id>=11515";
+$sql="select id,consecutivo_contrato,id_muestra from tbl_muestras where id>=14390";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
 //'Proteína Cruda','fibra cruda','materia seca','eln','extracto etereo','energia bruta','Humedad 135° C'
-/*actualiza_resultado($row->id,$row->consecutivo_contrato,'Proteína Cruda',$row->id_muestra);
-actualiza_resultado($row->id,$row->consecutivo_contrato,'Fibra Cruda',$row->id_muestra);*/
-actualiza_resultado($row->id,$row->consecutivo_contrato,'Humedad a 60 ºC (Materia Seca a 60 ºC)',$row->id_muestra);
-/*actualiza_resultado($row->id,$row->consecutivo_contrato,'ELN',$row->id_muestra);
+//actualiza_resultado($row->id,$row->consecutivo_contrato,'Proteína Cruda',$row->id_muestra);
+//actualiza_resultado($row->id,$row->consecutivo_contrato,'Fibra Cruda',$row->id_muestra);
+///actualiza_resultado($row->id,$row->consecutivo_contrato,'Humedad a 60 ºC (Materia Seca a 60 ºC)',$row->id_muestra);
+actualiza_resultado($row->id,$row->consecutivo_contrato,'ELN',$row->id_muestra);
 actualiza_resultado($row->id,$row->consecutivo_contrato,'Extracto etéreo',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Humedad 135 °C',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Cenizas',$row->id_muestra);
@@ -22,7 +22,7 @@ $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Fibra Deterge
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Fibra Detergente Ácida',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Lignina Detergente Ácido',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Tamaño de Partículas',$row->id_muestra);
-$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Energía Bruta',$row->id_muestra);*/
+$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Energía Bruta',$row->id_muestra);
 
 
 echo "<br>";
