@@ -1,7 +1,7 @@
 <?
 session_start();
 require_once('../cnx/conexion.php');
-require_once('opr_materias.php');
+//require_once('opr_materias.php');
 conectar();
 $hoy=date("Y-m-d H:i:s");
 //guarda un articulo en inventario
@@ -83,7 +83,7 @@ if($_REQUEST['opcion']==4)
 	$row=mysql_fetch_assoc($result);
 	$result2=mysql_query("update tbl_analisis set estado='"."3"."',fecha_gerentes='".$hoy."' where id='".$row['id_analisis']."'");
 	//estas consultas evaluan si ya todos los analisis tienen un resultado y marcan el contrato como completo
-	$result3=mysql_query("select COUNT(consecutivo_contrato) as total from tbl_resultados where consecutivo_contrato='".$_REQUEST['contrato']."' and estado='"."1"."'");
+	$result3=mysql_query("select COUNT(consecutivo_contrato) as total from tbl_resultados where consecutivo_contrato='".$_REQUEST['contrato']."' and estado=1");
 	$row3=mysql_fetch_assoc($result3);
 
 	$total_ap=$row3['total'];
@@ -99,7 +99,8 @@ if($_REQUEST['opcion']==4)
 		$result3=mysql_query("update tbl_contratos set fecha_terminado='".$hoy."', estado='"."4"."' where consecutivo='".$_REQUEST['contrato']."'");
 		 		date_default_timezone_set('America/Denver');
        //$dest = "kmadrigal@feednet.ucr.ac.cr";
-       $dest  = 'kmadrigal@feednet.ucr.ac.cr' . ', ';
+       //$dest  = 'kmadrigal@feednet.ucr.ac.cr' . ', ';
+       $dest  = 'clientes.cina@gmail.com' . ', ';
 	   $dest .= 'sergio.barrantes@hotmail.com';
        $head = "From: info@siccina.ucr.ac.cr<info@siccina.ucr.ac.cr>\r\n";
 	   $asunto = "Contrato Termindado = ".$_REQUEST['contrato'];
@@ -138,19 +139,20 @@ if($_REQUEST['opcion']==5)
 	$result=mysql_query("Select id_analisis from tbl_resultados where id='".$_REQUEST['id']."'");
 	$row=mysql_fetch_assoc($result);
 	if($_REQUEST['rechazar']==2){
-		echo "entro";
+		//echo "entro";
 		$result2=mysql_query("update tbl_analisis set estado='"."2"."',trabajando='"."0"."',fecha_rechazado='".$hoy."', observaciones='".$_REQUEST['observaciones_gerente']."' where id='".$row['id_analisis']."'");	
 		$result=mysql_query("update tbl_resultados set observaciones_gerente='".utf8_decode($_REQUEST['observaciones_gerente'])."', estado='"."2"."' where id='".$_REQUEST['id']."' ");
 	}else{
 		$result2=mysql_query("update tbl_analisis set estado='"."1"."',trabajando='"."0"."',fecha_rechazado='".$hoy."', observaciones='".$_REQUEST['observaciones_gerente']."' where id='".$row['id_analisis']."'");
 		$result=mysql_query("update tbl_resultados set estado='"."1"."' where id='".$_REQUEST['id']."' ");
 	}
-	if (!$result2) {//si da error que me despliegue el error del query
+	/*if (!$result2) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
         $message .= 'Query ejecutado: ' . $query;
 		
-		}
+		}*/
 	echo "Success";	
+	die();
 	}
 
 }

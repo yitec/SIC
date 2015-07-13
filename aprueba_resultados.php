@@ -82,7 +82,7 @@ $("#btn_rechazar").live("click", function(event){
         url: "operaciones/opr_analisis.php",		
         data: "opcion=5&id="+$('#id').val()+"&laboratorio="+$('#laboratorio').val()+"&observaciones_gerente="+$('#txt_observaciones_gerente').val()+"&rechazar="+rechazar,
         success: function(datos){
-        	if (datos=="Succcess"){
+        	if (datos=="Success"){
         	if($('#laboratorio').val()==1){
 				top.location.href = 'resultados_quimica.php';
 				}

@@ -101,13 +101,43 @@ require_once('menu_superior.php');
     echo '<div align="center" class="Arial14Morado">Año 2013</div>';   
     echo '<div align="center" class="Arial14Negro"><img id="btn_2013" src="img/search.png" />
     </div><br>';   
-
-if($_REQUEST['estado']==1){
-        $result=mysql_query("select * from tbl_contratos where  fecha_ingreso>='20140101' and (estado=1 or estado=2)  order by id ASC");    
+    //2014
+    if($_REQUEST['estado']==1){
+        $result=mysql_query("select * from tbl_contratos where fecha_ingreso>='20140101' and  fecha_ingreso<='20141231' and  (estado=1 or estado=2) order by id ASC");    
     }else{
-        $result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20140101' order by id ASC");    
+       $result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20140101' and  fecha_ingreso<='20141231' order by id ASC");    
+    }
+    echo '<div align="center" id="year_2014">    
+    <table width="747" height="18" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
+    <tr>
+    <td><div align="center" class="Arial14Azul">Contrato</div></td>
+    <td><div align="center" class="Arial14Azul">Muestras</div></td>    
+    <td><div align="center" class="Arial14Azul">Fecha Ingreso</div></td>
+    <td><div align="center" class="Arial14Azul">Ver Contrato</div></td>        
+    </tr>';
+    while ($row=mysql_fetch_assoc($result)){
+        echo '<tr>
+    <td><div align="center" class="Arial14Negro">'.$row['consecutivo'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['numero_muestras'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['fecha_ingreso'].'</div></td>
+    <td><div align="center" class="Arial14Negro"><a href="informe.php?id='.$row['id'].'" target="_blank"><img src="img/search.png" /></a>
+    </div></td>        
+    </tr>';
+    }
+    echo '</table>
+    </div>';  
+    echo '<div align="center" class="Arial14Morado">Año 2014</div>';   
+    echo '<div align="center" class="Arial14Negro"><img id="btn_2014" src="img/search.png" />
+    </div><br>';   
+
+
+//2015
+if($_REQUEST['estado']==1){
+        $result=mysql_query("select * from tbl_contratos where  fecha_ingreso>='20150101' and (estado=1 or estado=2)  order by id ASC");    
+    }else{
+        $result=mysql_query("select * from tbl_contratos where estado='"."4"."' and fecha_ingreso>='20150101' order by id ASC");    
     }    
-    echo '<div align="center" id="year_2013">    
+    echo '<div align="center" id="year_2015">    
     <table width="747" height="18" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
     <tr>
     <td><div align="center" class="Arial14Azul">Contrato</div></td>

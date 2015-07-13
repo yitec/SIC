@@ -201,13 +201,10 @@ if ($encontrado==false){
 		mysql_query("insert into bd.materiasprimas.tbl_errores (error,fecha)values('".$e."','".$hoy."')");
 		
 	}
-	
-	
-	
-	
-	
-	
+		
 }//end function
+
+
 
 function busca_muestreo($id_cliente,$tipo_cliente){
 	
@@ -255,10 +252,8 @@ if($encontrado==false){
 	
 }
 
-
- 
-
 }//end function
+
 
 
 //***************************************************funcion tipo alimento***************

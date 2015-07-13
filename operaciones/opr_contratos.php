@@ -440,12 +440,12 @@ if($_REQUEST['opcion']==14)
 //*************************************************Modificar firmas***********************
 if($_REQUEST['opcion']==15)
 {
-
-	if	($_REQUEST['txt_equimica']!="0000-00-00 00:00:00"){
-		$equimica=$_REQUEST['txt_equimica']." ".date('h:i');		
+	$tiempo=date('h:i');
+	if	($_REQUEST['txt_equimica']!=""){
+		$equimica=$_REQUEST['txt_equimica'];		
 	}
-	if	($_REQUEST['txt_fquimica']!="0000-00-00 00:00:00"){
-		$fquimica=$_REQUEST['txt_fquimica']." ".date('h:i') ;		
+	if	($_REQUEST['txt_fquimica']!=""){
+		$fquimica=$_REQUEST['txt_fquimica'];		
 	}
 	if	($_REQUEST['txt_emicro']!="0000-00-00 00:00:00"){
 		$equimica=$_REQUEST['txt_emicro']." ".date('h:i');		
@@ -467,14 +467,16 @@ if($_REQUEST['opcion']==15)
 	}
 
 		
-
-$result=mysql_query("update tbl_contratos set fecha_equimica='".$equimica."',fecha_fquimica='".$fquimica."',fecha_emicro='".$emicro."',fecha_fmicro='".$fmicro."',fecha_ebroma='".$ebroma."',fecha_fbroma='".$fbroma."',fecha_ezootecnia='".$ezootecnia."',fecha_fzootecnia='".$fzootecnia."' where consecutivo='".$_REQUEST['contrato']."'");
+$sql="update tbl_contratos set fecha_equimica='".$_REQUEST['txt_equimica']."',fecha_fquimica='".$_REQUEST['txt_fquimica']."',fecha_emicro='".$_REQUEST['txt_emicro']."',fecha_fmicro='".$_REQUEST['txt_fmicro']."',fecha_ebroma='".$_REQUEST['txt_ebroma']."',fecha_fbroma='".$_REQUEST['txt_fbroma']."',fecha_ezootecnia='".$_REQUEST['txt_ezootecnia']."',fecha_fzootecnia='".$_REQUEST['txt_fzootecnia']."' where consecutivo='".$_REQUEST['contrato']."'";
+//$sql="update tbl_contratos set fecha_equimica='".$equimica."',fecha_fquimica='".$fquimica."',fecha_emicro='".$emicro."',fecha_fmicro='".$fmicro."',fecha_ebroma='".$ebroma."',fecha_fbroma='".$fbroma."',fecha_ezootecnia='".$ezootecnia."',fecha_fzootecnia='".$fzootecnia."' where consecutivo='".$_REQUEST['contrato']."'";
+$result=mysql_query($sql);
 
 if (!$result) {//si da error que me despliegue el error del query
       echo $message  = 'Error: ' . mysql_error() . "\n";
        
 		
 }else{
+	//echo $sql;	
 	echo "Success";	
 }
 	

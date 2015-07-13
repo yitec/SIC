@@ -470,14 +470,17 @@ while($row2=mysql_fetch_array($result2)){
 			if (strlen($row3['nombre_muestra'])>18){
 				$pdf->SetTextColor(0,0,0);
 				$pdf->SetFont('Arial','',8);
-				$saltoi=strpos($row3['nombre_muestra'],"|");
+				$saltoi=strpos($row3['nombre_muestra'],"*");
 				if (strlen($row3['nombre_muestra'])<=71){
-					if ($salto>=0){
+					if ($saltoi>0){
 						$inicio=substr($row3['nombre_muestra'], 0,$saltoi);
 						$fin=substr($row3['nombre_muestra'], $saltoi+1,strlen($row3['nombre_muestra']));	
-						$pdf->MultiCell(48,5,utf8_decode($inicio."\n".$fin."\n" ),0,'L');
+						$pdf->MultiCell(48,5,utf8_decode(" ".$inicio."\n ".$fin."\n" ),0,'L');
+						//$pdf->MultiCell(48,5,$salto,0,'L');
 					}else{
 					$pdf->Cell(48,15,utf8_decode($row3['nombre_muestra']),1,1,'C');
+					$var = $pdf->GetY();		
+					$pdf->SetY($var-5);
 					}
 					$salto=0;	
 
@@ -631,7 +634,7 @@ $pdf->SetX(58);
 	$pdf->SetTextColor(0,0,0);
 	//Si el análisis es de microscopia imprimo una multicelda por ser muy largo el resultado
 	if ($row2['37']=="Microscopía"){
-		$pdf->Cell(36,10,"Ver siguiente línea",1,0,'C');
+		$pdf->Cell(48,10,"Ver siguiente línea",0,0,'C');
 		$pdf->Ln(10);
 		$pdf->MultiCell(0,5,'Resultado Microscopía: '.$resultado,1,2,'L');
 		$posicion=1;	

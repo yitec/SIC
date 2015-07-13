@@ -541,11 +541,20 @@ $result4=mysql_query("select nombre_muestra from tbl_muestras where id_contrato=
 	if ($mayor==true){		
 		$pdf->SetFont('Arial','',8);
 		$pdf->Cell(22,10,$row2[2],1,0,'C');
-		$pdf->SetFont('Arial','',5);		
-		if (strlen($row4['nombre_muestra'])<=71){
-			$pdf->Cell(48,10,utf8_decode($row4['nombre_muestra']),1,1,'C');	
+		$pdf->SetFont('Arial','',8);	
+		$saltoi=strpos($row4['nombre_muestra'],"*");	
+		if ($saltoi>0){
+			$inicio=substr($row4['nombre_muestra'], 0,$saltoi);
+			$fin=substr($row4['nombre_muestra'], $saltoi+1,strlen($row4['nombre_muestra']));	
+			$pdf->MultiCell(48,5,utf8_decode(" ".$inicio."\n ".$fin."\n" ),1,'L');
+			//$pdf->Cell(48,10,utf8_decode($row4['nombre_muestra']),1,1,'C');	
 		}else{
-			$pdf->MultiCell(48,5,utf8_decode($row4['nombre_muestra']),1,'L');
+			if (strlen($row4['nombre_muestra'])<=33){
+				$pdf->MultiCell(48,10,utf8_decode($row4['nombre_muestra']),1,'L');
+			}else{
+				$pdf->SetFont('Arial','',5);	
+				$pdf->MultiCell(48,10,utf8_decode($row4['nombre_muestra']),1,'L');
+			}
 		}
 		$pdf->SetFont('Arial','',8);		
 		$var = $pdf->GetY();		
