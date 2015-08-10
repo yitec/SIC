@@ -411,7 +411,7 @@ $linea=0;
 $posicion=0;
 while($row2=mysql_fetch_array($result2)){
 	$cont++;
-	if($cont>18){
+	if($cont>7){
 	$pdf->SetY(270);
 	$pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
 	
@@ -532,7 +532,7 @@ $pdf->SetX(58);
 		}else{
 			$pdf->SetTextColor(39,210,75);
 			$pdf->MultiCell(86,5,$row2[37]."\n".$row2[4]."\n\n",0,'L');
-			$pdf->Ln(-10);
+			$pdf->Ln(-15);
 			$pdf->SetX(154);
 			$pdf->SetFont('Arial','',8);
 		}
@@ -571,12 +571,12 @@ $pdf->SetX(58);
 				if ($row2[16]<>""){	//pregunto si tiene valor corregido
 			
 			$resultado="(".utf8_decode($row2[16]).$row2[10].")".utf8_decode($row2[11])." [".utf8_decode($row2[6]).$row2[9]."]".utf8_decode($row2[11]);	
-			$r1="(".utf8_decode($row2[16]).$row2[10].")".utf8_decode($row2[11]);
-			$r2=" [".utf8_decode($row2[6]).$row2[9]."]".utf8_decode($row2[11]);	
+			$r1="(".utf8_decode($row2[16])." ".$row2[10].") ".utf8_decode($row2[11]);
+			$r2=" [".utf8_decode($row2[6])." ".$row2[9]."] ".utf8_decode($row2[11]);	
 				}else{
 			$resultado="(".utf8_decode($row2[7]).$row2[10].")".utf8_decode($row2[11])." [".utf8_decode($row2[6]).$row2[9]."]".utf8_decode($row2[11]);	
-			$r1="(".$row2[7].$row2[10].")".utf8_decode($row2[11]);
-			$r2=" [".$row2[6].$row2[9]."]".utf8_decode($row2[11]);	
+			$r1="(".$row2[7]." ".$row2[10].") ".utf8_decode($row2[11]);
+			$r2=" [".$row2[6]." ".$row2[9]."] ".utf8_decode($row2[11]);	
 				}
 		
 		}else{
@@ -585,12 +585,12 @@ $pdf->SetX(58);
 				
 				if ($row2[16]<>""){	//pregunto si tiene valor corregido			
 					$resultado="(".utf8_decode($row2[16]).$row2[10].")".$row2[11]." [".utf8_decode($row2[5]).$row2[8]."]".utf8_decode($row2[11]);
-					$r1="(".$row2[16].$row2[10].")".$row2[11];
+					$r1="(".$row2[16]." ".$row2[10].") ".$row2[11];
 					//$r2=" [".$row2[5].$row2[8]."]".utf8_decode($row2[11]);	
 			
 			}else{
 					$resultado="(".utf8_decode($row2[7]).$row2[10].")".$row2[11]." [".utf8_decode($row2[5]).$row2[8]."]".utf8_decode($row2[11]);	
-					$r1="(".$row2[7].$row2[10].")".$row2[11];
+					$r1="(".$row2[7]." ".$row2[10].") ".$row2[11];
 					//$r2=" [".$row2[5].$row2[8]."]".utf8_decode($row2[11]);	
 			}
 		
@@ -606,18 +606,18 @@ $pdf->SetX(58);
 		if ($row2[6]<>""){// pregunto si hay resultado en base seca	
 		
 			if ($row2[16]<>""){	
-				$resultado="(".$row2[16].$row2[9].")".utf8_decode($row2[11])	;
+				$resultado="(".$row2[16]." ".$row2[9].") ".utf8_decode($row2[11])	;
 				$r1=$resultado;
 			}else{
-				$resultado="(".$row2[6].$row2[9].")".utf8_decode($row2[11])	;
+				$resultado="(".$row2[6]." ".$row2[9].") ".utf8_decode($row2[11])	;
 				$r1=$resultado;				
 			}
 		}else{
 			if ($row2[16]<>""){	
-				$resultado="(".$row2[16].$row2[8].")".utf8_decode($row2[11])	;
+				$resultado="(".$row2[16]." ".$row2[8].") ".utf8_decode($row2[11])	;
 				$r1=$resultado;				
 			}else{
-				$resultado="(".$row2[5].$row2[8].")".utf8_decode($row2[11])	;
+				$resultado="(".$row2[5]." ".$row2[8].") ".utf8_decode($row2[11])	;
 				$r1=$resultado;				
 			}
 		
