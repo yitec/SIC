@@ -268,7 +268,7 @@ $pdf->Ln(5);
 $pdf->Cell(70,5,'',1,0,'L');
 $pdf->Cell(120,5,'',1,0,'L');
 $pdf->Ln(0);
-$pdf->Cell(70,5,'Lisencia DAA :',0,0,'L');
+$pdf->Cell(70,5,'Licencia DAA :',0,0,'L');
 $pdf->Cell(70,5,$row7['lisencia'],0,0,'L');
 $pdf->Ln(5);
 $pdf->Cell(70,5,'',1,0,'L');
