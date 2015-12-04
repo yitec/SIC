@@ -634,10 +634,12 @@ $pdf->SetX(58);
 	$pdf->SetTextColor(0,0,0);
 	//Si el análisis es de microscopia imprimo una multicelda por ser muy largo el resultado
 	if ($row2['37']=="Microscopía"){
-		$pdf->Cell(48,10,"Ver siguiente línea",0,0,'C');
-		$pdf->Ln(10);
+		$pdf->SetX(164);
+		$pdf->Cell(36,10,"Ver siguiente línea",0,0,'C');
+		$pdf->Ln(15);
 		$pdf->MultiCell(0,5,'Resultado Microscopía: '.$resultado,1,2,'L');
-		$posicion=1;	
+		$posicion=1;
+		$pdf->Ln(5);	
 				
 
 	}else{

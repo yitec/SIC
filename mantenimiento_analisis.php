@@ -168,6 +168,11 @@ function agregaAnalisis(id,laboratorio,tab,precio,ligados){
 
 //esta funcionrecibe en el parametro tipo el tipo de laboratio que es y en seleccionada el tap a que pertenece 1=quimica 2=micro 3= broma 
 		
+		//este if me valida si es TH2, acetil, o fumonisina b2 que tiene que ser precio 0		
+		if (id=="1682"||id=="1684"||id=="1687"){
+			precio=0;
+		}
+
 		var encontrado=false;
 		var data=id+','+laboratorio+','+$('#numero_muestra').val()+','+precio+'|';
 		 //metos los datos de los analisis en un array y luego los mando a guardar

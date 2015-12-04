@@ -146,6 +146,16 @@ if($_REQUEST['estado']==1){
     <td><div align="center" class="Arial14Azul">Ver Contrato</div></td>        
     </tr>';
     while ($row=mysql_fetch_assoc($result)){
+        if($row['id']>3161){
+            echo '<tr>
+    <td><div align="center" class="Arial14Negro">'.$row['consecutivo'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['numero_muestras'].'</div></td>
+    <td><div align="center" class="Arial14Negro">'.$row['fecha_ingreso'].'</div></td>
+    <td><div align="center" class="Arial14Negro"><a href="nuevo_informe.php?id='.$row['id'].'" target="_blank"><img src="img/search.png" /></a>
+    </div></td>        
+    </tr>';
+
+        }else{
         echo '<tr>
     <td><div align="center" class="Arial14Negro">'.$row['consecutivo'].'</div></td>
     <td><div align="center" class="Arial14Negro">'.$row['numero_muestras'].'</div></td>
@@ -153,6 +163,7 @@ if($_REQUEST['estado']==1){
     <td><div align="center" class="Arial14Negro"><a href="informe.php?id='.$row['id'].'" target="_blank"><img src="img/search.png" /></a>
     </div></td>        
     </tr>';
+        }
     }
     echo '</table>
     </div>';              

@@ -6,12 +6,7 @@ include('cnx/conexion.php');
 conectar();
 
 
-$result=mysql_query("Select * from tbl_contratos as a INNER JOIN tbl_clientes AS b ON a.id_cliente = b.id and a.id='".$_REQUEST['id']."'");
-
-
-
-
-
+$result=mysql_query("Select a.*,b.nombre,b.direccion,b.tipo_cliente,b.tel_fijo,b.correo from tbl_contratos as a INNER JOIN tbl_clientes AS b ON a.id_cliente = b.id and a.id='".$_REQUEST['id']."'");
 if (!$result) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
         $message .= 'Query ejecutado: ' . $query;
@@ -20,13 +15,21 @@ if (!$result) {//si da error que me despliegue el error del query
 
 $row=mysql_fetch_assoc($result);
 
-$result2=mysql_query("Select * from tbl_resultados as a Inner join tbl_analisis as b on a.id_analisis=b.id and a.consecutivo_contrato='".$row['consecutivo']."' inner join tbl_categoriasanalisis as c on b.id_analisis=c.id order by a.id_laboratorio,b.id_muestra ");
+//busco todos los resultados
+$result2=mysql_query("Select res.consecutivo_contrato,ana.id_laboratorio,cat.nombre,res.metodo,res.resultado,res.base_seca,
+res.base_fresca,res.incertidumbre, res.incertidumbre_fresca,res.incertidumbre_seca,
+res.unidades,res.fecha_aprobacion,res.valor_correjido,ana.id_analisis,ana.id_muestra,cat.acreditado
+from tbl_resultados res  Inner join tbl_analisis as ana 
+on res.id_analisis=ana.id inner join tbl_categoriasanalisis as cat on ana.id_analisis=cat.id
+where
+res.consecutivo_contrato='".$row['consecutivo']."'  order by res.id_laboratorio,ana.id_muestra ");
 
 if (!$result2) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
         $message .= 'Query ejecutado: ' . $query;
 		
 } 
+
 
 
 //tengo que revisar si algun resultado es certificado, en el caso que exista alguno debo imprimir el logo del ECA
@@ -74,606 +77,231 @@ $row7=mysql_fetch_assoc($result7);
 
 $pdf=new FPDF();
 $pdf->AddPage();
-$pdf->Image('img/ucr_informe.png',12,16,17);
-$pdf->Image('img/cina_informe.png',180,17,17);
-$pdf->SetFont('Arial','B',14);
-$pdf->Cell(190,30,'',1,0,'C');
-$pdf->Ln(5);
-$pdf->Cell(190,5,'UNIVERSIDAD DE COSTA RICA',0,0,'C');
-$pdf->Ln(6);
+$pdf->Image('img/ucr_informe.png',12,12,16);
+$pdf->Image('img/cina_informe.png',180,13,16);
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(190,5,'Centro de Investigación en Nutrición Animal',0,0,'C');
-$pdf->Ln(7);
+$pdf->Cell(190,20,'',1,0,'C');
+$pdf->Ln(2);
+$pdf->Cell(190,5,'UNIVERSIDAD DE COSTA RICA',0,0,'C');
+$pdf->Ln(5);
 $pdf->SetFont('Arial','',10);
+$pdf->Cell(190,5,'Centro de Investigación en Nutrición Animal',0,0,'C');
+$pdf->Ln(5);
+$pdf->SetFont('Arial','',8);
 $pdf->Cell(190,5,'Teléfono (506) 2511-2049 ó (506)2511-2055. Fax: 2234-2415',0,0,'C');
-$pdf->Ln(7);
-$pdf->Cell(190,3,'Ciudad de la investigación, Sabanilla, San José, Costa Rica',0,0,'C');
+$pdf->Ln(5);
+$pdf->Cell(190,3,'Ciudad de la investigación, Sabanilla, Montes de Oca, San José, Costa Rica',0,1,'C');
 //Cuandro solicitud servicio
 
-$pdf->Ln(8);
-$pdf->Cell(190,10,'',1,0,'C');
+
+$pdf->Cell(190,15,'',1,0,'C');
 $pdf->Ln(0);
-$pdf->Cell(45,5,'',1,0,'C');
+$pdf->Cell(45,10,'',0,0,'C');
 $pdf->Ln(0);
-$pdf->Cell(45,10,'',1,0,'C');
+$pdf->Cell(45,15,'',1,0,'C');
 $pdf->Ln(0);
-$pdf->Cell(150,10,'',1,0,'C');
+$pdf->Cell(150,15,'',1,0,'C');
+$pdf->SetFont('Arial','B',8);
 $pdf->Ln(0);
-$pdf->Cell(190,5,'Código: R-TE-18',0,0,'L');
-$pdf->Ln(0);
+$pdf->Cell(45,10,'Código:',0,0,'C');
+$pdf->Ln(5);
+$pdf->Cell(45,10,'R-TE-18',0,0,'C');
+$pdf->SetFont('Arial','',8);
+$pdf->Ln(-5);
+$pdf->SetX(160);
+$pdf->Cell(40,5,'Versión: 05',1,0,C);
+$pdf->Ln(5);
 $pdf->Cell(185,5,'Fecha de Emisión:',0,0,'R');
 $pdf->Ln(5);
-$pdf->Cell(20,5,'Versión: 5',0);
-$pdf->Ln(0);
 $pdf->Cell(180,5,'29-05-2012',0,0,'R');
-$pdf->Ln(0);
-$pdf->SetFont('Arial','B',14);
-$pdf->Cell(185,5,'INFORME DE ENSAYO',0,0,'C');
-$pdf->SetFont('Arial','',10);
+$pdf->Ln(-5);
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(185,10,'INFORME DE ENSAYO',0,0,'C');
+$pdf->SetFont('Arial','B',8);
 
 
 
 //Cuadro info general de la solicitud
-$pdf->Ln(5);
+$pdf->Ln(20);
 $pdf->Cell(190,5,'',1,0,'C');
 $pdf->Ln(0);
-$pdf->Cell(190,5,'INFORMACIÓN GENERAL DE LA SOLICITUD',0,0,'C');
+$pdf->SetFillColor(241,243,246);
+$pdf->Cell(190,5,'INFORMACIÓN GENERAL DE LA SOLICITUD',1,0,'C',true);
+$pdf->SetFont('Arial','',8);
 $pdf->Ln(5);
-$pdf->Cell(63,5,'',1,0,'C');
-$pdf->Cell(63,5,'',1,0,'C');
-$pdf->Cell(64,5,'',1,0,'C');
 
 $pdf->Ln(0);
-$pdf->Cell(63,5,'Consecutivo',0,0,'C');
-$pdf->Cell(63,5,'Fecha de recepción de muestras:',0,0,'C');
-$pdf->Cell(64,5,'Tipo de cliente:',0,1,'C');
-$fecha=
+$pdf->Cell(63,5,'N° Contrato',1,0,'C');
+$pdf->Cell(63,5,'Fecha de recepción de muestras:',1,0,'C');
+$pdf->Cell(64,5,'Tipo de cliente:',1,1,'C');
+
 $pdf->Ln(0);
-$pdf->Cell(63,5,'',1,0,'C');
-$pdf->Cell(63,5,'',1,0,'C');
-$pdf->Cell(64,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(63,5,$row['consecutivo'],0,0,'C');
-$pdf->Cell(63,5,$fechas,0,0,'C');
-$pdf->Cell(64,5,utf8_decode($row['tipo_cliente']),0,1,'C');
+$pdf->Cell(63,5,$row['consecutivo'],1,0,'C');
+$pdf->Cell(63,5,$fechas,1,0,'C');
+$pdf->Cell(64,5,utf8_decode($row['tipo_cliente']),1,1,'C');
 
 
 //Cuadro info general del cliente
-$pdf->Ln(0);
+$pdf->Ln(10);
 $pdf->Cell(190,5,'',1,0,'C');
 $pdf->Ln(0);
-$pdf->Cell(190,5,'INFORMACIÓN GENERAL DEL CLIENTE',0,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(190,10,'',1,0,'C');
-$pdf->Ln(5);
-$pdf->Cell(20,5,'Nombre:',0,0,'L');
+$pdf->SetFont('Arial','B',8);
+$pdf->SetFillColor(241,243,246);
+$pdf->Cell(190,5,'INFORMACIÓN GENERAL DEL CLIENTE',1,0,'C',true);
+$pdf->SetFont('Arial','',8);
 
-$pdf->Cell(80,5,$row['nombre'],0,0,'L');
 $pdf->Ln(5);
-$pdf->Cell(190,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(27,5,'',1,0,'C');
-$pdf->Cell(27,5,'',1,0,'C');
-$pdf->Cell(67,5,'',1,0,'C');
-$pdf->Cell(69,10,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(27,5,'Teléfono:',0,0,'C');
-$pdf->Cell(27,5,'Fax:',0,0,'C');
-$pdf->Cell(67,5,'Correo Electrónico:',0,0,'C');
-$pdf->Cell(69,5,'Nombre Solicitante:',0,0,'C');
-$pdf->Ln(5);
-$pdf->Cell(27,5,'',1,0,'C');
-$pdf->Cell(27,5,'',1,0,'C');
-$pdf->Cell(67,5,'',1,0,'C');
-$pdf->Cell(69,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(27,5,$row['tel_fijo'],0,0,'C');
-$pdf->Cell(27,5,$row['fax'],0,0,'C');
-$pdf->Cell(67,5,$row['correo'],0,0,'C');
-$pdf->Cell(69,5,utf8_decode($row['nombre_solicitante']),0,2,'C');
+$pdf->Cell(190,5,'Nombre de la empresa: '.$row['nombre'],1,1,'L');
+$pdf->Cell(190,5,'Nombre Solicitante: '.utf8_decode($row['nombre_solicitante']),1,1,'L');
+$pdf->Cell(190,5,'Teléfono: '.$row['tel_fijo'],1,1,'L');
+$pdf->Cell(190,5,'Dirección: '.$row['direccion'],1,1,'L');
+$pdf->Cell(190,5,'Correo Electrónico: '.$row['correo'],1,1,'L');
+
+
 
 //INFORMACIÓN general de las muestras
 $pdf->Ln(5);
-$pdf->Cell(190,50,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(190,5,'INFORMACIÓN GENERAL DE LA(S) MUESTRA(S)',0,0,'C');
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Tipo de muestra:',0,0,'L');
-$pdf->Cell(70,5,$row5['tipo_alimento'],0,0,'L');
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Nombre o descripción del producto:',0,0,'L');
-$pdf->Cell(70,5,$row5['nombre_producto'],0,0,'L');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Presentación de la muestra:',0,0,'L');
-$pdf->Cell(70,5,$row5['condicion_muestra'],0,0,'L');
-
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Fecha de toma de la muestra(s):',0,0,'L');
-$pdf->Cell(70,5,$row5['fecha_muestra'],0,0,'L');
-
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Proceso de elaboración:',0,0,'L');
-$pdf->Cell(70,5,$row5['proceso_elaboracion'],0,0,'L');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Parte de la planta/animal que compone:',0,0,'L');
-$pdf->Cell(70,5,$row5['parte_planta'],0,0,'L');
-
-
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Procedencia Geográfica:',0,0,'L');
+$pdf->SetFont('Arial','B',8);
+$pdf->SetFillColor(241,243,246);
+$pdf->Cell(190,5,'INFORMACIÓN GENERAL DE LA(S) MUESTRA(S)',1,1,'C',true);
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(190,5,'Tipo de muestra: '.$row5['tipo_alimento'],1,1,'L');
+$pdf->Cell(190,5,'Nombre o descripción del producto: '.$row5['nombre_producto'],1,1,'L');
+$pdf->Cell(190,5,'Presentación de la muestra: '.$row5['condicion_muestra'],1,1,'L');
+$pdf->Cell(190,5,'Fecha de toma de la muestra(s): '.$row5['fecha_muestra'],1,1,'L');
+$pdf->Cell(190,5,'Proceso de elaboración: '.$row5['proceso_elaboracion'],1,1,'L');
+$pdf->Cell(190,5,'Parte de la planta/animal que compone: '.$row5['parte_planta'],1,1,'L');
 if(isset($row5['procedencia'])){
-$pdf->Cell(70,5,$row6[0]."-".$row6[1]."-".$row6[2],0,0,'L');	
+	$pdf->Cell(190,5,'Procedencia Geográfica: '.$row6[0].'-'.$row6[1].'-'.$row6[2],1,1,'L');
+
+}else{
+	$pdf->Cell(190,5,'Procedencia Geográfica:',1,1,'L');
 }
+$pdf->Cell(190,5,'Importado de: '.$row5['importado'],1,1,'L');
+$pdf->Cell(190,5,'Elaborado por: '.$row5['elaborado'],1,1,'L');
+$pdf->MultiCell(0,5,'Forma de muestreo utilizada: '.$row5['forma_muestreo'],1,1,'L');
 
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Importado de:',0,0,'L');
-$pdf->Cell(70,5,$row5['importado'],0,0,'l');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'C');
-$pdf->Cell(120,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Elaborado por:',0,0,'L');
-$pdf->Cell(70,5,$row5['elaborado'],0,2,'L');
-
-$pdf->Ln(0);
-$pdf->MultiCell(0,5,'Forma de muestreo utilizada: '.$row5['forma_muestreo'],1,'L');
 
 
 if(isset($row7['empresa'])&&strlen($row7['empresa'])>1){
 
 //INFORMACIÓN de Muestras Oficiales
-
 $pdf->Ln(5);
-$pdf->Cell(190,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(190,5,'INFORMACIÓN DE MUESTRAS OFICIALES',0,0,'C');
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'L');
-$pdf->Cell(120,5,'',1,0,'L');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Empresa:',0,0,'L');
-$pdf->Cell(70,5,$row7['empresa'],0,0,'L');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'L');
-$pdf->Cell(120,5,'',1,0,'L');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Lisencia DAA :',0,0,'L');
-$pdf->Cell(70,5,$row7['lisencia'],0,0,'L');
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'L');
-$pdf->Cell(120,5,'',1,0,'L');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Inspector:',0,0,'L');
-$pdf->Cell(70,5,$row7['inspector'],0,0,'L');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'L');
-$pdf->Cell(120,5,'',1,0,'L');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Boleta de Campo:',0,0,'L');
-$pdf->Cell(70,5,$row7['boleta'],0,0,'L');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'L');
-$pdf->Cell(120,5,'',1,0,'L');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Muestreado en:',0,0,'L');
-$pdf->Cell(70,5,$row7['muestreado'],0,0,'L');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'L');
-$pdf->Cell(120,5,'',1,0,'L');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Fecha de elaboración:',0,0,'L');
-$pdf->Cell(70,5,$row7['fecha_elaboracion'],0,0,'L');
-
-$pdf->Ln(5);
-$pdf->Cell(70,5,'',1,0,'L');
-$pdf->Cell(120,5,'',1,0,'L');
-$pdf->Ln(0);
-$pdf->Cell(70,5,'Fecha de vencimiento:',0,0,'L');
-$pdf->Cell(70,5,$row7['fecha_vencimiento'],0,2,'L');
+$pdf->SetFont('Arial','B',8);
+$pdf->SetFillColor(241,243,246);
+$pdf->Cell(190,5,'INFORMACIÓN DE MUESTRAS OFICIALES',1,1,'C',true);
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(190,5,'Empresa: '.$row7['empresa'],1,1,'L');
+$pdf->Cell(190,5,'Lisencia DAA : '.$row7['lisencia'],1,1,'L');
+$pdf->Cell(190,5,'Inspector: '.$row7['inspector'],1,1,'L');
+$pdf->Cell(190,5,'Boleta de Campo: '.$row7['boleta'],1,1,'L');
+$pdf->Cell(190,5,'Muestreado en :'.$row7['muestreado'],1,1,'L');
+$pdf->Cell(190,5,'Fecha de elaboración: '.$row7['fecha_elaboracion'],1,1,'L');
+$pdf->Cell(190,5,'Fecha de vencimiento: '.$row7['fecha_vencimiento'],1,1,'L');
 
 }
 
-
-//$pdf->AddPage();//*	***************************+Pagina 2*****************/
 
 
 
 //Cuadro info general del Pago
-/*$pdf->Ln(5);
-$pdf->Cell(190,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(190,5,'INFORMACION DEL PAGO ',0,0,'C');
 $pdf->Ln(5);
-$pdf->Cell(190,5,'',1,0,'C');
+$pdf->SetFillColor(241,243,246);
+$pdf->Cell(190,42,'',1,0,'C',true);
+$pdf->SetFont('Arial','',6);
 $pdf->Ln(0);
-$pdf->Cell(64,5,'',1,0,'C');
-$pdf->Cell(64,5,'',1,0,'C');
-$pdf->Cell(62,5,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(64,5,'Tipo Pago:',0,0,'C');
-$pdf->Cell(64,5,'Total:',0,0,'C');
-$pdf->Cell(62,5,'Resultados por correo:',0,0,'C');
-$pdf->Ln(5);
-$pdf->Cell(64,5,'',1,0,'C');
-$pdf->Cell(64,5,'',1,0,'C');
-$pdf->Cell(62,5,'',1,0,'C');
-$pdf->Ln(0);
-if ($row['tipo_pago']=="Rebajar"){
-	$pdf->Cell(64,5,'Rebajo de Partida',0,0,'C');
-}else{
-$pdf->Cell(64,5,$row['tipo_pago'],0,0,'C');
-}
-if ($row['tipo_pago']=="Exonerado"){
-	$pdf->Cell(64,5,'0',0,0,'C');
-}else{
-	$pdf->Cell(64,5,number_format($row['monto_total'],2,',','.'),0,0,'C');
-}
-$pdf->Cell(62,5,$row['envio_correo'],0,2,'C');
-*/
-//cuadros de observaciones
-
-//Cuadro info general del Pago
-$pdf->Ln(2);
-$pdf->Cell(190,45,'',1,0,'C');
-$pdf->SetFont('Arial','',8);
-$pdf->Ln(0);
-$pdf->Cell(190,5,'-El muestreo es responsabilidad del cliente y los resultados en este informe se refieren únicamente a las muestras ensayadas.',0,1,'L');
-$pdf->Cell(190,5,'-Los resultados químicos  se reportan  utilizando un factor de cobertura  k=2 y una probabilidad de cobertura de 95% y corresponde ',0,1,'L');
-$pdf->Cell(190,5,' al método de ensayo utilizado.',0,1,'L');
-$pdf->Cell(190,5,' -La incertidumbre se expresa de forma relativa o como intervalos de confianza y reflejan la precisión del mesurando.',0,1,'L');
-$pdf->Cell(108,5,' -Para el análisis de energía bruta, el factor de conversión es 4,184 J/cal.',0,1,'L');
-$pdf->Cell(18,5,' -El método de ',0,0,'L');
-$pdf->SetFont('Arial','I',8);
-$pdf->Cell(20,5,' Escherichia coli ',0,0,'L');
-$pdf->SetFont('Arial','',8);
-$pdf->Cell(80,5,'  por NMP detecta las cepas indol positivas (95 %).  ',0,1,'L');
-$pdf->Cell(190,5,'-Este documento no es válido sin firmas originales y sello blanco del Centro de Investigaciones en Nutrición Animal.',0,1,'L');
-$pdf->Cell(190,5,'-Cualquier copia parcial de este documento invalida los resultados presentados en él.',0,1,'L');
-$pdf->Cell(190,5,'-Se conserva una muestra de respaldo por 3 meses, excepto para las muestras con ensayos microbiológicos.',0,1,'L');
-$pdf->SetY(270);
+$pdf->Cell(190,4,'• El muestreo es responsabilidad del cliente y los resultados en este informe se refieren únicamente a las muestras ensayadas.',0,1,'L');
+$pdf->Cell(190,4,'• Los resultados químicos  se reportan  utilizando un factor de cobertura  k=2 y una probabilidad de cobertura de 95% y corresponde ',0,1,'L');
+$pdf->Cell(190,4,' al método de ensayo utilizado.',0,1,'L');
+$pdf->Cell(190,4,'• La incertidumbre se expresa de forma relativa o como un intervalo de confianza y reflejan la precisión del mesurado.',0,1,'L');
+$pdf->Cell(190,4,'• Para el análisis de energía bruta, el factor de conversión de 4,184 J/cal.',0,1,'L');
+$pdf->Cell(190,4,'• El método de Escherichia coli por NMP detecta las cepas indol positivas (95 %).  ',0,1,'L');
+$pdf->Cell(190,4,'• Documento no válido sin firmas originales.',0,1,'L');
+$pdf->Cell(190,4,'• Cualquier copia parcial de este documento invalida los resultados presentados en él.',0,1,'L');
+$pdf->Cell(190,4,'• Se conserva una muestra de respaldo por 3 meses',0,1,'L');
+$pdf->Cell(190,4,'• Cualquier duda o consulta sobre los resultados emitidos, por favor comuníquese con servicio al cliente 2511-2049 o 2511-2055',0,1,'L');
+$pdf->SetY(271);
 $pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
 
 //****************cuadro de analisis********
 
+
 $pdf->AddPage();
-$pdf->SetFont('Arial','B',8);
-$pdf->Ln(10);
-$pdf->Cell(190,45,'',1,0,'C');
-$pdf->Ln(0);
-$pdf->Cell(190,10,'RESULTADOS DE LOS ENSAYOS',0,1,'C');
-$pdf->SetFont('Arial','',8);
-if($acreditado==1){	
-	$pdf->Image('img/acreditados.png',165,22,32);
-	$pdf->Cell(190,5,'El nombre y el método de los análisis acreditados se destacan en color verde. En logotipo del Ente Costarricense,',0,1,'L');
-	$pdf->Cell(190,5,'de Acreditación (ECA), se incluye únicamente cuando al menos uno de los análisis reportados está dentro del alcance.',0,1,'L');
-}else{
-	
-	$pdf->Cell(190,5,'El nombre y el método de los análisis acreditados se destacan en color verde. En logotipo del Ente Costarricense de Acreditación (ECA),',0,1,'L');
-	$pdf->Cell(190,5,'se incluye únicamente cuando al menos uno de los análisis reportados está dentro del alcance.',0,1,'L');
-}
 $hoja=1;
-//$pdf->Cell(190,5,'Página # '.$hoja,0,1,'L');
-$pdf->Cell(190,5,'',0,1,'L');
-$pdf->Cell(190,5,'Contrato # '.$row['consecutivo'],0,1,'L');
-$pdf->Cell(190,5,'',0,1,'L');
-$pdf->Cell(190,5,'Cuando aplique  resultados en base fresca y seca, se indica el primero en base fresca y entre parétesis cuadrados en base seca',0,1,'L');
-$pdf->Ln(8);
-
-//*************************************************Acreeditados**********************************************
-//*************************************************Acreeditados**********************************************
-//*************************************************Acreeditados**********************************************
-//if($acreditado==1){	
-//	$pdf->Image('img/acreditados.png',165,35,30);
-//}
-//$pdf->Cell(190,0,'',1,0,'C');
-$pdf->Ln(0);
+imprime_header($pdf,$acreditado,$hoja,$row['consecutivo']);
 
 
-$pdf->Ln(0);
+/*****************************************Busco los nombres de muestras e imprimo los resultados********************/
+/*****************************************Busco los nombres de muestras e imprimo los resultados********************/
+/*****************************************Busco los nombres de muestras e imprimo los resultados********************/
+/*****************************************Busco los nombres de muestras e imprimo los resultados********************/
+/*****************************************Busco los nombres de muestras e imprimo los resultados********************/
+$pdf->SetFont('Arial','',5);
 $cont=0;
 $linea=0;
 $posicion=0;
-$inicial=1;
-$muestra_actual=1;
-//*********************************************Recorro todos los resultados**********************************
-while($row2=mysql_fetch_array($result2)){
-	$cont++;
-	$cont_result++;
-	if ($cont>1){
-		$muestra=$row2[22];
-	}
+$muestra=0;
+$v_metodos=array();
+while($row2=mysql_fetch_object($result2)){
 
-
-		//imprimo el encabezado si es muestra 1 o cambio de muestra	
-	if($muestra_actual!=$row2[22] || $inicial==1){
-
-		//imprimo en una nueva pagina caundo he impreso 6 resultados
-		if ($cont_result==6){
-			$pdf->SetY(270);
-			$pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
-			$pdf->AddPage();
-			$cont_result=0;
-		}
-
-		$pdf->Ln(0);		
-		$pdf->Cell(180,5,'',0,2,'C');
-		$pdf->SetFont('Arial','',10);
-		$pdf->SetFillColor(200,203,203);
-		$pdf->Cell(128,5,'Identificación Muestra',1,0,'C',1);
-		$pdf->Cell(62,5,'Código Laboratorio',1,2,'C',1);	
-		$pdf->SetFont('Arial','',8);
-	$result3=mysql_query("select nombre_muestra,codigo from tbl_muestras where id_contrato='".$row['consecutivo']."' and  numero_muestra='".$row2[22]."'  ");
-	$row3=mysql_fetch_assoc($result3);
-	$pdf->Ln($linea);		
-			if (strlen($row3['nombre_muestra'])>18){
-				$pdf->SetTextColor(0,0,0);
-				$pdf->SetFont('Arial','',8);
-				if (strlen($row3['nombre_muestra'])<=71){
-					$pdf->Cell(128,10,utf8_decode($row3['nombre_muestra']),1,1,'C');	
-				}else{
-					$pdf->MultiCell(128,5,utf8_decode($row3['nombre_muestra']),1,'L');
-				}
-				$var = $pdf->GetY();		
-				$pdf->SetY($var-10);
-				$pdf->SetX(138);
-				$pdf->SetFont('Arial','',8);
-			}else{
-				$pdf->Cell(128,10,$row3['nombre_muestra'],1,0,'C');		
-			}
-
-
-
+	if ($row2->id_muestra!=$muestra ){
+		$cont=0;
 		
-	if($row2[2]==1){
-		$pdf->Cell(62,10,"Química ".$row3['codigo'],1,1,'C');
-		//$pdf->Cell(18,10,'Química'\n,1,0,'C');
-	}
-	if($row2[2]==2){
-		$pdf->Cell(62,10,"Microbiología ".$row3['codigo'],1,1,'C');		
-		//$pdf->Cell(18,10,'Microbiología',1,0,'C');
-	}
-	if($row2[2]==3){
-		$pdf->Cell(62,10,"Bromatología ".$row3['codigo'],1,1,'C');		
-		//$pdf->Cell(18,10,'Bromatología',1,0,'C');	
-	}
-	}//end encabezado de muestra
-
-	//**************************************Imprimo Segunda Linea***********************************
-	//**************************************Imprimo Segunda Linea***********************************
-	//**************************************Imprimo Segunda Linea***********************************
-	if($muestra_actual!=$row2[22]|| $inicial==1){
-		$pdf->Ln(0);
-		$pdf->SetFont('Arial','',10);
-		$pdf->SetFillColor(200,203,203);
-		$pdf->Cell(128,5,'Análisis Solicitados',1,0,'C',1);
-		$pdf->Cell(62,5,'Resultados',1,2,'C',1);
-		$pdf->SetFont('Arial','',8);
-	}
-	$pdf->Ln(0);	
-	
-	
-	
-	if($row2[39]==1){//si es acreditado lo imprimo en verde
-	
-
-		//si es un metodo de caracteres muy largos bajo la letra  a 4
-		if (strlen($row2[4])>=50){
-			$pdf->SetTextColor(39,210,75);
-			$pdf->SetFont('Arial','',8);
-			if($row2['37']=="Salmonella sp"||$row2['37']=="Escherichia coli"){
-			$pdf->SetFont('Arial','IUB',8);
-			}
-			$pdf->MultiCell(128,5,$row2[37]."\n".$row2[4],1,'L');
-			$pdf->Ln(-10);
-			$pdf->SetX(128);
-			$pdf->SetFont('Arial','',8);
-		}else{
-			$pdf->SetTextColor(39,210,75);
-			if($row2['37']=="Salmonella sp"||$row2['37']=="Escherichia coli"){
-			$pdf->SetFont('Arial','IUB',8);
-			}			
-			$pdf->MultiCell(128,5,$row2[37]."\n".$row2[4],1,'L');
-			$pdf->Ln(-10);
-			$pdf->SetX(128);
-			$pdf->SetFont('Arial','',8);
+		if($muestra<>0){
+			imprime_metodos($pdf,$v_metodos);		
 		}
+		$cont++;
+		$pdf->SetY($pdf->GetY()+5);
+		unset($v_metodos);
+		$v_metodos=array(); 	//vector para almacenar los metodos
+		//$v_acreditados=array(); //vector para almacenar los metodos a imprimir en verde
+		$pdf->SetY($pdf->GetY()+5);
+		//calcula_salto($pdf,'new');
+		$hoja=calcula_salto($pdf,'new',$acreditado,$hoja,$row['consecutivo']);
+		$muestra=$row2->id_muestra;				
+		$v_metodos[]='  ('.$cont.')'.$row2->metodo;
 		
+		$pdf->SetFillColor(241,243,246);
+		imprime_muestra($pdf,$row['consecutivo'],$muestra);		
+		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);		
 		
 	}else{
-		//si es un metodo de caracteres muy largos bajo la letra  a 7
-		if (strlen($row2[4])>=50){
-			$pdf->SetTextColor(0,0,0);
-			$pdf->SetFont('Arial','',8);
-			$pdf->MultiCell(128,5,$row2[37]."\n".$row2[4],1,'L');
-			$pdf->Ln(-10);
-			$pdf->SetX(128);
-			$pdf->SetFont('Arial','',8);
-		}else{
-			$pdf->SetTextColor(0,0,0);
-			$pdf->MultiCell(128,5,$row2[37]."\n".$row2[4],1,'L');
-			$pdf->Ln(-10);
-			$pdf->SetX(128);
-		}
+		
+		$cont++;		
+		$v_metodos[]='  ('.$cont.')'.$row2->metodo;
+		
+		
+		$hoja=calcula_salto($pdf,'old',$acreditado,$hoja,$row['consecutivo']);
+		
+		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);	
 	}
-	
-	//pregunto si hay resultado en base fresca, si la hay primero va el resultado en base fresca y luego seca
-	//valor corregido&incertidumbre
-	$r1="";
-	$r2="";
-	if($row2[7]<>""){	
-	
-		
-		if ($row2[6]<>""){//pregunto si tiene resultado en base seca
-			
-				if ($row2[16]<>""){	//pregunto si tiene valor corregido
-			
-			$resultado="(".utf8_decode($row2[16]).$row2[10].")".utf8_decode($row2[11])." [".utf8_decode($row2[6]).$row2[9]."]".utf8_decode($row2[11]);	
-			$r1="(".utf8_decode($row2[16]).$row2[10].")".utf8_decode($row2[11]);
-			$r2=" [".utf8_decode($row2[6]).$row2[9]."]".utf8_decode($row2[11]);	
-				}else{
-			$resultado="(".utf8_decode($row2[7]).$row2[10].")".utf8_decode($row2[11])." [".utf8_decode($row2[6]).$row2[9]."]".utf8_decode($row2[11]);	
-			$r1="(".$row2[7].$row2[10].")".utf8_decode($row2[11]);
-			$r2=" [".$row2[6].$row2[9]."]".utf8_decode($row2[11]);	
-				}
-		
-		}else{
-			
-				
-				
-				if ($row2[16]<>""){	//pregunto si tiene valor corregido			
-					$resultado="(".utf8_decode($row2[16]).$row2[10].")".$row2[11]." [".utf8_decode($row2[5]).$row2[8]."]".utf8_decode($row2[11]);
-					$r1="(".$row2[16].$row2[10].")".$row2[11];
-					//$r2=" [".$row2[5].$row2[8]."]".utf8_decode($row2[11]);	
-			
-			}else{
-					$resultado="(".utf8_decode($row2[7]).$row2[10].")".$row2[11]." [".utf8_decode($row2[5]).$row2[8]."]".utf8_decode($row2[11]);	
-					$r1="(".$row2[7].$row2[10].")".$row2[11];
-					//$r2=" [".$row2[5].$row2[8]."]".utf8_decode($row2[11]);	
-			}
-		
-			
-		
-		
-		}//fin base seca
-		
-	
-	}else{
-		
-		// no tiene resultado en base fresca	
-		if ($row2[6]<>""){// pregunto si hay resultado en base seca	
-		
-			if ($row2[16]<>""){	
-				$resultado="(".$row2[16].$row2[9].")".utf8_decode($row2[11])	;
-				$r1=$resultado;
-			}else{
-				$resultado="(".$row2[6].$row2[9].")".utf8_decode($row2[11])	;
-				$r1=$resultado;				
-			}
-		}else{
-			if ($row2[16]<>""){	
-				$resultado="(".$row2[16].$row2[8].")".utf8_decode($row2[11])	;
-				$r1=$resultado;				
-			}else{
-				$resultado="(".$row2[5].$row2[8].")".utf8_decode($row2[11])	;
-				$r1=$resultado;				
-			}
-		
-		}//end if resultado base seca
-	}//end if resultado base fresca
-	
-	
-	//quito los saltos de linea del final
-	$r1 =str_replace("\n", "", $r1);
-	$r2 =str_replace("\n", "", $r2);
 
-	
-	
-	$pdf->SetTextColor(0,0,0);
-	//Si el análisis es de microscopia imprimo una multicelda por ser muy largo el resultado
-	if ($row2['37']=="Microscopía"){
-		$pdf->SetX(138);
-		$pdf->Cell(62,10,"Ver siguiente línea",1,0,'C');
-		$pdf->Ln(10);
-		$pdf->MultiCell(0,5,'Resultado Microscopía: '.$resultado,1,2,'C');
-		$posicion=1;	
-				
 
-	}else{
-	
-		if (strlen($resultado)<=6){
-			$pdf->SetTextColor(0,0,0);
-			$pdf->SetFont('Arial','',8);
-		$var = $pdf->GetY();		
-		$pdf->SetY($var-10);
-		$var2 = $pdf->GetX();		
-		$pdf->SetX($var2+128);
-		$pdf->MultiCell(62,5,$r1."\n ",1,'C');
-			//$pdf->Cell(56,10,$resultado,1,0,'C');
-			$pdf->SetFont('Arial','',8);
-		}else{
-		$var = $pdf->GetY();
-			if($cont==1){		
-				$pdf->SetY($var);
-			}else{
-				$pdf->SetY($var);
-			}
-		$pdf->SetFont('Arial','',8);	
-		$var2 = $pdf->GetX();		
-		$pdf->SetX($var2+128);
-		$pdf->MultiCell(62,5,$r1."\n ".$r2,1,'C');
-			//$pdf->Cell(56,10,$resultado,1,0,'C');
-		}
-	}
-	$inicial=2;
-	$muestra_actual=$row2[22];
-}//end while
+}
 
-$pdf->SetFont('Arial','B',10);
-$pdf->Cell(190,10,'Fín del Informe',0,0,'C');
-$pdf->SetFont('Arial','',8);
-$pdf->SetY(270);
-$pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
-$pdf->SetFont('Arial','B',10);
+imprime_metodos($pdf,$v_metodos);
+$pdf->SetY($pdf->GetY()+5);
+$pdf->SetFont('Arial','B',8);
 $pdf->Ln(20);
-$pdf->Cell(190,84,'',1,0,'C');
+$pdf->Cell(190,44,'',1,0,'C');
 $pdf->Ln(0);
 $pdf->Cell(190,10,'Firmas Responsables',0,1,'C');
 $pdf->Ln(15);
+$pdf->Cell(42,5,'______________________',0,0,'C');
+$pdf->Cell(58,5,'______________________',0,0,'C');
+$pdf->Cell(38,5,'_______________________',0,0,'C');
+$pdf->Cell(58,5,'_______________________',0,1,'C');
 
-$pdf->Cell(90,5,'______________________',0,0,'C');
-$pdf->Cell(90,5,'______________________',0,2,'C');
-$pdf->SetFont('Arial','',10);
-$pdf->SetX('10');
-$pdf->Cell(90,5,'Responsable Laboratorio Química',0,0,'C');
-$pdf->Cell(90,5,'Ingeniero(a) Agrónomo Zootecnista Responsable',0,2,'C');
-$pdf->Ln(20);
-$pdf->SetX('10');
-$pdf->Cell(90,5,'_______________________',0,0,'C');
-$pdf->Cell(90,5,'_______________________',0,1,'C');
-$pdf->Cell(90,5,'Responsable Laboratorio Bromatología ',0,0,'C');
-$pdf->Cell(90,5,'Responsable Laboratorio Microbiología',0,0,'C');
 $pdf->SetFont('Arial','',6);
-
-
-$pdf->Ln(15);
-$pdf->SetFont('Arial','',8);
+$pdf->Cell(42,5,'Responsable Laboratorio Química',0,0,'C');
+$pdf->Cell(58,5,'Ingeniero(a) Agrónomo Zootecnista Responsable',0,0,'C');
+$pdf->Cell(38,5,'Responsable Laboratorio Bromatología ',0,0,'L');
+$pdf->Cell(58,5,'Responsable Laboratorio Microbiología',0,0,'C');
+$pdf->Ln(10);
+$pdf->SetFont('Arial','',6);
 $pdf->Cell(190,5,'Las firmas indicadas en cada informe solo corresponden a los análisis solicitados y a los laboratorios que intervienen en su ejecución.',0,0,'C');
 
-$pdf->SetFont('Arial','B',10);
+$pdf->SetFont('Arial','B',8);
 $pdf->Ln(20);
 $pdf->Cell(190,40,'',1,0,'C');
 $pdf->Ln(0);
@@ -682,9 +310,10 @@ $pdf->Ln(15);
 $pdf->Cell(95,5,'________________________________________',0,0,'C');
 $pdf->Cell(95,5,'________________________________________',0,1,'C');
 
-$pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',6);
 $pdf->Cell(95,5,'Nombre',0,0,'C');
-$pdf->Cell(95,5,'Firma',0,1,'C');
+$pdf->Cell(95,5,'Fecha',0,1,'C');
+$pdf->Cell(190,5,'Fín del informe de ensayo',0,1,'C');
 
 
 $pdf->SetFont('Arial','',8);	
@@ -693,6 +322,156 @@ $pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
 
 
 $pdf->Output();
+
+function imprime_header($pdf,$acreditado,$hoja,$contrato){
+$pdf->SetFont('Arial','B',8);
+$pdf->Ln(10);
+$pdf->Cell(190,30,'',1,0,'C');
+$pdf->Ln(0);
+$pdf->Cell(190,10,'RESULTADOS DE LOS ENSAYOS',0,1,'C');
+if($acreditado==1){
+	$pdf->Image('img/acreditados.png',165,25,30);
+}
+$pdf->SetFont('Arial','',8);
+//$pdf->Cell(190,5,' ',0,1,'L');
+//$pdf->Cell(190,5,' ',0,1,'L');
+//$hoja=1;
+$pdf->Cell(190,5,'Página # '.$hoja,0,1,'L');
+$pdf->Cell(190,5,'Contrato # '.$contrato,0,1,'L');
+$pdf->MultiCell(190,5,'Únicamente los análisis acreditados se muestran en color verde. Ver alcance de acreditación en www.eca.or.cr',0,2,'L');
+//$pdf->MultiCell(190,5,'Cuando se reporten resultados en base fresca y seca, se muestran entre paréntesis redondos y cuadrados respectivamente. En caso contrario se reporta solamente un valor entre paréntesis redondos',0,2,'L');
+$pdf->Ln(8);
+}
+
+function imprime_muestra($pdf,$consecutivo,$muestra){
+		$result3=mysql_query("select nombre_muestra,codigo from tbl_muestras where id_contrato='".$consecutivo."' and  numero_muestra='".$muestra."'  ");
+		$row3=mysql_fetch_object($result3);
+
+		$pdf->SetFont('Arial','B',8);
+		$pdf->Cell(190,5,'Muestra: '.$row3->codigo.' ( '.$row3->nombre_muestra.' )',1,1,'L',true);
+		$pdf->Cell(37,5,'Fecha de resultados:',1,0,'L',true);
+		$pdf->Cell(20,5,'Laboratorio:',1,0,'L',true);
+		$pdf->Cell(65,5,'Análisis:',1,0,'L',true);
+		$pdf->Cell(68,5,'Resultado:',1,1,'L',true);
+
+}
+
+
+function imprime_resultados($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido,$acreditado,$cont){
+		$pdf->SetFont('Arial','',8);
+		$pdf->Cell(37,5,$fecha,1,0,'L');
+		$pdf->Cell(20,5,nombre_laboratorio($laboratorio),1,0,'L');
+		if ($acreditado==1){
+			$pdf->SetTextColor(39,210,75);
+		}
+		$pdf->Cell(65,5,$analisis." (".$cont.")",1,0,'L');
+		$pdf->SetTextColor(0,0,0);
+		if ($analisis=="Microscopía"){
+			$pdf->Cell(68,5,"Ver siguiente línea",1,1,'C');
+			$pdf->MultiCell(0,5,'Resultado Microscopía: '.calcula_resultado($resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido),1,2,'L');
+		}else{
+			$pdf->Cell(68,5,calcula_resultado($resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido),1,1,'L');
+		}
+
+}
+
+function nombre_laboratorio($laboratorio){
+	if($laboratorio==1){
+		return "Química";
+	}elseif ($laboratorio==2) {
+		return "Microbiología";
+	}else{
+		return "Bromatología";
+	}
+}
+
+function imprime_metodos($pdf,$v_metodos){
+	$l_metodos=implode(";",$v_metodos);
+	$size=strlen($l_metodos);
+	if($size>=120){
+		$pdf->Cell(190,10,'',1,1,'L',true);
+		$pdf->SetY($pdf->GetY()-10);
+		$pdf->Write(5,'Métodos de referencia: '.$l_metodos);
+		$pdf->SetY($pdf->GetY()+5);
+	}else{
+		$pdf->Cell(190,5,'',1,1,'L',true);
+		$pdf->SetY($pdf->GetY()-5);
+		$pdf->Write(5,'Métodos de referencia: '.$l_metodos);
+	}
+	
+	
+}
+
+
+function calcula_resultado($resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido){
+	$r1="";
+	$r2="";
+	if ($base_fresca<>""){
+		
+		if ($base_seca<>""){//pregunto si tiene resultado en base seca
+			
+				if ($valor_correjido<>""){	//pregunto si tiene valor correjido			
+					$resultado="(".utf8_decode($valor_correjido).$incertidumbre_fresca.")".utf8_decode($unidades)." [".utf8_decode($base_seca).$incertidumbre_seca."]".utf8_decode($unidades);	
+					$r1="(".utf8_decode($valor_correjido)." ".$incertidumbre_fresca.") ".utf8_decode($unidades);
+					$r2=" [".utf8_decode($base_seca)." ".$incertidumbre_seca."] ".utf8_decode($unidades);	
+				}else{
+					$resultado="(".utf8_decode($base_fresca).$incertidumbre_fresca.")".utf8_decode($unidades)." [".utf8_decode($base_seca).$incertidumbre_seca."]".utf8_decode($unidades);	
+					$r1="(".$base_fresca." ".$incertidumbre_fresca.") ".utf8_decode($unidades);
+					$r2=" [".$base_seca." ".$incertidumbre_seca."] ".utf8_decode($unidades);	
+				}
+		}else{
+				if ($valor_correjido<>""){	//pregunto si tiene valor correjido			
+					$resultado="(".utf8_decode($valor_correjido).$incertidumbre_fresca.")".$unidades." [".utf8_decode($resultado).$incertidumbre."]".utf8_decode($unidades);
+					$r1="(".$valor_correjido." ".$incertidumbre_fresca.") ".$unidades;							
+				}else{
+					$resultado="(".utf8_decode($base_fresca).$incertidumbre_fresca.")".$unidades." [".utf8_decode($resultado).$incertidumbre."]".utf8_decode($unidades);	
+					$r1="(".$base_fresca." ".$incertidumbre_fresca.") ".$unidades;					
+				}
+		}// fin base seca linea 458
+
+	}else{
+		// no tiene resultado en base fresca	
+		if ($base_seca<>""){// pregunto si hay resultado en base seca	
+		
+			if ($valor_correjido<>""){	
+				$resultado="(".$valor_correjido." ".$incertidumbre_seca.") ".utf8_decode($unidades)	;
+				$r1=$resultado;
+			}else{
+				$resultado="(".$base_seca." ".$incertidumbre_seca.") ".utf8_decode($unidades)	;
+				$r1=$resultado;				
+			}
+		}else{
+			if ($valor_correjido<>""){	
+				$resultado="(".$valor_correjido." ".$incertidumbre.") ".utf8_decode($unidades)	;
+				$r1=$resultado;				
+			}else{
+				$resultado="(".$resultado." ".$incertidumbre.") ".utf8_decode($unidades)	;
+				$r1=$resultado;				
+			}		
+		}//end if resultado base seca
+	}//fin base fresca vacio linea 456
+	//quito los saltos de linea del final
+	$r1 =str_replace("\n", "", $r1);
+	$r2 =str_replace("\n", "", $r2);
+	return $r1." ".$r2;
+}//fin funcion calcula_resultados
+
+function calcula_salto($pdf,$new,$acreditado,$hoja,$contrato){
+
+	if($pdf->GetY()>=200&&$new=="new"){//si ya Y es mas de xxx y viene un analisis nuevo
+		$pdf->AddPage();
+		$hoja++;
+		imprime_header($pdf,$acreditado,$hoja,$contrato);
+
+	}elseif ($pdf->GetY()>=250) {
+		$pdf->AddPage();
+		$hoja++;
+		imprime_header($pdf,$acreditado,$hoja,$contrato);
+
+	}
+			return $hoja;
+
+}
 
 function color(){
 $this->SetFillColor(230,230,0);	
