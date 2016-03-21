@@ -228,7 +228,7 @@ function agregaAnalisis(id,laboratorio,tab,precio,ligados){
 //esta funcionrecibe en el parametro tipo el tipo de laboratio que es y en seleccionada el tap a que pertenece 1=quimica 2=micro 3= broma 		
 		var encontrado=false;
 		//este if me valida si es ELN que tiene que ser precio 0		
-		if (id=="1567"||id=="1568"||id=="1569"||id=="1570"||id=="1571"||id=="1572"||id=="1573"){
+		if (id=="1567"||id=="1568"||id=="1569"||id=="1570"||id=="1571"||id=="1572"||id=="1573"||id=="1682"||id=="1684"||id=="1687"){
 			precio=0;
 		}
 		//si es pepsina pongo la variable global con el id
