@@ -1,7 +1,7 @@
 <?
 session_start();
-require_once('../cnx/conexion.php');
-conectar();
+require_once('../cnx/conexion_compras.php');
+conectarc();
 $hoy=date("Y-m-d H:i:s");
 /*****************************************************************************************************************
 Accion:Ejecuta todas las operaciones sobre expedientes
@@ -23,7 +23,8 @@ class Pedidos{
 
 	function crea_pedido($parametros,$hoy){
 		$v_datos=explode(",",utf8_encode($parametros));
-		$result=mysql_query("insert into tbl_pedidos(consecutivo,id_proveedor,fecha_creacion,id_usuario,solicitante,seccion,asunto,proyecto_nombre,proyecto_numero,tipo)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".$hoy."','".$_SESSION['usuario']."','".$v_datos[2]."','".$v_datos[3]."','".$v_datos[4]."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."')");		
+		$sql="insert into tbl_pedidos(consecutivo,id_proveedor,fecha_creacion,id_usuario,solicitante,seccion,justificacion,tipo,geco,codigo_agrupacion,codigo_articulo,correo_usuario)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".$hoy."','".$_SESSION['usuario']."','".$v_datos[2]."','".$v_datos[3]."','".$v_datos[4]."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."')";
+		$result=mysql_query($sql);		
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
@@ -37,12 +38,33 @@ class Pedidos{
 	function agrega_articulos($parametros,$hoy){
 		$v_datos=explode(",",$parametros);
 		
-		$result=mysql_query("insert into tbl_detalle_pedidos(id_pedido,id_categoria,cantidad,descripcion,observaciones,equipo,codigo_equipo,placa,serie,marca,modelo,presentacion,pureza,grado,capacidad,tipo_coneccion,certificador,volumen,fecha_recepcion,estado)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".utf8_encode($v_datos[2])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".utf8_encode($v_datos[10])."','".utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."','".utf8_encode($v_datos[13])."','".utf8_encode($v_datos[14])."','".utf8_encode($v_datos[15])."','".utf8_encode($v_datos[16])."','".utf8_encode($v_datos[17])."','".$hoy."','"."1"."')");
+		$result=mysql_query("insert into tbl_detalle_pedidos(id_pedido,id_categoria,cantidad)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".utf8_encode($v_datos[2])."')");
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
         	$jsondata['resultado'] = 'Success';        	
         }
+
+        switch ($v_datos[1]==1){
+        	case 1:
+        	$sql="insert into tbl_reactivos (id_pedido,nombre,pureza,grado,presentacion,almacenamiento,similar_marca
+        		similar_catalogo,plazo_entrega,otros,proveedores,cotizacion,monto)values();
+        		)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."'
+        		,'".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."'
+        		,'".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".utf8_encode($v_datos[10])."'
+        		,'".utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."','".utf8_encode($v_datos[13])."'
+        		,'".utf8_encode($v_datos[13])."'
+        		)"
+        	break;
+        }
+        $result=mysql_query($sql);
+        if (!$result) {//si da error que me despliegue el error del query       		
+       		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+        }else{
+        	$jsondata['resultado'] = $sql;        	
+        	//$jsondata['resultado'] = 'Success';        	
+        }
+    
     echo json_encode($jsondata);
 
 	}

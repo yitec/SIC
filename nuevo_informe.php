@@ -207,7 +207,7 @@ $pdf->Cell(190,5,'Fecha de vencimiento: '.$row7['fecha_vencimiento'],1,1,'L');
 //Cuadro info general del Pago
 $pdf->Ln(5);
 $pdf->SetFillColor(241,243,246);
-$pdf->Cell(190,42,'',1,0,'C',true);
+$pdf->Cell(190,44,'',1,0,'C',true);
 $pdf->SetFont('Arial','',6);
 $pdf->Ln(0);
 $pdf->Cell(190,4,'• El muestreo es responsabilidad del cliente y los resultados en este informe se refieren únicamente a las muestras ensayadas.',0,1,'L');
@@ -216,10 +216,11 @@ $pdf->Cell(190,4,' al método de ensayo utilizado.',0,1,'L');
 $pdf->Cell(190,4,'• La incertidumbre se expresa de forma relativa o como un intervalo de confianza y reflejan la precisión del mesurado.',0,1,'L');
 $pdf->Cell(190,4,'• Para el análisis de energía bruta, el factor de conversión de 4,184 J/cal.',0,1,'L');
 $pdf->Cell(190,4,'• El método de Escherichia coli por NMP detecta las cepas indol positivas (95 %).  ',0,1,'L');
-$pdf->Cell(190,4,'• Documento no válido sin firmas originales.',0,1,'L');
+$pdf->Cell(190,4,'• Documento no válido sin firmas originales. ',0,1,'L');
+$pdf->Cell(190,4,'• Luego de tres meses se desecharán los informes de ensayo que no hayan sido retirados por el cliente. (El periodo será contado a partir del día en que se informa al cliente la emisión del ensayo)',0,1,'L');
 $pdf->Cell(190,4,'• Cualquier copia parcial de este documento invalida los resultados presentados en él.',0,1,'L');
-$pdf->Cell(190,4,'• Se conserva una muestra de respaldo por 3 meses',0,1,'L');
-$pdf->Cell(190,4,'• Cualquier duda o consulta sobre los resultados emitidos, por favor comuníquese con servicio al cliente 2511-2049 o 2511-2055',0,1,'L');
+$pdf->Cell(190,4,'• Se conserva una muestra de respaldo por 3 meses.',0,1,'L');
+$pdf->Cell(190,4,'• Cualquier duda o consulta sobre los resultados emitidos, por favor comuníquese con servicio al cliente 2511-2049 o 2511-2055.',0,1,'L');
 $pdf->SetY(271);
 $pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
 
@@ -326,7 +327,7 @@ $pdf->Output();
 function imprime_header($pdf,$acreditado,$hoja,$contrato){
 $pdf->SetFont('Arial','B',8);
 $pdf->Ln(10);
-$pdf->Cell(190,30,'',1,0,'C');
+$pdf->Cell(190,35,'',1,0,'C');
 $pdf->Ln(0);
 $pdf->Cell(190,10,'RESULTADOS DE LOS ENSAYOS',0,1,'C');
 if($acreditado==1){
@@ -339,7 +340,7 @@ $pdf->SetFont('Arial','',8);
 $pdf->Cell(190,5,'Página # '.$hoja,0,1,'L');
 $pdf->Cell(190,5,'Contrato # '.$contrato,0,1,'L');
 $pdf->MultiCell(190,5,'Únicamente los análisis acreditados se muestran en color verde. Ver alcance de acreditación en www.eca.or.cr',0,2,'L');
-//$pdf->MultiCell(190,5,'Cuando se reporten resultados en base fresca y seca, se muestran entre paréntesis redondos y cuadrados respectivamente. En caso contrario se reporta solamente un valor entre paréntesis redondos',0,2,'L');
+$pdf->MultiCell(190,5,'Cuando se reporten resultados en base fresca y seca, se muestran entre paréntesis redondos y cuadrados respectivamente. En caso contrario, se reporta solamente un dato entre paréntesis redondos correspondiente al valor tal como ofrecido',0,2,'L');
 $pdf->Ln(8);
 }
 
