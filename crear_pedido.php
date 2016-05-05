@@ -67,8 +67,8 @@ conectarc();
                                 <td><select class="combos" id="cmb_tipo_compra" name="cmb_tipo_compra">
                                 <option value="0" selected="selected">Seleccione</option>
                                 <option value="1">Reactivos</option>
-                                <option value="2">Cristalería</option>
-                                <option value="3">Gases</option>
+                                <option value="2">Gases</option>
+                                <option value="3">Cristalería</option>
                                 <option value="4">Repuesto/consumible de equipo</option>                                
                                 <option value="5">Equipos</option>
                                 <option value="6">Materiales de laboratorio</option>

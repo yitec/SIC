@@ -45,21 +45,133 @@ class Pedidos{
         	$jsondata['resultado'] = 'Success';        	
         }
 
-        switch ($v_datos[1]==1){
+        
+        switch ($v_datos[1]){
         	case 1:
-        	$sql="insert into tbl_reactivos (id_pedido,nombre,pureza,grado,presentacion,almacenamiento,similar_marca
-        		similar_catalogo,plazo_entrega,otros,proveedores,cotizacion,monto)values();
-        		)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."'
-        		,'".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."'
-        		,'".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".utf8_encode($v_datos[10])."'
-        		,'".utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."','".utf8_encode($v_datos[13])."'
-        		,'".utf8_encode($v_datos[13])."'
-        		)"
+        	$sql="insert into tbl_reactivos (id_pedido,cantidad,nombre,pureza,grado,presentacion,almacenamiento,similar_marca,similar_catalogo,plazo_entrega,otros,proveedores,cotizacion,monto)values('".
+        		utf8_encode($v_datos[0])."','".utf8_encode($v_datos[2])."','".utf8_encode($v_datos[3])."','".
+        		utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".
+        		utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".
+     			utf8_encode($v_datos[10])."','".utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."','".
+     			utf8_encode($v_datos[13])."','".utf8_encode($v_datos[14])."')";
+        	break;
+        	case 2:
+        	$sql="insert into tbl_gases (id_pedido,cantidad,nombre,pureza,presentacion,plazo,otros,proveedores,cotizacion,monto)values('".
+        		utf8_encode($v_datos[0])."','".utf8_encode($v_datos[2])."','".utf8_encode($v_datos[3])."','".
+        		utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".
+        		utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".
+        		utf8_encode($v_datos[10])."')";
+        	break;
+        	case 3:
+        	$sql="insert into tbl_cristaleria (id_pedido,cantidad,nombre,clase,capacidad,presentacion,similar_marca,similar_catalogo,plazo_entrega,otros,proveedores,cotizacion,monto)values('".
+        		utf8_encode($v_datos[0])."','".utf8_encode($v_datos[2])."','".utf8_encode($v_datos[3])."','".
+        		utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".
+        		utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".
+     			utf8_encode($v_datos[10])."','".utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."','".
+     			utf8_encode($v_datos[13])."')";
+        	break;
+        	case 4:
+        	$sql="insert into tbl_repuestos(id_pedido,cantidad,nombre_repuesto,marca_equipo,modelo_equipo,numero_catalogo,representante,garantia,otros,proveedores,cotizacion,monto,marca)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[2])."','".utf8_encode($v_datos[3])."','".
+        		utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".
+        		utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".
+     			utf8_encode($v_datos[10])."','".utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."','".
+     			utf8_encode($v_datos[13])."')";
+        	break;	
+        	case 5:
+        	$sql="insert into tbl_equipos(id_pedido,nombre,representante,similar_marca,similar_modelo,similar_catalogo,plazo,garantia_fab,garantia_man,capacitacion,instalacion,lugar,otros,proveedores,cotizacion,monto)
+        	values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".
+        		utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".utf8_encode($v_datos[10])."','".
+     			utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."','".utf8_encode($v_datos[13])."','".
+     			utf8_encode($v_datos[14])."','".utf8_encode($v_datos[15])."','".utf8_encode($v_datos[16])."','".
+     			utf8_encode($v_datos[17])."')";
+        	break;
+
+        	case 6:
+        	$sql="insert into tbl_materiales(id_pedido,cantidad,nombre,similar_materia,similar_catalogo,plazo,otros,proveedores,cotizacion,monto)values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[2])."','".utf8_encode($v_datos[3])."','".
+        		utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".
+        		utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".
+     			utf8_encode($v_datos[10])."')";
+        	break;
+
+        	case 7:
+        	$sql="insert into tbl_calibraciones(id_pedido,nombre,codigo,placa,ubicacion,lugar,monto,otros,proveedores,cotizacion)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".
+        		utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".utf8_encode($v_datos[10])."','".
+        		utf8_encode($v_datos[11])."')";
+        	break;	
+
+        	case 8:
+        	$sql="insert into tbl_reparaciones(id_pedido,
+        		nombre_equipo,codigo,placa,ubicacion,otros,proveedores,cotizacion,monto)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".
+        		utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".utf8_encode($v_datos[10])."')";
+        	break;
+
+        	case 9:
+        	$sql="insert into tbl_interlaboratoriales(id_pedido,
+        		analisis,ronda,otros,proveedores,cotizacion,monto)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".
+        		utf8_encode($v_datos[8])."')";
+
+        	break;
+        	case 10:
+        	$sql="insert into tbl_medios(id_pedido,
+        		nombre,tipo,similar_marca,similar_catalogo,plazo,presentacion,otros,proveedores,cotizacion,monto)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".
+        		utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."','".utf8_encode($v_datos[10])."','".
+     			utf8_encode($v_datos[11])."','".utf8_encode($v_datos[12])."')";
+        	break;
+
+        	case 11:
+        	$sql="insert into tbl_software(id_pedido,cantidad,
+        		nombre,desarrollador,version,otros,proveedores,cotizacion,monto)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[2])."','".utf8_encode($v_datos[3])."','".
+        		utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".
+        		utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."')";
+        	break;
+
+        	case 12:
+        	$sql="insert into tbl_capacitaciones(id_pedido,
+        		proveedor,tema,fecha,costo,cotizacion,otros,proveedores)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".
+        		utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."')";
+        	break;
+
+        	case 13:
+        	$sql="insert into tbl_inscripciones(id_pedido,
+        		tema,fecha,costo,otros,organizadores)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."')";
+        	break;
+
+        	case 14:
+        	$sql="insert into tbl_referencias(id_pedido,
+        		tipo,presentacion,cotizacion,proveedores)
+			values('".
+				utf8_encode($v_datos[0])."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".
+        		utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."')";
         	break;
         }
         $result=mysql_query($sql);
         if (!$result) {//si da error que me despliegue el error del query       		
-       		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+       		$jsondata['resultado'] = 'Query invalido: ' . mysql_error()."/".$sql ;       		
         }else{
         	$jsondata['resultado'] = $sql;        	
         	//$jsondata['resultado'] = 'Success';        	
