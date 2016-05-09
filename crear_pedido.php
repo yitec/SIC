@@ -27,7 +27,7 @@ conectarc();
                             <tr>
                                 <td height="29" class="Arial14Morado">Consecutivo</td>
                                 <?
-                                $result=mysql_query("select consecutivo from tbl_consecutivos limit 1");
+                                $result=mysql_query("SELECT max(id_consecutivo) as consecutivo FROM tbl_consecutivos  ");
                                 $row=mysql_fetch_object($result);
                                 $consecutivo=$row->consecutivo+1;
                                 ?>

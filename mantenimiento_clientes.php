@@ -69,6 +69,7 @@ require_once('menu_superior.php');
 	      <option>Particular</option>
 	      <option>Investigacion</option>
           <option>Exonerado</option>
+          <option>Oficial</option>
 	      </select></td>
 	    <td class="Arial14Negro"><input id="txt_tel_cel" class="inputbox" type="text" /></td>
 	    <td class="Arial14Negro"><input id="txt_tel_fijo" class="inputbox" type="text" /></td>
