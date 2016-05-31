@@ -182,10 +182,24 @@ class Pedidos{
 
 	}
 
-	function aprueba_pedidos($parametros,$hoy){
+	function aprueba_pedidost($parametros,$hoy){
 		$v_datos=explode(",",$parametros);
 		
-		$result=mysql_query("update tbl_pedidos set fecha_aprobacion='".$hoy."',estado=1 where consecutivo='".$v_datos[0]."'");
+		$result=mysql_query("update tbl_pedidos set fecha_aprobacion='".$hoy."',presupuesto='".$v_datos[1]."',tipo_presupuesto='".$v_datos[2]."',estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_reactivos set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_cristaleria set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_gases set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_repuestos set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_equipos set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_materiales set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_calibraciones set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_reparaciones set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_interlaboratoriales set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_medios set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_software set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_capacitaciones set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_inscripciones set estado=1 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_referencias set estado=1 where id_pedido='".$v_datos[0]."'");
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
@@ -194,11 +208,37 @@ class Pedidos{
     echo json_encode($jsondata);
 
 	}
+
+    function aprueba_articulos($parametros,$hoy){
+        $v_datos=explode(",",$parametros);        
+        $result=mysql_query("update ".$v_datos[0]." set estado=1 where id_articulo=".$v_datos[1]);
+        if (!$result) {//si da error que me despliegue el error del query               
+            $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+        }else{
+            $jsondata['resultado'] = 'Success';         
+        }
+    echo json_encode($jsondata);
+
+    }
 	
-	function rechaza_pedidos($parametros,$hoy){
+	function rechaza_pedidost($parametros,$hoy){
 		$v_datos=explode("|",$parametros);
 		
-		$result=mysql_query("update tbl_pedidos set fecha_rechazado='".$hoy."',razon_rechazo='".$v_datos[1]."' ,estado=2 where consecutivo='".$v_datos[0]."'");
+		$result=mysql_query("update tbl_pedidos set fecha_rechazado='".$hoy."',razon_rechazo='".$v_datos[1]."' ,estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_reactivos set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_cristaleria set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_gases set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_repuestos set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_equipos set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_materiales set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_calibraciones set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_reparaciones set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_interlaboratoriales set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_medios set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_software set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_capacitaciones set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_inscripciones set estado=2 where id_pedido='".$v_datos[0]."'");
+        $result=mysql_query("update tbl_referencias set estado=2 where id_pedido='".$v_datos[0]."'");
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
@@ -207,6 +247,18 @@ class Pedidos{
     echo json_encode($jsondata);
 
 	}
+
+    function rechaza_articulos($parametros,$hoy){
+        $v_datos=explode(",",$parametros);
+        $result=mysql_query("update ".$v_datos[0]." set estado=2 where id_articulo=".$v_datos[1]);
+        if (!$result) {//si da error que me despliegue el error del query               
+            $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+        }else{
+            $jsondata['resultado'] = 'Success';         
+        }
+    echo json_encode($jsondata);
+
+    }
 	
 	function entrega_pedidos($parametros,$hoy){
 		$v_datos=explode("|",$parametros);

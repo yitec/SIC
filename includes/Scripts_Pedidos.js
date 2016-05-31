@@ -1,8 +1,17 @@
 $(document).ready(function(){
 
+$("#ver").fancybox({
+        'width'       : '75%',
+        'height'      : '75%',
+        'autoScale'     : false,
+        'transitionIn'    : 'fade',
+        'transitionOut'   : 'fade',
+        'type'        : 'iframe'
+});              
 
 var nproductos=1;
 $("#geco").hide();
+$("#tipo_presupuesto").hide();
 if ($("#txt_cantidad_lineas").val()>1){
   var totl=parseInt($("#txt_cantidad_lineas").val());
   totl++;
@@ -38,19 +47,6 @@ $('#form_radio input').on('change', function() {
    
 });
 
-//despliego los divs de compra de:
-$("#cmb_tipo").change(function(event){	
-	/*if ($("#cmb_tipo").val()==5 ){
-    $('#generico').html('');
-		$("#productos_dinamicos").show();
-    $("#agregar").show();
-	}else{		
-		$("#productos_dinamicos").hide();    
-    $("#agregar").hide();
-    $('#generico').html('');
-    $('#generico').append('<div class="Arial14Morado subtitulosl fl">Descripci&oacute;n:</div><div class="Arial14Morado subtitulosl fl ml ">Observaciones:</div><br class="none"><div class="fl"><textarea  rows="4" cols="25" name="txt_descripcion_g" id="txt_descripcion_g" ></textarea></div><div ><textarea class="ml"  rows="4" cols="25" name="txt_observaciones_g" id="txt_observaciones_g" ></textarea></div>');
-	}	*/
-})
 
 $('#productos_dinamicos').on('change', '.combos', function() {
   var numero=$(this).attr("numero");
@@ -58,6 +54,22 @@ $('#productos_dinamicos').on('change', '.combos', function() {
   $("#detalle_"+numero).html('');
   agrega_inputs(numero,opcion);
 });
+
+$("#cmb_presupuesto").change(function(event){
+  if ($("#cmb_presupuesto").val()=='SUMINISTROS'){
+    $("#tipo_presupuesto").show();
+  }else{
+    $("#tipo_presupuesto").hide();
+  }
+});
+
+/*$(".rnd_tpres").click(function() {  
+        if($("#rnd_tpres").is(':checked')) {  
+            alert($( "#rnd_tpres:checked" ).val());
+        } else {  
+            alert($( "#rnd_tpres:checked" ).val());
+        }  
+    });  */
 
 
 /***********************************************Boton guardar pedido**********************************************/
@@ -189,11 +201,18 @@ $("#btn_agregarm").click(function(){
   $("#txt_cantidad_lineas").attr("value",total);
 });
 
-/***********************************************Boton Aprobar**********************************************/
-$("#btn_aprobar").click(function(){  
- parametros=$(this).attr('consecutivo')+',';
+
+/***********************************************Boton Aprobar todo un pedido**********************************************/
+$("#btn_finalizar").click(function(){  
+  if (confirm('Seguro que desea aprobar este pedido?')) {
+    if ($("#cmb_presupuesto").val()=='SUMINISTROS'){
+      parametros=$(this).attr('id_pedido')+','+$("#cmb_presupuesto").val()+','+$( "#rnd_tpres:checked" ).val();  
+    } else {  
+      parametros=$(this).attr('id_pedido')+','+$("#cmb_presupuesto").val();
+    }  
+  
   $.ajax({ 
-      data: "metodo=aprueba_pedidos&parametros="+parametros,
+      data: "metodo=aprueba_pedidost&parametros="+parametros,
       type: "POST",
       async:false,
       dataType: "json",
@@ -206,15 +225,44 @@ $("#btn_aprobar").click(function(){
         }
         }//end succces function
       });//end ajax function   
-  setInterval(function(){window.location.assign("control_pedidos.php")},2000);   
+  setInterval(function(){window.location.assign("listado_pedidos.php")},2000); 
+  } else {
+    return;
+  }  
 });
-/***********************************************Boton Rechazar**********************************************/
-$("#btn_rechazar").click(function(){  
+
+/***********************************************Boton Aprobar un articulo**********************************************/
+$(".aprobara").live("click",function(event){ 
+  if (confirm('Seguro que desea aprobar este articulo?')) {  
+
+  parametros=$(this).attr('tabla')+','+$(this).attr('id_articulo');
+  $.ajax({ 
+      data: "metodo=aprueba_articulos&parametros="+parametros,
+      type: "POST",
+      async:false,
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function (data){
+        if (data.resultado!="Success"){
+         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");          
+        }else{
+          notificacion("Articulo Aprobado","El articulo se ha aprobado correctamente","info");          
+        }
+        }//end succces function
+      });//end ajax function   
+  
+  } else {
+    return;
+  }  
+});
+/***********************************************Boton Rechazar un pedido**********************************************/
+$("#btn_rechazart").click(function(){  
   
   var razon=prompt("Motivo del rechazo:","");
-  parametros=$(this).attr('consecutivo')+'|'+razon;
+  if (razon != null) {
+  parametros=$(this).attr('id_pedido')+'|'+razon;
   $.ajax({ 
-      data: "metodo=rechaza_pedidos&parametros="+parametros,
+      data: "metodo=rechaza_pedidost&parametros="+parametros,
       type: "POST",
       async:false,
       dataType: "json",
@@ -227,7 +275,34 @@ $("#btn_rechazar").click(function(){
         }
         }//end succces function
       });//end ajax function
-      setInterval(function(){window.location.assign("control_pedidos.php")},2000);   
+      setInterval(function(){window.location.assign("listado_pedidos.php")},2000);   
+  } else {
+    return;
+  }
+});
+
+/***********************************************Boton Rechazar un articulo**********************************************/
+$(".rechazara").live("click",function(event){ 
+  
+  if (confirm('Seguro que desea aprobar este articulo?')) {    
+  parametros=$(this).attr('tabla')+','+$(this).attr('id_articulo');
+  $.ajax({ 
+      data: "metodo=rechaza_articulos&parametros="+parametros,
+      type: "POST",
+      async:false,
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function (data){
+        if (data.resultado!="Success"){
+         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");          
+        }else{
+          notificacion("Articulo Rechazado","El articulo se ha rechazado correctamente","info");          
+        }
+        }//end succces function
+      });//end ajax function
+  } else {
+    return;
+  }
 });
 /***********************************************Boton Entregar**********************************************/
 $("#btn_entregar").click(function(){
@@ -1225,6 +1300,9 @@ if (parseInt(opcion)==13){
 
   return html;
 }//end function
+
+
+
 
 function notificacion(titulo,cuerpo,tipo){
   $.pnotify({

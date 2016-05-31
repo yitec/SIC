@@ -121,6 +121,9 @@ $(document).ready(function() {
   	</td>     
     <td width="131">
     	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Resultados</strong></div>
+  	</td>
+  	<td width="131">
+    	<div style=" background:url(../img/centro_grid.png);" class="Arial14Morado"><strong>Fecha</strong></div>
   	</td>     
     
     
@@ -128,24 +131,25 @@ $(document).ready(function() {
 
 <?
 
-$result=mysql_query("select an.id,an.id_contrato,an.id_muestra,an.id_analisis,an.fecha_molienda,an.precio,inf.tipo_alimento from tbl_analisis an INNER JOIN tbl_infmuestras inf on an.fecha_contrato>='".$fecha_ini."' and an.fecha_contrato<='".$fecha_fin."' and an.id_laboratorio='".$_REQUEST['cmb_laboratorio']."' and  inf.cons_contrato=an.id_contrato");
-
+$result=mysql_query(
+"select an.id,an.id_contrato,an.id_muestra,an.id_analisis,an.fecha_molienda,an.precio,inf.tipo_alimento 
+,cli.nombre , cat.nombre
+from tbl_analisis an INNER JOIN tbl_infmuestras inf 
+on inf.cons_contrato=an.id_contrato
+INNER JOIN tbl_categoriasanalisis  cat
+on an.id_analisis=cat.id
+INNER JOIN tbl_contratos cons
+on an.id_contrato=cons.consecutivo
+INNER JOIN tbl_clientes cli
+on cons.id_cliente=cli.id
+where  an.fecha_contrato>='".$fecha_ini."' and  an.fecha_contrato<='".$fecha_fin."' and an.id_laboratorio='".$_REQUEST['cmb_laboratorio']."'");  
 
 $cont=0;
 $monto=0;
 while($row=mysql_fetch_assoc($result)){
 	$cont++;
 //busco el nombre del analisis	
-$result2=mysql_query("select nombre from tbl_categoriasanalisis where id='".$row['id_analisis']."'");
-$row2=mysql_fetch_assoc($result2);
-// busco el nmbre del cliente
-$result3=mysql_query("select c.nombre from tbl_clientes c,tbl_contratos co where co.consecutivo='".$row['id_contrato']."' and c.id=co.id_cliente");
-if (!$result3) {//si da error que me despliegue el error del query
-       echo $message  = 'Query invalido: ' . mysql_error() . "\n";
-        $message .= 'Query ejecutado: ' . $query;
-		
-		} 
-$row3=mysql_fetch_assoc($result3);
+
 // busco el resultado
 
 $result4=mysql_query("select * from tbl_resultados where id_analisis='".$row['id']."' ");	
@@ -161,7 +165,7 @@ $monto=$monto+$row['precio'];
   <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['fecha_molienda']);?></td>
   <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['id_muestra']);?></td>
   <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['tipo_alimento']);?></td>
-  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row2['nombre']);?></td>
+  <td style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" class="tablas"><?=utf8_encode($row['nombre']);?></td>
   <td width="121" class="tablas" style=" font-size:12px; font-family:Arial, Helvetica, sans-serif"><?=utf8_encode($row['precio']);?></td>
   <td width="121" class="tablas" style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" >
     <?
@@ -219,7 +223,7 @@ $monto=$monto+$row['precio'];
 	?>
   
   </td>
-    
+  <td width="121" class="tablas" style=" font-size:12px; font-family:Arial, Helvetica, sans-serif" ><?=utf8_encode($row4['fecha_ingreso']);?></td>  
   </tr>
 <?
 }
