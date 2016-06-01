@@ -113,7 +113,7 @@ $pdf->Cell(40,5,'Versión: 05',1,0,C);
 $pdf->Ln(5);
 $pdf->Cell(185,5,'Fecha de Emisión:',0,0,'R');
 $pdf->Ln(5);
-$pdf->Cell(180,5,'29-05-2012',0,0,'R');
+$pdf->Cell(180,5,'10-11-2015',0,0,'R');
 $pdf->Ln(-5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(185,10,'INFORME DE ENSAYO',0,0,'C');

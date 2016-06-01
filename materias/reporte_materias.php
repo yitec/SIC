@@ -320,6 +320,8 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="NIFAD"class="datos"><?=utf8_encode($row['nifad']);?></td>
   <td style="width: 60px;"title="Hemicelulosa"class="datos"><?=utf8_encode($row['hemicelulosa']);?></td>    
   <td style="width: 60px;"title="CE_INSOLU"class="datos"><?=utf8_encode($row['ce_insolu']);?></td>
+  <td style="width: 60px;"title="CE_INSOLU"class="datos"><?=utf8_encode($row['consecutivo_contrato']);?></td>
+  <td style="width: 60px;"title="CE_INSOLU"class="datos"><?=utf8_encode($row['id_muestra']);?></td>
   </tr>
 <?
 }

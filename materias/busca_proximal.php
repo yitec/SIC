@@ -17,7 +17,7 @@ join tbl_categoriasanalisis cat
 ON cat.id=ana.id_analisis
 join tbl_infmuestras inf
 on mues.id_contrato=inf.cons_contrato
-where mues.fecha_ingreso>='20140101' and mues.fecha_ingreso<='20141231' 
+where mues.fecha_ingreso>='20140101' and mues.fecha_ingreso<='20150101' 
 and cat.nombre in (".utf8_decode($proxi).") and metodo not like 'no se realiza%'
 group by mues.id order by mues.id_contrato";
 $result=mysql_query($sql);
@@ -86,6 +86,12 @@ and ana.id_contrato='".$id."'";
 		$encontrado=true;
         break;	
 	case "Humedad 135 °C":
+		//echo "||entro 135||".$id;
+        $analisis="humedad_135";
+		$total++;
+		$encontrado=true;
+        break;
+    case "Humedad 135° C":
 		//echo "||entro 135||".$id;
         $analisis="humedad_135";
 		$total++;

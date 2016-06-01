@@ -5,7 +5,7 @@ include('../cnx/conexion_materias.php');
 conectarm();
 
 
-$sql="select id,tipo_muestra,nombre_producto from tbl_proxi2014";
+$sql="select id,tipo_muestra,nombre_producto from tbl_proxi2015";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	
@@ -18,9 +18,9 @@ while ($row=mysql_fetch_object($result)){
 	$row2=mysql_fetch_object($result2);
 	echo "<br>".$row->nombre_producto."------".$row2->nombre;
 	if ($row2->nombre==''){
-		mysql_query("update tbl_proxi2014 set codigo='".$row2->codigo."', nombre='".strTOUPPER($row->nombre_producto)."' where id='".$row->id."'");
+		mysql_query("update tbl_proxi2015 set codigo='".$row2->codigo."', nombre='".strTOUPPER($row->nombre_producto)."' where id='".$row->id."'");
 	}else{
-		mysql_query("update tbl_proxi2014 set codigo='".$row2->codigo."', nombre='".$row2->nombre."' where id='".$row->id."'");
+		mysql_query("update tbl_proxi2015 set codigo='".$row2->codigo."', nombre='".$row2->nombre."' where id='".$row->id."'");
 	}
 
 }
