@@ -17,6 +17,7 @@ conectarc();
         <title>SIC-CINA</title>
     </head>
     <body >
+            
     		<div class="header"></div>
     		<div class="box"> 
             <div style="margin-top:20px;"><?require_once('menu_superior.php');?></div>               
@@ -25,11 +26,12 @@ conectarc();
                         <div class="titulo1" align="center"><h2>Nuevo Pedido</h2></div>
                         <table>
                             <tr>
-                                <td height="29" class="Arial14Morado">Consecutivo</td>
+                                <td height="29"  class="Arial14Morado">Consecutivo</td>
                                 <?
-                                $result=mysql_query("select consecutivo from tbl_consecutivos limit 1");
+                                $result=mysql_query("SELECT max(id_consecutivo) as consecutivo FROM tbl_consecutivos  ");
                                 $row=mysql_fetch_object($result);
                                 $consecutivo=$row->consecutivo+1;
+                                $_SESSION['consecutivo']='CO-'.$consecutivo."-".date("Y");
                                 ?>
                                 <td><input  id="txt_consecutivo" name="txt_consecutivo"  value="CO-<?=$consecutivo."-".date("Y");?>" class="inputbox"  type="text" disabled /></td>
                             </tr>
@@ -67,8 +69,8 @@ conectarc();
                                 <td><select class="combos" id="cmb_tipo_compra" name="cmb_tipo_compra">
                                 <option value="0" selected="selected">Seleccione</option>
                                 <option value="1">Reactivos</option>
-                                <option value="2">Cristalería</option>
-                                <option value="3">Gases</option>
+                                <option value="2">Gases</option>
+                                <option value="3">Cristalería</option>
                                 <option value="4">Repuesto/consumible de equipo</option>                                
                                 <option value="5">Equipos</option>
                                 <option value="6">Materiales de laboratorio</option>
@@ -105,7 +107,9 @@ conectarc();
                         <div><br /></div>
                         
                         <div  id="agregar" align="center"><input  id="btn_agregar"  type="image"  src="img/agregar.png" /></div>                        
-                        <br> <br>   
+                        <br>
+                        <div align="center" class="Arial14Morado"><a id="ver" href="cotizacion_upload.php">Subir archivo<img src="img/add_icon.png" width="25" height="25"  /></a></div>
+                        <br>   
                         <div id="siguiente" align="center">
                             <input  id="btn_siguiente"  type="image"  src="img/btn_continuar.png" /><br />
                         </div>
@@ -127,5 +131,6 @@ conectarc();
 <script src="includes/ui/jquery-ui.js"></script>
 <script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
 <script src="includes/Scripts_Pedidos.js" type="text/javascript"></script> 
+<script type="text/javascript" src="includes/jquery.fancybox-1.3.4.pack.js"></script>
 </html>
 

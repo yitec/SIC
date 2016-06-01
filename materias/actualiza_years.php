@@ -16,7 +16,6 @@ while ($row=mysql_fetch_object($result)){
 actualiza_resultado($row->id,$row->consecutivo_contrato,'ELN',$row->id_muestra);
 actualiza_resultado($row->id,$row->consecutivo_contrato,'Extracto etéreo',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Humedad 135 °C',$row->id_muestra);
-$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Humedad a 60 ºC (Materia Seca a 60 ºC)',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Cenizas',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Proteína Cruda',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Fibra Cruda',$row->id_muestra);
@@ -64,9 +63,10 @@ on res.id_analisis=ana.id
  on  ana.id_muestra=mues.numero_muestra
  where 
  cat.nombre='".utf8_decode($analisis)."'
+
   and mues.id='".$id_muestra."'
   and res.consecutivo_contrato='".$consecutivo."'";
-  
+
 	$result2=mysql_query($sql2);
 	if (!$result2) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";

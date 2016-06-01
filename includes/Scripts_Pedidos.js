@@ -1,8 +1,17 @@
 $(document).ready(function(){
 
+$("#ver").fancybox({
+        'width'       : '75%',
+        'height'      : '75%',
+        'autoScale'     : false,
+        'transitionIn'    : 'fade',
+        'transitionOut'   : 'fade',
+        'type'        : 'iframe'
+});              
 
 var nproductos=1;
 $("#geco").hide();
+$("#tipo_presupuesto").hide();
 if ($("#txt_cantidad_lineas").val()>1){
   var totl=parseInt($("#txt_cantidad_lineas").val());
   totl++;
@@ -38,19 +47,6 @@ $('#form_radio input').on('change', function() {
    
 });
 
-//despliego los divs de compra de:
-$("#cmb_tipo").change(function(event){	
-	/*if ($("#cmb_tipo").val()==5 ){
-    $('#generico').html('');
-		$("#productos_dinamicos").show();
-    $("#agregar").show();
-	}else{		
-		$("#productos_dinamicos").hide();    
-    $("#agregar").hide();
-    $('#generico').html('');
-    $('#generico').append('<div class="Arial14Morado subtitulosl fl">Descripci&oacute;n:</div><div class="Arial14Morado subtitulosl fl ml ">Observaciones:</div><br class="none"><div class="fl"><textarea  rows="4" cols="25" name="txt_descripcion_g" id="txt_descripcion_g" ></textarea></div><div ><textarea class="ml"  rows="4" cols="25" name="txt_observaciones_g" id="txt_observaciones_g" ></textarea></div>');
-	}	*/
-})
 
 $('#productos_dinamicos').on('change', '.combos', function() {
   var numero=$(this).attr("numero");
@@ -58,6 +54,22 @@ $('#productos_dinamicos').on('change', '.combos', function() {
   $("#detalle_"+numero).html('');
   agrega_inputs(numero,opcion);
 });
+
+$("#cmb_presupuesto").change(function(event){
+  if ($("#cmb_presupuesto").val()=='SUMINISTROS'){
+    $("#tipo_presupuesto").show();
+  }else{
+    $("#tipo_presupuesto").hide();
+  }
+});
+
+/*$(".rnd_tpres").click(function() {  
+        if($("#rnd_tpres").is(':checked')) {  
+            alert($( "#rnd_tpres:checked" ).val());
+        } else {  
+            alert($( "#rnd_tpres:checked" ).val());
+        }  
+    });  */
 
 
 /***********************************************Boton guardar pedido**********************************************/
@@ -72,6 +84,11 @@ $("#btn_siguiente").click(function(event){
   if($('#cmb_tipo').val()==0){
     notificacion("Error","Debe seleccionar el tipo de pedido!!","error"); 
     $('#cmb_tipo').focus();
+    return;
+  }
+  if($('#cmb_tipo_compra').val()==0){
+    notificacion("Error","Debe seleccionar el tipo de compra","error"); 
+    $('#cmb_tipo_compra').focus();
     return;
   }
   for (i=1;i<=$("#txt_cantidad_lineas").val();i++){
@@ -103,7 +120,7 @@ $("#btn_siguiente").click(function(event){
 
   
   for (i=1;i<=$("#txt_cantidad_lineas").val();i++){//Dependiendo de la cantida de articulos recorro los divs
-		parametros=busca_valores(id_pedido,$("#cmb_tipo_compra").val(),i)     
+		parametros=busca_valores(id_pedido,$("#cmb_compra_"+i).val(),i)     
 		//guardo el detalle del pedido por articulo
     	$.ajax({ 
     	data: "metodo=agrega_articulos&parametros="+parametros,
@@ -112,8 +129,7 @@ $("#btn_siguiente").click(function(event){
     	dataType: "json",
     	url: "operaciones/opr_pedidos.php",
     	success: function (data){
-      	if (data.resultado!="Success"){
-      	 alert(data.resultado);
+      	if (data.resultado!="Success"){      	 
          notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error"); 
          exito=0;
 	  	  }
@@ -185,11 +201,18 @@ $("#btn_agregarm").click(function(){
   $("#txt_cantidad_lineas").attr("value",total);
 });
 
-/***********************************************Boton Aprobar**********************************************/
-$("#btn_aprobar").click(function(){  
- parametros=$(this).attr('consecutivo')+',';
+
+/***********************************************Boton Aprobar todo un pedido**********************************************/
+$("#btn_finalizar").click(function(){  
+  if (confirm('Seguro que desea aprobar este pedido?')) {
+    if ($("#cmb_presupuesto").val()=='SUMINISTROS'){
+      parametros=$(this).attr('id_pedido')+','+$("#cmb_presupuesto").val()+','+$( "#rnd_tpres:checked" ).val();  
+    } else {  
+      parametros=$(this).attr('id_pedido')+','+$("#cmb_presupuesto").val();
+    }  
+  
   $.ajax({ 
-      data: "metodo=aprueba_pedidos&parametros="+parametros,
+      data: "metodo=aprueba_pedidost&parametros="+parametros,
       type: "POST",
       async:false,
       dataType: "json",
@@ -202,15 +225,44 @@ $("#btn_aprobar").click(function(){
         }
         }//end succces function
       });//end ajax function   
-  setInterval(function(){window.location.assign("control_pedidos.php")},2000);   
+  setInterval(function(){window.location.assign("listado_pedidos.php")},2000); 
+  } else {
+    return;
+  }  
 });
-/***********************************************Boton Rechazar**********************************************/
-$("#btn_rechazar").click(function(){  
+
+/***********************************************Boton Aprobar un articulo**********************************************/
+$(".aprobara").live("click",function(event){ 
+  if (confirm('Seguro que desea aprobar este articulo?')) {  
+
+  parametros=$(this).attr('tabla')+','+$(this).attr('id_articulo');
+  $.ajax({ 
+      data: "metodo=aprueba_articulos&parametros="+parametros,
+      type: "POST",
+      async:false,
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function (data){
+        if (data.resultado!="Success"){
+         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");          
+        }else{
+          notificacion("Articulo Aprobado","El articulo se ha aprobado correctamente","info");          
+        }
+        }//end succces function
+      });//end ajax function   
+  
+  } else {
+    return;
+  }  
+});
+/***********************************************Boton Rechazar un pedido**********************************************/
+$("#btn_rechazart").click(function(){  
   
   var razon=prompt("Motivo del rechazo:","");
-  parametros=$(this).attr('consecutivo')+'|'+razon;
+  if (razon != null) {
+  parametros=$(this).attr('id_pedido')+'|'+razon;
   $.ajax({ 
-      data: "metodo=rechaza_pedidos&parametros="+parametros,
+      data: "metodo=rechaza_pedidost&parametros="+parametros,
       type: "POST",
       async:false,
       dataType: "json",
@@ -223,7 +275,34 @@ $("#btn_rechazar").click(function(){
         }
         }//end succces function
       });//end ajax function
-      setInterval(function(){window.location.assign("control_pedidos.php")},2000);   
+      setInterval(function(){window.location.assign("listado_pedidos.php")},2000);   
+  } else {
+    return;
+  }
+});
+
+/***********************************************Boton Rechazar un articulo**********************************************/
+$(".rechazara").live("click",function(event){ 
+  
+  if (confirm('Seguro que desea aprobar este articulo?')) {    
+  parametros=$(this).attr('tabla')+','+$(this).attr('id_articulo');
+  $.ajax({ 
+      data: "metodo=rechaza_articulos&parametros="+parametros,
+      type: "POST",
+      async:false,
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function (data){
+        if (data.resultado!="Success"){
+         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");          
+        }else{
+          notificacion("Articulo Rechazado","El articulo se ha rechazado correctamente","info");          
+        }
+        }//end succces function
+      });//end ajax function
+  } else {
+    return;
+  }
 });
 /***********************************************Boton Entregar**********************************************/
 $("#btn_entregar").click(function(){
@@ -321,14 +400,149 @@ function eliminar_item(id,pedido){
 
 
 function busca_valores(id_pedido,id_categoria,i){
-	var datos;
-
-  alert ($("#txt_consecutivo").val());
-  alert ($("#txt_nombresoli").val());
-  
+	var datos;  
   if (id_categoria==1){
     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","+$("#txt_nombrere_"+i).val()+","+$("#txt_purezare_"+i).val()+","+$("#txt_gradore_"+i).val()+","+$("#txt_presentacionre_"+i).val()+","+$("#txt_condicionesre_"+i).val()+","+$("#txt_similarmre_"+i).val()+","+$("#txt_similarcre_"+i).val()+","+$("#txt_plazore_"+i).val()+","+$("#txt_otrosre_"+i).val()+","+$("#txt_proveedoresre_"+i).val()+","+$("#txt_cotizacionre_"+i).val()+","+$("#txt_montore_"+i).val();         
   }
+  if (id_categoria==2){
+    datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","+$("#txt_nombrega_"+i).val()+","+$("#txt_purezaga_"+i).val()+","+$("#txt_presentacionga_"+i).val()+","+$("#txt_plazoga_"+i).val()+","+$("#txt_otrosga_"+i).val()+","+$("#txt_proveedoresga_"+i).val()+","+$("#txt_cotizacionga_"+i).val()+","+$("#txt_montoga_"+i).val();         
+  }
+  if (id_categoria==3){
+    datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","+$("#txt_nombrecri_"+i).val()+","+$("#txt_clasecri_"+i).val()+","+$("#txt_capacidadcri_"+i).val()+","+$("#txt_presentacioncri_"+i).val()+","+$("#txt_similarcri_"+i).val()+","+$("#txt_numerocri_"+i).val()+","+$("#txt_plazocri_"+i).val()+","+$("#txt_otroscri_"+i).val()+","+$("#txt_proveedorescri_"+i).val()+","+$("#txt_cotizacioncri_"+i).val()+","+$("#txt_montocri_"+i).val();         
+  }
+  if (id_categoria==4){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_nombrerep_"+i).val()+","
+    +$("#txt_marcaequirep_"+i).val()+","
+    +$("#txt_modeloequirep_"+i).val()+","
+    +$("#txt_catalogorep_"+i).val()+","
+    +$("#txt_representanterep_"+i).val()+","
+    +$("#txt_garantiarep_"+i).val()+","
+    +$("#txt_otrosrep_"+i).val()+","
+    +$("#txt_proveedoresrep_"+i).val()+","
+    +$("#txt_cotizacionrep_"+i).val()+","
+    +$("#txt_montorep_"+i).val()+","
+    +$("#txt_marcarep_"+i).val();  
+  }
+  if (id_categoria==5){
+    datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_nombreequi_"+i).val()+","
+    +$("#txt_representanteequi_"+i).val()+","
+    +$("#txt_similarmarequi_"+i).val()+","
+    +$("#txt_similarmodequi_"+i).val()+","
+    +$("#txt_similarcatequi_"+i).val()+","
+    +$("#txt_plazoequi_"+i).val()+","
+    +$("#txt_garantiafabequi_"+i).val()+","
+    +$("#txt_garantiamanequi_"+i).val()+","
+    +$("#txt_capacitacionequi_"+i).val()+","
+    +$("#txt_instalacionequi_"+i).val()+","
+    +$("#txt_lugarequi_"+i).val()+","
+    +$("#txt_otrosequi_"+i).val()+","
+    +$("#txt_proveedoresequi_"+i).val()+","
+    +$("#txt_cotizacionequi_"+i).val()+","
+    +$("#txt_montoequi_"+i).val();         
+  }
+  if (id_categoria==6){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_nombreremat_"+i).val()+","
+    +$("#txt_similarmat_"+i).val()+","
+    +$("#txt_similarcat_"+i).val()+","
+    +$("#txt_plazomat_"+i).val()+","
+    +$("#txt_otrosmat_"+i).val()+","
+    +$("#txt_proveedorermat_"+i).val()+","
+    +$("#txt_cotizacionmat_"+i).val()+","
+    +$("#txt_montomat_"+i).val()+","
+    +$("#"+i).val(); 
+  }
+  if (id_categoria==7){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_nombrerecal_"+i).val()+","
+    +$("#txt_codcal_"+i).val()+","
+    +$("#txt_placacal_"+i).val()+","
+    +$("#txt_ubicacioncal_"+i).val()+","
+    +$("#txt_lugarcal_"+i).val()+","
+    +$("#txt_montocal_"+i).val()+","
+    +$("#txt_otroscal_"+i).val()+","
+    +$("#txt_proveedorescal_"+i).val()+","
+    +$("#txt_cotizacioncal_"+i).val()+","
+    +$("#"+i).val();         
+  }
+  if (id_categoria==8){
+    datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_nombrerepa_"+i).val()+","
+    +$("#txt_codrepa_"+i).val()+","
+    +$("#txt_placarepa_"+i).val()+","
+    +$("#txt_ubicacionrepa_"+i).val()+","
+    +$("#txt_otrosrepa_"+i).val()+","
+    +$("#txt_proveedoresrepa_"+i).val()+","
+    +$("#txt_cotizacionrepa_"+i).val()+","
+    +$("#txt_montorepa_"+i).val()+","
+    +$("#"+i).val();         
+  }
+  if (id_categoria==9){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_analisisinte_"+i).val()+","
+    +$("#txt_rondainte_"+i).val()+","
+    +$("#txt_ontrointe_"+i).val()+","
+    +$("#txt_proveedoresinte_"+i).val()+","
+    +$("#txt_cotizacioninte_"+i).val()+","
+    +$("#txt_montointe_"+i).val()+","  
+    +$("#"+i).val();         
+  }
+  if (id_categoria==10){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_nombremed_"+i).val()+","
+    +$("#txt_tipomed_"+i).val()+","
+    +$("#txt_similarmarmed_"+i).val()+","
+    +$("#txt_similarcatmed_"+i).val()+","
+    +$("#txt_plazomed_"+i).val()+","
+    +$("#txt_presentacionmed_"+i).val()+","
+    +$("#txt_otrosmed_"+i).val()+","
+    +$("#txt_proveedoresmed_"+i).val()+","
+    +$("#txt_cotizacionmed_"+i).val()+","
+    +$("#txt_montomed_"+i).val(); 
+  }
+  if (id_categoria==11){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_nombresoft_"+i).val()+","
+    +$("#txt_desarrolladorsoft_"+i).val()+","
+    +$("#txt_versionsoft_"+i).val()+","
+    +$("#txt_otrossoft_"+i).val()+","
+    +$("#txt_proveedoressoft_"+i).val()+","
+    +$("#txt_cotizacionsoft_"+i).val()+","
+    +$("#txt_montosoft_"+i).val()+","
+    +$("#"+i).val();
+  }
+  if (id_categoria==12){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_proveedorcapa_"+i).val()+","
+    +$("#txt_temacapa_"+i).val()+","
+    +$("#txt_fechacapa_"+i).val()+","
+    +$("#txt_costocapa_"+i).val()+","
+    +$("#txt_cotizacioncapa_"+i).val()+","
+    +$("#txt_otroscapa_"+i).val()+","
+    +$("#txt_provinvicapa_"+i).val()+","
+    +$("#"+i).val();
+  }
+  if (id_categoria==13){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_temains_"+i).val()+","
+    +$("#txt_fechains_"+i).val()+","
+    +$("#txt_costoins_"+i).val()+","
+    +$("#txt_otrosins_"+i).val()+","
+    +$("#txt_organizadoresins_"+i).val()+","    
+    +$("#"+i).val();      
+
+  }
+  if (id_categoria==14){
+     datos=id_pedido+","+id_categoria+","+$("#txt_cantidad_"+i).val()+","
+    +$("#txt_tiporef_"+i).val()+","
+    +$("#txt_presentacionref_"+i).val()+","
+    +$("#txt_cotizacionref_"+i).val()+","
+    +$("#txt_proveedoresref_"+i).val()+","
+    +$("#"+i).val();    
+  }
+
 
     if ($("#cmb_compra_"+i).val()==1){
       /*alert ($("#txt_nombrere_"+i).val());
@@ -345,7 +559,8 @@ function llena_divs(nproductos,opcion){
   $('#productos_dinamicos').append('<div style="margin-top 50px;" class="lineaAzul"></div>');
   $('#productos_dinamicos').append('<div id="productos_'+nproductos+'"></div>');  
   $('#productos_'+nproductos).append('<h2 align="center" class="Arial18Morado">Articulo '+nproductos+'</h2>');
-  $('#productos_'+nproductos).append('<div id="comprade_'+nproductos+'"><div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br class="none"><div class="Arial14Morado subtitulosl fl">Tipo de compra: </div><div><select class="combos" id="cmb_compra_'+nproductos+'" numero="'+nproductos+'" name="cmb_compra_'+nproductos+'"><option value="0" selected="selected">Seleccione</option><option value="1">Reactivos</option><option value="2">Gases</option><option value="3">Cristalería</option><option value="4">Repuestos/Consumible de equipo</option><option value="5">Equipos</option><option value="6">Materiales Laboratorio</option><option value="7">Calibraciones</option><option value="8">Reparación o mantenimiento de equipo</option><option value="9">interlaboratoriales</option><option value="10">Medio de Cultivo</opcionption><option value="11">Software</option><option value="12">Capacitaciones</option><option value="13">Inscripciones, congresos etc</option><option value="14">Materiales de referencia</option></select></div><br>');
+  //$('#productos_'+nproductos).append('<div id="comprade_'+nproductos+'"><div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br class="none"><div class="Arial14Morado subtitulosl fl">Tipo de compra: </div><div><select class="combos" id="cmb_compra_'+nproductos+'" numero="'+nproductos+'" name="cmb_compra_'+nproductos+'"><option value="0" selected="selected">Seleccione</option><option value="1">Reactivos</option><option value="2">Gases</option><option value="3">Cristalería</option><option value="4">Repuestos/Consumible de equipo</option><option value="5">Equipos</option><option value="6">Materiales Laboratorio</option><option value="7">Calibraciones</option><option value="8">Reparación o mantenimiento de equipo</option><option value="9">interlaboratoriales</option><option value="10">Medio de Cultivo</opcionption><option value="11">Software</option><option value="12">Capacitaciones</option><option value="13">Inscripciones, congresos etc</option><option value="14">Materiales de referencia</option></select></div><br>');
+  $('#productos_'+nproductos).append('<div id="comprade_'+nproductos+'"><br class="none"><div class="Arial14Morado subtitulosl fl">Tipo de compra: </div><div><select class="combos" id="cmb_compra_'+nproductos+'" numero="'+nproductos+'" name="cmb_compra_'+nproductos+'"><option value="0" selected="selected">Seleccione</option><option value="1">Reactivos</option><option value="2">Gases</option><option value="3">Cristalería</option><option value="4">Repuestos/Consumible de equipo</option><option value="5">Equipos</option><option value="6">Materiales Laboratorio</option><option value="7">Calibraciones</option><option value="8">Reparación o mantenimiento de equipo</option><option value="9">interlaboratoriales</option><option value="10">Medio de Cultivo</opcionption><option value="11">Software</option><option value="12">Capacitaciones</option><option value="13">Inscripciones, congresos etc</option><option value="14">Materiales de referencia</option></select></div><br>');
   $('#productos_dinamicos').append('<div id="detalle_'+nproductos+'"></div>');  
 }
 
@@ -395,6 +610,7 @@ function getform(nproductos,opcion){
   if (parseInt(opcion)==1){
     html=
  '<div id="reactivos_'+nproductos+'">'
++'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
 +'<div class="Arial14Morado subtitulosl fl">Nombre</div>'
 +'<div class="Arial14Morado subtitulosl fl">Pureza</div>'
 +'<div class="Arial14Morado subtitulosl fl">Grado</div><br>'
@@ -455,6 +671,7 @@ function getform(nproductos,opcion){
   if (parseInt(opcion)==2){
     html=
     '<div id="gases_'+nproductos+'">'
+    +'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
     +'<div class="Arial14Morado subtitulosl fl">Nombre</div>'
     +'<div class="Arial14Morado subtitulosl fl">Pureza</div>'
     +'<div class="Arial14Morado subtitulosl fl">Presentación</div><br>'
@@ -465,7 +682,7 @@ function getform(nproductos,opcion){
       +'<input  id="txt_purezaga_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_gradoga_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_presentacionga_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
 
     +'<div class="Arial14Morado subtitulosl fl">Plazo entrega</div>'
@@ -501,6 +718,7 @@ function getform(nproductos,opcion){
   if (parseInt(opcion)==3){
     html=
     '<div id="cristaleria_'+nproductos+'">'
+    +'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
     +'<div class="Arial14Morado subtitulosl fl">Nombre</div>'
     +'<div class="Arial14Morado subtitulosl fl">Clase</div>'
     +'<div class="Arial14Morado subtitulosl fl">Capacidad</div><br>'
@@ -544,10 +762,10 @@ function getform(nproductos,opcion){
     +'<div class="Arial14Morado subtitulosl fl">Monto</div>'    
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'    
     +'<div  class=" fl input25">'
-      +'<input  id="txt_plazocri_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_cotizacioncri_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
-      +'<input  id="txt_otroscri_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_montocri_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class=" fl input25">&nbsp;&nbsp;'      
     +'</div>'
@@ -560,17 +778,18 @@ function getform(nproductos,opcion){
   if (parseInt(opcion)==4){
     html=
     '<div id="repuestos_'+nproductos+'">'
-    +'<div class="Arial14Morado subtitulosl fl">Nombre</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Marca</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Modelo</div><br>'
+    +'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
+    +'<div class="Arial14Morado subtitulosl fl">Nombre Repuesto</div>'
+    +'<div class="Arial14Morado subtitulosl fl">Marca Equipo</div>'
+    +'<div class="Arial14Morado subtitulosl fl">Modelo Equipo</div><br>'
     +'<div  class=" fl input25">'
       +'<input  id="txt_nombrerep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
-      +'<input  id="txt_marcarep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_marcaequirep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_capacidadcri_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_modeloequirep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
 
     +'<div class="Arial14Morado subtitulosl fl"># de catálogo</div>'
@@ -601,14 +820,14 @@ function getform(nproductos,opcion){
 
     +'<div class="Arial14Morado subtitulosl fl"># cotización</div>'
     +'<div class="Arial14Morado subtitulosl fl">Monto</div>'    
-    +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'    
+    +'<div class="Arial14Morado subtitulosl fl">Marca Repuesto</div>'    
     +'<div  class=" fl input25">'
-      +'<input  id="txt_plazorep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_cotizacionrep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
-      +'<input  id="txt_otrosrep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_montorep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
-    +'<div  class=" fl input25">&nbsp;&nbsp;'      
+      +'<input  id="txt_marcarep_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
 
     +'</div>'
@@ -618,11 +837,12 @@ function getform(nproductos,opcion){
   if (parseInt(opcion)==5){
     html=
     '<div id="equipos_'+nproductos+'">'
+    +'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
     +'<div class="Arial14Morado subtitulosl fl">Nombre</div>'
     +'<div class="Arial14Morado subtitulosl fl">Representantes CR</div>'
     +'<div class="Arial14Morado subtitulosl fl">Similar a marca</div><br>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_nombrerequi_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_nombreequi_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
       +'<input  id="txt_representanteequi_'+nproductos+'"    value="" class="inputbox"  type="text" />'
@@ -689,6 +909,7 @@ function getform(nproductos,opcion){
   if (parseInt(opcion)==6){
     html=
     '<div id="materiales_'+nproductos+'">'
+    +'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
     +'<div class="Arial14Morado subtitulosl fl">Nombre</div>'
     +'<div class="Arial14Morado subtitulosl fl">Similar a marca</div>'
     +'<div class="Arial14Morado subtitulosl fl">Similar # catálogo</div><br>'
@@ -720,10 +941,10 @@ function getform(nproductos,opcion){
     +'<div class="Arial14Morado subtitulosl fl">Monto</div>'    
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_proveedoresequi_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_cotizacionmat_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
-      +'<input  id="txt_cotizacionequi_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_montomat_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class=" fl input25">&nbsp;&nbsp;'      
     +'</div>'
@@ -733,7 +954,7 @@ function getform(nproductos,opcion){
 
   if (parseInt(opcion)==7){
     html=
-    '<div id="calibraciones_'+nproductos+'">'
+    '<div id="calibraciones_'+nproductos+'">'    
     +'<div class="Arial14Morado subtitulosl fl">Nombre equipo</div>'
     +'<div class="Arial14Morado subtitulosl fl">Código</div>'
     +'<div class="Arial14Morado subtitulosl fl">Placa</div><br>'
@@ -774,11 +995,11 @@ function getform(nproductos,opcion){
       +'<input  id="txt_cotizacioncal_'+nproductos+'"    value="" class="inputbox"  type="text" />'      
     +'</div>'
 
-    +'<div class="Arial14Morado subtitulosl fl">Calibración acreditada</div>'    
+    +'<div class="Arial14Morado subtitulosl fl">Calibración acreditada INTE-ISO/IEC 17025</div>'    
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'    
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
     +'<div  class=" fl input25">'
-      +'<span class="Arial14Negro">No</span><input type="radio" value="1" id="rnd_acreditadocal_'+nproductos+'" name="rnd_acreditadocal_'+nproductos+'" ><span class="Arial14Negro">S&iacute;</span><input type="radio" value="1" id="rnd_acreditadocal_'+nproductos+' name="rnd_acreditadocal_'+nproductos+'">'      
+      +'<span class="Arial14Negro">No</span><input type="radio" value="0" id="rnd_acreditadocal_'+nproductos+'" name="rnd_acreditadocal_'+nproductos+'" ><span class="Arial14Negro">S&iacute;</span><input type="radio" value="1" id="rnd_acreditadocal_'+nproductos+'" name="rnd_acreditadocal_'+nproductos+'">'      
     +'</div>'
     +'<div  class="fl input25">&nbsp;&nbsp;'      
     +'</div>'
@@ -790,7 +1011,7 @@ function getform(nproductos,opcion){
 
   if (parseInt(opcion)==8){
     html=
-    '<div id="reparaciones_'+nproductos+'">'
+    '<div id="reparaciones_'+nproductos+'">'    
     +'<div class="Arial14Morado subtitulosl fl">Nombre equipo</div>'
     +'<div class="Arial14Morado subtitulosl fl">Código</div>'
     +'<div class="Arial14Morado subtitulosl fl">Placa</div><br>'
@@ -837,7 +1058,7 @@ function getform(nproductos,opcion){
     html=
     '<div id="interlaboratoriales_'+nproductos+'">'
     +'<div class="Arial14Morado subtitulosl fl">Análisis solicitados</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Ronda Acreditada</div>'
+    +'<div class="Arial14Morado subtitulosl fl">Ronda INTE-ISO/IEC 17043</div>'
     +'<div class="Arial14Morado subtitulosl fl">Otros detalles</div><br>'
     +'<div  class=" fl input25">'
       +'<input  id="txt_analisisinte_'+nproductos+'"    value="" class="inputbox"  type="text" />'
@@ -868,7 +1089,7 @@ function getform(nproductos,opcion){
 
 if (parseInt(opcion)==10){
     html=
-    '<div id="medios_'+nproductos+'">'
+    '<div id="medios_'+nproductos+'">'    
     +'<div class="Arial14Morado subtitulosl fl">Nombre del medio</div>'
     +'<div class="Arial14Morado subtitulosl fl">Tipo de medio</div>'
     +'<div class="Arial14Morado subtitulosl fl">Similar a marca</div><br>'
@@ -886,7 +1107,7 @@ if (parseInt(opcion)==10){
     +'<div class="Arial14Morado subtitulosl fl">Plazo de entrega</div>'
     +'<div class="Arial14Morado subtitulosl fl">Presentación</div><br>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_similarmed_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_similarcatmed_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
       +'<input  id="txt_plazomed_'+nproductos+'"    value="" class="inputbox"  type="text" />'
@@ -927,42 +1148,43 @@ if (parseInt(opcion)==10){
 if (parseInt(opcion)==11){
     html=
     '<div id="software_'+nproductos+'">'
+    +'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
     +'<div class="Arial14Morado subtitulosl fl">Nombre del programa</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Cantidad licencias</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Desarrollador</div><br>'
+    +'<div class="Arial14Morado subtitulosl fl">Desarrollador</div>'
+    +'<div class="Arial14Morado subtitulosl fl">Versión</div><br>'
     +'<div  class=" fl input25">'
       +'<input  id="txt_nombresoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
-      +'<input  id="txt_cantidadsoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
-    +'</div>'
-    +'<div  class=" fl input25">'
       +'<input  id="txt_desarrolladorsoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
-
-    +'<div class="Arial14Morado subtitulosl fl">Versión</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Otros detalles</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Proveedores a invitar</div><br>'
     +'<div  class=" fl input25">'
       +'<input  id="txt_versionsoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
-    +'<div  class="fl input25">'
+
+    +'<div class="Arial14Morado subtitulosl fl">Otros detalles</div>'
+    +'<div class="Arial14Morado subtitulosl fl">Proveedores a invitar</div>'
+    +'<div class="Arial14Morado subtitulosl fl"># de cotización</div><br>'
+    +'<div  class=" fl input25">'
       +'<input  id="txt_otrossoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
-    +'<div  class=" fl input25">'
+    +'<div  class="fl input25">'
       +'<input  id="txt_proveedoressoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'      
     +'</div>'
-
-    +'<div class="Arial14Morado subtitulosl fl"># de cotización</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Monto</div>'
-    +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div><br>'
     +'<div  class=" fl input25">'
       +'<input  id="txt_cotizacionsoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
-    +'<div  class="fl input25">'
+
+    +'<div class="Arial14Morado subtitulosl fl">Monto</div>'
+    +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
+    +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div><br>'
+    +'<div  class=" fl input25">'
       +'<input  id="txt_montosoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
-    +'<div  class=" fl input25">&nbsp;&nbsp;'      
+    +'<div  class="fl input25">'
+      +'<div  class=" fl input25">&nbsp;&nbsp;'        
+    +'</div>'
+      +'<div  class=" fl input25">&nbsp;&nbsp;'      
     +'</div>'
 
     +'</div>'
@@ -1002,7 +1224,7 @@ if (parseInt(opcion)==12){
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div><br>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_cotizacionsoft_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_provinvicapa_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">&nbsp;&nbsp;'      
     +'</div>'
@@ -1030,13 +1252,13 @@ if (parseInt(opcion)==13){
     +'</div>'
 
     +'<div class="Arial14Morado subtitulosl fl">Otros detalles</div>'
-    +'<div class="Arial14Morado subtitulosl fl">Proveedores a invitar</div>'
+    +'<div class="Arial14Morado subtitulosl fl">Organizadores</div>'
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div><br>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_costocapa_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_otrosins_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">'
-      +'<input  id="txt_cotizacioncapa_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_organizadoresins_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class=" fl input25">&nbsp;&nbsp;'      
     +'</div>'
@@ -1065,7 +1287,7 @@ if (parseInt(opcion)==13){
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
     +'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div><br>'
     +'<div  class=" fl input25">'
-      +'<input  id="txt_costocapa_'+nproductos+'"    value="" class="inputbox"  type="text" />'
+      +'<input  id="txt_proveedoresref_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
     +'<div  class="fl input25">&nbsp;&nbsp;'      
     +'</div>'
@@ -1078,6 +1300,9 @@ if (parseInt(opcion)==13){
 
   return html;
 }//end function
+
+
+
 
 function notificacion(titulo,cuerpo,tipo){
   $.pnotify({

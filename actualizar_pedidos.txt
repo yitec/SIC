@@ -1,0 +1,15 @@
+carpeta img_cotizaciones
+pedidos.css
+pedidos_tablas.css
+conexion_compras.php
+Script_pedidos.js
+Script_Proveedores.js
+opr_proveedor.php
+opr_pedidos.php
+crea_pedido.php
+detalle_pedido.php
+listado_pedidos.php
+mantenimiento_proveedores.php
+modifica_pedido.php
+upload_coti.php
+cotizacion_upload.php

@@ -260,6 +260,12 @@ font-weight:bold;
 
 
 /***********************************************Letras y titulos**********************************************/
+a:link {
+  font-family: "Open Sans Light",X-LocaleSpecific-Light,"Open Sans",X-LocaleSpecific,sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+}
+
 .titulo1{
   position: relative;
   font-size:14px;
@@ -503,4 +509,100 @@ font-size:16;
 .desc:hover
 {
 color:#FFF;
+}
+
+.rectangulo {
+  margin:10px;
+  width: 170px;
+  height: 100px;
+  background: #ff534f;
+  float:left;
+}
+.mini_rectangulo {
+  margin-top:10px;
+  width: 170px;
+  height: 20px;
+  background: rgba(76,76,76,1);
+  background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,0.95) 12%, rgba(28,28,28,0.59) 91%, rgba(19,19,19,0.55) 100%);
+  float:left;
+}
+
+.rectangulo2 {
+  margin:10px;
+  width: 170px;
+  height: 100px;
+  background: #2da8e3;
+  float:left;
+}
+
+.rectangulo3 {
+  margin:10px;
+  width: 170px;
+  height: 100px;
+  background: #fd5f33;
+  float:left;
+}
+
+.rectangulo4 {
+  margin:10px;
+  width: 170px;
+  height: 100px;
+  background: #ea498a;
+  float:left;
+}
+
+.rectangulo_titulo {
+  margin-top:10px;
+  margin-left: 10px;
+  width: 740px;
+  height: 40px;
+  background: #e9ebec;  
+}
+
+.texto_cuadros_sombreado{
+  margin-top: 2px;
+  margin-left: 50px; 
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  font-family: "Open Sans Light",X-LocaleSpecific-Light,"Open Sans",X-LocaleSpecific,sans-serif;
+}
+
+.texto_cuadros_blanco{
+  letter-spacing: -0.035em;
+  margin-left: 20px;
+  font-family: "Open Sans Light",X-LocaleSpecific-Light,"Open Sans",X-LocaleSpecific,sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+  color: #fff;
+}
+
+.texto_titulo{
+  letter-spacing: -0.035em;
+  margin-top: 10px;
+  margin-left: 300px;
+  font-family: "Open Sans Light",X-LocaleSpecific-Light,"Open Sans",X-LocaleSpecific,sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  color: #ff5050;
+}
+
+.texto_subtitulo{
+  letter-spacing: -0.045em;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #0040ff;
+}
+
+.listado{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:12px;   
+  vertical-align: text-top;
+  text-align: left;
+}
+
+.td_items{
+  padding-bottom: 20px;
+  padding-right: 20px;
 }

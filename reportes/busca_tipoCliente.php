@@ -176,6 +176,7 @@ if (validado==true){
           <option>Particular</option>
         <option>Investigacion</option>
           <option>Exonerado</option>
+          <option>Oficial</option>
         </select></td>
   </tr>
     </table>
