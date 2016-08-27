@@ -7,7 +7,23 @@ $("#ver").fancybox({
         'transitionIn'    : 'fade',
         'transitionOut'   : 'fade',
         'type'        : 'iframe'
-});              
+});
+$("#ver1").fancybox({
+        'width'       : '75%',
+        'height'      : '75%',
+        'autoScale'     : false,
+        'transitionIn'    : 'fade',
+        'transitionOut'   : 'fade',
+        'type'        : 'iframe'
+});     
+$("#ver2").fancybox({
+        'width'       : '75%',
+        'height'      : '75%',
+        'autoScale'     : false,
+        'transitionIn'    : 'fade',
+        'transitionOut'   : 'fade',
+        'type'        : 'iframe'
+});         
 
 var nproductos=1;
 $("#geco").hide();
@@ -141,7 +157,7 @@ $("#btn_siguiente").click(function(event){
 
   if (exito=1){
     notificacion("Solicitud Guardada","La solicitud se almaceno con exito!!","info"); 
-    //setInterval(function(){window.location.assign("menu.php")},2000);   
+    setInterval(function(){window.location.assign("menu.php")},2000);   
   }
 
 });
@@ -256,7 +272,7 @@ $(".aprobara").live("click",function(event){
   }  
 });
 /***********************************************Boton Rechazar un pedido**********************************************/
-$("#btn_rechazart").click(function(){  
+$(".btn_rechazart").live("click",function(event){ 
   
   var razon=prompt("Motivo del rechazo:","");
   if (razon != null) {
@@ -555,7 +571,7 @@ function busca_valores(id_pedido,id_categoria,i){
 
 
 function llena_divs(nproductos,opcion){
-  $('#productos_dinamicos').append('<div style="margin-top 50px; color: #ffffff;">&nbsp;&nbsp.:::::::::::::::::::::</div>');
+  $('#productos_dinamicos').append('<div style="margin-top 50px; color: #ffffff;">&nbsp;&nbsp.:::::::::::::::::::::</div><br><br><br><br><br>');
   $('#productos_dinamicos').append('<div style="margin-top 50px;" class="lineaAzul"></div>');
   $('#productos_dinamicos').append('<div id="productos_'+nproductos+'"></div>');  
   $('#productos_'+nproductos).append('<h2 align="center" class="Arial18Morado">Articulo '+nproductos+'</h2>');
@@ -767,12 +783,12 @@ function getform(nproductos,opcion){
     +'<div  class="fl input25">'
       +'<input  id="txt_montocri_'+nproductos+'"    value="" class="inputbox"  type="text" />'
     +'</div>'
-    +'<div  class=" fl input25">&nbsp;&nbsp;'      
+    +'<div class=" fl input25">&nbsp;&nbsp;'      
     +'</div>'
     
 
     +'</div>'
-    +'<div>&nbsp;&nbsp;</div>';      
+    +'<div>&nbsp;&nbsp;<br><br></div>';      
   }
 
   if (parseInt(opcion)==4){
@@ -903,7 +919,8 @@ function getform(nproductos,opcion){
       +'<input  id="txt_montoequi_'+nproductos+'"    value="" class="inputbox"  type="text" />'      
     +'</div>'
 
-    +'</div>';
+    +'</div><br><br>'
+    +'<div>&nbsp;&nbsp;<br><br></div>';      
   }
 
   if (parseInt(opcion)==6){
@@ -1006,7 +1023,8 @@ function getform(nproductos,opcion){
     +'<div  class=" fl input25">&nbsp;&nbsp;'      
     +'</div>'
 
-    +'</div>';
+    +'</div><br><br>'
+    +'<div>&nbsp;&nbsp;<br><br></div>';      
   }
 
   if (parseInt(opcion)==8){
@@ -1141,8 +1159,8 @@ if (parseInt(opcion)==10){
     +'<div  class=" fl input25">&nbsp;&nbsp;'      
     +'</div>'
 
-    +'</div>'
-    +'<div>&nbsp;&nbsp;</div>';      
+    +'</div><br><br>'
+    +'<div>&nbsp;&nbsp;<br><br></div>';      
   }
 
 if (parseInt(opcion)==11){

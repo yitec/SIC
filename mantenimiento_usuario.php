@@ -35,7 +35,7 @@ conectar();
 <div class="cen_sup_g"><div  class="Arial14blanco" align="left" style="float:left; margin-top:18px;">Usuarios</div><div align="right"></div> </div>
 <div class="der_sup_g"></div>
 <div class="lineaAzul"></div>
-<div class="izq_lat_g" style=" height:2800px;"></div>
+<div class="izq_lat_g" style=" height:3800px;"></div>
 <div    class="contenido_gm">
 
 
@@ -324,7 +324,8 @@ require_once('menu_superior.php');
     </tr>     
     <tr>
       <td class="Arial14Azul"></td>
-      <td width="204" class="Arial14Negro"><input class="ck"  id="chk_nmuestras" type="checkbox" value="" />Nombre Muestras</td>            
+      <td width="204" class="Arial14Negro"><input class="ck"  id="chk_nmuestras" type="checkbox" value="" />Nombre Muestras</td>
+      <td width="204" class="Arial14Negro"><input class="ck"  id="chk_nproveedores" type="checkbox" value="" />Mantenimiento Proveedores</td>            
     </tr>     
     </table>
 <div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar" id="btn_guardar" type="image" src="img/btn_guardar.png" /><input name="btn_eliminar" id="btn_eliminar" type="image" src="img/btn_eliminar.png" /></div>    
@@ -336,7 +337,7 @@ require_once('menu_superior.php');
 
 
 </div><!--fin div de contenido cudro gm-->
-<div class="der_lat_g" style="height:2800px;"></div>
+<div class="der_lat_g" style="height:3800px;"></div>
 <div class="izq_inf_g"></div>
 <div class="cen_inf_g"></div>
 <div class="der_inf_g"></div>

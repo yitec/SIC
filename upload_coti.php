@@ -16,7 +16,16 @@ if ($_POST["action"] == "upload") {
 		// guardamos el archivo a la carpeta files
 		$destino =  "img_cotizaciones/".$archivo;
 		$nombre=$archivo;
-		echo $sql="insert into tbl_archivos (consecutivo,nombre) values ('".$_SESSION['consecutivo']."','".$nombre."')";
+		
+		$sql="select consecutivo from tbl_archivos where consecutivo='".$_SESSION['consecutivo']."'";
+		$result=mysql_query($sql);
+		if (mysql_num_rows($result)>=1){
+			echo "Ups!!, solo se permite un archivo por pedido";
+			die();
+		}
+
+
+		$sql="insert into tbl_archivos (consecutivo,nombre) values ('".$_SESSION['consecutivo']."','".$nombre."')";
 		mysql_query($sql);
 		if (copy($_FILES['archivo']['tmp_name'],$destino)) {
 			

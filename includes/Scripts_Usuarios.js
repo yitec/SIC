@@ -174,6 +174,9 @@ $("#btn_buscar").live("click", function(event){
 			if(v_resultado.indexOf("38")>=0){
 				$("#chk_nmuestras").attr("checked","checked");
 			}
+			if(v_resultado.indexOf("39")>=0){
+				$("#chk_nmuestras").attr("checked","checked");
+			}
 		}//end succces function
 		});//end ajax function	
 });						   
@@ -307,6 +310,9 @@ $("#btn_guardar").click(function(event){
 		}
 		if ($("#chk_nmuestras").is(":checked")){
 			permisos=permisos+","+38;	
+		}		
+		if ($("#chk_nmuestras").is(":checked")){
+			permisos=permisos+","+39;	
 		}		
 		
 		

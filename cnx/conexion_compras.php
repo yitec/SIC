@@ -17,7 +17,7 @@ function conectarc()
 
 }
 
-function desconectarm()
+function desconectarc()
 {
 	mysql_close();
 }

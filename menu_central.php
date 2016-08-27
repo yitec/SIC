@@ -3,7 +3,7 @@ session_start();
 ?>
 <body>
 
-<div id="mainGris" style="height:510px;"><!--Cuadro Gris-->
+<div id="mainGris" style="height:610px;"><!--Cuadro Gris-->
 	<? if (in_array(1, $_SESSION['perfil'])){
 	?>
 	<div id="mainBlancoMenu"  style=" margin-left:10px; margin-top:10px;  float:left;">
@@ -213,6 +213,13 @@ session_start();
     <div align="center" class="Arial14Negro"><a href="mantenimiento_muestras.php"><img src="img/edit.png" width="48" height="48"></a><br>Nombre Muestras</div>
     </div>
 <? } ?>     
+<? if (in_array(39, $_SESSION['perfil'])){
+    ?>
+    <div id="mainBlancoMenu"  style=" margin-left:10px; float:left; margin-top:10px;">
+    <div align="center" class="Arial14Negro"><a href="mantenimiento_proveedores.php"><img src="img/edit.png" width="48" height="48"></a><br>Mantenimiento Proveedores</div>
+    </div>
+<? } ?>     
+
 
 
 

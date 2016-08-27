@@ -43,14 +43,14 @@ if($_REQUEST['opcion']==2)
 		echo "error";
 	}
 	
-	desconectar();
+	desconectarc();
 }//end if opcion 2
 
 
 //modificar usuario
 if($_REQUEST['opcion']==3)
 {	
-$result=mysql_query("update tbl_proveedores set nombre='".utf8_decode($_REQUEST['txt_nombre'])."',cedula='".$_REQUEST['txt_cedula']."',correo='".$_REQUEST['txt_correo']."',marcas='".$_REQUEST['txt_marcas']."',tel_cel='".$_REQUEST['txt_tel_cel']."',tel_fijo='".$_REQUEST['txt_tel_fijo']."',fax='".$_REQUEST['txt_fax']."',nota='".$_REQUEST['nota']."',contacto='".$_REQUEST['txt_contacto']."',estado='".$_REQUEST['rnd_activo']."' where nombre='".utf8_decode($_REQUEST['txt_usuario_buscar'])."'");
+$result=mysql_query("update tbl_proveedores set nombre='".utf8_decode($_REQUEST['txt_nombre'])."',cedula='".$_REQUEST['txt_cedula']."',correo='".$_REQUEST['txt_correo']."',marcas='".$_REQUEST['txt_marcas']."',tel_cel='".$_REQUEST['txt_tel_cel']."',tel_fijo='".$_REQUEST['txt_tel_fijo']."',fax='".$_REQUEST['txt_fax']."',nota='".$_REQUEST['txt_nota']."',contacto='".$_REQUEST['txt_contacto']."',estado='".$_REQUEST['rnd_activo']."' where nombre='".utf8_decode($_REQUEST['txt_usuario_buscar'])."'");
 
 	//$result=mysql_query("update tbl_usuarios set nombre='".$_REQUEST['txt_nombre']."',cedula='".$_REQUEST['txt_cedula']."',correo='".$_REQUEST['txt_correo']."',fax='".$_REQUEST['txt_fax']."',direccion='".$_REQUEST['txt_direccion']."',tel_fijo='".$_REQUEST['txt_tel_fijo']."',tel_cel='".$_REQUEST['txt_tel_cel']."',tipo_cliente='".$_REQUEST['cmb_tipo']."',consumible='".$_REQUEST['txt_consumible']."',consumido='".$_REQUEST['txt_consumido']."',credito='".$_REQUEST['rnd_credito']."' where nombre='".$_REQUEST['txt_usuario_buscar']."'");
 
@@ -59,7 +59,7 @@ if (!$result) {//si da error que me despliegue el error del query
         $message .= 'Query ejecutado: ' . $query;
 		
 } 
-desconectar();
+desconectarc();
 }//end if opcion 3
 
 
@@ -73,7 +73,7 @@ if($_REQUEST['opcion']==4)
 			$message .= 'Query ejecutado: ' . $query;
 			
 	} 
-desconectar();
+desconectarc();
 }//end if opcion 4
 
 if($_REQUEST['opcion']==5)
@@ -84,7 +84,7 @@ if($_REQUEST['opcion']==5)
 		$vector=$vector.",".utf8_encode($row['nombre']); 
 	}
 	echo $vector;
-	desconectar();
+	desconectarc();
 
 
 }//end if opcion 6

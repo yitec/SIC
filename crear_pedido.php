@@ -30,10 +30,10 @@ conectarc();
                                 <?
                                 $result=mysql_query("SELECT max(id_consecutivo) as consecutivo FROM tbl_consecutivos  ");
                                 $row=mysql_fetch_object($result);
-                                $consecutivo=$row->consecutivo+1;
-                                $_SESSION['consecutivo']='CO-'.$consecutivo."-".date("Y");
+                                $cons=$row->consecutivo+1;
+                                $_SESSION['consecutivo']='CO-'.$cons."-".date("Y");
                                 ?>
-                                <td><input  id="txt_consecutivo" name="txt_consecutivo"  value="CO-<?=$consecutivo."-".date("Y");?>" class="inputbox"  type="text" disabled /></td>
+                                <td><input  id="txt_consecutivo" name="txt_consecutivo"  value="CO-<?=$cons."-".date("Y");?>" class="inputbox"  type="text" disabled /></td>
                             </tr>
                             <tr>
                                 <td height="25" class="Arial14Morado">Nombre Solicitante</td>

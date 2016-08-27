@@ -31,7 +31,7 @@ a:hover {color: #CCC}
 </div>
 <div class="der_sup_g"></div>
 <div class="lineaAzul"></div>
-<div class="izq_lat_g" style="height:800px;"></div>
+<div class="izq_lat_g" style="height:1000px;"></div>
 <div    class="contenido_gm">
 
 
@@ -49,7 +49,7 @@ include('menu_central.php');
 
 <div style="margin-left:700px;  margin-top:186px; " class="Arial10gris"><a href="login.php">Salir</a></div>
 </div>
-<div class="der_lat_g" style="height:800px;"></div>
+<div class="der_lat_g" style="height:1000px;"></div>
 <div class="izq_inf_g"></div>
 <div class="cen_inf_g"></div>
 <div class="der_inf_g"></div>

@@ -324,6 +324,32 @@ if($_REQUEST['opcion']==18)
 
 }
 
+//Ingresa resultados analisis NIR
+if($_REQUEST['opcion']==19)
+{
+	//busco el consecitivo del contrato
+	$result2=mysql_query("select id_contrato from tbl_analisis where id='".$_REQUEST['id']."'");
+	$row2=mysql_fetch_assoc($result2);
+	
+	
+	if ($_REQUEST['metodo']==""){
+		$res=mysql_query("select c.metodo from  tbl_analisis a, tbl_categoriasanalisis c where a.id='".$_REQUEST['id']."' and  c.id=a.id_analisis");
+		$r1=mysql_fetch_object($res);
+		$metodo=$r1->metodo;	
+	}else{
+		$metodo=$_REQUEST['metodo'];
+	}
+	//meto todos los resultados y el sep en un solo string
+	echo $resultado=$_REQUEST['rcenizas']."|".$_REQUEST['rfibra']."|".$_REQUEST['rproteina']."|".$_REQUEST['rextracto']."|".$_REQUEST['rhumedad'];
+	echo $sep=$_REQUEST['sepcenizas']."|".$_REQUEST['sepfibra']."|".$_REQUEST['sepproteina']."|".$_REQUEST['sepextracto']."|".$_REQUEST['sephumedad'];
+		if($_REQUEST['rechazado']==1){
+			$result=mysql_query("update tbl_resultados set resultado='".utf8_decode($resultado)."', incertidumbre='".utf8_decode($sep)."',unidades='".utf8_decode($_REQUEST['unidades'])."',estado='"."0"."' where id_analisis='".$_REQUEST['id']."' ");
+		}else{
+			$result=mysql_query("insert into tbl_resultados (consecutivo_contrato,id_laboratorio,id_analisis,metodo,incertidumbre,unidades,observaciones_analista,resultado,fecha_ingreso,estado)values('".$row2['id_contrato']."','".$_REQUEST['laboratorio']."','".$_REQUEST['id']."','".$metodo."','".utf8_decode($sep)."','".$_REQUEST['unidades']."','".utf8_decode($_REQUEST['observaciones_analista'])."','".utf8_decode($resultado)."','".$hoy."','"."0"."')");
+		}
+	
+	$result=mysql_query("update tbl_analisis set estado='"."2"."',fecha_analisis='".$hoy."' where id='".$_REQUEST['id']."'");
+}
 
 
 

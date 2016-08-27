@@ -174,8 +174,8 @@ class Pedidos{
         if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error()."/".$sql ;       		
         }else{
-        	$jsondata['resultado'] = $sql;        	
-        	//$jsondata['resultado'] = 'Success';        	
+        	//$jsondata['resultado'] = $sql;        	
+        	$jsondata['resultado'] = 'Success';        	
         }
     
     echo json_encode($jsondata);

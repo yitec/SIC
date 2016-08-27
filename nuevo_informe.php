@@ -249,7 +249,7 @@ while($row2=mysql_fetch_object($result2)){
 		$cont=0;
 		
 		if($muestra<>0){
-			imprime_metodos($pdf,$v_metodos);		
+			imprime_metodos($pdf,$v_metodos,$sep_nir);		
 		}
 		$cont++;
 		$pdf->SetY($pdf->GetY()+5);
@@ -264,23 +264,27 @@ while($row2=mysql_fetch_object($result2)){
 		
 		$pdf->SetFillColor(241,243,246);
 		imprime_muestra($pdf,$row['consecutivo'],$muestra);		
+		if($row2->nombre=="NIR"){			
+			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont);		
+		}else{
 		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);		
-		
+		}
 	}else{
 		
 		$cont++;		
 		$v_metodos[]='  ('.$cont.')'.$row2->metodo;
-		
-		
 		$hoja=calcula_salto($pdf,'old',$acreditado,$hoja,$row['consecutivo']);
-		
+		if($row2->nombre=="NIR"){
+			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont);		
+		}else{
 		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);	
+		}
 	}
 
 
 }
 
-imprime_metodos($pdf,$v_metodos);
+imprime_metodos($pdf,$v_metodos,$sep_nir);
 $pdf->SetY($pdf->GetY()+5);
 $pdf->SetFont('Arial','B',8);
 $pdf->Ln(20);
@@ -376,6 +380,23 @@ function imprime_resultados($pdf,$fecha,$laboratorio,$analisis,$resultado,$incer
 
 }
 
+function imprime_nir($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido,$acreditado,$cont){
+	$resultado=explode('|',$resultado);
+    $sep=explode('|',$incertidumbre);
+    $analisis='Cenizas,Fibra Cruda,Proteina Cruda,Extracto Etéreo,Humedad';
+    $ana=explode(',',$analisis);
+	for ($i = 0; $i <= 4; $i++){
+		$pdf->SetFont('Arial','',8);
+		$pdf->Cell(37,5,$fecha,1,0,'L');
+		$pdf->Cell(20,5,nombre_laboratorio($laboratorio),1,0,'L');
+		$pdf->Cell(65,5,$ana[$i]." (".$cont.")",1,0,'L');
+		$pdf->SetTextColor(0,0,0);
+		$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+
+	}
+	return $sep[$i-1];
+}
+
 function nombre_laboratorio($laboratorio){
 	if($laboratorio==1){
 		return "Química";
@@ -386,7 +407,7 @@ function nombre_laboratorio($laboratorio){
 	}
 }
 
-function imprime_metodos($pdf,$v_metodos){
+function imprime_metodos($pdf,$v_metodos,$sep_nir){
 	$l_metodos=implode(";",$v_metodos);
 	$size=strlen($l_metodos);
 	if($size>=120){
@@ -394,10 +415,22 @@ function imprime_metodos($pdf,$v_metodos){
 		$pdf->SetY($pdf->GetY()-10);
 		$pdf->Write(5,'Métodos de referencia: '.$l_metodos);
 		$pdf->SetY($pdf->GetY()+5);
+		if($sep_nir!=''){
+			$pdf->Cell(190,5,'',1,1,'L',true);
+			$pdf->SetY($pdf->GetY()-5);
+			$pdf->Write(5,'*SEP: Error estándar de predicción');
+		}
 	}else{
 		$pdf->Cell(190,5,'',1,1,'L',true);
 		$pdf->SetY($pdf->GetY()-5);
+
 		$pdf->Write(5,'Métodos de referencia: '.$l_metodos);
+		$pdf->SetY($pdf->GetY()+5);
+		if($sep_nir!=''){
+			$pdf->Cell(190,5,'',1,1,'L',true);
+			$pdf->SetY($pdf->GetY()-5);
+			$pdf->Write(5,'*SEP: Error estándar de predicción');
+		}
 	}
 	
 	

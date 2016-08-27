@@ -13,3 +13,7 @@ mantenimiento_proveedores.php
 modifica_pedido.php
 upload_coti.php
 cotizacion_upload.php
+cuadros.css
+menu.php
+menu_central.php
+script_usuarios.php

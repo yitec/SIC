@@ -43,11 +43,11 @@ conectarc();
         <tbody>
         <?
         
-        $result=mysql_query("select ped.id_pedido, ped.consecutivo, ped.solicitante, ped.seccion, ped.fecha_creacion, arc.nombre  from tbl_pedidos ped join tbl_archivos arc on ped.consecutivo=arc.consecutivo where estado=0 ");
+        $result=mysql_query("select ped.id_pedido, ped.consecutivo, ped.solicitante, ped.seccion, ped.fecha_creacion, arc.nombre  from tbl_pedidos ped join tbl_archivos arc on ped.consecutivo=arc.consecutivo where estado='".$_REQUEST['estado']."' ");
         while ($row=mysql_fetch_object($result)){
             echo '<tr><td class="datos">'.$row->consecutivo.'</td><td class="datos">'.utf8_decode($row->solicitante).'</td><td class="datos">'.utf8_decode($row->seccion).'</td><td class="datos">'.
             $row->fecha_creacion.'</td><td class="datos"><span><a  id="btn_consultar"  title="Consultar" href="detalle_pedido.php?id='.$row->id_pedido.'">Consultar
-            </a></span><span>| <a class="datos" id="btn_aprobart" href="presupuesto_pedidos.php?id_pedido='.$row->id_pedido.'" id_pedido="'.$row->id_pedido.'">Aprobar</a></span><span> | <a class="datos" href="#" id="btn_rechazart" id_pedido="'.$row->id_pedido.'">Rechazar</a> | <a class="datos" target="blank" href="img_cotizaciones/'.$row->nombre.'" id="btn_archivo" archivo="'.$row->nombre.'">Archivo</a></span></td></tr>';
+            </a></span><span>| <a class="datos" id="btn_aprobart" href="presupuesto_pedidos.php?id_pedido='.$row->id_pedido.'" id_pedido="'.$row->id_pedido.'">Aprobar</a></span><span> | <a  href="#" class="btn_rechazart" id_pedido="'.$row->id_pedido.'">Rechazar</a> | <a class="datos" target="blank" href="img_cotizaciones/'.$row->nombre.'" id="btn_archivo" archivo="'.$row->nombre.'">Archivo</a></span></td></tr>';
         }
         
         ?>

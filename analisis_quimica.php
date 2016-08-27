@@ -141,7 +141,10 @@ $(document).ready(function() {
 			$j++;
 		}				
 		
-$result=mysql_query("  select a.id_contrato,a.codigo,a.fecha_molienda,a.id,c.nombre,a.observaciones, a.id_laboratorio,a.trabajando,a.fecha_rechazado from tbl_analisis a,tbl_categoriasanalisis c where a.id_laboratorio='1' and a.estado='1' and c.id=a.id_analisis order by a.trabajando,a.fecha_molienda");
+$result=mysql_query("  select a.id_contrato,a.codigo,a.fecha_molienda,a.id,c.nombre,a.observaciones, a.id_laboratorio,a.trabajando,a.fecha_rechazado from tbl_analisis a
+	join tbl_categoriasanalisis c 
+	on a.id_analisis=c.id
+	where a.id_laboratorio='1' and a.estado='1' order by a.trabajando,a.fecha_molienda");
 	while ($row=mysql_fetch_assoc($result)){			
 		if (in_array(trim(utf8_encode($row['nombre']))	,$v_nombres)){
 			
@@ -172,7 +175,13 @@ $result=mysql_query("  select a.id_contrato,a.codigo,a.fecha_molienda,a.id,c.nom
           <td><div align="center" class="Arial14Negro">
             <input id="<?=$row['id'];?>" class="trabajando" <? if($row['trabajando']==1){?> checked="checked"<? }?> type="checkbox" value="" />
           </div></td>
-          <td><div align="center" class="Arial14Negro"><a id="ver" href="ingresa_resultados.php?id=<?=$row['id'];?>&codigo=<?=$row['codigo'];?>&nombre=<?=utf8_encode($row['nombre']);?>&laboratorio=<?=$row['id_laboratorio'];?>&rechazado=<?=$rechazado;?>&contrato=<?=$row['id_contrato'];?>"><img src="img/check.png" width="25" height="25" /></a></div></td>
+          <td><div align="center" class="Arial14Negro">
+          <?if ($row['nombre']=='NIR'){?>
+          <a id="ver" href="ingresa_resultados_nir.php?id=<?=$row['id'];?>&codigo=<?=$row['codigo'];?>&nombre=<?=utf8_encode($row['nombre']);?>&laboratorio=<?=$row['id_laboratorio'];?>&rechazado=<?=$rechazado;?>&contrato=<?=$row['id_contrato'];?>"><img src="img/check.png" width="25" height="25" /></a>
+          <?}else{?>
+          	<a id="ver" href="ingresa_resultados.php?id=<?=$row['id'];?>&codigo=<?=$row['codigo'];?>&nombre=<?=utf8_encode($row['nombre']);?>&laboratorio=<?=$row['id_laboratorio'];?>&rechazado=<?=$rechazado;?>&contrato=<?=$row['id_contrato'];?>"><img src="img/check.png" width="25" height="25" /></a>
+          <?}?>
+          </div></td>
         </tr>
         <?	
 		}//end if
