@@ -1,0 +1,70 @@
+Actualizar proximal
+
+1-Correr busca_proximal.php para sacar todos los analisis del año a los que se les
+hizo proximal. recordar modificar las fechas en el php
+
+2-Eliminar todas las muestras que sean pastos y minerales.
+
+delete from `tbl_proxi2013`  where nombre_producto  like '%pasto%';
+delete from `tbl_proxi2013`  where nombre_producto  like '%ensilaje%';
+delete from `tbl_proxi2013`  where nombre_producto  like '%forraje%';
+delete from `tbl_proxi2013`  where nombre_producto  like '%mineral%'; 
+delete from `tbl_proxi2013`  where tipo_muestra  like '%mineral%';
+
+3-Correr busca_codigos_2013.php para que a cada muestra le asigne el codigo de materia prima si tiene
+
+4- Copiar los registros de la tabla temporal a la de muestras
+
+insert into tbl_muestras (consecutivo_contrato,id_muestra,codigo,tipo_muestreo,clase_alimento,tipo_alimento,zona_geografica,year,fecha_creacion,nombre)
+select consecutivo_contrato,id_muestra,codigo,tipo_muestreo,clase_alimento,tipo_alimento,zona_geografica,year,fecha_ingreso,nombre
+from tbl_proxi2013
+
+
+5-Correr actualiza_years.php para actualizar los valores de cada resultado
+del proximal en la tabla de muestras.
+
+6-Correr actualiza_varios.php actualiza numero registro y quita los parentesis de los resultados
+recordar modificar las fechas cada rutina del archivo
+
+7-Corres este query para eliminar los vacios, por modificaciones en las muestras
+
+delete FROM `tbl_muestras` WHERE 
+proteina_cruda=''
+and eln=''
+and `fibra_cruda`=''
+and `materia_seca`=''
+and `humedad_135`=''
+and `cenizas`=''
+and `particula`=''
+and `energia_bruta`=''
+and `extracto_etereo`=''
+and `nnp`=''
+and `lignina`=''
+and `fnd`=''
+and `fad`=''
+and fecha_creacion>='20130101' and fecha_creacion<'20140101'
+
+8-Corregir manualmente los que tengan ± ya que php no reconoce el simbolo no se porque
+
+select * FROM `tbl_muestras` WHERE 
+fecha_creacion>='20130101' and fecha_creacion<'20140101'
+and (
+proteina_cruda like'%±%'
+or eln like'%±%'
+or fibra_cruda like'%±%'
+or materia_seca like'%±%'
+or humedad_135 like'%±%'
+or cenizas like'%±%'
+or particula like '%±%'
+or energia_bruta like'%±%'
+or extracto_etereo like'%±%'
+or nnp like'%±%'
+or lignina like'%±%'
+or fnd like'%±%'
+or fad like'%±%'
+)
+
+
+
+9-revisar los resultados visualmente y corregir manualmente los que tienen 
+caracteres o formatos desconcocidos
