@@ -60,19 +60,24 @@ require_once('menu_superior.php');
     </tr>
     <tr>
     	<td height="34" class="Arial14Negro"><input name="txt_nombre" id="txt_nombre" class="inputbox" type="text" /><input id="opcion" name="opcion" type="hidden" value="1" /></td>
-    	<td class="Arial14Negro"><input name="txt_apellidos" id="txt_apellidos" class="inputbox" type="text" /></td>        
-    	<td class="Arial14Negro"><input name="txt_cedula" id="txt_cedula" class="inputbox" type="text" /></td>                
+    	<td class="Arial14Negro"><input name="txt_apellidos" id="txt_apellidos" class="inputbox" type="text" /></td>   <td class="Arial14Negro"><input name="txt_cedula" id="txt_cedula" class="inputbox" type="text" /></td>
     </tr>
 	<tr>
     	<td class="Arial14Morado">Usuario</td>
     	<td class="Arial14Morado">Password</td> 
-        <td class="Arial14Morado">Fecha Caducidad</td>               
+      <td class="Arial14Morado">Fecha Caducidad</td>               
     </tr>
     <tr>
     	<td class="Arial14Negro"><input name="txt_usuario" id="txt_usuario" class="inputbox" type="text" /></td>
     	<td class="Arial14Negro"><input name="txt_pass" id="txt_pass" class="inputbox" type="password" /></td>        
         <td class="Arial14Negro"><input name="txt_fecha" id="txt_fecha" class="inputbox" type="text" /><img src="img_calendar/cal.gif" onClick="javascript:NewCssCal('txt_fecha')" style="cursor:pointer"/></td>        
-    </tr>    
+    </tr>
+    <tr>
+      <td class="Arial14Morado">Correo</td>
+    </tr> 
+    <tr>
+      <td class="Arial14Negro"><input name="txt_correo" id="txt_correo" class="inputbox" type="text" /></td>
+    </tr>   
     </table>
     
     <table width="740" >
@@ -325,7 +330,7 @@ require_once('menu_superior.php');
     <tr>
       <td class="Arial14Azul"></td>
       <td width="204" class="Arial14Negro"><input class="ck"  id="chk_nmuestras" type="checkbox" value="" />Nombre Muestras</td>
-      <td width="204" class="Arial14Negro"><input class="ck"  id="chk_nproveedores" type="checkbox" value="" />Mantenimiento Proveedores</td>            
+      <td width="204" class="Arial14Negro"><input class="ck"  id="chk_mproveedores" type="checkbox" value="" />Mantenimiento Proveedores</td>            
     </tr>     
     </table>
 <div align="center" style="margin-top:20px; margin-bottom:20px;"><input name="btn_guardar" id="btn_guardar" type="image" src="img/btn_guardar.png" /><input name="btn_eliminar" id="btn_eliminar" type="image" src="img/btn_eliminar.png" /></div>    

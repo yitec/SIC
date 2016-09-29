@@ -1,0 +1,50 @@
+Actualizar proximal
+
+1-Correr busca_minerales.php para sacar todos los analisis del año a los que se les
+hizo proximal. recordar modificar las fechas en el php
+
+2-Eliminar todas las muestras que sean pastos y minerales.
+
+delete from `tbl_mine2013`  where nombre_producto  like '%pasto%';
+delete from `tbl_mine2013`  where nombre_producto  like '%ensilaje%';
+delete from `tbl_mine2013`  where nombre_producto  like '%forraje%';
+
+
+3-Correr busca_codigos_mine2013.php para que a cada muestra le asigne el codigo de materia prima si tiene
+
+4- Copiar los registros de la tabla temporal a la de muestras
+
+insert into tbl_minerales (consecutivo_contrato,id_muestra,cifra1,cifra2,cifra3,cifra4,cifra5,cifra6,cifra7,cifra8,cifra9,cifra10,fecha_creacion,nombre)
+select consecutivo_contrato,id_muestra,tipo_muestreo,'0','45','2',codigo,'0','0','0','0',year,fecha_ingreso,nombre
+from tbl_mine2013
+
+5-Correr actualiza_resultados2013.php para actualizar los valores de cada resultado
+del le la tabla de minerales.
+
+6-Correr actualiza_varios_2013.php actualiza numero registro y quita los parentesis de los resultados
+recordar modificar las fechas cada rutina del archivo 
+
+
+7-Corregir manualmente los que tengan ± ya que php no reconoce el simbolo no se porque
+
+select * FROM tbl_minerales WHERE 
+fecha_creacion>='20130101' and fecha_creacion<'20140101'
+and (
+calcio like'%±%'
+or fosforo like'%±%'
+or magnesio like'%±%'
+or potasio like'%±%'
+or hierro like'%±%'
+or cobre like '%±%'
+or manganeso like'%±%'
+or zinc like'%±%'
+or cobalto like'%±%'
+or molibdeno like'%±%'
+or ph like'%±%'
+or sodio like'%±%'
+or materia_seca like'%±%'
+)
+
+
+9-revisar los resultados visualmente y corregir manualmente los que tienen 
+caracteres o formatos desconcocidos

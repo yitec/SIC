@@ -24,7 +24,7 @@ class Pedidos{
 	function crea_pedido($parametros,$hoy){
 		$v_datos=explode(",",utf8_encode($parametros));
 		$result=mysql_query("insert into tbl_consecutivos (estado) values('1')");
-		$sql="insert into tbl_pedidos(consecutivo,id_proveedor,fecha_creacion,id_usuario,solicitante,seccion,justificacion,tipo,geco,codigo_agrupacion,codigo_articulo,correo_usuario)values('".utf8_encode($v_datos[0])."','".utf8_encode($v_datos[1])."','".$hoy."','".$_SESSION['usuario']."','".$v_datos[2]."','".$v_datos[3]."','".$v_datos[4]."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."','".utf8_encode($v_datos[9])."')";
+		$sql="insert into tbl_pedidos(consecutivo,fecha_creacion,id_usuario,solicitante,seccion,justificacion,geco,codigo_agrupacion,codigo_articulo,correo_usuario)values('".utf8_encode($v_datos[0])."','".$hoy."','".$_SESSION['usuario']."','".$v_datos[1]."','".$v_datos[2]."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."')";
 		$result=mysql_query($sql);		
 		if (!$result) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;

@@ -11,22 +11,19 @@ $hoy=date("Y-m-d H:i:s");
 $ano=substr($_REQUEST['txt_fecha'], 0, 4);
 $mes=substr($_REQUEST['txt_fecha'], 5, 2);
 $dia=substr($_REQUEST['txt_fecha'], 8, 2);
-
-
-
-
 $fecha=$ano."-".$mes."-".$dia." ".$_GET['cmb_ini'].":00";
 $fecha2=$ano."-".$mes."-".$dia."  00:00:00";
+
+
 if($_REQUEST['opcion']==1)
 {
-
 //busco si no existe el usuario
 $result=mysql_query("select usuario from tbl_usuarios where usuario='".$_REQUEST['txt_usuario']."'");
 $total=mysql_num_rows($result);
 if($total>0){
 	echo "repetido";
 }else{
-	$query="insert into tbl_usuarios(id_perfil,ids_analisis,ids_reportes,nombre,apellidos,cedula,usuario,pass,fecha_caducidad,estado)values('".$_REQUEST['id_permisos']."','".$_REQUEST['ids_analisis']."','".$_REQUEST['ids_reportes']."','".$_REQUEST['txt_nombre']."','".$_REQUEST['txt_apellidos']."','".$_REQUEST['txt_cedula']."','".$_REQUEST['txt_usuario']."','".$_REQUEST['txt_pass']."','".$fecha2."','"."1"."')";
+	$query="insert into tbl_usuarios(id_perfil,ids_analisis,ids_reportes,nombre,apellidos,cedula,usuario,pass,fecha_caducidad,correo,estado)values('".$_REQUEST['id_permisos']."','".$_REQUEST['ids_analisis']."','".$_REQUEST['ids_reportes']."','".$_REQUEST['txt_nombre']."','".$_REQUEST['txt_apellidos']."','".$_REQUEST['txt_cedula']."','".$_REQUEST['txt_usuario']."','".$_REQUEST['txt_pass']."','".$fecha2."','".$_REQUEST['txt_correo']."','"."1"."')";
 	$result = mysql_query($query);	
 	echo "Success";
 }
@@ -38,13 +35,10 @@ if($total>0){
 //Consultar usuarios
 if($_REQUEST['opcion']==2)
 {
-	
-	
 	$result=mysql_query("select * from tbl_usuarios where usuario='".$_REQUEST['usuario']."'");
 	$row=mysql_fetch_assoc($result);
 
-	echo $row['usuario']."|".$row['nombre']."|".$row['apellidos']."|".$row['cedula']."|".$row['pass']."|".$row['fecha_caducidad']."|".$row['id_perfil']."|".$row['ids_analisis']."|".$row['ids_reportes'] ;   
-	
+	echo $row['usuario']."|".$row['nombre']."|".$row['apellidos']."|".$row['cedula']."|".$row['pass']."|".$row['fecha_caducidad']."|".$row['correo']."|".$row['id_perfil']."|".$row['ids_analisis']."|".$row['ids_reportes'] ;   	
 	desconectar();
 }//end if opcion 2
 
@@ -52,7 +46,7 @@ if($_REQUEST['opcion']==2)
 //modificar usuario
 if($_REQUEST['opcion']==3)
 {		
-	$result=mysql_query("update tbl_usuarios set usuario='".$_REQUEST['txt_usuario']."',nombre='".$_REQUEST['txt_nombre']."',apellidos='".$_REQUEST['txt_apellidos']."',cedula='".$_REQUEST['txt_cedula']."',pass='".$_REQUEST['txt_pass']."',fecha_caducidad='".$fecha2."',id_perfil='".$_REQUEST['id_permisos']."', ids_analisis='".$_REQUEST['ids_analisis']."' , ids_reportes='".$_REQUEST['ids_reportes']."'  where usuario='".$_REQUEST['txt_usuario_buscar']."'");
+	$result=mysql_query("update tbl_usuarios set usuario='".$_REQUEST['txt_usuario']."',nombre='".$_REQUEST['txt_nombre']."',apellidos='".$_REQUEST['txt_apellidos']."',cedula='".$_REQUEST['txt_cedula']."',pass='".$_REQUEST['txt_pass']."',fecha_caducidad='".$fecha2."',correo='".$_REQUEST['txt_correo']."',id_perfil='".$_REQUEST['id_permisos']."', ids_analisis='".$_REQUEST['ids_analisis']."' , ids_reportes='".$_REQUEST['ids_reportes']."'  where usuario='".$_REQUEST['txt_usuario_buscar']."'");
 
 if (!$result) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";

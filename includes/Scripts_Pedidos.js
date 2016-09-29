@@ -118,7 +118,9 @@ $("#btn_siguiente").click(function(event){
 
 	//guardo el pedido
   
-  parametros=$("#txt_consecutivo").val()+","+$("#cmb_proveedor").val()+","+$("#txt_nombresoli").val()+","+$("#cmb_seccion").val()+","+$("#txt_justificacion").val()+","+$("#cmb_tipo_compra").val()+","+$("#rnd_geco").val()+","+$("#txt_cagrup").val()+","+$("#txt_carti").val()+",mizard6@yahoo.es";	
+  parametros=$("#txt_consecutivo").val()+","+$("#txt_nombresoli").val()+","+$("#cmb_seccion").val()+
+  ","+$("#txt_justificacion").val()+","+$("#rnd_geco").val()+","+$("#txt_cagrup").val()+
+  ","+$("#txt_carti").val()+",mizard6@yahoo.es";	
 	$.ajax({ 
     data: "metodo=crea_pedido&parametros="+parametros,
     type: "POST",

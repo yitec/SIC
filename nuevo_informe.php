@@ -18,7 +18,7 @@ $row=mysql_fetch_assoc($result);
 //busco todos los resultados
 $result2=mysql_query("Select res.consecutivo_contrato,ana.id_laboratorio,cat.nombre,res.metodo,res.resultado,res.base_seca,
 res.base_fresca,res.incertidumbre, res.incertidumbre_fresca,res.incertidumbre_seca,
-res.unidades,res.fecha_aprobacion,res.valor_correjido,ana.id_analisis,ana.id_muestra,cat.acreditado
+res.unidades,res.fecha_aprobacion,res.valor_correjido,res.observaciones_analista,ana.id_analisis,ana.id_muestra,cat.acreditado
 from tbl_resultados res  Inner join tbl_analisis as ana 
 on res.id_analisis=ana.id inner join tbl_categoriasanalisis as cat on ana.id_analisis=cat.id
 where
@@ -265,7 +265,7 @@ while($row2=mysql_fetch_object($result2)){
 		$pdf->SetFillColor(241,243,246);
 		imprime_muestra($pdf,$row['consecutivo'],$muestra);		
 		if($row2->nombre=="NIR"){			
-			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont);		
+			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont,$row2->observaciones_analista);		
 		}else{
 		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);		
 		}
@@ -275,7 +275,7 @@ while($row2=mysql_fetch_object($result2)){
 		$v_metodos[]='  ('.$cont.')'.$row2->metodo;
 		$hoja=calcula_salto($pdf,'old',$acreditado,$hoja,$row['consecutivo']);
 		if($row2->nombre=="NIR"){
-			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont);		
+			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont,$row2->observaciones_analista);		
 		}else{
 		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);	
 		}
@@ -380,19 +380,26 @@ function imprime_resultados($pdf,$fecha,$laboratorio,$analisis,$resultado,$incer
 
 }
 
-function imprime_nir($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido,$acreditado,$cont){
+function imprime_nir($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido,$acreditado,$cont,$observaciones){
 	$resultado=explode('|',$resultado);
     $sep=explode('|',$incertidumbre);
     $analisis='Cenizas,Fibra Cruda,Proteina Cruda,Extracto Etéreo,Humedad';
     $ana=explode(',',$analisis);
-	for ($i = 0; $i <= 4; $i++){
-		$pdf->SetFont('Arial','',8);
-		$pdf->Cell(37,5,$fecha,1,0,'L');
-		$pdf->Cell(20,5,nombre_laboratorio($laboratorio),1,0,'L');
-		$pdf->Cell(65,5,$ana[$i]." (".$cont.")",1,0,'L');
-		$pdf->SetTextColor(0,0,0);
-		$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
-
+    
+		for ($i = 0; $i <= 4; $i++){
+			if(strtoupper($resultado[$i])=='NO PREDECIBLE'){
+				$obs=true;
+			}else{
+				$pdf->SetFont('Arial','',8);
+				$pdf->Cell(37,5,$fecha,1,0,'L');
+				$pdf->Cell(20,5,nombre_laboratorio($laboratorio),1,0,'L');
+				$pdf->Cell(65,5,$ana[$i]." (".$cont.")",1,0,'L');
+				$pdf->SetTextColor(0,0,0);
+				$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+			}
+		}
+	if($obs==true){
+		$pdf->Cell(190,15,$observaciones,1,1,'L');
 	}
 	return $sep[$i-1];
 }

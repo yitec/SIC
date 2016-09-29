@@ -38,13 +38,13 @@ conectarc();
         $total=$row->total;
         ?>
         <div class="rectangulo_titulo"><p class="texto_titulo">Detalle Pedidos</p></div>
-        <a id="ver" href="listado_pedidos.php?estado=0"><div class="rectangulo "><p class="texto_cuadros_blanco">Total= <?=$pendientes?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Pendientes</p></div></div></a>
-        <a id="ver1" href="listado_pedidos.php?estado=1"><div class="rectangulo2"><p class="texto_cuadros_blanco">Total= <?=$aprobados?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Aprobados</p></div></div>
+        <a id="ver" href="listado_pedidos.php?estado=0"><div class="rectangulo "><p align="center" class="texto_cuadros_blanco"><?=$pendientes?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Pendientes</p></div></div></a>
+        <a id="ver1" href="listado_pedidos.php?estado=1"><div class="rectangulo2"><p align="center" class="texto_cuadros_blanco"><?=$aprobados?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Aprobados</p></div></div>
         </a>
         <a id="ver2" href="listado_pedidos.php?estado=2">
-        <div class="rectangulo3"><p class="texto_cuadros_blanco">Total= <?=$rechazados?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Rechazados</p></div></div>
+        <div class="rectangulo3"><p align="center" class="texto_cuadros_blanco"><?=$rechazados?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Rechazados</p></div></div>
         </a>
-        <div class="rectangulo4"><p class="texto_cuadros_blanco">Total= <?=$total?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Total General</p></div></div>
+        <div class="rectangulo4"><p align="center" class="texto_cuadros_blanco"><?=$total?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Total General</p></div></div>
    
 
 				</div> <!-- end div blanco-->  

@@ -37,20 +37,7 @@ conectarc();
                             </tr>
                             <tr>
                                 <td height="25" class="Arial14Morado">Nombre Solicitante</td>
-                                <td ><input id="txt_nombresoli" name="txt_nombresoli"  size="40"  class="inputbox" type="text" /></td>
-                            </tr>
-                            <tr>
-                                <td height="25" class="Arial14Morado">Proveedor</td>
-                                <td >
-                                <select class="combos" id="cmb_proveedor" name="cmb_proveedor">
-                                <option selected="selected" value="0">Seleccione</option>
-                                <?
-                                $result=mysql_query("select * from tbl_proveedores where estado=1");
-                                while($row=mysql_fetch_object($result)){
-                                  echo  '<option value="'.$row->id_proveedor.'">'.$row->nombre.'</option>' ;
-                                }
-                                ?>                                                                                                        
-                                </select></td>
+                                <td ><input id="txt_nombresoli" name="txt_nombresoli" value="<?=$_SESSION['nombre_usuario'];?>" disabled size="40"  class="inputbox" type="text" /></td>
                             </tr>
                             <tr>
                                 <td height="25" class="Arial14Morado">Secci&oacute;n</td>
@@ -63,26 +50,6 @@ conectarc();
                             <tr>
                                 <td height="25" class="Arial14Morado">Justificación <br> de la compra</td>
                                 <td><textarea maxlength="200" rows="4" cols="40" name="txt_justificacion" id="txt_justificacion" ></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="Arial14Morado">Tipo de compra: </td>
-                                <td><select class="combos" id="cmb_tipo_compra" name="cmb_tipo_compra">
-                                <option value="0" selected="selected">Seleccione</option>
-                                <option value="1">Reactivos</option>
-                                <option value="2">Gases</option>
-                                <option value="3">Cristalería</option>
-                                <option value="4">Repuesto/consumible de equipo</option>                                
-                                <option value="5">Equipos</option>
-                                <option value="6">Materiales de laboratorio</option>
-                                <option value="7">Calibraciones</option>
-                                <option value="8">Reparación o mantenimiento de equipo</option>                                
-                                <option value="9">Interlaboratoriales</option>
-                                <option value="10">Medios de cultivo</option>
-                                <option value="11">Software</option>
-                                <option value="12">Capacitaciones</option>
-                                <option value="13">Inscripciones, congresos, etc</option>
-                                <option value="14">Materiales de referencia</option>                            
-                                </select></td>
                             </tr>
                         </table>
                         <table>

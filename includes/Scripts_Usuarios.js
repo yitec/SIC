@@ -45,11 +45,12 @@ $("#btn_buscar").live("click", function(event){
 			$('#txt_cedula').attr('value',v_resultado[3]);
 			$('#txt_pass').attr('value',v_resultado[4]);
 			$('#txt_fecha').attr('value',v_resultado[5]);
+			$('#txt_correo').attr('value',v_resultado[6]);
 			$('#opcion').attr('value','3');
-			ids_analisis=v_resultado[7];
-			ids_reportes=v_resultado[8];
+			ids_analisis=v_resultado[8];
+			ids_reportes=v_resultado[9];
 			//desconcateno el vector de permisos		
-			v_resultado=v_resultado[6].split(",");
+			v_resultado=v_resultado[7].split(",");
 			
 			if(v_resultado.indexOf("1")>=0){
 				$("#chk_c_contrato").attr("checked","checked");
@@ -175,7 +176,7 @@ $("#btn_buscar").live("click", function(event){
 				$("#chk_nmuestras").attr("checked","checked");
 			}
 			if(v_resultado.indexOf("39")>=0){
-				$("#chk_nmuestras").attr("checked","checked");
+				$("#chk_mproveedores").attr("checked","checked");
 			}
 		}//end succces function
 		});//end ajax function	
@@ -311,7 +312,7 @@ $("#btn_guardar").click(function(event){
 		if ($("#chk_nmuestras").is(":checked")){
 			permisos=permisos+","+38;	
 		}		
-		if ($("#chk_nmuestras").is(":checked")){
+		if ($("#chk_mproveedores").is(":checked")){
 			permisos=permisos+","+39;	
 		}		
 		
@@ -322,7 +323,7 @@ $("#btn_guardar").click(function(event){
         type: "POST",
 		async: false,
         url: "operaciones/opr_usuarios.php",
-        data: "opcion=1&txt_nombre="+$('#txt_nombre').val()+"&txt_apellidos="+$('#txt_apellidos').val()+"&txt_cedula="+$('#txt_cedula').val()+"&txt_usuario="+$('#txt_usuario').val()+"&txt_pass="+$('#txt_pass').val()+"&txt_fecha="+$('#txt_fecha').val()+"&id_permisos="+permisos+"&ids_analisis="+v_nombres+"&ids_reportes="+v_reportes,        		
+        data: "opcion=1&txt_nombre="+$('#txt_nombre').val()+"&txt_apellidos="+$('#txt_apellidos').val()+"&txt_cedula="+$('#txt_cedula').val()+"&txt_usuario="+$('#txt_usuario').val()+"&txt_pass="+$('#txt_pass').val()+"&txt_fecha="+$('#txt_fecha').val()+"&txt_correo="+$('#txt_correo').val()+"&id_permisos="+permisos+"&ids_analisis="+v_nombres+"&ids_reportes="+v_reportes,        		
 		success: function(datos){
 
 		if (datos=="Success"){
@@ -353,7 +354,7 @@ $("#btn_guardar").click(function(event){
         type: "POST",
 		async: false,
         url: "operaciones/opr_usuarios.php",
-        data: "opcion=3&txt_nombre="+$('#txt_nombre').val()+"&txt_apellidos="+$('#txt_apellidos').val()+"&txt_cedula="+$('#txt_cedula').val()+"&txt_usuario="+$('#txt_usuario').val()+"&txt_pass="+$('#txt_pass').val()+"&txt_fecha="+$('#txt_fecha').val()+"&id_permisos="+permisos+"&ids_analisis="+v_nombres+"&ids_reportes="+v_reportes+"&txt_usuario_buscar="+$('#txt_usuario_buscar').val(),		
+        data: "opcion=3&txt_nombre="+$('#txt_nombre').val()+"&txt_apellidos="+$('#txt_apellidos').val()+"&txt_cedula="+$('#txt_cedula').val()+"&txt_usuario="+$('#txt_usuario').val()+"&txt_pass="+$('#txt_pass').val()+"&txt_fecha="+$('#txt_fecha').val()+"&txt_correo="+$('#txt_correo').val()+"&id_permisos="+permisos+"&ids_analisis="+v_nombres+"&ids_reportes="+v_reportes+"&txt_usuario_buscar="+$('#txt_usuario_buscar').val(),		
 		success: function(datos){
 				
 				$.pnotify({
