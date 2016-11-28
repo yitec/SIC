@@ -120,7 +120,7 @@ $("#btn_siguiente").click(function(event){
   
   parametros=$("#txt_consecutivo").val()+","+$("#txt_nombresoli").val()+","+$("#cmb_seccion").val()+
   ","+$("#txt_justificacion").val()+","+$("#rnd_geco").val()+","+$("#txt_cagrup").val()+
-  ","+$("#txt_carti").val()+",mizard6@yahoo.es";	
+  ","+$("#txt_carti").val()+","+$("#txt_correo").val()+","+$("#txt_cantidad_lineas").val();	
 	$.ajax({ 
     data: "metodo=crea_pedido&parametros="+parametros,
     type: "POST",
@@ -128,7 +128,7 @@ $("#btn_siguiente").click(function(event){
     dataType: "json",
     url: "operaciones/opr_pedidos.php",
     success: function (data){
-      if (data.resultado!="Success"){
+      if (data['resultado']!="Success"){
       	notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");         
       }else{
         id_pedido=data.id_pedido;
@@ -321,6 +321,32 @@ $(".rechazara").live("click",function(event){
   } else {
     return;
   }
+});
+
+/***********************************************Boton eliminar un articulo**********************************************/
+$(".eliminara").live("click",function(event){ 
+  if (confirm('Seguro que desea eliminar este articulo?')) {  
+
+  parametros=$(this).attr('tabla')+','+$(this).attr('id_articulo');
+  $.ajax({ 
+      data: "metodo=eliminar_articulos&parametros="+parametros,
+      type: "POST",
+      async:false,
+      dataType: "json",
+      url: "operaciones/opr_pedidos.php",
+      success: function (data){
+        if (data.resultado!="Success"){
+         notificacion("Error","Ha ocurrido un error, intente de nuevo!!","error");          
+        }else{
+          notificacion("Articulo eliminado","El articulo se ha eliminado correctamente","info");  
+          setInterval(function(){window.location.assign("listado_pedidos.php")},2000);         
+        }
+        }//end succces function
+      });//end ajax function   
+  
+  } else {
+    return;
+  }  
 });
 /***********************************************Boton Entregar**********************************************/
 $("#btn_entregar").click(function(){

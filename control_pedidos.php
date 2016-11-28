@@ -37,6 +37,7 @@ conectarc();
         $row=mysql_fetch_object($result);
         $total=$row->total;
         ?>
+        <div>
         <div class="rectangulo_titulo"><p class="texto_titulo">Detalle Pedidos</p></div>
         <a id="ver" href="listado_pedidos.php?estado=0"><div class="rectangulo "><p align="center" class="texto_cuadros_blanco"><?=$pendientes?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Pendientes</p></div></div></a>
         <a id="ver1" href="listado_pedidos.php?estado=1"><div class="rectangulo2"><p align="center" class="texto_cuadros_blanco"><?=$aprobados?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Aprobados</p></div></div>
@@ -45,9 +46,13 @@ conectarc();
         <div class="rectangulo3"><p align="center" class="texto_cuadros_blanco"><?=$rechazados?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Rechazados</p></div></div>
         </a>
         <div class="rectangulo4"><p align="center" class="texto_cuadros_blanco"><?=$total?></p><div class="mini_rectangulo"><p class="texto_cuadros_sombreado">Total General</p></div></div>
-   
+        </div>
+        <br>
+        <br>
+        <br><br><br><br><br><br>
+        <div style="float: none;" align="center"><label><a href="control_pedidos.php">Actualizar</a></label></div>
 
-				</div> <!-- end div blanco-->  
+		</div> <!-- end div blanco-->  
         </div><!-- end div azul-->  
       </div><!-- end div cuadro gris-->             				                        	
     </body>

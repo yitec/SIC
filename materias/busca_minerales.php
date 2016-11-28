@@ -17,7 +17,7 @@ join tbl_categoriasanalisis cat
 ON cat.id=ana.id_analisis
 join tbl_infmuestras inf
 on mues.id_contrato=inf.cons_contrato
-where mues.fecha_ingreso>='20150101' and mues.fecha_ingreso<='20160101' 
+where mues.fecha_ingreso>='20130101' and mues.fecha_ingreso<='20140101' 
 and cat.nombre in (".utf8_decode($mine).") and metodo not like 'no se realiza%'
 group by mues.id order by mues.id_contrato";
 $result=mysql_query($sql);
@@ -42,10 +42,16 @@ Echo "Total Contratos->".$cont;
 function busca_mineral($id,$id_muestra,$fecha_ingreso,$numero_muestra,$tipo_muestra,$nombre_producto,$numero_muestra,$procedencia,$nombre_muestra){
 
 	$total=0;
-	$sql2="select cat.nombre from tbl_analisis ana
+	/*$sql2="select cat.nombre from tbl_analisis ana
 join tbl_categoriasanalisis cat
 on ana.id_analisis=cat.id
 where ana.id_muestra=1
+and ana.id_contrato='".$id."'";*/
+
+$sql2="select cat.nombre from tbl_analisis ana
+join tbl_categoriasanalisis cat
+on ana.id_analisis=cat.id
+where ana.id_muestra='".$numero_muestra."'
 and ana.id_contrato='".$id."'";
 
 	$result2=mysql_query($sql2);
@@ -54,6 +60,8 @@ and ana.id_contrato='".$id."'";
 	//echo "-".$row2->nombre ;
 	$analisis_procesar.="|".utf8_encode($row2->nombre);
 	
+	echo 'Revisando '.utf8_encode($row2->nombre).' de contrato '.$id.' numero de muestra='.$numero_muestra.'<br>';
+
 	switch (utf8_encode($row2->nombre)) {
     case "Calcio":
 		//echo "||entro Prote||".$id;
@@ -159,7 +167,7 @@ and ana.id_contrato='".$id."'";
 		$clase_alimento=busca_clase_alimento($id,$numero_muestra);
 		$procedencia=busca_region($procedencia);
 
-		echo $sql3="insert into bd_materiasprimas.tbl_mine2015 (consecutivo_contrato,numero_muestra,tipo_muestreo,nombre_muestra,clase_alimento,tipo_alimento,zona_geografica,year,fecha_ingreso,id_muestra,tipo_muestra,nombre_producto)
+		echo $sql3="insert into bd_materiasprimas.tbl_mine2013 (consecutivo_contrato,numero_muestra,tipo_muestreo,nombre_muestra,clase_alimento,tipo_alimento,zona_geografica,year,fecha_ingreso,id_muestra,tipo_muestra,nombre_producto)
 		values
 		('$id','$numero_muestra','$tipo_muestreo','$nombre_muestra','$clase_alimento',2,'$procedencia',29,'$fecha_ingreso','$id_muestra','$tipo_muestra','$nombre_producto')
 		";

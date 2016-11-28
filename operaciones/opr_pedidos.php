@@ -24,9 +24,33 @@ class Pedidos{
 	function crea_pedido($parametros,$hoy){
 		$v_datos=explode(",",utf8_encode($parametros));
 		$result=mysql_query("insert into tbl_consecutivos (estado) values('1')");
-		$sql="insert into tbl_pedidos(consecutivo,fecha_creacion,id_usuario,solicitante,seccion,justificacion,geco,codigo_agrupacion,codigo_articulo,correo_usuario)values('".utf8_encode($v_datos[0])."','".$hoy."','".$_SESSION['usuario']."','".$v_datos[1]."','".$v_datos[2]."','".utf8_encode($v_datos[3])."','".utf8_encode($v_datos[4])."','".utf8_encode($v_datos[5])."','".utf8_encode($v_datos[6])."','".utf8_encode($v_datos[7])."','".utf8_encode($v_datos[8])."')";
-		$result=mysql_query($sql);		
-		if (!$result) {//si da error que me despliegue el error del query       		
+		$sql="insert into tbl_pedidos(
+        consecutivo,
+        fecha_creacion,
+        id_usuario,
+        solicitante,
+        seccion,
+        justificacion,
+        geco,
+        codigo_agrupacion,
+        codigo_articulo,
+        correo_usuario,
+        tot_articulos
+        )values(
+        '".utf8_encode($v_datos[0])."',
+        '".$hoy."',
+        '".$_SESSION['usuario']."',
+        '".$v_datos[1]."',
+        '".$v_datos[2]."',
+        '".utf8_encode($v_datos[3])."',
+        '".utf8_encode($v_datos[4])."',
+        '".utf8_encode($v_datos[5])."',
+        '".utf8_encode($v_datos[6])."',
+        '".utf8_encode($v_datos[7])."',
+        '".utf8_encode($v_datos[8])."'  
+        )";
+		$result2=mysql_query($sql);		
+		if (!$result2) {//si da error que me despliegue el error del query       		
        		$jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{
         	$jsondata['resultado'] = 'Success';        	
@@ -212,6 +236,18 @@ class Pedidos{
     function aprueba_articulos($parametros,$hoy){
         $v_datos=explode(",",$parametros);        
         $result=mysql_query("update ".$v_datos[0]." set estado=1 where id_articulo=".$v_datos[1]);
+        if (!$result) {//si da error que me despliegue el error del query               
+            $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
+        }else{
+            $jsondata['resultado'] = 'Success';         
+        }
+    echo json_encode($jsondata);
+
+    }
+
+     function eliminar_articulos($parametros,$hoy){
+        $v_datos=explode(",",$parametros);        
+        $result=mysql_query("update ".$v_datos[0]." set estado=3 where id_articulo=".$v_datos[1]);
         if (!$result) {//si da error que me despliegue el error del query               
             $jsondata['resultado'] = 'Query invalido: ' . mysql_error() ;
         }else{

@@ -22,8 +22,9 @@ conectarc();
         <table>
         <tbody>
         <?
-        $result=mysql_query("select id_pedido,consecutivo, solicitante, seccion, fecha_creacion  from tbl_pedidos where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select id_pedido,consecutivo, solicitante, seccion, fecha_creacion, tot_articulos  from tbl_pedidos where id_pedido='".$_REQUEST["id"]."'");
         $row=mysql_fetch_object($result);
+        $tot_art=$row->tot_articulos;
         echo '<thead class="texto_titulo"><td>Detalle pedido</td></thead>
             <tr class="listado"><td >Consecutivo: </td><td>'.$row->consecutivo.'</td></tr>
             <tr class="listado"><td >Solicitante: </td><td>'.utf8_decode($row->solicitante).'</td></tr>
@@ -52,8 +53,13 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></td></tr></table>';
+                if($_REQUEST['estado']==1){
+                echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></td></tr></table>';
+                    }
+                }
                 $cont++;
             }
             echo '<div>-----------------------------------------------------------------------------</div>';

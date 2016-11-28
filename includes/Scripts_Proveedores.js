@@ -16,10 +16,51 @@ var availableTags;
 		$( "#txt_usuario_buscar" ).autocomplete({
 			source: availableTags
 		});
-		
+
+var proveedor = getUrlVars()["proveedor"];
+var search = getUrlVars()["search"];	
+
+if (search==1&&proveedor!=''){		
+		$.ajax({
+        type: "POST",
+		async: false,
+        url: "operaciones/opr_proveedores.php",
+        data: "opcion=7&proveedor="+proveedor,
+        success: function(datos){
+			//desconcateno el resultado la primera posicion me indica si fue exitoso
+			if(datos=="error"){
+				$.pnotify({
+			    pnotify_title: 'El proveedor no se encontro',
+    			pnotify_text: '',
+    			pnotify_type: 'info',
+    			pnotify_hide: true
+				});
+			}else{
+			var v_resultado=datos.split("|");
+			$('#txt_nombre').attr('value',v_resultado[0]);
+			$('#txt_cedula').attr('value',v_resultado[1]);
+			$('#txt_correo').attr('value',v_resultado[2]);
+			$('#txt_marcas').attr('value',v_resultado[3]);
+			$('#txt_tel_cel').attr('value',v_resultado[4]);
+			$('#txt_tel_fijo').attr('value',v_resultado[5]);
+			$('#txt_fax').attr('value',v_resultado[6]);			
+			$('#txt_nota').attr('value',v_resultado[7]);			
+			$('#txt_contacto').val(v_resultado[8]); 			
+			if (v_resultado[9]==1){
+				$("#rnd_activo_1").attr('checked', 'checked');
+			}else{
+				$("#rnd_activo_0").attr('checked', 'checked');				
+			}
+				
+			$('#opcion').attr('value','3');
+			}
+		}//end succces function
+		});//end ajax function
+
+}
 						   
 						   
-//busca un item en el inventario
+//busca un proveedor
 $("#btn_buscar").live("click", function(event){
 //$("#btn_buscar").click(function(event){
 		event.preventDefault();			
@@ -32,7 +73,7 @@ $("#btn_buscar").live("click", function(event){
 			//desconcateno el resultado la primera posicion me indica si fue exitoso
 			if(datos=="error"){
 				$.pnotify({
-			    pnotify_title: 'El cliente no se encontro',
+			    pnotify_title: 'El proveedor no se encontro',
     			pnotify_text: '',
     			pnotify_type: 'info',
     			pnotify_hide: true
@@ -80,7 +121,7 @@ $("#btn_guardar").click(function(event){
         type: "POST",
 		async: false,
         url: "operaciones/opr_proveedores.php",
-        data: "opcion=1&txt_nombre="+$('#txt_nombre').val()+"&txt_cedula="+$('#txt_cedula').val()+"&txt_correo="+$('#txt_correo').val()+"&txt_fax="+$('#txt_fax').val()+"&txt_direccion="+$('#txt_direccion').val()+"&txt_tel_fijo="+$('#txt_tel_fijo').val()+"&txt_tel_cel="+$('#txt_tel_cel').val()+"&cmb_tipo="+$('#cmb_tipo').val()+"&txt_consumible="+$('#txt_consumible').val()+"&txt_consumido="+$('#txt_consumido').val()+"&rnd_credito="+$('input[name=rnd_credito]:checked').attr('value'),        		
+        data: "opcion=1&txt_nombre="+$('#txt_nombre').val()+"&txt_cedula="+$('#txt_cedula').val()+"&txt_correo="+$('#txt_correo').val()+"&txt_fax="+$('#txt_fax').val()+"&txt_marcas="+$('#txt_marcas').val()+"&txt_tel_fijo="+$('#txt_tel_fijo').val()+"&txt_tel_cel="+$('#txt_tel_cel').val()+"&txt_nota="+$('#txt_nota').val()+"&txt_contacto="+$('#txt_contacto').val()+"&rnd_activo="+$('input[name=rnd_activo]:checked').attr('value'),        		
 		success: function(datos){
 
 
@@ -167,6 +208,15 @@ function limpiar(){
 			$('#txt_nota').attr('value','');			
 			$('#txt_usuario_buscar').attr('value','');						
 			$('#opcion').attr('value','1');	
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
 }
 
 																   

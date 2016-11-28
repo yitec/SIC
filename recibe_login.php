@@ -25,7 +25,7 @@ if(mysql_num_rows($result) >=1){
 	$_SESSION['perfil']=$v_perfil;
 	$_SESSION['reportes']=$v_reportes;
 	$_SESSION['expiracion']=$row['fecha_caducidad'];
-	$calidad=verifica_calidad($row['id']);
+/*	$calidad=verifica_calidad($row['id']);
 	if($calidad!=NULL){			
 		//echo "entro";
 		header("Location:alerta.php?datos=	".$calidad); 
@@ -33,7 +33,9 @@ if(mysql_num_rows($result) >=1){
 	}else{
 		header("Location:menu.php"); 
 	exit();
-	}
+	}*/
+	header("Location:menu.php");
+	exit();
 }else{
 	header("Location:login.php"); 
 	exit();

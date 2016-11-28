@@ -42,12 +42,31 @@ conectarc();
 
         <tbody>
         <?
+        $sql="select ped.id_pedido, ped.consecutivo, ped.solicitante, ped.seccion, ped.fecha_creacion, arc.nombre  from tbl_pedidos ped left join tbl_archivos arc on ped.consecutivo=arc.consecutivo where estado='".$_REQUEST['estado']."' ";
         
-        $result=mysql_query("select ped.id_pedido, ped.consecutivo, ped.solicitante, ped.seccion, ped.fecha_creacion, arc.nombre  from tbl_pedidos ped join tbl_archivos arc on ped.consecutivo=arc.consecutivo where estado='".$_REQUEST['estado']."' ");
+       
+        $result=mysql_query($sql);
         while ($row=mysql_fetch_object($result)){
+            $date = new DateTime($row->fecha_creacion);
             echo '<tr><td class="datos">'.$row->consecutivo.'</td><td class="datos">'.utf8_decode($row->solicitante).'</td><td class="datos">'.utf8_decode($row->seccion).'</td><td class="datos">'.
-            $row->fecha_creacion.'</td><td class="datos"><span><a  id="btn_consultar"  title="Consultar" href="detalle_pedido.php?id='.$row->id_pedido.'">Consultar
-            </a></span><span>| <a class="datos" id="btn_aprobart" href="presupuesto_pedidos.php?id_pedido='.$row->id_pedido.'" id_pedido="'.$row->id_pedido.'">Aprobar</a></span><span> | <a  href="#" class="btn_rechazart" id_pedido="'.$row->id_pedido.'">Rechazar</a> | <a class="datos" target="blank" href="img_cotizaciones/'.$row->nombre.'" id="btn_archivo" archivo="'.$row->nombre.'">Archivo</a></span></td></tr>';
+            date_format($date,'d-m-Y H:i:s').'</td><td class="datos"><span><a  id="btn_consultar"  title="Consultar" href="detalle_pedido.php?id='.$row->id_pedido.'&estado='.$_REQUEST['estado'].'">Consultar
+            </a></span><span>| ';
+
+            if($_REQUEST['estado']==2){
+                echo '<a class="datos" id="btn_aprobart" href="presupuesto_pedidos.php?id_pedido='.$row->id_pedido.'" id_pedido="'.$row->id_pedido.'">Aprobar</a></span><span> | ';
+            }
+            if($_REQUEST['estado']==1){
+                echo '<a  href="#" class="btn_rechazart" id_pedido="'.$row->id_pedido.'">Rechazar</a> | ';
+            }
+            if($_REQUEST['estado']==0){
+                echo '<a class="datos" id="btn_aprobart" href="presupuesto_pedidos.php?id_pedido='.$row->id_pedido.'" id_pedido="'.$row->id_pedido.'">Aprobar</a></span><span> | ';
+                echo '<a  href="#" class="btn_rechazart" id_pedido="'.$row->id_pedido.'">Rechazar</a> | ';
+            }
+            if($row->nombre!=''){
+            echo   '<a class="datos" target="blank" href="img_cotizaciones/'.$row->nombre.'" id="btn_archivo" archivo="'.$row->nombre.'">Archivo</a></span></td></tr>';
+            }
+
+             
         }
         
         ?>

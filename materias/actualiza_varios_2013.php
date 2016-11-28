@@ -13,7 +13,7 @@ conectarm();
 
 
 $cont=0;
-$sql="select id, from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(calcio)>=6  order by fecha_creacion";
+$sql="select id,calcio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(calcio)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -22,9 +22,9 @@ while ($row=mysql_fetch_object($result)){
 
 	
 	$pos = strpos($row->calcio,'(');
-	$humedad=substr($row->calcio, 0, $pos);  // abcd
-	if($humedad<>''){
-		echo $sql="update tbl_minerales set calcio='".$humedad."' where id='".$row->id."'";
+	$calcio=substr($row->calcio, 0, $pos);  // abcd
+	if($calcio<>''){
+		echo $sql="update tbl_minerales set calcio='".$calcio."' where id='".$row->id."'";
 		mysql_query($sql);
 	}
 

@@ -33,7 +33,7 @@ if($total>0){
 
 
 
-//Consultar usuarios
+//Consultar proveedores
 if($_REQUEST['opcion']==2)
 {	
 	$result=mysql_query("select * from tbl_proveedores where nombre='".utf8_decode($_REQUEST['usuario'])."'");
@@ -89,6 +89,17 @@ if($_REQUEST['opcion']==5)
 
 }//end if opcion 6
 
+if($_REQUEST['opcion']==7)
+{	
+	$result=mysql_query("select * from tbl_proveedores where nombre='".utf8_decode($_REQUEST['proveedor'])."'");
+	$row=mysql_fetch_assoc($result);
+	if (mysql_num_rows($result)>=1){
+	echo utf8_encode($row['nombre'])."|".$row['cedula']."|".$row['correo']."|".$row['marcas']."|".$row['tel_cel']."|".$row['tel_fijo']."|".$row['fax']."|".$row['nota']."|".$row['contacto']."|".$row['estado'] ; 	}else{
+		echo "error";
+	}
+	
+	desconectarc();
+}//end if opcion 7
 
 
 	

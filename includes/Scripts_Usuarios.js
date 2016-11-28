@@ -599,6 +599,7 @@ function limpiar(){
 			$('#txt_usuario').attr('value','');
 			$('#txt_pass').attr('value','');
 			$('#txt_fecha').attr('value','');
+			$('#txt_correo').attr('value','');
 			$('#txt_usuario_buscar').attr('value','');						
 			$('#opcion').attr('value','1');
 			$(".ck:checkbox:checked").removeAttr("checked");

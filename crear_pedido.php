@@ -38,6 +38,7 @@ conectarc();
                             <tr>
                                 <td height="25" class="Arial14Morado">Nombre Solicitante</td>
                                 <td ><input id="txt_nombresoli" name="txt_nombresoli" value="<?=$_SESSION['nombre_usuario'];?>" disabled size="40"  class="inputbox" type="text" /></td>
+                                <input type="hidden" id="txt_correo" value="<?=$_SESSION['correo'];?>">
                             </tr>
                             <tr>
                                 <td height="25" class="Arial14Morado">Secci&oacute;n</td>
