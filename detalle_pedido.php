@@ -36,7 +36,7 @@ conectarc();
 
         //**************************************Reactivos******************************************/
         
-        $result=mysql_query("select * from tbl_reactivos where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_reactivos where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -61,15 +61,16 @@ conectarc();
                     }
                 }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         
 
 
         //**************************************Gases******************************************/
 
-        $result=mysql_query("select * from tbl_gases where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_gases where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -86,15 +87,22 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                        echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         //**************************************Cristaleria******************************************/
 
-        $result=mysql_query("select * from tbl_cristaleria where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_cristaleria where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -111,14 +119,21 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }        
         //**************************************Repuestos******************************************/
-        $result=mysql_query("select * from tbl_repuestos where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_repuestos where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -135,14 +150,21 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         //**************************************Equipos******************************************/
-        $result=mysql_query("select * from tbl_equipos where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_equipos where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -161,14 +183,21 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         //**************************************Materiales******************************************/
-        $result=mysql_query("select * from tbl_materiales where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_materiales where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -185,14 +214,21 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         //**************************************Calibraciones******************************************/
-        $result=mysql_query("select * from tbl_calibraciones where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_calibraciones where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -209,14 +245,21 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         //**************************************Reparaciones******************************************/
-        $result=mysql_query("select * from tbl_reparaciones where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_reparaciones where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -231,15 +274,22 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
 
         //**************************************Interlaboratoriales******************************************/
-        $result=mysql_query("select * from tbl_interlaboratoriales where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_interlaboratoriales where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -254,15 +304,22 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
+             echo '<div>-----------------------------------------------------------------------------</div>';
             }
-            echo '<div>-----------------------------------------------------------------------------</div>';
+           
         }
 
         //**************************************Medios******************************************/
-        $result=mysql_query("select * from tbl_medios where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_medios where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -279,15 +336,22 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara"     tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
 
         //**************************************Software******************************************/
-        $result=mysql_query("select * from tbl_software where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_software where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -302,14 +366,21 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->monto.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }        
         //**************************************Capacitaciones******************************************/
-        $result=mysql_query("select * from tbl_capacitaciones where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_capacitaciones where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -324,15 +395,22 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->costo.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+           
         }        
 
         //**************************************Inscripciones******************************************/
-        $result=mysql_query("select * from tbl_inscripciones where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_inscripciones where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -347,14 +425,21 @@ conectarc();
                 echo '<tr class="listado"><td class="td_items">'.$row->costo.'</td></tr>';
                 echo '<tr class="texto_subtitulo"><td>Otros</td></tr></tbody></table>';
                 echo '<table><tr class="listado"><td class="td_items">'.$row->otros.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         //**************************************Materiales refrenecia******************************************/
-        $result=mysql_query("select * from tbl_referencias where id_pedido='".$_REQUEST["id"]."'");
+        $result=mysql_query("select * from tbl_referencias where id_pedido='".$_REQUEST["id"]."' and estado<>3");
         $cont=0;
         if (mysql_num_rows($result)>0){
             while ($row=mysql_fetch_object($result)){
@@ -365,11 +450,18 @@ conectarc();
                 }
                 echo '<tr class="texto_subtitulo"><td>Tipo</td><td>Presentacion</td><td>Cotización</td><td>Proveedores</td></tr>';
                 echo '<tr class="listado"><td class="td_items" >'.$row->tipo.'</td><td class="td_items">'.$row->presentacion.'</td><td class="td_items">'.$row->cotizacion.'</td><td class="td_items">'.$row->proveedores.'</td></tr></table>';
-                echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Rechazar</a></span></tr></td></table>';
+                if($_REQUEST['estado']==1){
+                    echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
+                }else{
+                    if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
+                    echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                    }
+                }
                 $cont++;
-            }
             echo '<div>-----------------------------------------------------------------------------</div>';
+            }
+            
         }
         
         ?>

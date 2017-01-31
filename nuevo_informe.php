@@ -109,11 +109,19 @@ $pdf->Cell(45,10,'R-TE-18',0,0,'C');
 $pdf->SetFont('Arial','',8);
 $pdf->Ln(-5);
 $pdf->SetX(160);
-$pdf->Cell(40,5,'Versión: 05',1,0,C);
+if($row['id']>4609){
+	$pdf->Cell(40,5,'Versión: 06',1,0,C);
+}else{
+	$pdf->Cell(40,5,'Versión: 05',1,0,C);
+}
 $pdf->Ln(5);
 $pdf->Cell(185,5,'Fecha de Emisión:',0,0,'R');
 $pdf->Ln(5);
-$pdf->Cell(180,5,'10-11-2015',0,0,'R');
+if($row['id']>4609){
+	$pdf->Cell(180,5,'23-01-2017',0,0,'R');
+}else{
+	$pdf->Cell(180,5,'10-11-2015',0,0,'R');
+}
 $pdf->Ln(-5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(185,10,'INFORME DE ENSAYO',0,0,'C');
@@ -229,7 +237,7 @@ $pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
 
 $pdf->AddPage();
 $hoja=1;
-imprime_header($pdf,$acreditado,$hoja,$row['consecutivo']);
+imprime_header($pdf,$acreditado,$hoja,$row['consecutivo'],$row['id']);
 
 
 /*****************************************Busco los nombres de muestras e imprimo los resultados********************/
@@ -258,7 +266,7 @@ while($row2=mysql_fetch_object($result2)){
 		//$v_acreditados=array(); //vector para almacenar los metodos a imprimir en verde
 		$pdf->SetY($pdf->GetY()+5);
 		//calcula_salto($pdf,'new');
-		$hoja=calcula_salto($pdf,'new',$acreditado,$hoja,$row['consecutivo']);
+		$hoja=calcula_salto($pdf,'new',$acreditado,$hoja,$row['consecutivo'],$row['id']);
 		$muestra=$row2->id_muestra;				
 		$v_metodos[]='  ('.$cont.')'.$row2->metodo;
 		
@@ -273,7 +281,7 @@ while($row2=mysql_fetch_object($result2)){
 		
 		$cont++;		
 		$v_metodos[]='  ('.$cont.')'.$row2->metodo;
-		$hoja=calcula_salto($pdf,'old',$acreditado,$hoja,$row['consecutivo']);
+		$hoja=calcula_salto($pdf,'old',$acreditado,$hoja,$row['consecutivo'],$row['id']);
 		if($row2->nombre=="NIR"){
 			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont,$row2->observaciones_analista);		
 		}else{
@@ -328,14 +336,19 @@ $pdf->Cell(0,5,'Página '.$pdf->PageNo(),0,0,'R');
 
 $pdf->Output();
 
-function imprime_header($pdf,$acreditado,$hoja,$contrato){
+function imprime_header($pdf,$acreditado,$hoja,$contrato,$id_contrato){
 $pdf->SetFont('Arial','B',8);
 $pdf->Ln(10);
 $pdf->Cell(190,35,'',1,0,'C');
 $pdf->Ln(0);
 $pdf->Cell(190,10,'RESULTADOS DE LOS ENSAYOS',0,1,'C');
 if($acreditado==1){
-	$pdf->Image('img/acreditados.png',165,25,30);
+	$pdf->Cell(190,5,'id# '.$row['id'],0,1,'L');
+	if($id_contrato>4609){
+		$pdf->Image('img/acreditados.png',165,22,30);
+	}else{
+		$pdf->Image('img/acreditados_old.png',165,22,30);
+	}
 }
 $pdf->SetFont('Arial','',8);
 //$pdf->Cell(190,5,' ',0,1,'L');
@@ -497,17 +510,17 @@ function calcula_resultado($resultado,$incertidumbre,$base_fresca,$incertidumbre
 	return $r1." ".$r2;
 }//fin funcion calcula_resultados
 
-function calcula_salto($pdf,$new,$acreditado,$hoja,$contrato){
+function calcula_salto($pdf,$new,$acreditado,$hoja,$contrato,$id_contrato){
 
 	if($pdf->GetY()>=200&&$new=="new"){//si ya Y es mas de xxx y viene un analisis nuevo
 		$pdf->AddPage();
 		$hoja++;
-		imprime_header($pdf,$acreditado,$hoja,$contrato);
+		imprime_header($pdf,$acreditado,$hoja,$contrato,$id_contrato);
 
 	}elseif ($pdf->GetY()>=250) {
 		$pdf->AddPage();
 		$hoja++;
-		imprime_header($pdf,$acreditado,$hoja,$contrato);
+		imprime_header($pdf,$acreditado,$hoja,$contrato,$id_contrato);
 
 	}
 			return $hoja;
