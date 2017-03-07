@@ -13,7 +13,7 @@ conectarm();
 
 
 $cont=0;
-$sql="select id,calcio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(calcio)>=6  order by fecha_creacion";
+$sql="select id,calcio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(calcio)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -30,7 +30,7 @@ while ($row=mysql_fetch_object($result)){
 
 }//end while
 
-$sql="select id,calcio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and calcio like '%±%'  order by fecha_creacion";
+$sql="select id,calcio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and calcio like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -51,7 +51,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 $cont=0;
-$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(cobalto)>=6  order by fecha_creacion";
+$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(cobalto)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -65,7 +65,7 @@ while ($row=mysql_fetch_object($result)){
 }//end while
 
 $cont=0;
-$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(cobalto)>=6  order by fecha_creacion";
+$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(cobalto)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -79,7 +79,7 @@ while ($row=mysql_fetch_object($result)){
 }//end while
 
 $cont=0;
-$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(cobalto)>=6  order by fecha_creacion";
+$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(cobalto)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -92,7 +92,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 }//end while
 
-$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and cobalto like '%±%'  order by fecha_creacion";
+$sql="select id,cobalto from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and cobalto like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -109,7 +109,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados cobre*******************************/
 /**********************************Actualizo los resultados cobre*******************************/
 $cont=0;
-$sql="select id,cobre from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(cobre)>=6  order by fecha_creacion";
+$sql="select id,cobre from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(cobre)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -123,7 +123,7 @@ while ($row=mysql_fetch_object($result)){
 }//end while
 
 $cont=0;
-$sql="select id,cobre from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(cobre)>=6  order by fecha_creacion";
+$sql="select id,cobre from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(cobre)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -137,7 +137,7 @@ while ($row=mysql_fetch_object($result)){
 }//end while
 
 $cont=0;
-$sql="select id,cobre from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(cobre)>=6  order by fecha_creacion";
+$sql="select id,cobre from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(cobre)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -150,7 +150,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 }//end while
 
-$sql="select id,cobre from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and cobre like '%±%'  order by fecha_creacion";
+$sql="select id,cobre from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and cobre like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -170,7 +170,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 $cont=0;
-$sql="select id,materia_seca from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(materia_seca)>=6  order by fecha_creacion";
+$sql="select id,materia_seca from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(materia_seca)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -181,7 +181,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,materia_seca from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and materia_seca like '%(%'  order by fecha_creacion";
+$sql="select id,materia_seca from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and materia_seca like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -193,7 +193,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 }//end while
 
-$sql="select id,materia_seca from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and materia_seca like '%±%'  order by fecha_creacion";
+$sql="select id,materia_seca from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and materia_seca like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -212,7 +212,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 $cont=0;
-$sql="select id,fosforo from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(fosforo)>=6  order by fecha_creacion";
+$sql="select id,fosforo from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(fosforo)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -220,7 +220,7 @@ while ($row=mysql_fetch_object($result)){
 	echo $sql="update tbl_minerales set fosforo=SUBSTRING('".$row->fosforo."',1,5) where id='".$row->id."'";
 	mysql_query($sql);
 }//end while
-$sql="select id,fosforo from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20150101' and fosforo like '%(%'  order by fecha_creacion";
+$sql="select id,fosforo from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20160101' and fosforo like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
@@ -237,7 +237,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados hierro*******************************/
 /**********************************Actualizo los resultados hierro*******************************/
 $cont=0;
-$sql="select id,hierro from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(hierro)>=6  order by fecha_creacion";
+$sql="select id,hierro from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(hierro)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -248,7 +248,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,hierro from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and hierro like '%(%'  order by fecha_creacion";
+$sql="select id,hierro from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and hierro like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -262,7 +262,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,hierro from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and hierro like '%±%'  order by fecha_creacion";
+$sql="select id,hierro from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and hierro like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -279,7 +279,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados magnesio*******************************/
 /**********************************Actualizo los resultados magnesio*******************************/
 $cont=0;
-$sql="select id,magnesio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(magnesio)>=6  order by fecha_creacion";
+$sql="select id,magnesio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(magnesio)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -290,7 +290,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,magnesio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and magnesio like '%(%'  order by fecha_creacion";
+$sql="select id,magnesio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and magnesio like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -304,7 +304,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,magnesio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and magnesio like '%±%'  order by fecha_creacion";
+$sql="select id,magnesio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and magnesio like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -321,7 +321,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados manganeso*******************************/
 /**********************************Actualizo los resultados manganeso*******************************/
 $cont=0;
-$sql="select id,manganeso from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(manganeso)>=6  order by fecha_creacion";
+$sql="select id,manganeso from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(manganeso)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -332,7 +332,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,manganeso from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and manganeso like '%(%'  order by fecha_creacion";
+$sql="select id,manganeso from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and manganeso like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -346,7 +346,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,manganeso from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and manganeso like '%±%'  order by fecha_creacion";
+$sql="select id,manganeso from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and manganeso like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -363,7 +363,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados molibdeno*******************************/
 /**********************************Actualizo los resultados molibdeno*******************************/
 $cont=0;
-$sql="select id,molibdeno from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(molibdeno)>=6  order by fecha_creacion";
+$sql="select id,molibdeno from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(molibdeno)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -374,7 +374,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,molibdeno from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and molibdeno like '%(%'  order by fecha_creacion";
+$sql="select id,molibdeno from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and molibdeno like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -388,7 +388,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,molibdeno from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and molibdeno like '%±%'  order by fecha_creacion";
+$sql="select id,molibdeno from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and molibdeno like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -406,7 +406,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados ph*******************************/
 /**********************************Actualizo los resultados ph*******************************/
 $cont=0;
-$sql="select id,ph from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(ph)>=6  order by fecha_creacion";
+$sql="select id,ph from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(ph)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -417,7 +417,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,ph from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and ph like '%(%'  order by fecha_creacion";
+$sql="select id,ph from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and ph like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -431,7 +431,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,ph from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and ph like '%±%'  order by fecha_creacion";
+$sql="select id,ph from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and ph like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -449,7 +449,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados potasio*******************************/
 /**********************************Actualizo los resultados potasio*******************************/
 $cont=0;
-$sql="select id,potasio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(potasio)>=6  order by fecha_creacion";
+$sql="select id,potasio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(potasio)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -460,7 +460,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,potasio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and potasio like '%(%'  order by fecha_creacion";
+$sql="select id,potasio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and potasio like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -474,7 +474,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,potasio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and potasio like '%±%'  order by fecha_creacion";
+$sql="select id,potasio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and potasio like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -490,7 +490,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados sodio*******************************/
 /**********************************Actualizo los resultados sodio*******************************/
 $cont=0;
-$sql="select id,sodio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(sodio)>=6  order by fecha_creacion";
+$sql="select id,sodio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(sodio)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -501,7 +501,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,sodio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and sodio like '%(%'  order by fecha_creacion";
+$sql="select id,sodio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and sodio like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -515,7 +515,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,sodio from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and sodio like '%±%'  order by fecha_creacion";
+$sql="select id,sodio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and sodio like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -532,7 +532,7 @@ while ($row=mysql_fetch_object($result)){
 /**********************************Actualizo los resultados zinc*******************************/
 /**********************************Actualizo los resultados zinc*******************************/
 $cont=0;
-$sql="select id,zinc from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and LENGTH(zinc)>=6  order by fecha_creacion";
+$sql="select id,zinc from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and LENGTH(zinc)>=6  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -543,7 +543,7 @@ while ($row=mysql_fetch_object($result)){
 		mysql_query($sql);
 	}
 }//end while
-$sql="select id,zinc from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and zinc like '%(%'  order by fecha_creacion";
+$sql="select id,zinc from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and zinc like '%(%'  order by fecha_creacion";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	$cont++;
@@ -557,7 +557,7 @@ while ($row=mysql_fetch_object($result)){
 
 
 
-$sql="select id,zinc from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' and zinc like '%±%'  order by fecha_creacion";
+$sql="select id,zinc from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and zinc like '%±%'  order by fecha_creacion";
 $sql=utf8_decode($sql);
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
@@ -589,7 +589,7 @@ molibdeno='' and
 ph='' and
 sodio='' and
 materia_seca='' and
- fecha_creacion >='".'20150101'."'";
+ fecha_creacion >='".'20160101'."'";
  mysql_query($sql);
 
 
@@ -598,7 +598,7 @@ materia_seca='' and
 /**********************************Actualizo los numeros de registros*******************************/
 
 $cont=0;
-$sql="select id,consecutivo_contrato from tbl_minerales where fecha_creacion>='20150101' and fecha_creacion<'20160101' order by fecha_creacion";
+$sql="select id,consecutivo_contrato from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' order by fecha_creacion";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){

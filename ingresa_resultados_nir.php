@@ -52,7 +52,14 @@ $("#btn_guardar").live("click", function(event){
         type: "POST",
 		async: false,
         url: "operaciones/opr_analisis.php",		
-        data: "opcion=19&id="+$('#id').val()+"&metodo="+$('#cmb_metodo').val()+"&rcenizas="+$('#txt_cenizas').val()+"&sepcenizas="+$('#txt_sepcenizas').val()+"&rfibra="+$('#txt_fibra').val()+"&sepfibra="+$('#txt_sepfibra').val()+"&rproteina="+$('#txt_proteina').val()+"&sepproteina="+$('#txt_sepproteina').val()+"&rextracto="+$('#txt_extracto').val()+"&sepextracto="+$('#txt_sepextracto').val()+"&rhumedad="+$('#txt_humedad').val()+"&sephumedad="+$('#txt_sephumedad').val()+"&observaciones_analista="+$('#txt_observaciones_analista').val()+"&laboratorio="+$('#laboratorio').val()+"&rechazado="+$('#rechazado').val(),
+        data: "opcion=19&id="+$('#id').val()+"&metodo="+$('#cmb_metodo').val()+"&rcenizas="+$('#txt_cenizas').val()+"&sepcenizas="+$('#txt_sepcenizas').val()+"&rfibra="+$('#txt_fibra').val()+"&sepfibra="+$('#txt_sepfibra').val()+"&rproteina="+$('#txt_proteina').val()+"&sepproteina="+$('#txt_sepproteina').val()+"&rextracto="+$('#txt_extracto').val()+"&sepextracto="+$('#txt_sepextracto').val()+"&rhumedad="+$('#txt_humedad').val()+"&sephumedad="+$('#txt_sephumedad').val()+
+            "&rfad="+$('#txt_fad').val()+"&sepfad="+$('#txt_sepfad').val()+
+            "&rbruta="+$('#txt_ebruta').val()+
+            "&remaves="+$('#txt_emaves').val()+"&rtndvcs="+$('#txt_tndvcs').val()+
+            "&redvcs="+$('#txt_edvcs').val()+"&remvcs="+$('#txt_emvcs').val()+
+            "&rtndcrds="+$('#txt_tndcrds').val()+"&redcrds="+$('#txt_edcrds').val()+
+            "&remcrds="+$('#txt_emcrds').val()+
+        "&observaciones_analista="+$('#txt_observaciones_analista').val()+"&laboratorio="+$('#laboratorio').val()+"&rechazado="+$('#rechazado').val(),
         success: function(datos){
 			
 		}//end succces function
@@ -96,7 +103,7 @@ $("#btn_cancelar").live("click", function(event){
 <div class="cen_sup_g"><div  class="Arial14blanco" align="left" style="float:left; margin-top:18px;">Ingresa Resultados</div></div>
 <div class="der_sup_g"></div>
 <div class="lineaAzul"></div>
-<div class="izq_lat_g" style="height:1000px;"></div>
+<div class="izq_lat_g" style="height:1600px;"></div>
 <div    class="contenido_gm">
 <?
 require_once('menu_superior.php');
@@ -221,6 +228,96 @@ mysql_free_result($result2);
             <td></td>
         </tr>
         <tr>
+            <td><div class="Arial14Morado">FAD:</div></td>
+            <td><textarea class="textArea" id="txt_fad" cols="35" rows="1"><? echo utf8_encode($resultado[5]);?></textarea></td>
+            <td><textarea class="textArea" id="txt_sepfad" cols="35" rows="1"><? echo utf8_encode($sep[4]);?></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">E. Bruta:</div></td>
+            <td><textarea class="textArea" id="txt_ebruta" cols="35" rows="1"><? echo utf8_encode($resultado[6]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">EM aves:</div></td>
+            <td><textarea class="textArea" id="txt_emaves" cols="35" rows="1"><? echo utf8_encode($resultado[7]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">TND vcs:</div></td>
+            <td><textarea class="textArea" id="txt_tndvcs" cols="35" rows="1"><? echo utf8_encode($resultado[8]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">ED vcs:</div></td>
+            <td><textarea class="textArea" id="txt_edvcs" cols="35" rows="1"><? echo utf8_encode($resultado[9]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">EM vcs:</div></td>
+            <td><textarea class="textArea" id="txt_emvcs" cols="35" rows="1"><? echo utf8_encode($resultado[10]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">TND crds:</div></td>
+            <td><textarea class="textArea" id="txt_tndcrds" cols="35" rows="1"><? echo utf8_encode($resultado[11]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">ED crds:</div></td>
+            <td><textarea class="textArea" id="txt_edcrds" cols="35" rows="1"><? echo utf8_encode($resultado[12]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">EM crds:</div></td>
+            <td><textarea class="textArea" id="txt_emcrds" cols="35" rows="1"><? echo utf8_encode($resultado[13]);?></textarea></td>
+           <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
         	<td><div class="Arial14Morado">Observaciones:</div></td>
             <td><textarea class="textArea" id="txt_observaciones_analista" cols="35" rows="4"></textarea></td>        
         </tr> 
@@ -241,7 +338,7 @@ mysql_free_result($result2);
 
 
 </div><!--fin div de contenido cudro gm-->
-<div class="der_lat_g" style="height:1000px;"></div>
+<div class="der_lat_g" style="height:1600px;"></div>
 <div class="izq_inf_g"></div>
 <div class="cen_inf_g"></div>
 <div class="der_inf_g"></div>

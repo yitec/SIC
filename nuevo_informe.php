@@ -396,10 +396,10 @@ function imprime_resultados($pdf,$fecha,$laboratorio,$analisis,$resultado,$incer
 function imprime_nir($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido,$acreditado,$cont,$observaciones){
 	$resultado=explode('|',$resultado);
     $sep=explode('|',$incertidumbre);
-    $analisis='Cenizas,Fibra Cruda,Proteina Cruda,Extracto Etéreo,Humedad';
+    $analisis='Cenizas,Fibra Cruda,Proteina Cruda,Extracto Etéreo,Humedad,FAD,E. Bruta,EM aves,TND vcs,ED vcs,EM vcs,TND crds,ED crds,EM crds';
     $ana=explode(',',$analisis);
     
-		for ($i = 0; $i <= 4; $i++){
+		for ($i = 0; $i <= 13; $i++){
 			if(strtoupper($resultado[$i])=='NO PREDECIBLE'){
 				$obs=true;
 			}else{
@@ -408,7 +408,13 @@ function imprime_nir($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbr
 				$pdf->Cell(20,5,nombre_laboratorio($laboratorio),1,0,'L');
 				$pdf->Cell(65,5,$ana[$i]." (".$cont.")",1,0,'L');
 				$pdf->SetTextColor(0,0,0);
-				$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+				if($i<5){
+					$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+				}elseif($i==5){
+					$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+				}else{
+					$pdf->Cell(68,5,$resultado[$i].' Mcal/kg',1,1,'L');
+				}
 			}
 		}
 	if($obs==true){

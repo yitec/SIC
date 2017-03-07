@@ -150,7 +150,7 @@ $("#btn_rechazar").live("click", function(event){
 <div class="cen_sup_g"><div  class="Arial14blanco" align="left" style="float:left; margin-top:18px;">Resultados</div></div>
 <div class="der_sup_g"></div>
 <div class="lineaAzul"></div>
-<div class="izq_lat_g" style="height:1200px;"></div>
+<div class="izq_lat_g" style="height:1600px;"></div>
 <div    class="contenido_gm">
 <?
 require_once('menu_superior.php');
@@ -254,6 +254,96 @@ $row=mysql_fetch_assoc($result);
             <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
             <td></td>
         </tr>
+         <tr>
+            <td><div class="Arial14Morado">FAD:</div></td>
+            <td><textarea class="textArea" id="txt_fad" cols="35" rows="1"><? echo utf8_encode($resultado[5]);?></textarea></td>
+            <td><textarea class="textArea" id="txt_sepfad" cols="35" rows="1"><? echo utf8_encode($sep[5]);?></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td><div class="Arial14Morado">E. Bruta:</div></td>
+            <td><textarea class="textArea" id="txt_ebruta" cols="35" rows="1"><? echo utf8_encode($resultado[6]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">EM aves:</div></td>
+            <td><textarea class="textArea" id="txt_emaves" cols="35" rows="1"><? echo utf8_encode($resultado[7]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">TND vcs:</div></td>
+            <td><textarea class="textArea" id="txt_tndvcs" cols="35" rows="1"><? echo utf8_encode($resultado[8]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">ED vcs:</div></td>
+            <td><textarea class="textArea" id="txt_edvcs" cols="35" rows="1"><? echo utf8_encode($resultado[9]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">EM vcs:</div></td>
+            <td><textarea class="textArea" id="txt_emvcs" cols="35" rows="1"><? echo utf8_encode($resultado[10]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">TND crds:</div></td>
+            <td><textarea class="textArea" id="txt_tndcrds" cols="35" rows="1"><? echo utf8_encode($resultado[11]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">ED crds:</div></td>
+            <td><textarea class="textArea" id="txt_edcrds" cols="35" rows="1"><? echo utf8_encode($resultado[12]);?></textarea></td>
+            <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="Arial14Morado">EM crds:</div></td>
+            <td><textarea class="textArea" id="txt_emcrds" cols="35" rows="1"><? echo utf8_encode($resultado[13]);?></textarea></td>
+           <td><label class="Arial14Morado">Los valores de energía son estimaciones a partir del análisis proximal</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>µ&nbsp;°&nbsp;±&nbsp;%</td>
+            <td></td>
+        </tr>
         <tr>
             <td><div class="Arial14Morado">Observaciones:</div></td>
             <td><textarea class="textArea" id="txt_observaciones_analista" cols="35" rows="4"></textarea></td>        
@@ -275,7 +365,7 @@ $row=mysql_fetch_assoc($result);
 </div><!--fin cuadro gris--> 
 </div><!--fin cuadro Azul--> 
 </div><!--fin div de contenido cudro gm-->
-<div class="der_lat_g" style="height:1200px;"></div>
+<div class="der_lat_g" style="height:1600px;"></div>
 <div class="izq_inf_g"></div>
 <div class="cen_inf_g"></div>
 <div class="der_inf_g"></div>

@@ -340,8 +340,8 @@ if($_REQUEST['opcion']==19)
 		$metodo=$_REQUEST['metodo'];
 	}
 	//meto todos los resultados y el sep en un solo string
-	echo $resultado=$_REQUEST['rcenizas']."|".$_REQUEST['rfibra']."|".$_REQUEST['rproteina']."|".$_REQUEST['rextracto']."|".$_REQUEST['rhumedad'];
-	echo $sep=$_REQUEST['sepcenizas']."|".$_REQUEST['sepfibra']."|".$_REQUEST['sepproteina']."|".$_REQUEST['sepextracto']."|".$_REQUEST['sephumedad'];
+	echo $resultado=$_REQUEST['rcenizas']."|".$_REQUEST['rfibra']."|".$_REQUEST['rproteina']."|".$_REQUEST['rextracto']."|".$_REQUEST['rhumedad']."|".$_REQUEST['rfad']."|".$_REQUEST['rbruta']."|".$_REQUEST['remaves']."|".$_REQUEST['rtndvcs']."|".$_REQUEST['redvcs']."|".$_REQUEST['remvcs']."|".$_REQUEST['rtndcrds']."|".$_REQUEST['redcrds']."|".$_REQUEST['remcrds'];
+	echo $sep=$_REQUEST['sepcenizas']."|".$_REQUEST['sepfibra']."|".$_REQUEST['sepproteina']."|".$_REQUEST['sepextracto']."|".$_REQUEST['sephumedad']."|".$_REQUEST['sepfad'];
 		if($_REQUEST['rechazado']==1){
 			$result=mysql_query("update tbl_resultados set resultado='".utf8_decode($resultado)."', incertidumbre='".utf8_decode($sep)."',unidades='".utf8_decode($_REQUEST['unidades'])."',estado='"."0"."' where id_analisis='".$_REQUEST['id']."' ");
 		}else{

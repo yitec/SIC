@@ -3,6 +3,8 @@ Actualizar proximal
 1-Correr busca_minerales.php para sacar todos los analisis del año a los que se les
 hizo proximal. recordar modificar las fechas en el php
 
+Recordar cambiar el año en la linea 170 con el numero del año que es
+
 2-Eliminar todas las muestras que sean pastos y minerales.
 
 delete from `tbl_mine2013`  where nombre_producto  like '%pasto%';
@@ -16,7 +18,7 @@ delete from `tbl_mine2013`  where nombre_producto  like '%forraje%';
 
 insert into tbl_minerales (consecutivo_contrato,id_muestra,cifra1,cifra2,cifra3,cifra4,cifra5,cifra6,cifra7,cifra8,cifra9,cifra10,fecha_creacion,nombre)
 select consecutivo_contrato,id_muestra,tipo_muestreo,'0','45','2',codigo,'0','0','0','0',year,fecha_ingreso,nombre
-from tbl_mine2013
+from tbl_mine2013 where codigo is not null
 
 5-Correr actualiza_resultados2013.php para actualizar los valores de cada resultado
 del le la tabla de minerales.

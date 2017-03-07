@@ -5,7 +5,7 @@ include('../cnx/conexion_materias.php');
 conectarm();
 
 
-$sql="select id,tipo_muestra,nombre_muestra,nombre_producto from tbl_mine2015";
+$sql="select id,tipo_muestra,nombre_muestra,nombre_producto from tbl_mine2016";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 	
@@ -21,7 +21,7 @@ while ($row=mysql_fetch_object($result)){
 		
 		echo"<br>1";
 		echo"<br>";
-		echo $sql3="update tbl_mine2015 set codigo='".$row2->codigo."', nombre='".$row2->nombre."' where id='".$row->id."'";
+		echo $sql3="update tbl_mine2016 set codigo='".$row2->codigo."', nombre='".$row2->nombre."' where id='".$row->id."'";
 		mysql_query($sql3);
 	}
 
@@ -35,7 +35,8 @@ echo '*********************************************tabla de codigos adicionales*
 
 
 
-$sql="select id,tipo_muestra,nombre_muestra,nombre_producto from tbl_mine2015";
+/*DEsactivado temporalmente ya que ya existen esos codigos
+$sql="select id,tipo_muestra,nombre_muestra,nombre_producto from tbl_mine2013";
 $result=mysql_query($sql);
 while ($row=mysql_fetch_object($result)){
 		$sql2="select codigo,nombre_muestra from tbl_codigos_minerales_adicionales where tipo_muestra like '%".$row->tipo_muestra."%' or nombre_muestra like '%".$row->nombre_muestra."%' or nombre_producto like '%".$row->nombre_producto."%'" ;
@@ -45,12 +46,12 @@ while ($row=mysql_fetch_object($result)){
 			$row2=mysql_fetch_object($result2);
 			echo"<br>2";
 			echo"<br>";
-			echo $sql3="update tbl_mine2015 set codigo='".$row2->codigo."', nombre='".strTOUPPER($row->tipo_muestra)."' where id='".$row->id."'";
+			echo $sql3="update tbl_mine2013 set codigo='".$row2->codigo."', nombre='".strTOUPPER($row->tipo_muestra)."' where id='".$row->id."'";
 		mysql_query($sql3);
 		}
 		
 }
-
+*/
 
 
 ?>

@@ -57,7 +57,7 @@ conectarc();
                 echo '<table><tr><td><span><span><a  target="_blank" href="mantenimiento_proveedores.php?search=1&proveedor='.$row->proveedores.'" tabla="tbl_reactivos" proveedor="'.$row->proveedores.'">Calificar Proveedor</a></span></td></tr></table>';
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
-                    echo '<table><tr><td><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></td></tr></table>';
+                    echo '<table><tr><td><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></td></tr></table>';
                     }
                 }
                 $cont++;
@@ -92,7 +92,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                         echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_gases" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -124,7 +124,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Eliminar</a>| <a class="parciala" href="#" id="btn_parciala" tabla="tbl_cristaleria" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -155,7 +155,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_repuestos" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -188,7 +188,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_equipos" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -219,7 +219,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_materiales" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -250,7 +250,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_calibraciones" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -279,7 +279,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_reparaciones" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -309,7 +309,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_interlaboratoriales" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -341,7 +341,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara"     tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_medios" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -371,7 +371,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_software" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -400,7 +400,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_capacitaciones" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -430,7 +430,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_inscripciones" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;
@@ -455,7 +455,7 @@ conectarc();
                 }else{
                     if ($tot_art!=1){//si el pedido solo tiene un articulo  no se muestran los botones
                     echo '<table><tr><td><span><span><a class="aprobara" href="#" id="btn_aprobara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Aprobar</a></span><span> | 
-                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_reactivos" id_articulo="'.$row->id_articulo.'">Eliminar</a></span></tr></td></table>';
+                        <a class="rechazara" href="#" id="btn_rechazara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Rechazar</a> | <a class="eliminara" href="#" id="btn_eliminara" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Eliminar</a> | <a class="parciala" href="#" id="btn_parciala" tabla="tbl_referencias" id_articulo="'.$row->id_articulo.'">Aprobaci&oacute;n Parcial </a></span></tr></td></table>';
                     }
                 }
                 $cont++;

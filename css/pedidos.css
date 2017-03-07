@@ -186,6 +186,28 @@ a:hover
   margin-right: 10px;
 
 }
+.mininputbox{
+  background:#FFF;
+  font-size: 15px;
+  color: #000;
+  border: 1px solid #DBDBDB;
+  height: 25px;
+  padding:2px;
+  -webkit-border-radius: 4px; -moz-border-radius: 4px;
+  margin-right: 10px;
+  width: 30px;
+}
+.midinputbox{
+  background:#FFF;
+  font-size: 10px;
+  color: #000;
+  border: 1px solid #DBDBDB;
+  height: 25px;
+  padding:2px;
+  -webkit-border-radius: 4px; -moz-border-radius: 4px;
+  margin-right: 5px;
+  width: 40px;
+}
 .input25{
   width: 226px;
 }
@@ -413,8 +435,13 @@ a:link {
   font-weight: bold;
   text-align: left; 
   padding: 2px;
+}
 
-
+.small_text{
+  font-size:10px;
+  font-family:arial;
+  text-align: left; 
+  padding: 2px;
 }
 
 .row_reset{

@@ -14,6 +14,11 @@ conectarc();
         <link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="css/normalize_dropdown.css">
+        <link rel="stylesheet" href="css/stylesheet_dropdown.css">
+        <script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
+        <script src="includes/selectize_dropdown.js"></script>
+        <script src="includes/index_dropdown.js"></script>
         <title>SIC-CINA</title>
     </head>
     <body >
@@ -46,6 +51,8 @@ conectarc();
                                 <option selected="selected">Qu&iacute;mica</option>
                                 <option >Microbiolog&iacute;a</option>
                                 <option >Bromatolog&iacute;a</option>
+                                <option >UGC</option>
+                                <option >Administraco&oacute;n</option>
                                 </select></td>
                             </tr>                                    
                             <tr>
@@ -53,7 +60,7 @@ conectarc();
                                 <td><textarea maxlength="200" rows="4" cols="40" name="txt_justificacion" id="txt_justificacion" ></textarea></td>
                             </tr>
                         </table>
-                        <table>
+                        <!--<table>
                             <tr>
                                 <td height="25" class="Arial14Morado">Bien existente en catálogo GECO</td>
                                 <td>&nbsp;&nbsp;<form id="form_radio"><span class="Arial14Negro">S&iacute;</span><input type="radio" value="1" id="rnd_geco" name="rnd_geco" ><span class="Arial14Negro">No</span><input type="radio" value="0" id="rnd_geco" name="rnd_geco" ></form></td>
@@ -62,18 +69,17 @@ conectarc();
                         <div id="geco">
                             <label  class="Arial14Morado">C&oacute;digo de agrupaci&oacute;n&nbsp;</label><input id="txt_cagrup" name="txt_cagrup"  size="10"  class="inputbox" type="text" />
                             <label  class="Arial14Morado">C&oacute;digo de Articulo &nbsp;</label><input id="txt_carti" name="txt_carti"  size="10"  class="inputbox" type="text" />
-                        </div>
-                        <br>
-                        <div id="generico"></div>                        
+                        </div>-->
+                        
+                        <div id="generico"></div>  
+                                              
                         <div id="productos_dinamicos"><!--Dentro de este div se cargan todos los articulos -->                                            
                         </div><!--Dentro de este div se cargan todos los articulos -->                                            
                         <br />
                         <div><br /></div>
                         <div><br /></div>
-                        <div><br /></div>
-                        <div><br /></div>
-                        <div><br /></div>
-                        
+                       
+                        <br><br>
                         <div  id="agregar" align="center"><input  id="btn_agregar"  type="image"  src="img/agregar.png" /></div>                        
                         <br>
                         <div align="center" class="Arial14Morado"><a id="ver" href="cotizacion_upload.php">Subir archivo<img src="img/add_icon.png" width="25" height="25"  /></a></div>
@@ -95,10 +101,11 @@ conectarc();
   </div> 
             <div class="modal"></div>	
     </body>
-<script src="includes/jquery-1.8.3.js" type="text/javascript"></script>
+
 <script src="includes/ui/jquery-ui.js"></script>
 <script src="includes/jquery.pnotify.js" type="text/javascript"></script> 
 <script src="includes/Scripts_Pedidos.js" type="text/javascript"></script> 
 <script type="text/javascript" src="includes/jquery.fancybox-1.3.4.pack.js"></script>
+
 </html>
 

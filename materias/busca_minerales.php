@@ -17,7 +17,7 @@ join tbl_categoriasanalisis cat
 ON cat.id=ana.id_analisis
 join tbl_infmuestras inf
 on mues.id_contrato=inf.cons_contrato
-where mues.fecha_ingreso>='20130101' and mues.fecha_ingreso<='20140101' 
+where mues.fecha_ingreso>='20160101' and mues.fecha_ingreso<='20170101' 
 and cat.nombre in (".utf8_decode($mine).") and metodo not like 'no se realiza%'
 group by mues.id order by mues.id_contrato";
 $result=mysql_query($sql);
@@ -167,9 +167,9 @@ and ana.id_contrato='".$id."'";
 		$clase_alimento=busca_clase_alimento($id,$numero_muestra);
 		$procedencia=busca_region($procedencia);
 
-		echo $sql3="insert into bd_materiasprimas.tbl_mine2013 (consecutivo_contrato,numero_muestra,tipo_muestreo,nombre_muestra,clase_alimento,tipo_alimento,zona_geografica,year,fecha_ingreso,id_muestra,tipo_muestra,nombre_producto)
+		echo $sql3="insert into bd_materiasprimas.tbl_mine2016 (consecutivo_contrato,numero_muestra,tipo_muestreo,nombre_muestra,clase_alimento,tipo_alimento,zona_geografica,year,fecha_ingreso,id_muestra,tipo_muestra,nombre_producto)
 		values
-		('$id','$numero_muestra','$tipo_muestreo','$nombre_muestra','$clase_alimento',2,'$procedencia',29,'$fecha_ingreso','$id_muestra','$tipo_muestra','$nombre_producto')
+		('$id','$numero_muestra','$tipo_muestreo','$nombre_muestra','$clase_alimento',2,'$procedencia',32,'$fecha_ingreso','$id_muestra','$tipo_muestra','$nombre_producto')
 		";
 		$resultado=mysql_query($sql3);
 		if (!$resulto) {//si da error que me despliegue el error del query

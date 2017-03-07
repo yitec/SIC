@@ -69,6 +69,7 @@ $('#productos_dinamicos').on('change', '.combos', function() {
   opcion=$("#cmb_compra_"+numero).val();    
   $("#detalle_"+numero).html('');
   agrega_inputs(numero,opcion);
+  ini_prov(); 
 });
 
 $("#cmb_presupuesto").change(function(event){
@@ -654,7 +655,27 @@ function getform(nproductos,opcion){
   if (parseInt(opcion)==1){
     html=
  '<div id="reactivos_'+nproductos+'">'
-+'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
++'<div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div>'
++'<div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br>'
++'<div align="left" class="Arial14Morado subtitulosl fl">Plazo de entrega</div>'
++'<div>'
+  +'<span class="small_text">D&iacute;as</span><input  id="txt_dias_'+nproductos+'" value="" class="mininputbox"  type="text" />'
+  +'<span class="small_text">Semanas</span><input  id="txt_semanas_'+nproductos+'" value="" class="mininputbox"  type="text" />'
+  +'<span class="small_text">Meses</span><input  id="txt_meses_'+nproductos+'" value="" class="mininputbox"  type="text" />'
++'</div><br>'
++'<div align="left" class="Arial14Morado subtitulosl fl">Existente en GECO</div>'
++'<div>'
+  +'<span class="small_text">C&oacute;digo de Agrupaci&oacute;n</span><input  id="txt_codagrup_'+nproductos+'" value="" class="midinputbox"  type="text" />'
+  +'<span class="small_text">C&oacute;digo de Articulo</span><input  id="txt_codart_'+nproductos+'" value="" class="midinputbox"  type="text" />'
++'</div><br>'
++'<div align="left" class="Arial14Morado subtitulosl fl">Proveedores</div>'
++'<div>'
++'<select type="text" id="input-tags2" multiple class="demo-default">'
++'<option>Gollo</option>'
++'<option>Verdugo</option>'
++'<option>Casa Blanca</option>'
++'</select>'
++'</div><br>'
 +'<div class="Arial14Morado subtitulosl fl">Nombre</div>'
 +'<div class="Arial14Morado subtitulosl fl">Pureza</div>'
 +'<div class="Arial14Morado subtitulosl fl">Grado</div><br>'
@@ -682,33 +703,32 @@ function getform(nproductos,opcion){
 +'</div>'
 
 +'<div class="Arial14Morado subtitulosl fl">Similar # catálogo</div>'
-+'<div class="Arial14Morado subtitulosl fl">Plazo de entrega</div>'
++'<div class="Arial14Morado subtitulosl fl"># Cotizaci&oacute;n</div>'
 +'<div class="Arial14Morado subtitulosl fl">Otros detalles</div><br>'
 +'<div  class=" fl input25">'
   +'<input  id="txt_similarcre_'+nproductos+'"    value="" class="inputbox"  type="text" />'
 +'</div>'
-+'<div  class="fl input25">'
-  +'<input  id="txt_plazore_'+nproductos+'"    value="" class="inputbox"  type="text" />'
++'<div  class=" fl input25">'
+  +'<input  id="txt_cotizacionre_'+nproductos+'"    value="" class="inputbox"  type="text" />'
 +'</div>'
 +'<div  class=" fl input25">'
   +'<input  id="txt_otrosre_'+nproductos+'"    value="" class="inputbox"  type="text" />'
 +'</div>'
 
-+'<div class="Arial14Morado subtitulosl fl">Proveedores a invitar</div>'
-+'<div class="Arial14Morado subtitulosl fl"># cotización</div>'
-+'<div class="Arial14Morado subtitulosl fl">Monto</div><br>'
-+'<div  class=" fl input25">'
-  +'<input  id="txt_proveedoresre_'+nproductos+'"    value="" class="inputbox"  type="text" />'
-+'</div>'
-+'<div  class="fl input25">'
-  +'<input  id="txt_cotizacionre_'+nproductos+'"    value="" class="inputbox"  type="text" />'
-+'</div>'
-+'<div  class=" fl input25">'
-  +'<input  id="txt_montore_'+nproductos+'"    value="" class="inputbox"  type="text" />'
-+'</div>'
 
+
++'<div class="Arial14Morado subtitulosl fl">Monto</div><br>'
++'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
++'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
+
++'<div  class=" fl input25">'
++'<span class="small_text">Colones</span><input  id="txt_colones_'+nproductos+'" value="" class="midinputbox"  type="text" />'
++'<span class="small_text">Dolares</span><input  id="txt_dolares_'+nproductos+'" value="" class="midinputbox"  type="text" />'
 +'</div>'
-+'<div>&nbsp;&nbsp;</div>';      
++'<div  class=" fl input25">&nbsp;</div>'
++'<div  class=" fl input25">&nbsp;</div>'
+  
++'</div><br><br><br>'
 
   }
 
@@ -1342,13 +1362,23 @@ if (parseInt(opcion)==13){
 
     +'</div>'
     +'<div>&nbsp;&nbsp;</div>';      
-  }  
+  } 
+  
 
   return html;
 }//end function
 
 
 
+
+
+function ini_prov(){
+  $('#input-tags2').selectize({
+          persist: false,
+          createOnBlur: true,
+          create: true
+});
+}
 
 function notificacion(titulo,cuerpo,tipo){
   $.pnotify({

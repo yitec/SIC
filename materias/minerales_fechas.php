@@ -180,7 +180,7 @@ if (validado==true){
 <option selected="selected" value="0">Todas</option>
 <? 
 //$result=mysql_query("select cifra5,LTRIM(nombre) as nombre from tbl_minerales group by nombre order by nombre")or throw_ex(mysql_error());
-$result=mysql_query("select codigo,nombre from tbl_codigos order by codigo")or throw_ex(mysql_error());
+$result=mysql_query("select codigo,nombre from tbl_codigos_minerales order by codigo")or throw_ex(mysql_error());
 while ($row=mysql_fetch_object($result)){
 	echo '<option value="'.$row->codigo.'">'.$row->codigo." - ".utf8_encode(strtoupper($row->nombre)).'</option>';
 }

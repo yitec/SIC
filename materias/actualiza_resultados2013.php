@@ -4,7 +4,7 @@ ini_set('memory_limit', '512M');
 include('../cnx/conexion_materias.php');
 conectarm();
 
-$sql="select id,consecutivo_contrato,id_muestra from tbl_minerales where fecha_creacion>='20150101' and  fecha_creacion<'20160101'";
+$sql="select id,consecutivo_contrato,id_muestra from tbl_minerales where fecha_creacion>='20160101' and  fecha_creacion<'20170101'";
 $result=mysql_query($sql);
 
 while ($row=mysql_fetch_object($result)){
