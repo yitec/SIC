@@ -7,7 +7,7 @@ $cont=0;
 $mine="'calcio','fosforo','magnesio','potasio','sal',
 'hierro','cobre','manganeso' ,
 'zinc','cobalto','molibdeno',
-'ph','carbonatos','sodio','materia seca'";
+'ph','carbonatos','sodio','materia seca','arsenico','plomo','cadmio','mercurio','aminoacidos','fluor'";
 echo "<br><br>";
  $sql="select cat.nombre,mues.numero_muestra,mues.id_contrato as consecutivo,mues.id as id_muestra,
 mues.fecha_ingreso, mues.numero_muestra, mues.nombre_muestra, inf.tipo_alimento,inf.nombre_producto,inf.procedencia  
@@ -147,7 +147,55 @@ and ana.id_contrato='".$id."'";
 		$total++;
 		$encontrado=true;
         break;
+
+        case "Arsénico":
+		//echo "||entro particulas||".$id;
+        $analisis="arsenico";
+		$total++;
+		$encontrado=true;
+        break;
+
+        case "Plomo":
+		//echo "||entro particulas||".$id;
+        $analisis="plomo";
+		$total++;
+		$encontrado=true;
+        break;
+
+        case "Cadmio":
+		//echo "||entro particulas||".$id;
+        $analisis="cadmio";
+		$total++;
+		$encontrado=true;
+        break;
+
+        case "Mercurio":
+		//echo "||entro particulas||".$id;
+        $analisis="mercurio";
+		$total++;
+		$encontrado=true;
+        break;
 	
+		case "Perfil de aminoácidos":
+		//echo "||entro particulas||".$id;
+        $analisis="aminoacidos";
+		$total++;
+		$encontrado=true;
+        break;
+
+        case "Fluoruros en Alimentos":
+		//echo "||entro particulas||".$id;
+        $analisis="fluor";
+		$total++;
+		$encontrado=true;
+        break;
+
+         case "Fluoruros":
+		//echo "||entro particulas||".$id;
+        $analisis="fluor";
+		$total++;
+		$encontrado=true;
+        break;
 	}
 	
 	

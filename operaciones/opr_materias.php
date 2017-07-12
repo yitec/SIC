@@ -696,6 +696,70 @@ if ($_REQUEST['opcion']==2){
 	}
 }
 
+
+/*************************************************************
+	Accion: Inserta un nuevo codigo de materia
+	Parametros: Clasificacion, Sub_Categoria, Fuente, Nombre.	
+*******************************************************/
+if ($_REQUEST['opcion']==3){
+	try{
+
+		$result=mysql_query(" SELECT MAX( registro ) AS maximo
+FROM tbl_minerales
+WHERE cifra10 ='".$_REQUEST["cifra10"]."'")or throw_ex(mysql_error());
+		$row=mysql_fetch_object($result);
+		$maximo=$row->maximo+1;
+		mysql_query("insert into bd_materiasprimas.tbl_minerales
+			(registro,consecutivo_contrato,cifra1,cifra2,cifra3,cifra4,cifra5,cifra6,cifra7,cifra8,cifra9,cifra10,nombre,fecha_creacion,calcio,fosforo,fosforo_d,magnesio,potasio,sal,hierro,cobre,manganeso,zinc,cobalto,molibdeno,ph,carbonatos,sodio,materia_seca,arsenico,plomo,cadmio,mercurio,aminoacidos,humedad,proteina,energia,fluor)values(
+			'".$maximo."',
+			'".$_REQUEST['contrato']."',
+			'".$_REQUEST['cifra1']."',
+			'".$_REQUEST['cifra2']."',
+			'".$_REQUEST['cifra3']."',
+			'".$_REQUEST['cifra4']."',
+			'".$_REQUEST['cifra5']."',
+			'".$_REQUEST['cifra6']."',
+			'".$_REQUEST['cifra7']."',
+			'".$_REQUEST['cifra8']."',
+			'".$_REQUEST['cifra9']."',
+			'".$_REQUEST['cifra10']."',
+			'".$_REQUEST['nombre']."',
+			'".$hoy."',
+			'".$_REQUEST['calcio']."',
+			'".$_REQUEST['fosforo']."',
+			'".$_REQUEST['fosforo_d']."',
+			'".$_REQUEST['magnesio']."',
+			'".$_REQUEST['potasio']."',
+			'".$_REQUEST['sal']."',
+			'".$_REQUEST['hierro']."',
+			'".$_REQUEST['cobre']."',
+			'".$_REQUEST['manganeso']."',
+			'".$_REQUEST['zinc']."',
+			'".$_REQUEST['cobalto']."',
+			'".$_REQUEST['molibdeno']."',
+			'".$_REQUEST['ph']."',
+			'".$_REQUEST['carbonatos']."',
+			'".$_REQUEST['sodio']."',
+			'".$_REQUEST['materia_seca']."',
+			'".$_REQUEST['arsenico']."',
+			'".$_REQUEST['plomo']."',
+			'".$_REQUEST['cadmio']."',
+			'".$_REQUEST['mercurio']."',
+			'".$_REQUEST['aminoacidos']."',
+			'".$_REQUEST['humedad']."',
+			'".$_REQUEST['proteina']."',
+			'".$_REQUEST['energia']."',
+			'".$_REQUEST['fluor']."')")or throw_ex(mysql_error());		
+		$jsondata['resultado'] = "Success";
+		echo json_encode($jsondata);
+	}
+	catch(Exception $e)
+	{
+		echo "Error:". $e;
+	}
+}
+
+
 //**********************************************funcion que recibe los errores**********************************************
 /*******************************************
 	Accion:Recibe todos los errores del sistema.

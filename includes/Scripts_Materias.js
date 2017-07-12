@@ -45,6 +45,86 @@ $("#btn_guardarm").click(function(event){
 		limpiar();			
 });
 
+/*****************************************Nueva Materia Prima************************************************
+  Acccion:Llama al archivo de operaciones para crear una nueva materia prima.
+  Parametros: Clasificacion, Sub categoria, nombre, fuente.
+*****************************************************************************/
+$("#btn_guardar_mine").click(function(event){		
+		event.preventDefault();	
+		if($("#txt_nombre").val() =="" || $("#txt_fuente").val()=="" || $("#cmb_categoria_1_1").val()=="Seleccione" ) {  
+        	$.pnotify({
+			    pnotify_title: 'Error ',
+    			pnotify_text: 'Todos los campos son obligatorios',
+    			pnotify_type: 'error',
+    			pnotify_hide: true
+				});
+        	return false;  
+    	}   			
+		$.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "../operaciones/opr_materias.php",
+        data: "opcion=3&contrato="+$('#txt_contrato').val()+
+        "&cifra1="+$("#txt_cifra1").val()+
+        "&cifra2="+$("#txt_cifra2").val()+
+        "&cifra3="+$("#txt_cifra3").val()+
+        "&cifra4="+$("#txt_cifra4").val()+
+        "&cifra5="+$("#txt_cifra5").val()+
+        "&cifra6="+$("#txt_cifra6").val()+
+        "&cifra7="+$("#txt_cifra7").val()+
+        "&cifra8="+$("#txt_cifra8").val()+
+        "&cifra9="+$("#txt_cifra9").val()+
+        "&cifra10="+$("#txt_cifra10").val()+
+        "&nombre="+$('#txt_nombre').val()+
+        "&calcio="+$('#txt_calcio').val()+
+        "&fosforo="+$('#txt_fosforo').val()+
+        "&fosforo_d="+$('#txt_fosforo_d').val()+
+        "&magnesio="+$('#txt_magnesio').val()+
+        "&potasio="+$('#txt_potasio').val()+
+        "&sal="+$('#txt_sal').val()+
+        "&hierro="+$('#txt_hierro').val()+
+        "&cobre="+$('#txt_cobre').val()+
+        "&manganeso="+$('#txt_manganeso').val()+
+        "&zinc="+$('#txt_zinc').val()+
+        "&cobalto="+$('#txt_cobalto').val()+
+        "&molibdeno="+$('#txt_molibdeno').val()+
+        "&ph="+$('#txt_ph').val()+
+        "&carbonatos="+$('#txt_carbonatos').val()+
+        "&sodio="+$('#txt_sodio').val()+
+        "&materia_seca="+$('#txt_materia_seca').val()+
+        "&arsenico="+$('#txt_arsenico').val()+
+        "&plomo="+$('#txt_plomo').val()+
+        "&cadmio="+$('#txt_cadmio').val()+
+        "&mercurio="+$('#txt_mercurio').val()+
+        "&aminoacidos="+$('#txt_aminoacidos').val()+
+        "&humedad="+$('#txt_humedad').val()+
+        "&proteina="+$('#txt_proteina').val()+
+        "&energia="+$('#txt_energia').val()+
+        "&fluor="+$('#txt_fluor').val(),        		
+		success: function(datos){
+			//alert (datos.resultado);
+		if (datos.resultado=="Success"){
+				$.pnotify({
+			    pnotify_title: 'Nueva muestra creada!!',
+    			pnotify_text: ' Muestra creada exitosamente.',
+    			pnotify_type: 'info',
+    			pnotify_hide: true
+				});
+				 
+		}else{
+				$.pnotify({
+			    pnotify_title: 'Error!!',
+    			pnotify_text: 'Ha sucedido un error revise los datos',
+    			pnotify_type: 'error',
+    			pnotify_hide: true
+				});
+			
+		}								
+		}//end succces function
+		});//end ajax function		
+		limpiar();			
+});
+
 
 
 

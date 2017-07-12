@@ -273,7 +273,7 @@ while($row2=mysql_fetch_object($result2)){
 		$pdf->SetFillColor(241,243,246);
 		imprime_muestra($pdf,$row['consecutivo'],$muestra);		
 		if($row2->nombre=="NIR"){			
-			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont,$row2->observaciones_analista);		
+			$sep_nir=imprime_nir($pdf,$row['id'],$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont,$row2->observaciones_analista);		
 		}else{
 		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);		
 		}
@@ -283,7 +283,7 @@ while($row2=mysql_fetch_object($result2)){
 		$v_metodos[]='  ('.$cont.')'.$row2->metodo;
 		$hoja=calcula_salto($pdf,'old',$acreditado,$hoja,$row['consecutivo'],$row['id']);
 		if($row2->nombre=="NIR"){
-			$sep_nir=imprime_nir($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont,$row2->observaciones_analista);		
+			$sep_nir=imprime_nir($pdf,$row['id'],$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,0,$cont,$row2->observaciones_analista);		
 		}else{
 		imprime_resultados($pdf,$row2->fecha_aprobacion,$row2->id_laboratorio,$row2->nombre,$row2->resultado,$row2->incertidumbre,$row2->base_fresca,$row2->incertidumbre_fresca,$row2->base_seca,$row2->incertidumbre_seca,$row2->unidades,$row2->valor_correjido,$row2->acreditado,$cont);	
 		}
@@ -393,13 +393,19 @@ function imprime_resultados($pdf,$fecha,$laboratorio,$analisis,$resultado,$incer
 
 }
 
-function imprime_nir($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido,$acreditado,$cont,$observaciones){
+function imprime_nir($pdf,$id_contrato,$fecha,$laboratorio,$analisis,$resultado,$incertidumbre,$base_fresca,$incertidumbre_fresca,$base_seca,$incertidumbre_seca,$unidades,$valor_correjido,$acreditado,$cont,$observaciones){
 	$resultado=explode('|',$resultado);
     $sep=explode('|',$incertidumbre);
-    $analisis='Cenizas,Fibra Cruda,Proteina Cruda,Extracto Etéreo,Humedad,FAD,E. Bruta,EM aves,TND vcs,ED vcs,EM vcs,TND crds,ED crds,EM crds';
+    if($id_contrato>=4755){
+    	$analisis='Cenizas,Fibra Cruda,Proteina Cruda,Extracto Etéreo,Humedad,FAD,E. Bruta,EM aves,TND vcs,ED vcs,EM vcs,TND crds,ED crds,EM crds';
+    	$tot_lines=13;
+	}else{
+		$analisis='Cenizas,Fibra Cruda,Proteina Cruda,Extracto Etéreo,Humedad';
+		$tot_lines=4;
+	}
     $ana=explode(',',$analisis);
     
-		for ($i = 0; $i <= 13; $i++){
+		for ($i = 0; $i <= $tot_lines; $i++){
 			if(strtoupper($resultado[$i])=='NO PREDECIBLE'){
 				$obs=true;
 			}else{
@@ -408,12 +414,20 @@ function imprime_nir($pdf,$fecha,$laboratorio,$analisis,$resultado,$incertidumbr
 				$pdf->Cell(20,5,nombre_laboratorio($laboratorio),1,0,'L');
 				$pdf->Cell(65,5,$ana[$i]." (".$cont.")",1,0,'L');
 				$pdf->SetTextColor(0,0,0);
-				if($i<5){
-					$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
-				}elseif($i==5){
-					$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+				if($id_contrato>=4755){
+					if($i<5){
+						$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+					}elseif($i==5){
+						$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
+					}elseif($i==8){
+						$pdf->Cell(68,5,$resultado[$i].' g/100 g '.$sep[$i],1,1,'L');
+					}elseif($i==11){
+						$pdf->Cell(68,5,$resultado[$i].' g/100 g '.$sep[$i],1,1,'L');
+					}else{
+						$pdf->Cell(68,5,$resultado[$i].' Mcal/kg',1,1,'L');
+					}
 				}else{
-					$pdf->Cell(68,5,$resultado[$i].' Mcal/kg',1,1,'L');
+					$pdf->Cell(68,5,$resultado[$i].' g/100 g  *SEP: '.$sep[$i],1,1,'L');
 				}
 			}
 		}

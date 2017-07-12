@@ -571,6 +571,90 @@ while ($row=mysql_fetch_object($result)){
 }//end while
 
 
+$sql="select id,arsenico from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and arsenico like '%±%'  order by fecha_creacion";
+$sql=utf8_decode($sql);
+$result=mysql_query($sql);
+while ($row=mysql_fetch_object($result)){
+	$cont++;
+	$pos = strpos($row->arsenico,utf8_decode('±'));
+	$arse=substr($row->arsenico, 0, $pos);  // abcd
+	if($arsenico<>''){
+		echo $sql="update tbl_minerales set arsenico='".$arse."' where id='".$row->id."'";
+		mysql_query($sql);
+	}
+}//end while
+
+
+$sql="select id,plomo from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and plomo like '%±%'  order by fecha_creacion";
+$sql=utf8_decode($sql);
+$result=mysql_query($sql);
+while ($row=mysql_fetch_object($result)){
+	$cont++;
+	$pos = strpos($row->plomo,utf8_decode('±'));
+	$plomo=substr($row->plomo, 0, $pos);  // abcd
+	if($plomo<>''){
+		echo $sql="update tbl_minerales set plomo='".$plomo."' where id='".$row->id."'";
+		mysql_query($sql);
+	}
+}//end while
+
+$sql="select id,cadmio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and cadmio like '%±%'  order by fecha_creacion";
+$sql=utf8_decode($sql);
+$result=mysql_query($sql);
+while ($row=mysql_fetch_object($result)){
+	$cont++;
+	$pos = strpos($row->cadmio,utf8_decode('±'));
+	$cadmio=substr($row->cadmio, 0, $pos);  // abcd
+	if($cadmio<>''){
+		echo $sql="update tbl_minerales set cadmio='".$cadmio."' where id='".$row->id."'";
+		mysql_query($sql);
+	}
+}//end while
+
+$sql="select id,mercurio from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and mercurio like '%±%'  order by fecha_creacion";
+$sql=utf8_decode($sql);
+$result=mysql_query($sql);
+while ($row=mysql_fetch_object($result)){
+	$cont++;
+	$pos = strpos($row->mercurio,utf8_decode('±'));
+	$mercurio=substr($row->mercurio, 0, $pos);  // abcd
+	if($mercurio<>''){
+		echo $sql="update tbl_minerales set mercurio='".$mercurio."' where id='".$row->id."'";
+		mysql_query($sql);
+	}
+}//end while
+
+$sql="select id,aminoacidos from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and aminoacidos like '%±%'  order by fecha_creacion";
+$sql=utf8_decode($sql);
+$result=mysql_query($sql);
+while ($row=mysql_fetch_object($result)){
+	$cont++;
+	$pos = strpos($row->aminoacidos,utf8_decode('±'));
+	$aminoacidos=substr($row->aminoacidos, 0, $pos);  // abcd
+	if($aminoacidos<>''){
+		echo $sql="update tbl_minerales set aminoacidos='".$aminoacidos."' where id='".$row->id."'";
+		mysql_query($sql);
+	}
+}//end while
+
+$sql="select id,fluor from tbl_minerales where fecha_creacion>='20160101' and fecha_creacion<'20170101' and fluor like '%±%'  order by fecha_creacion";
+$sql=utf8_decode($sql);
+$result=mysql_query($sql);
+while ($row=mysql_fetch_object($result)){
+	$cont++;
+	$pos = strpos($row->fluor,utf8_decode('±'));
+	$fluor=substr($row->fluor, 0, $pos);  // abcd
+	if($fluor<>''){
+		echo $sql="update tbl_minerales set fluor='".$fluor."' where id='".$row->id."'";
+		mysql_query($sql);
+	}
+}//end while
+
+
+
+
+
+
 
 /**********************************Borro los  registros en blanco*******************************/
 
@@ -589,6 +673,12 @@ molibdeno='' and
 ph='' and
 sodio='' and
 materia_seca='' and
+arsenico='' and
+plomo='' and
+cadmio='' and
+mercurio='' and
+aminoacidos='' and
+fluor='' and
  fecha_creacion >='".'20160101'."'";
  mysql_query($sql);
 

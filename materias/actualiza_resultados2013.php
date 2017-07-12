@@ -26,6 +26,12 @@ $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'pH',$row->id_
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Potasio',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Sodio',$row->id_muestra);
 $contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Zinc',$row->id_muestra);
+$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Arsénico',$row->id_muestra);
+$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Plomo',$row->id_muestra);
+$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Cadmio',$row->id_muestra);
+$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Mercurio',$row->id_muestra);
+$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Aminoacidos',$row->id_muestra);
+$contador=actualiza_resultado($row->id,$row->consecutivo_contrato,'Fluor',$row->id_muestra);
 
 
 
@@ -65,8 +71,9 @@ on res.id_analisis=ana.id
  cat.nombre='".utf8_decode($analisis)."'
 
   and mues.id='".$id_muestra."'
-  and res.consecutivo_contrato='".$consecutivo."'";
+  and res.consecutivo_contrato='".$consecutivo."' and res.resultado not like '%n%'";
 
+//el not like 'n' me elimina los resultados N/A
 	$result2=mysql_query($sql2);
 	if (!$result2) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";
@@ -130,19 +137,58 @@ on res.id_analisis=ana.id
 		$total++;
         break;
 	
-		case "Sodio":
+	case "Sodio":
 		echo "||entro sodio||";
         $analisis="sodio";
 		$total++;
         break;
 	
-		case "Zinc":
+	case "Zinc":
 		echo "||entro zinc||";
         $analisis="zinc";
 		$total++;
         break;
-	
-	
+
+    case "Arsénico":
+		echo "||entro arsenico||";
+        $analisis="arsenico";
+		$total++;
+        break;
+
+    case "Plomo":
+		echo "||entro plomo||";
+        $analisis="plomo";
+		$total++;
+        break;
+	case "Cadmio":
+		echo "||entro cadmio||";
+        $analisis="cadmio";
+		$total++;
+        break;
+
+    case "Mercurio":
+		echo "||entro mercurio||";
+        $analisis="mercurio";
+		$total++;
+        break;
+
+	case "Perfil de aminoácidos":
+		echo "||entro aminoacidos||";
+        $analisis="aminoacidos";
+		$total++;
+        break;
+
+    case "Fluoruros en Alimentos":
+		echo "||entro fluor||";
+        $analisis="fluor";
+		$total++;
+        break;
+
+    case "Fluoruros":
+		echo "||entro fluor||";
+        $analisis="fluor";
+		$total++;
+        break;
 }
 	global $cont;
 	$cont++;

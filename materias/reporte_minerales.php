@@ -158,6 +158,33 @@ body{
     <th>
       <div style="width: 60px;">Materia_Seca</div>
     </th>
+    <th>
+      <div style="width: 60px;">Arsenico</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Plomo</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Cadmio</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Mercurio</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Aminoacidos</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Humedad</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Proteina</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Energias</div>
+    </th>
+    <th>
+      <div style="width: 60px;">Fluor</div>
+    </th>
  </tr>
 </thead>
 <thead >  
@@ -251,6 +278,33 @@ body{
     </th>
     <th>
       <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
     </th>       
   </tr>           
 </thead>
@@ -307,7 +361,16 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="Ph"class="datos"><?=utf8_encode($row['ph']);?></td>
   <td style="width: 60px;"title="Carbonatos"class="datos"><?=utf8_encode($row['carbonatos']);?></td>
   <td style="width: 60px;"title="Sodio"class="datos"><?=utf8_encode($row['sodio']);?></td>
-  <td style="width: 60px;"title="Materia Seca"class="datos"><?=utf8_encode($row['mat_seca']);?></td>
+  <td style="width: 60px;"title="Materia Seca"class="datos"><?=utf8_encode($row['materia_seca']);?></td>
+  <td style="width: 60px;"title="Arsenico" class="datos"><?=utf8_encode($row['arsenico']);?></td>
+  <td style="width: 60px;"title="Plomo" class="datos"><?=utf8_encode($row['plomo']);?></td>
+  <td style="width: 60px;"title="Cadmio" class="datos"><?=utf8_encode($row['cadmio']);?></td>
+  <td style="width: 60px;"title="Mercurio" class="datos"><?=utf8_encode($row['mercurio']);?></td>
+  <td style="width: 60px;"title="Aminoacidos" class="datos"><?=utf8_encode($row['aminoacidos']);?></td>
+  <td style="width: 60px;"title="humedad" class="datos"><?=utf8_encode($row['humedad']);?></td>
+  <td style="width: 60px;"title="proteina" class="datos"><?=utf8_encode($row['proteina']);?></td>
+  <td style="width: 60px;"title="energias" class="datos"><?=utf8_encode($row['energia']);?></td>
+  <td style="width: 60px;"title="Fluor" class="datos"><?=utf8_encode($row['fluor']);?></td>
   </tr>
 <?
 }

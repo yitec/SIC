@@ -25,6 +25,15 @@ $("#ver2").fancybox({
         'type'        : 'iframe'
 });         
 
+$("#ver3").fancybox({
+        'width'       : '75%',
+        'height'      : '100%',
+        'autoScale'     : true,
+        'transitionIn'    : 'fade',
+        'transitionOut'   : 'fade',
+        'type'        : 'iframe'
+});
+
 var nproductos=1;
 $("#geco").hide();
 $("#tipo_presupuesto").hide();
@@ -600,10 +609,9 @@ function busca_valores(id_pedido,id_categoria,i){
 
 
 function llena_divs(nproductos,opcion){
-  $('#productos_dinamicos').append('<div style="margin-top 50px; color: #ffffff;">&nbsp;&nbsp.:::::::::::::::::::::</div><br><br><br><br><br>');
-  $('#productos_dinamicos').append('<div style="margin-top 50px;" class="lineaAzul"></div>');
+  //$('#productos_dinamicos').append('<div style="margin-top 50px; color: #ffffff;">&nbsp;&nbsp.:::::::::::::::::::::</div><br><br><br><br><br>');
   $('#productos_dinamicos').append('<div id="productos_'+nproductos+'"></div>');  
-  $('#productos_'+nproductos).append('<h2 align="center" class="Arial18Morado">Articulo '+nproductos+'</h2>');
+  //$('#productos_'+nproductos).append('<h2 align="center" class="Arial18Morado">Articulo '+nproductos+'</h2>');
   //$('#productos_'+nproductos).append('<div id="comprade_'+nproductos+'"><div align="left" class="Arial14Morado subtitulosl fl">Cantidad</div><div><input id="txt_cantidad_'+nproductos+'"" name="txt_cantidad_'+nproductos+' size="10"  value="" class="inputbox"  type="text" /></div><br class="none"><div class="Arial14Morado subtitulosl fl">Tipo de compra: </div><div><select class="combos" id="cmb_compra_'+nproductos+'" numero="'+nproductos+'" name="cmb_compra_'+nproductos+'"><option value="0" selected="selected">Seleccione</option><option value="1">Reactivos</option><option value="2">Gases</option><option value="3">Cristalería</option><option value="4">Repuestos/Consumible de equipo</option><option value="5">Equipos</option><option value="6">Materiales Laboratorio</option><option value="7">Calibraciones</option><option value="8">Reparación o mantenimiento de equipo</option><option value="9">interlaboratoriales</option><option value="10">Medio de Cultivo</opcionption><option value="11">Software</option><option value="12">Capacitaciones</option><option value="13">Inscripciones, congresos etc</option><option value="14">Materiales de referencia</option></select></div><br>');
   $('#productos_'+nproductos).append('<div id="comprade_'+nproductos+'"><br class="none"><div class="Arial14Morado subtitulosl fl">Tipo de compra: </div><div><select class="combos" id="cmb_compra_'+nproductos+'" numero="'+nproductos+'" name="cmb_compra_'+nproductos+'"><option value="0" selected="selected">Seleccione</option><option value="1">Reactivos</option><option value="2">Gases</option><option value="3">Cristalería</option><option value="4">Repuestos/Consumible de equipo</option><option value="5">Equipos</option><option value="6">Materiales Laboratorio</option><option value="7">Calibraciones</option><option value="8">Reparación o mantenimiento de equipo</option><option value="9">interlaboratoriales</option><option value="10">Medio de Cultivo</opcionption><option value="11">Software</option><option value="12">Capacitaciones</option><option value="13">Inscripciones, congresos etc</option><option value="14">Materiales de referencia</option></select></div><br>');
   $('#productos_dinamicos').append('<div id="detalle_'+nproductos+'"></div>');  
@@ -687,7 +695,7 @@ function getform(nproductos,opcion){
 +'</div>'
 +'<div  class=" fl input25">'
   +'<input  id="txt_gradore_'+nproductos+'" name="txt_grado_'+nproductos+'"   value="" class="inputbox"  type="text" />'
-+'</div>'
++'</div><div>-</div><br>'
 
 +'<div class="Arial14Morado subtitulosl fl">Presentación</div>'
 +'<div class="Arial14Morado subtitulosl fl">Tipo de almacenamiento</div>'
@@ -700,7 +708,7 @@ function getform(nproductos,opcion){
 +'</div>'
 +'<div  class=" fl input25">'
   +'<input  id="txt_similarmre_'+nproductos+'"    value="" class="inputbox"  type="text" />'
-+'</div>'
++'</div><div>-</div><br>'
 
 +'<div class="Arial14Morado subtitulosl fl">Similar # catálogo</div>'
 +'<div class="Arial14Morado subtitulosl fl"># Cotizaci&oacute;n</div>'
@@ -713,22 +721,16 @@ function getform(nproductos,opcion){
 +'</div>'
 +'<div  class=" fl input25">'
   +'<input  id="txt_otrosre_'+nproductos+'"    value="" class="inputbox"  type="text" />'
-+'</div>'
++'</div><div>-</div><br>'
 
-
-
-+'<div class="Arial14Morado subtitulosl fl">Monto</div><br>'
-+'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
-+'<div class="Arial14Morado subtitulosl fl">&nbsp;&nbsp;</div>'
++'<div class="Arial14Morado subtitulosl ">Monto</div><br>'
 
 +'<div  class=" fl input25">'
 +'<span class="small_text">Colones</span><input  id="txt_colones_'+nproductos+'" value="" class="midinputbox"  type="text" />'
 +'<span class="small_text">Dolares</span><input  id="txt_dolares_'+nproductos+'" value="" class="midinputbox"  type="text" />'
 +'</div>'
-+'<div  class=" fl input25">&nbsp;</div>'
-+'<div  class=" fl input25">&nbsp;</div>'
   
-+'</div><br><br><br>'
++'</div><div><br>'
 
   }
 
