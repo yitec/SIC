@@ -55,7 +55,7 @@ if($('#cmb_laboratorio').val()==0){
 	
 }
 if (validado==true){
-	top.location.href = 'historialfechas_contratos.php?fecha_ini='+$('#fecha_ini').val()+'&fecha_fin='+$('#fecha_fin').val()+'&cmb_ini='+$('#cmb_ini').val()+'&cmb_fin='+$('#cmb_fin').val();
+	top.location.href = 'historialfechas_contratos.php?fecha_ini='+$('#fecha_ini').val()+'&fecha_fin='+$('#fecha_fin').val()+'&cmb_ini='+$('#cmb_ini').val()+'&cmb_fin='+$('#cmb_fin').val()+'&tipo_cliente='+$('#cmb_tipo_cliente').val();
 }
 });
 </script>
@@ -86,6 +86,16 @@ if (validado==true){
     <tr>
     <td class="Arial14Negro">Fecha Fin:</td>
     <td><input type="Text" class="inputbox" id="fecha_fin" name="fecha_fin" maxlength="20" size="20"/>     <img src="../img_calendar/cal.gif" onClick="javascript:NewCssCal('fecha_fin')" style="cursor:pointer"/></td>
+    </tr>
+    <tr>
+    <td class="Arial14Negro">Tipo Cliente:</td>
+    <td>
+      <select id="cmb_tipo_cliente" name="cmb_tipo_cliente">
+        <option value="Particular">Particular</option>
+        <option value="Exonerado">Exonerado</option>
+        <option value="Investigacion">Investigación</option>
+      </select>
+    </td>
     </tr>
     </table>
     <br />

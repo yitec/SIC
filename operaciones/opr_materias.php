@@ -759,6 +759,80 @@ WHERE cifra10 ='".$_REQUEST["cifra10"]."'")or throw_ex(mysql_error());
 	}
 }
 
+//***************************************************************
+//Busco un regiustro de minerales
+//***************************************************************
+if($_REQUEST['opcion']==4)
+{
+
+	$result=mysql_query("select * from tbl_minerales where registro='".$_REQUEST['registro']."' and cifra10='".$_REQUEST['year']."'");
+	$row = mysql_fetch_assoc($result); 
+	if (!$result) {//si da error que me despliegue el error del query
+       echo $message  = 'Query invalido: ' . mysql_error() . "\n";
+        $message .= 'Query ejecutado: ' . $query;
+		
+		} 
+	if (mysql_num_rows($result)>=1){
+		echo $row['consecutivo_contrato']."|".
+		$row['nombre']."|".
+		$row['cifra1']."|".
+		$row['cifra2']."|".
+		$row['cifra3']."|".
+		$row['cifra4']."|".
+		$row['cifra5']."|".
+		$row['cifra6']."|".
+		$row['cifra7']."|".
+		$row['cifra8']."|".
+		$row['cifra9']."|".
+		$row['cifra10']."|".
+		$row['calcio']."|".
+		$row['fosforo']."|".
+		$row['fosforo_d']."|".
+		$row['magnesio']."|".
+		$row['potasio']."|".
+		$row['sal']."|".
+		$row['hierro']."|".
+		$row['cobre']."|".
+		$row['manganeso']."|".
+		$row['zinc']."|".
+		$row['cobalto']."|".
+		$row['molibdeno']."|".
+		$row['ph']."|".
+		$row['carbonatos']."|".
+		$row['sodio']."|".
+		$row['materia_seca']."|".
+		$row['arsenico']."|".
+		$row['plomo']."|".
+		$row['cadmio']."|".
+		$row['mercurio']."|".
+		$row['aminoacidos']."|".
+		$row['fluor']."|".
+		$row['humedad']."|".
+		$row['proteina']."|".
+		$row['energia']."|";
+	}else{
+	echo "error"; 	
+	}
+	desconectar();
+
+
+}//end if opcion4
+
+
+//***************************************************************
+//Elimino un regiustro de minerales
+//***************************************************************
+if($_REQUEST['opcion']==5){
+	$result=mysql_query("delete from tbl_minerales where registro='".$_REQUEST['registro']."' and cifra10='".$_REQUEST['year']."'"); 
+	if (!$result) {//si da error que me despliegue el error del query
+    	echo $message  = 'Query invalido: ' . mysql_error() . "\n";
+        $message .= 'Query ejecutado: ' . $query;
+		
+	}else{
+		echo "Success";
+	}
+	desconectar();
+}//end if opcion5
 
 //**********************************************funcion que recibe los errores**********************************************
 /*******************************************

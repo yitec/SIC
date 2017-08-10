@@ -1,5 +1,75 @@
 
 $(document).ready(function(){
+
+
+
+//busca un registro de un mineral para modificarlo manual
+$("#btn_buscar_mine").live("click", function(event){
+//$("#btn_buscar").click(function(event){
+    if($('#txt_registro_buscar').val()==''||$('#txt_year_buscar').val()==''){
+        alert('Debe ingresar el numero de registro y el año en formato cifra10');
+        return;
+    }
+        event.preventDefault();         
+        $.ajax({
+        type: "POST",
+        async: false,
+        url: "../operaciones/opr_materias.php",
+        data: "opcion=4&registro="+$('#txt_registro_buscar').val()+"&year="+$('#txt_year_buscar').val(),
+        success: function(datos){
+            //desconcateno el resultado la primera posicion me indica si fue exitoso
+            if(String(datos)=='error'){
+                $.pnotify({
+                pnotify_title: 'El contrato no se encontro',
+                pnotify_text: '',
+                pnotify_type: 'info',
+                pnotify_hide: true
+                });
+            }else{
+            var v_resultado=datos.split("|");
+            $('#txt_contrato').attr('value',v_resultado[0]);
+            $('#txt_nombre').attr('value',v_resultado[1]);
+            $('#txt_cifra1').attr('value',v_resultado[2]);
+            $('#txt_cifra2').attr('value',v_resultado[3]);
+            $('#txt_cifra3').attr('value',v_resultado[4]);
+            $('#txt_cifra4').attr('value',v_resultado[5]);
+            $('#txt_cifra5').attr('value',v_resultado[6]);
+            $('#txt_cifra6').attr('value',v_resultado[7]);
+            $('#txt_cifra7').attr('value',v_resultado[8]);
+            $('#txt_cifra8').attr('value',v_resultado[9]);
+            $('#txt_cifra9').attr('value',v_resultado[10]);
+            $('#txt_cifra10').attr('value',v_resultado[11]);
+            $('#txt_calcio').attr('value',v_resultado[12]);
+            $('#txt_fosforo').attr('value',v_resultado[13]);
+            $('#txt_fosforo_d').attr('value',v_resultado[14]);
+            $('#txt_magnesio').attr('value',v_resultado[15]);
+            $('#txt_potasio').attr('value',v_resultado[16]);
+            $('#txt_sal').attr('value',v_resultado[17]);
+            $('#txt_hierro').attr('value',v_resultado[18]);
+            $('#txt_cobre').attr('value',v_resultado[19]);
+            $('#txt_manganeso').attr('value',v_resultado[20]);
+            $('#txt_zinc').attr('value',v_resultado[21]);          
+            $('#txt_cobalto').attr('value',v_resultado[22]);
+            $('#txt_molibdeno').attr('value',v_resultado[23]);
+            $('#txt_ph').attr('value',v_resultado[24]);
+            $('#txt_carbonatos').attr('value',v_resultado[25]);
+            $('#txt_sodio').attr('value',v_resultado[26]);
+            $('#txt_materia_seca').attr('value',v_resultado[27]);
+            $('#txt_arsenico').attr('value',v_resultado[28]);
+            $('#txt_plomo').attr('value',v_resultado[29]);
+            $('#txt_cadmio').attr('value',v_resultado[30]);
+            $('#txt_mercurio').attr('value',v_resultado[31]);
+            $('#txt_aminoacidos').attr('value',v_resultado[32]);
+            $('#txt_humedad').attr('value',v_resultado[33]);
+            $('#txt_proteina').attr('value',v_resultado[34]);
+            $('#txt_energia').attr('value',v_resultado[35]);
+            $('#txt_fluor').attr('value',v_resultado[40]);
+            $('#opcion').attr('value','2');
+            }
+        }//end succces function
+        });//end ajax function  
+});                        
+    
 						   						   						  
 /*****************************************Nueva Materia Prima************************************************
   Acccion:Llama al archivo de operaciones para crear una nueva materia prima.
@@ -45,7 +115,7 @@ $("#btn_guardarm").click(function(event){
 		limpiar();			
 });
 
-/*****************************************Nueva Materia Prima************************************************
+/*****************************************Nueva muestra de minerales************************************************
   Acccion:Llama al archivo de operaciones para crear una nueva materia prima.
   Parametros: Clasificacion, Sub categoria, nombre, fuente.
 *****************************************************************************/
@@ -124,6 +194,47 @@ $("#btn_guardar_mine").click(function(event){
 		});//end ajax function		
 		limpiar();			
 });
+
+/*****************************************eliminar mineral************************************************
+  Acccion:Llama al archivo de operaciones para eliminar una muestra de mineral.
+  Parametros: numero registro y año.
+*****************************************************************************/
+$("#btn_eliminar_mine").click(function(event){       
+        event.preventDefault(); 
+        if($('#txt_registro_buscar').val()==''||$('#txt_year_buscar').val()==''){
+                alert('Debe ingresar el numero de registro y el año en formato cifra10 antes de borrar');
+                return;
+        }               
+        $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "../operaciones/opr_materias.php",
+        data: "opcion=5&registro="+$('#txt_registro_buscar').val()+
+        "&year="+$("#txt_year_buscar").val(),                
+        success: function(datos){
+            //alert (datos.resultado);
+        if (datos.resultado=="Success"){
+                $.pnotify({
+                pnotify_title: 'Registro Eliminado',
+                pnotify_text: ' Registro eliminado exitosamente.',
+                pnotify_type: 'info',
+                pnotify_hide: true
+                });
+                 
+        }else{
+                $.pnotify({
+                pnotify_title: 'Error!!',
+                pnotify_text: 'Ha sucedido un error revise los datos',
+                pnotify_type: 'error',
+                pnotify_hide: true
+                });
+            
+        }                               
+        }//end succces function
+        });//end ajax function      
+        limpiar();          
+});
+
 
 
 

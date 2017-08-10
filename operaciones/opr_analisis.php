@@ -1,8 +1,10 @@
 <?
 session_start();
 require_once('../cnx/conexion.php');
+require_once('../genera_informeautomatico.php');
 //require_once('opr_materias.php');
 conectar();
+
 $hoy=date("Y-m-d H:i:s");
 //guarda un articulo en inventario
 $dia=substr($_REQUEST['txt_fecha'], 3, 2);
@@ -86,18 +88,19 @@ if($_REQUEST['opcion']==4)
 	$result3=mysql_query("select COUNT(consecutivo_contrato) as total from tbl_resultados where consecutivo_contrato='".$_REQUEST['contrato']."' and estado=1");
 	$row3=mysql_fetch_assoc($result3);
 
-	$total_ap=$row3['total'];
+	echo $total_ap=$row3['total'];
 	
 	
 	$result3=mysql_query("select COUNT(id_contrato) as total from tbl_analisis where id_contrato='".$_REQUEST['contrato']."'");
 	
 	$row3=mysql_fetch_assoc($result3);
-	$total_an=$row3['total'];
+	echo $total_an=$row3['total'];
 
 	if($total_ap==$total_an){
-		//echo "Entro";
+		echo "Entro";
 		$result3=mysql_query("update tbl_contratos set fecha_terminado='".$hoy."', estado='"."4"."' where consecutivo='".$_REQUEST['contrato']."'");
 		 		date_default_timezone_set('America/Denver');
+		genera_informe($_REQUEST['contrato']);	
        //$dest = "kmadrigal@feednet.ucr.ac.cr";
        //$dest  = 'kmadrigal@feednet.ucr.ac.cr' . ', ';
        $dest  = 'clientes.cina@gmail.com' . ', ';
@@ -109,6 +112,7 @@ if($_REQUEST['opcion']==4)
 			   if (mail($dest, $asunto, $msg, $head)) {
       
 	   //echo 'Enviado correo';	   
+		   	
        } else {
        //echo 'error correo';
 	   }
@@ -117,7 +121,6 @@ if($_REQUEST['opcion']==4)
 	}
 	//meto los datos de materias primas
 	//$materias=actualiza_materias($_REQUEST['id']);
-	
 	//echo $total_ap."sid ".$total_an;
 	echo "Success";
 	}
@@ -284,7 +287,8 @@ if($_REQUEST['opcion']==15)
 //Marco todos los analisis de un contrato procesados en molienda
 if($_REQUEST['opcion']==16)
 {
-	$result=mysql_query("update tbl_analisis set estado=1,fecha_molienda='".$hoy."' where id_contrato='".$_REQUEST['contrato']."' and estado=0");
+	$sql="update tbl_analisis set estado=1,fecha_molienda='".$hoy."' where id_contrato='".$_REQUEST['contrato']."' and estado=0";
+	$result=mysql_query($sql);
 	$result=mysql_query("update tbl_contratos set estado=2 where consecutivo='".$_REQUEST['contrato']."' ");
 	if (!$result) {//si da error que me despliegue el error del query
        echo $message  = 'Query invalido: ' . mysql_error() . "\n";

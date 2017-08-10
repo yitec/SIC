@@ -50,6 +50,7 @@ $(document).ready(function() {
 	<table width="1008"  height="22" border="1"   cellpadding="0" cellspacing="0" bordercolor="#a6c9e2">
     <tr>
     <td width="94"><div align="center" class="Arial14Azul" style="margin-top:5px;">Contrato</div></td>
+    <td width="94"><div align="center" class="Arial14Azul" style="margin-top:5px;">Fecha Ingreso</div></td>
     <td width="119"><div align="center" class="Arial14Azul">Muestra</div></td>    
     <td width="118"><div align="center" class="Arial14Azul">An&aacute;lisis</div></td>
     <td width="114"><div align="center" class="Arial14Azul">Status actual</div></td>                
@@ -62,7 +63,7 @@ $(document).ready(function() {
 <?
 $tot_contratos=0;
 $con_actual='GE-0';
-$result=mysql_query("SELECT con.consecutivo,cat.nombre, ana.* FROM tbl_contratos as con JOIN tbl_analisis as ana ON con.consecutivo=ana.id_contrato JOIN tbl_categoriasanalisis cat ON ana.id_analisis=cat.id WHERE con.fecha_ingreso>='".$_REQUEST['fecha_ini']."' AND con.fecha_ingreso<='".$_REQUEST['fecha_fin']."' order by con.consecutivo,ana.id");
+$result=mysql_query("SELECT con.consecutivo,con.fecha_ingreso,cat.nombre, ana.* FROM tbl_contratos as con JOIN tbl_analisis as ana ON con.consecutivo=ana.id_contrato JOIN tbl_categoriasanalisis cat ON ana.id_analisis=cat.id LEFT JOIN tbl_clientes cli on con.id_cliente=cli.id WHERE con.fecha_ingreso>='".$_REQUEST['fecha_ini']."' AND con.fecha_ingreso<='".$_REQUEST['fecha_fin']."' AND cli.tipo_cliente='".$_REQUEST['tipo_cliente']."' order by con.consecutivo,ana.id");
 while ($row=mysql_fetch_assoc($result)){
     if($con_actual<>$row['id_contrato']){
         $tot_contratos++;
@@ -95,7 +96,8 @@ while ($row=mysql_fetch_assoc($result)){
 		
 ?>
 	<tr>
-    <td><div align="center" class="Arial11Negro" style="margin-top:5px;"><?=$row['id_contrato'];?></div></td>
+    <td><div align="center" class="Arial11Negro"><?=$row['id_contrato'];?></div></td>
+    <td><div align="center" class="Arial11Negro"><?=$row['fecha_ingreso'];?></div></td>
     <td><div align="center" class="Arial11Negro"><?=$row['codigo'];?></div></td>    
     <td><div align="center" class="Arial11Negro"><?=utf8_encode($row['nombre']);?></div></td>    
     <td><div align="center" class="Arial11Negro"><?=$actual;?></div></td>
