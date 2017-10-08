@@ -15,7 +15,8 @@ $dt=mysql_query($consulta);
         <link rel ="stylesheet" href="../css/cuadros.css" type="text/css" />
         <link rel ="stylesheet" href="../css/tablas_fdigital.css" type="text/css" />
         <link rel ="stylesheet" href="../css/jquery.pnotify.default.css" type="text/css" />
-        <link rel ="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />        
+        <link rel ="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" type="text/css" />  
+        <link rel="stylesheet" href="../css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />      
         <title>SIC CINA</title>
     </head>
 <body >
@@ -96,7 +97,8 @@ $dt=mysql_query($consulta);
     <td class="datos_tablas">'.$zoo.'</td>
     <td class="datos_tablas">'.$micro.'</td>
     <td class="datos_tablas">'.$broma.'</td>
-    <td class="datos_tablas">'.$row->consecutivo.'</td>
+    <td class="datos_tablas"><a href="informes/download_pdf.php?file=informe_'.$row->consecutivo.'.pdf"><img src="../img/download_icon_orange.png"></a>&nbsp;&nbsp;
+    <a class="ver" href="informe_upload.php?file=informe_'.$row->consecutivo.'.pdf"><img src="../img/upload_icon.png"></td>
     </tr>';
     } //end while
     ?>
@@ -117,6 +119,7 @@ $dt=mysql_query($consulta);
 </body>
 <script src="../includes/jquery-1.8.3.js" type="text/javascript"></script>
 <script src="../includes/jquery.pnotify.js" type="text/javascript"></script> 
-<script src="../includes/Scripts_Calidad.js" type="text/javascript"></script> 
+<script src="../includes/Scripts_Firma_Digital.js" type="text/javascript"></script> 
+<script src="../includes/jquery.fancybox-1.3.4.pack.js" type="text/javascript" ></script>   
 </html>
 

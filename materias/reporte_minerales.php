@@ -185,6 +185,12 @@ body{
     <th>
       <div style="width: 60px;">Fluor</div>
     </th>
+    <th>
+      <div style="width: 60px;">Yodo</div>
+    </th>
+     <th>
+      <div style="width: 60px;">Cloruros</div>
+    </th>
  </tr>
 </thead>
 <thead >  
@@ -305,6 +311,12 @@ body{
     </th>
     <th>
       <div  style="width: 60px;"><strong></strong></div>
+    </th>  
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
+    </th>  
+    <th>
+      <div  style="width: 60px;"><strong></strong></div>
     </th>       
   </tr>           
 </thead>
@@ -371,6 +383,8 @@ while($row=mysql_fetch_assoc($result)){
   <td style="width: 60px;"title="proteina" class="datos"><?=utf8_encode($row['proteina']);?></td>
   <td style="width: 60px;"title="energias" class="datos"><?=utf8_encode($row['energia']);?></td>
   <td style="width: 60px;"title="Fluor" class="datos"><?=utf8_encode($row['fluor']);?></td>
+  <td style="width: 60px;"title="yodo" class="datos"><?=utf8_encode($row['yodo']);?></td>
+  <td style="width: 60px;"title="cloruros" class="datos"><?=utf8_encode($row['cloruros']);?></td>
   </tr>
 <?
 }

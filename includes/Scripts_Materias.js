@@ -121,7 +121,7 @@ $("#btn_guardarm").click(function(event){
 *****************************************************************************/
 $("#btn_guardar_mine").click(function(event){		
 		event.preventDefault();	
-		if($("#txt_nombre").val() =="" || $("#txt_fuente").val()=="" || $("#cmb_categoria_1_1").val()=="Seleccione" ) {  
+		if($("#txt_nombre").val() =="" || $("#txt_fuente").val()=="" || $("#cmb_categoria_1_1").val()=="Seleccione" || $("#cmb_cifra10").val()=="Seleccione" ) {  
         	$.pnotify({
 			    pnotify_title: 'Error ',
     			pnotify_text: 'Todos los campos son obligatorios',
@@ -144,7 +144,7 @@ $("#btn_guardar_mine").click(function(event){
         "&cifra7="+$("#txt_cifra7").val()+
         "&cifra8="+$("#txt_cifra8").val()+
         "&cifra9="+$("#txt_cifra9").val()+
-        "&cifra10="+$("#txt_cifra10").val()+
+        "&cifra10="+$("#cmb_cifra10").val()+
         "&nombre="+$('#txt_nombre').val()+
         "&calcio="+$('#txt_calcio').val()+
         "&fosforo="+$('#txt_fosforo').val()+
@@ -170,6 +170,8 @@ $("#btn_guardar_mine").click(function(event){
         "&humedad="+$('#txt_humedad').val()+
         "&proteina="+$('#txt_proteina').val()+
         "&energia="+$('#txt_energia').val()+
+        "&yodo="+$('#txt_yodo').val()+
+        "&cloruros="+$('#txt_cloruros').val()+
         "&fluor="+$('#txt_fluor').val(),        		
 		success: function(datos){
 			//alert (datos.resultado);
@@ -237,17 +239,36 @@ $("#btn_eliminar_mine").click(function(event){
 
 
 
+/*****************************************Trae el numero de registr************************************************
+  Acccion:Actualiza el numero de registro a crear segun el año.
+  Parametros: año
+*****************************************************************************/
+$("#cmb_cifra10").change(function(){
+   obtiene_registro();
+});
 
-
+function obtiene_registro(){
+     $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "../operaciones/opr_materias.php",
+        data: "opcion=6&year="+$('#cmb_cifra10').val(),                
+        success: function(datos){
+            $("#txt_registro").val(datos);
+        }//end succces function
+        });//end ajax function      
+}
 
 //****************************************************Limpiar formulario crear articulo
 function limpiar(){
 	$('input[type=text]').each(function() {
 		$(this).val('');
 	}); 
+    obtiene_registro();
 			$("#cmb_clasificacion option[value='0']").attr("selected","selected");
 			$("#cmb_cmb_categoria_1_1 option[value='0']").attr("selected","Seleccione");
 			$("#cmb_cmb_subcategoria_1_1 option[value='0']").attr("selected","Selecccione");
+            $("#cmb_cifra10 option[value='Seleccione']").attr("selected","Selecccione");
 }
 													
 })// JavaScript Document

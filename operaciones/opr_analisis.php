@@ -63,9 +63,7 @@ if($_REQUEST['opcion']==3)
 			$result=mysql_query("insert into tbl_resultados (consecutivo_contrato,id_laboratorio,id_analisis,metodo,incertidumbre,unidades,observaciones_analista,resultado,fecha_ingreso,estado)values('".$row2['id_contrato']."','".$_REQUEST['laboratorio']."','".$_REQUEST['id']."','".$metodo."','".utf8_decode($_REQUEST['incertidumbre'])."','".$_REQUEST['unidades']."','".utf8_decode($_REQUEST['observaciones_analista'])."','".utf8_decode($_REQUEST['resultado'])."','".$hoy."','"."0"."')");
 		}
 	}
-	$result=mysql_query("update tbl_analisis set estado='"."2"."',fecha_analisis='".$hoy."' where id='".$_REQUEST['id']."'");
-
-	
+	$result=mysql_query("update tbl_analisis set estado='"."2"."',fecha_analisis='".$hoy."' where id='".$_REQUEST['id']."'");	
 }
 
 

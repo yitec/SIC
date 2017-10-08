@@ -709,8 +709,8 @@ FROM tbl_minerales
 WHERE cifra10 ='".$_REQUEST["cifra10"]."'")or throw_ex(mysql_error());
 		$row=mysql_fetch_object($result);
 		$maximo=$row->maximo+1;
-		mysql_query("insert into bd_materiasprimas.tbl_minerales
-			(registro,consecutivo_contrato,cifra1,cifra2,cifra3,cifra4,cifra5,cifra6,cifra7,cifra8,cifra9,cifra10,nombre,fecha_creacion,calcio,fosforo,fosforo_d,magnesio,potasio,sal,hierro,cobre,manganeso,zinc,cobalto,molibdeno,ph,carbonatos,sodio,materia_seca,arsenico,plomo,cadmio,mercurio,aminoacidos,humedad,proteina,energia,fluor)values(
+		$sql="insert into bd_materiasprimas.tbl_minerales
+			(registro,consecutivo_contrato,cifra1,cifra2,cifra3,cifra4,cifra5,cifra6,cifra7,cifra8,cifra9,cifra10,nombre,fecha_creacion,calcio,fosforo,fosforo_d,magnesio,potasio,sal,hierro,cobre,manganeso,zinc,cobalto,molibdeno,ph,carbonatos,sodio,materia_seca,arsenico,plomo,cadmio,mercurio,aminoacidos,humedad,proteina,energia,fluor,yodo,cloruros)values(
 			'".$maximo."',
 			'".$_REQUEST['contrato']."',
 			'".$_REQUEST['cifra1']."',
@@ -749,7 +749,10 @@ WHERE cifra10 ='".$_REQUEST["cifra10"]."'")or throw_ex(mysql_error());
 			'".$_REQUEST['humedad']."',
 			'".$_REQUEST['proteina']."',
 			'".$_REQUEST['energia']."',
-			'".$_REQUEST['fluor']."')")or throw_ex(mysql_error());		
+			'".$_REQUEST['fluor']."',
+			'".$_REQUEST['yodo']."',
+			'".$_REQUEST['cloruros']."')";
+		mysql_query($sql)or throw_ex(mysql_error());		
 		$jsondata['resultado'] = "Success";
 		echo json_encode($jsondata);
 	}
@@ -830,6 +833,27 @@ if($_REQUEST['opcion']==5){
 		
 	}else{
 		echo "Success";
+	}
+	desconectar();
+}//end if opcion5
+
+//***************************************************************
+//obtengo el proximo registro a insertar
+//***************************************************************
+if($_REQUEST['opcion']==6){
+	try{
+		$result=mysql_query(" SELECT MAX( registro ) AS maximo
+FROM tbl_minerales
+WHERE cifra10 ='".$_REQUEST["year"]."'")or throw_ex(mysql_error());
+		$row=mysql_fetch_object($result);
+		echo $maximo=$row->maximo+1;
+		//$jsondata['resultado'] = "Success";
+		//$jsondata['registro'] =$maximo;
+		//echo json_encode($jsondata);
+	}
+	catch(Exception $e)
+	{
+		echo "Error:". $e;
 	}
 	desconectar();
 }//end if opcion5
